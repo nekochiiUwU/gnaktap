@@ -1,0 +1,12 @@
+2a60927148abd1d33b818b535e306557
+::res://::1688734698
+Game.gd::GDScript::-1::1688634323::0::1::::<>Node3D<>::
+game.tscn::PackedScene::3678001432857770308::1688734697::0::1::::<><>::res://Game.gd
+icon.svg::CompressedTexture2D::7836633539864202342::1688633006::1688633037::1::::<><>::
+map.tscn::PackedScene::8332103927413140277::1688734697::0::1::::<><>::uid://b68x4f3s67leq<>uid://weitoykb1612
+mesh.tres::MeshLibrary::4631847887944757236::1688734095::0::1::::<><>::
+Player.gd::GDScript::-1::1688730996::0::1::::<>CharacterBody3D<>::
+client.tscn::PackedScene::982404619041805356::1688734698::0::1::::<><>::
+player.tscn::PackedScene::1552932509938233515::1688734152::0::1::::<><>::res://Player.gd
+server.gd::GDScript::-1::1688734693::0::1::::<>Node<>::
+server.tscn::PackedScene::1156046321308995213::1688734715::0::1::::<><>::res://server.gd

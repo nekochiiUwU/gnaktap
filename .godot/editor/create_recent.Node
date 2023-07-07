@@ -1,0 +1,10 @@
+MeshInstance3D
+Node
+Node3D
+DirectionalLight3D
+SpotLight3D
+WorldEnvironment
+Camera3D
+CharacterBody3D
+GridMap
+TileMap
