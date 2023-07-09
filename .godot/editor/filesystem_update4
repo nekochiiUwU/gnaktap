@@ -1,8 +1,6 @@
-res://game.tscn
-res://mesh.tres
 res://map.tscn
+res://mesh.tres
+res://network.tscn
+res://network.gd
+res://player.tscn
 res://Player.gd
-res://server.tscn
-res://client.tscn
-res://server.gd
-res://multiplayer.gd

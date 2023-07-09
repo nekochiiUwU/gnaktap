@@ -1,6 +1,15 @@
-MeshInstance3D
-Node
+CollisionShape3D
+MultiplayerSynchronizer
 Node3D
+Button
+SpinBox
+ColorRect
+TextEdit
+MeshInstance3D
+Sprite2D
+RichTextLabel
+Control
+Node
 DirectionalLight3D
 SpotLight3D
 WorldEnvironment

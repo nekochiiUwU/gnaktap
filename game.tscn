@@ -4,3 +4,7 @@
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_ni810")
+
+[node name="Entities" type="Node3D" parent="."]
+
+[node name="Players" type="Node3D" parent="Entities"]

@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3 uid="uid://cajolt5qkc14j"]
+
+[ext_resource type="Script" path="res://network.gd" id="1_4y2ny"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_57ju0"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4oclt"]
+bg_color = Color(1, 1, 1, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_53dpe"]
+bg_color = Color(0, 0, 0, 0)
+
+[node name="Network" type="Node"]
+script = ExtResource("1_4y2ny")
+
+[node name="Net Status" type="RichTextLabel" parent="."]
+clip_contents = false
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 760.0
+offset_bottom = 32.0
+bbcode_enabled = true
+
+[node name="Server help" type="RichTextLabel" parent="Net Status"]
+visible = false
+layout_mode = 0
+offset_left = 8.0
+offset_top = 352.0
+offset_right = 752.0
+offset_bottom = 632.0
+focus_mode = 2
+bbcode_enabled = true
+text = "Server help
+1) Do an port-forward on your firewall using the UDP protocol. (Needed: Port)
+2) Do the same on your router with the UDP protocol. (Needed: Local IPv4, Port)
+3) Give your IP to the players. (Needed: Public IPv4)
+
+Just please... The Public IP and the Local one aren't the same !
+
+Port: 21212
+Local IPv4 adress: 169.254.52.210
+Public IPv4 adress: 87.89.177.64
+
+Don't forget to close the port that you opened on your router when you will close the server !"
+selection_enabled = true
+
+[node name="Occluder" type="Button" parent="Net Status/Server help"]
+layout_mode = 0
+offset_left = 147.0
+offset_top = 206.0
+offset_right = 744.0
+offset_bottom = 234.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_57ju0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_57ju0")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_4oclt")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_57ju0")
+theme_override_styles/focus = SubResource("StyleBoxFlat_53dpe")
+text = "Click to show /!\\ DON'T LEAK IT /!\\"
