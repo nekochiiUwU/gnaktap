@@ -13,6 +13,8 @@ sky = SubResource("Sky_bt5t6")
 ambient_light_source = 1
 reflected_light_source = 1
 glow_blend_mode = 0
+volumetric_fog_density = 0.2
+volumetric_fog_temporal_reprojection_enabled = false
 
 [node name="Map" type="GridMap"]
 mesh_library = ExtResource("1_whyo0")
@@ -27,3 +29,34 @@ environment = SubResource("Environment_phn6l")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.939555, 0.329505, -0.0930728, 0, 0.271827, 0.962346, 0.342397, -0.904177, 0.255396, 0, 4.94395, 0)
+visible = false
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.75313, 0)
+light_color = Color(0, 0, 1, 1)
+shadow_enabled = true
+omni_range = 10.0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.59508, 0)
+light_color = Color(1, 0, 0, 1)
+shadow_enabled = true
+omni_range = 10.0
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.52692, 5.61974)
+light_color = Color(1, 1, 0, 1)
+shadow_enabled = true
+omni_range = 10.0
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.33872, 3.52692, -0.0360727)
+light_color = Color(0, 1, 0, 1)
+shadow_enabled = true
+omni_range = 10.0
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5518, 1.99735, 11.5532)
+light_color = Color(1, 0, 1, 1)
+shadow_enabled = true
+omni_range = 10.0

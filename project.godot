@@ -87,7 +87,3 @@ quit={
 [physics]
 
 3d/default_gravity=24.0
-
-[rendering]
-
-renderer/rendering_method="gl_compatibility"

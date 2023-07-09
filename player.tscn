@@ -80,6 +80,7 @@ shape = SubResource("CapsuleShape3D_a7pkv")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
 
 [node name="Light" type="SpotLight3D" parent="Head"]
+visible = false
 spot_range = 10.0
 spot_angle = 60.0
 
