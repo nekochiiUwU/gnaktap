@@ -13,15 +13,17 @@ extends Node
 var TARGET_IP: String = "127.0.0.1" # Server IP adress used to connect client to the sever
 var PORT: int = 21212 # Connection port used for the network connection
 
-var ENet: ENetMultiplayerPeer # Multiplayer tool
+var ENet: ENetMultiplayerPeer = ENetMultiplayerPeer.new() # Multiplayer tool
 var players = [] # Contain all connected players
 
 func create_room(): # Server Function // Create an server and initialize it
 	print("Server creation started")
 
-	ENet = ENetMultiplayerPeer.new() # Create multiplayer instance
+	if multiplayer.multiplayer_peer:
+		multiplayer.multiplayer_peer.close()
+
 	ENet.create_server(PORT) # Create an server
-	get_tree().set_network_peer(ENet) # Set multiplayer instance for godot networking processes
+	multiplayer.multiplayer_peer = ENet # Set multiplayer instance for godot networking processes
 
 	##  The client isn't a player so this line is not used
 	##      connect_peer(1) # Add the server to the list of players
@@ -52,11 +54,11 @@ Don't forget to close the port that you opened on your router when you will clos
 func join_room(): # Client Function // Create an client and connect him to the server
 	print("Starting the server connection")
 
-	ENet.close() 
+	if multiplayer.multiplayer_peer:
+		multiplayer.multiplayer_peer.close()
 
-	ENet = ENetMultiplayerPeer.new() # Create multiplayer instance
 	ENet.create_client(TARGET_IP, PORT) # Create an client by connecting him to the server
-	get_tree().set_network_peer(ENet) # Set multiplayer instance for godot networking processes
+	multiplayer.multiplayer_peer = ENet # Set multiplayer instance for godot networking processes
 
 	start_lobby()
 
@@ -154,7 +156,6 @@ func _ready():
 		join_room()
 
 func _process(_delta):
-	multiplayer.multiplayer_peer = null
 	if ENet.get_connection_status() != current_connection_status:
 		current_connection_status = ENet.get_connection_status()
 		get_node("Net Status").text = \
@@ -207,6 +208,6 @@ func start_lobby():
 	state = States.LOBBY
 
 func _exit_tree():
-	if ENet.get_connection_status() != MultiplayerPeer.CONNECTION_DISCONNECTED:
-		ENet.close()
+	if multiplayer.multiplayer_peer:
+		multiplayer.multiplayer_peer.close()
 	multiplayer.multiplayer_peer = null
