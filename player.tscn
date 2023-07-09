@@ -1,11 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://weitoykb1612"]
+[gd_scene load_steps=15 format=3 uid="uid://weitoykb1612"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fjljj"]
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_vc00k"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/sync = true
 
 [sub_resource type="Gradient" id="Gradient_nmpr1"]
 interpolation_mode = 1
@@ -74,9 +69,6 @@ size = Vector3(0.005, 0.005, 0.005)
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 0, 1, 0)
 script = ExtResource("1_fjljj")
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_vc00k")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_ogwai")
