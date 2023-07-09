@@ -53,9 +53,8 @@ func _physics_process(delta):
 
 		#print("Speed: ", float(int(sqrt(pow(velocity.x, 2) + pow(velocity.z, 2)) * 1000)) / 1000)
 
-	move_and_slide()
-
-	if is_multiplayer_authority():
+		move_and_slide()
+		
 		$Head.rotation.z -= velocity.dot(transform.basis.x) / 1000
 		$Head.rotation.z /= 1.1
 		$Head/UI.scale = Vector3.ONE * .25 + Vector3.ONE * float(int(sqrt(pow(velocity.x, 2) + pow(velocity.z, 2)) * 1000)) / 1000 / 20

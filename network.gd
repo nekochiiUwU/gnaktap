@@ -13,7 +13,7 @@ extends Node
 var TARGET_IP: String = "127.0.0.1" # Server IP adress used to connect client to the sever
 var PORT: int = 21212 # Connection port used for the network connection
 
-var ENet: ENetMultiplayerPeer = ENetMultiplayerPeer.new() # Multiplayer tool
+var ENet: ENetMultiplayerPeer # Multiplayer tool
 var players = [] # Contain all connected players
 
 func create_room(): # Server Function // Create an server and initialize it
@@ -21,7 +21,7 @@ func create_room(): # Server Function // Create an server and initialize it
 
 	ENet = ENetMultiplayerPeer.new() # Create multiplayer instance
 	ENet.create_server(PORT) # Create an server
-	multiplayer.multiplayer_peer = ENet # Set multiplayer instance for godot networking processes
+	get_tree().set_network_peer(ENet) # Set multiplayer instance for godot networking processes
 
 	##  The client isn't a player so this line is not used
 	##      connect_peer(1) # Add the server to the list of players
@@ -56,7 +56,7 @@ func join_room(): # Client Function // Create an client and connect him to the s
 
 	ENet = ENetMultiplayerPeer.new() # Create multiplayer instance
 	ENet.create_client(TARGET_IP, PORT) # Create an client by connecting him to the server
-	multiplayer.multiplayer_peer = ENet # Set multiplayer instance for godot networking processes
+	get_tree().set_network_peer(ENet) # Set multiplayer instance for godot networking processes
 
 	start_lobby()
 
@@ -154,6 +154,7 @@ func _ready():
 		join_room()
 
 func _process(_delta):
+	multiplayer.multiplayer_peer = null
 	if ENet.get_connection_status() != current_connection_status:
 		current_connection_status = ENet.get_connection_status()
 		get_node("Net Status").text = \

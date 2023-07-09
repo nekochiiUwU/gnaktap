@@ -6,12 +6,6 @@
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/sync = true
-properties/1/path = NodePath(".:rotation")
-properties/1/spawn = true
-properties/1/sync = true
-properties/2/path = NodePath("Head:rotation")
-properties/2/spawn = true
-properties/2/sync = true
 
 [sub_resource type="Gradient" id="Gradient_nmpr1"]
 interpolation_mode = 1

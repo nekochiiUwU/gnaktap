@@ -1,6 +1,6 @@
+res://main_menu.tscn
 res://map.tscn
 res://mesh.tres
-res://network.tscn
-res://network.gd
 res://player.tscn
 res://Player.gd
+res://network.gd

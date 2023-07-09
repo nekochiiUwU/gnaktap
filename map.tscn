@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://dqyesfybvy2tt"]
+[gd_scene load_steps=5 format=3 uid="uid://dqyesfybvy2tt"]
 
 [ext_resource type="MeshLibrary" uid="uid://b68x4f3s67leq" path="res://mesh.tres" id="1_whyo0"]
-[ext_resource type="PackedScene" uid="uid://weitoykb1612" path="res://player.tscn" id="2_bhf7i"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vxqex"]
 
@@ -28,5 +27,3 @@ environment = SubResource("Environment_phn6l")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.939555, 0.329505, -0.0930728, 0, 0.271827, 0.962346, 0.342397, -0.904177, 0.255396, 0, 4.94395, 0)
-
-[node name="Player" parent="." instance=ExtResource("2_bhf7i")]
