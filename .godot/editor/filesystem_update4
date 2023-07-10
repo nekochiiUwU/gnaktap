@@ -1,2 +1,9 @@
-res://map.tscn
+res://main_menu.tscn
 res://mesh.tres
+res://map.tscn
+res://Game.gd
+res://player.tscn
+res://game.tscn
+res://Player.gd
+res://bullet.gd
+res://bullet.tscn

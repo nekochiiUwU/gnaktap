@@ -1,12 +1,13 @@
-OmniLight3D
 CollisionShape3D
-MultiplayerSynchronizer
+MeshInstance3D
+CharacterBody3D
 Node3D
+OmniLight3D
+MultiplayerSynchronizer
 Button
 SpinBox
 ColorRect
 TextEdit
-MeshInstance3D
 Sprite2D
 RichTextLabel
 Control
@@ -15,6 +16,5 @@ DirectionalLight3D
 SpotLight3D
 WorldEnvironment
 Camera3D
-CharacterBody3D
 GridMap
 TileMap
