@@ -3,9 +3,9 @@ extends CharacterBody3D
 var spawntime
 var game
 var damages
-var speed:       float =  5.
-var grav:        float =  .12
-var lifetime = 10
+var speed:       float =  50.
+var grav:        float =  1.2
+var lifetime = 1
 
 func _ready():
 	game = get_node("../..")
