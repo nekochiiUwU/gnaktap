@@ -5,8 +5,8 @@ extends CharacterBody3D
 
 var game
 
-var health = 100
-var damages = 34
+var health:      float =  100.
+var damages:     float =  34.
 var gravity:     float = -ProjectSettings.get_setting("physics/3d/default_gravity")
 var air_speed:   float =  50.
 var jump:        float =  7.
