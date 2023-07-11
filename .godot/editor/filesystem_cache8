@@ -1,5 +1,5 @@
 2a60927148abd1d33b818b535e306557
-::res://::1689061108
+::res://::1689071933
 bullet.gd::GDScript::-1::1689053911::0::1::::<>CharacterBody3D<>::
 bullet.tscn::PackedScene::7142913519403393106::1688994482::0::1::::<><>::res://bullet.gd
 Game.gd::GDScript::-1::1689058015::0::1::::<>Node3D<>::
@@ -13,4 +13,4 @@ network.gd::GDScript::-1::1688918152::0::1::::<>Node<>::
 network.tscn::PackedScene::4792291493832649467::1689061087::0::1::::<><>::res://network.gd
 Player.gd::GDScript::-1::1689058229::0::1::::Player<>CharacterBody3D<>::
 player.tscn::PackedScene::1552932509938233515::1689058432::0::1::::<><>::res://Player.gd
-Weapon.tscn::PackedScene::3147071178916393741::1689061087::0::1::::<><>::
+Weapon.tscn::PackedScene::3147071178916393741::1689063072::0::1::::<><>::

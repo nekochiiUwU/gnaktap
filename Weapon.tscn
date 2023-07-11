@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bk3p2jyntv3bd"]
+[gd_scene load_steps=22 format=3 uid="uid://bk3p2jyntv3bd"]
 
 [sub_resource type="Gradient" id="Gradient_u4f1q"]
 interpolation_mode = 1
@@ -38,36 +38,34 @@ size = Vector3(0.1, 0.15, 0.15)
 
 [sub_resource type="PrismMesh" id="PrismMesh_bwlij"]
 material = SubResource("StandardMaterial3D_554bt")
-size = Vector3(0.2, 0.3, 0.1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_t2u6y"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cmmjc"]
-noise = SubResource("FastNoiseLite_t2u6y")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yoee0"]
-albedo_color = Color(1, 1, 1, 0.0627451)
-metallic = 0.52
-roughness = 0.42
-refraction_enabled = true
-refraction_scale = -0.13
-refraction_texture = SubResource("NoiseTexture2D_cmmjc")
-
-[sub_resource type="BoxMesh" id="BoxMesh_krk3m"]
-material = SubResource("StandardMaterial3D_yoee0")
-size = Vector3(0.065, 0.055, 0.3)
-
-[sub_resource type="BoxMesh" id="BoxMesh_7geov"]
-material = SubResource("StandardMaterial3D_554bt")
-size = Vector3(0.01, 0.074, 0.3)
-
-[sub_resource type="BoxMesh" id="BoxMesh_hy7ix"]
-material = SubResource("StandardMaterial3D_554bt")
-size = Vector3(0.075, 0.01, 0.3)
+left_to_right = 1.0
+size = Vector3(0.2, 0.4, 0.099)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ptinh"]
 material = SubResource("StandardMaterial3D_554bt")
 size = Vector3(0.025, 0.013, 0.25)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_v0tt1"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gubfn"]
+albedo_color = Color(0, 0, 0, 1)
+metallic = 0.2
+metallic_specular = 0.0
+roughness = 0.75
+
+[sub_resource type="BoxMesh" id="BoxMesh_7geov"]
+material = SubResource("StandardMaterial3D_gubfn")
+size = Vector3(0.01, 0.074, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8dlgx"]
+albedo_color = Color(0, 0, 0, 1)
+metallic = 0.2
+roughness = 0.75
+
+[sub_resource type="BoxMesh" id="BoxMesh_hy7ix"]
+material = SubResource("StandardMaterial3D_8dlgx")
+size = Vector3(0.075, 0.01, 0.3)
 
 [sub_resource type="Gradient" id="Gradient_hphq8"]
 interpolation_mode = 1
@@ -116,54 +114,62 @@ rotation_edit_mode = 2
 mesh = SubResource("BoxMesh_6gy3v")
 
 [node name="Crosse" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, -0.4, 0, -7.00504e-05, 0.15)
+transform = Transform3D(0, 0, -1, 1, 0, 0, -0.2, -1, 0, 0, -0.0479383, 0.15538)
 rotation_edit_mode = 2
 mesh = SubResource("PrismMesh_bwlij")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.980581, 0.196116, 0, -0.196116, 0.980581, -6.55651e-07, 0.0986679, -0.408552)
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.980581, 0.196116, 0, -0.196116, 0.980581, -6.55651e-07, 0.0986679, -0.0796364)
-
-[node name="Scope" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -0.2, 1, -6.55651e-07, 0.0986679, -0.1)
-rotation_edit_mode = 2
-mesh = SubResource("BoxMesh_krk3m")
-
-[node name="ScopeR" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -0.2, 1, 0.033, 0.099, -0.1)
-rotation_edit_mode = 2
-mesh = SubResource("BoxMesh_7geov")
-
-[node name="ScopeL" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -0.2, 1, -0.033, 0.099, -0.1)
-rotation_edit_mode = 2
-mesh = SubResource("BoxMesh_7geov")
-
-[node name="ScopeB" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -0.2, 1, -6.55651e-07, 0.0665207, -0.0940004)
-rotation_edit_mode = 2
-mesh = SubResource("BoxMesh_hy7ix")
-
-[node name="ScopeT" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -0.2, 1, -6.55651e-07, 0.131135, -0.105108)
-rotation_edit_mode = 2
-mesh = SubResource("BoxMesh_hy7ix")
 
 [node name="SupScope" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -0.2, 1, 0, 0.056, -0.0914599)
 rotation_edit_mode = 2
 mesh = SubResource("BoxMesh_ptinh")
 
+[node name="Scope" type="Sprite3D" parent="SupScope"]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, -6.55651e-07, 0.0410088, 0.131914)
+rotation_edit_mode = 2
+pixel_size = 0.0001
+transparent = false
+double_sided = false
+texture = SubResource("ViewportTexture_v0tt1")
+
+[node name="ScopeR" type="MeshInstance3D" parent="SupScope"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.033, 0.043, 5.98952e-05)
+rotation_edit_mode = 2
+mesh = SubResource("BoxMesh_7geov")
+skeleton = NodePath("../..")
+
+[node name="ScopeL" type="MeshInstance3D" parent="SupScope"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.033, 0.043, 5.98952e-05)
+rotation_edit_mode = 2
+mesh = SubResource("BoxMesh_7geov")
+skeleton = NodePath("../..")
+
+[node name="ScopeB" type="MeshInstance3D" parent="SupScope"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.55651e-07, 0.0105207, -0.000436366)
+rotation_edit_mode = 2
+mesh = SubResource("BoxMesh_hy7ix")
+skeleton = NodePath("../..")
+
+[node name="ScopeT" type="MeshInstance3D" parent="SupScope"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.55651e-07, 0.075135, 0.0013789)
+rotation_edit_mode = 2
+mesh = SubResource("BoxMesh_hy7ix")
+skeleton = NodePath("../..")
+
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0976624, 0.40593)
-fov = 10.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.099, 0.109)
+current = true
+fov = 80.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -0.2, 1, -6.55651e-07, 0.0986679, -5.03875)
+transform = Transform3D(1, 0, 0, 0, 1, 0.196116, 0, -0.2, 0.980581, 0.0648897, -0.22519, -2)
 mesh = SubResource("SphereMesh_srcuk")
-skeleton = NodePath("../Scope")
+skeleton = NodePath("")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ccbto")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="Camera3D2" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.6)
+fov = 20.0
