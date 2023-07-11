@@ -18,12 +18,22 @@ var joy_sensi: Vector2 = -Vector2(.1, .1)
 func _ready():
 	game = get_node("../../..")
 	if is_multiplayer_authority():
+		calibrate_ui()
+		get_viewport().size_changed.connect(calibrate_ui)
 		spawn()
 	else:
 		get_node("Collision").queue_free()
 		get_node("Head/Light").queue_free()
 		get_node("Head/UI").queue_free()
 		get_node("Head/Camera").queue_free()
+
+
+func calibrate_ui():
+	var window_size = get_viewport().size
+	get_node("Head/UI").scale.x = float(window_size.x) / 1152
+	get_node("Head/UI").scale.y = float(window_size.y) / 648
+	print(get_node("Head/UI").scale)
+	get_node("Head/UI").position = window_size / 2
 
 
 func _input(event):
@@ -37,6 +47,8 @@ func _input(event):
 
 func _physics_process(delta):
 	if is_multiplayer_authority():
+		health += delta
+		get_node("Head/UI/HealthBar").value = health
 		var input_rotation = Input.get_vector("camera_left", "camera_right", "camera_up", "camera_down")
 		if input_rotation:
 			rotation.y += input_rotation.x * joy_sensi.x
@@ -70,20 +82,16 @@ func _physics_process(delta):
 		#print("Speed: ", float(int(sqrt(pow(velocity.x, 2) + pow(velocity.z, 2)) * 1000)) / 1000)
 
 		move_and_slide()
-
 		$Head.rotation.z -= velocity.dot(transform.basis.x) / 1000
 		$Head.rotation.z /= 1.1
-		$Head/UI.scale = Vector3.ONE * .25 + Vector3.ONE * float(int(sqrt(pow(velocity.x, 2) + pow(velocity.z, 2)) * 1000)) / 1000 / 20
-		$Head/UI.scale += abs(Vector3.ONE * velocity.y * .05)
-		$Head/UI.scale += Vector3.ONE * float(!is_on_floor()) * .1
-		$Head/UI.scale.z = 1 
 		get_node("Head/Camera").fov = (get_node("Head/Camera").fov - 120) / 1.2 + 120
-		
-		rpc("online_syncronisation", position, rotation, get_node("Head").rotation)
+
+func _process(_delta):
+	if is_multiplayer_authority():
+		rpc("online_syncronisation", position, rotation, get_node("Head").rotation, health)
 
 
 func spawn():
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	get_node("Head/Camera").current = true
 	transform = game.spawnpoints[randi() % len(game.spawnpoints)].transform
 	health = 100
@@ -100,13 +108,13 @@ func die():
 	process_mode = Node.PROCESS_MODE_DISABLED
 	rotation.z += 90
 	position.y -= 0.8
-	rpc("online_syncronisation", position, rotation, get_node("Head").rotation)
+	rpc("online_syncronisation", position, rotation, get_node("Head").rotation, health)
 	await get_tree().create_timer(2.0).timeout
 	spawn()
 	process_mode = Node.PROCESS_MODE_INHERIT
 
 
-@rpc("authority", "call_local", "unreliable", 0)
+@rpc("authority", "call_local", "unreliable", 2)
 func shoot(pos, rot):
 	var new_bullet = bullet.instantiate()
 	new_bullet.position = pos
@@ -118,7 +126,8 @@ func shoot(pos, rot):
 
 
 @rpc("authority", "call_remote", "unreliable", 0)
-func online_syncronisation(_position: Vector3, _rotation: Vector3, _head_rotation: Vector3):
+func online_syncronisation(_position: Vector3, _rotation: Vector3, _head_rotation: Vector3, _health: float):
 	position = _position
 	rotation = _rotation
 	get_node("Head").rotation = _head_rotation
+	health = _health

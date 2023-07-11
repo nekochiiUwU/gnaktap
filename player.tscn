@@ -1,24 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://weitoykb1612"]
+[gd_scene load_steps=9 format=3 uid="uid://weitoykb1612"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fjljj"]
 
-[sub_resource type="Gradient" id="Gradient_nmpr1"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.590551)
-colors = PackedColorArray(0, 0.101961, 0, 1, 0, 0.498039, 0, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_swnq4"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_d6k40"]
-seamless = true
-color_ramp = SubResource("Gradient_nmpr1")
-noise = SubResource("FastNoiseLite_swnq4")
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vhf1b"]
-albedo_texture = SubResource("NoiseTexture2D_d6k40")
+resource_local_to_scene = true
 roughness = 0.75
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ogwai"]
+resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_vhf1b")
 radius = 0.4
 height = 1.8
@@ -41,30 +30,11 @@ height = 0.66
 radial_segments = 16
 rings = 1
 
-[sub_resource type="Gradient" id="Gradient_8vy86"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.370079, 0.559055, 0.748031)
-colors = PackedColorArray(0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1gsey"]
+bg_color = Color(0, 0, 0, 0.12549)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_s6cyr"]
-frequency = 0.001
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_prb48"]
-width = 16
-height = 388
-generate_mipmaps = false
-seamless = true
-seamless_blend_skirt = 1.0
-color_ramp = SubResource("Gradient_8vy86")
-noise = SubResource("FastNoiseLite_s6cyr")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gydkf"]
-shading_mode = 0
-albedo_texture = SubResource("NoiseTexture2D_prb48")
-
-[sub_resource type="PrismMesh" id="PrismMesh_aavq0"]
-material = SubResource("StandardMaterial3D_gydkf")
-size = Vector3(0.005, 0.005, 0.005)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wi8oh"]
+bg_color = Color(0.545098, 1, 0, 1)
 
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 0, 1, 0)
@@ -92,24 +62,70 @@ mesh = SubResource("CylinderMesh_qvvqb")
 [node name="Camera" type="Camera3D" parent="Head"]
 fov = 120.0
 
-[node name="UI" type="Node3D" parent="Head"]
+[node name="UI" type="Control" parent="Head"]
+layout_mode = 3
+anchors_preset = 0
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Head/UI"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.01, -0.07)
-mesh = SubResource("PrismMesh_aavq0")
-skeleton = NodePath("../..")
+[node name="HealthBar" type="ProgressBar" parent="Head/UI"]
+texture_filter = 1
+offset_left = -100.0
+offset_top = 300.0
+offset_right = 100.0
+offset_bottom = 316.0
+theme_override_styles/background = SubResource("StyleBoxFlat_1gsey")
+theme_override_styles/fill = SubResource("StyleBoxFlat_wi8oh")
+step = 1.0
+value = 80.0
+show_percentage = false
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="Head/UI"]
-transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0.01, -0.07)
-mesh = SubResource("PrismMesh_aavq0")
-skeleton = NodePath("../..")
+[node name="TB" type="ColorRect" parent="Head/UI"]
+offset_left = -2.0
+offset_top = -9.0
+offset_right = 2.0
+offset_bottom = -3.0
+color = Color(0, 0, 0, 0.25098)
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Head/UI"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.01, 0, -0.07)
-mesh = SubResource("PrismMesh_aavq0")
-skeleton = NodePath("../..")
+[node name="TF" type="ColorRect" parent="Head/UI/TB"]
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 3.0
+offset_bottom = 5.0
 
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="Head/UI"]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -0.01, 0, -0.07)
-mesh = SubResource("PrismMesh_aavq0")
-skeleton = NodePath("../..")
+[node name="RB" type="ColorRect" parent="Head/UI"]
+offset_left = 3.0
+offset_top = -2.0
+offset_right = 9.0
+offset_bottom = 2.0
+color = Color(0, 0, 0, 0.25098)
+
+[node name="RF" type="ColorRect" parent="Head/UI/RB"]
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 5.0
+offset_bottom = 3.0
+
+[node name="DB" type="ColorRect" parent="Head/UI"]
+offset_left = -2.0
+offset_top = 3.0
+offset_right = 2.0
+offset_bottom = 9.0
+color = Color(0, 0, 0, 0.25098)
+
+[node name="DF" type="ColorRect" parent="Head/UI/DB"]
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 3.0
+offset_bottom = 5.0
+
+[node name="LB" type="ColorRect" parent="Head/UI"]
+offset_left = -9.0
+offset_top = -2.0
+offset_right = -3.0
+offset_bottom = 2.0
+color = Color(0, 0, 0, 0.25098)
+
+[node name="LF" type="ColorRect" parent="Head/UI/LB"]
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 5.0
+offset_bottom = 3.0

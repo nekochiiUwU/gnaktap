@@ -27,4 +27,4 @@ func _process(delta):
 			get_node("/root/Network").start_lobby()
 		queue_free()
 	if Input.is_action_just_pressed("lock_mouse"):
-		Input.mouse_mode = int(!Input.mouse_mode)*2
+		Input.mouse_mode = int(!Input.mouse_mode) * 2

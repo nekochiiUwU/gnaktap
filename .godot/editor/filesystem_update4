@@ -1,4 +1,1 @@
-res://main_menu.tscn
-res://Player.gd
-res://bullet.tscn
-res://bullet.gd
+res://Weapon.tscn

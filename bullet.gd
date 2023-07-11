@@ -4,7 +4,7 @@ var spawntime
 var game
 var damages
 var speed:       float =  50.
-var grav:        float =  1.2
+var grav:        float =  12.
 var lifetime = 1
 
 func _ready():
