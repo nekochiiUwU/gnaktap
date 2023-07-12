@@ -43,7 +43,7 @@ size = Vector3(0.1, 0.1, 0.3)
 
 [sub_resource type="BoxMesh" id="BoxMesh_6gy3v"]
 material = SubResource("StandardMaterial3D_8dlgx")
-size = Vector3(0.1, 0.15, 0.15)
+size = Vector3(0.1, 0.15, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qcnsp"]
 albedo_color = Color(0.730469, 0.575124, 0.372757, 1)
@@ -108,7 +108,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.1, 1),
+"transitions": PackedFloat32Array(0.05, 1),
 "update": 0,
 "values": [Vector3(0, -0.1, -0.6), Vector3(0.25, -0.2, -0.667)]
 }
@@ -120,7 +120,7 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.1, 1),
+"transitions": PackedFloat32Array(0.05, 1),
 "update": 0,
 "values": [Vector3(0.197396, 0, 0), Vector3(0, -0.174533, 0)]
 }
@@ -135,7 +135,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.1, 1),
+"transitions": PackedFloat32Array(0.05, 1),
 "update": 0,
 "values": [Vector3(0.25, -0.2, -0.667), Vector3(0, -0.1, -0.6)]
 }
@@ -147,7 +147,7 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.1, 1),
+"transitions": PackedFloat32Array(0.05, 1),
 "update": 0,
 "values": [Vector3(0.000868231, -0.173765, 0), Vector3(0.197222, 0, 0)]
 }
@@ -186,6 +186,12 @@ spot_range = 32.0
 spot_angle = 0.25
 spot_angle_attenuation = 0.069348
 
+[node name="SpotLight3D2" type="SpotLight3D" parent="Canon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0.2, 1, 0, 0, 0)
+rotation_edit_mode = 2
+visible = false
+spot_range = 24.0
+
 [node name="Front" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -0.2, 1, 0.000240856, 0, -0.3)
 rotation_edit_mode = 2
@@ -214,7 +220,7 @@ update_scale = false
 size = Vector2i(500, 500)
 
 [node name="Node3D" type="Node3D" parent="SupScope/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1.0155, 0.195838, 0, -0.2031, 0.979189, 0, -0.04, -0.6)
+transform = Transform3D(1, 0, 0, 0, 1.0155, 0.195838, 0, -0.2031, 0.979189, 0.25, 0.31, -0.667)
 
 [node name="Scope" type="Sprite3D" parent="SupScope/SubViewport/Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, -2.98023e-08, 1, 0, 0.011, 0.147)
@@ -227,6 +233,10 @@ texture = SubResource("ViewportTexture_v0tt1")
 transform = Transform3D(1, 0, 0, 0, 0.948144, -0.196148, 0, 0.189629, 0.980737, 0, 0, 0)
 current = true
 fov = 10.0
+
+[node name="Glass" type="MeshInstance3D" parent="SupScope"]
+transform = Transform3D(1, 0, 0, 0, 1.0155, 0.195838, 0, -4.47035e-08, 1.01836, 0, 0.0399587, 0.149698)
+rotation_edit_mode = 2
 
 [node name="ScopeR" type="MeshInstance3D" parent="SupScope"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03, 0.04, -9.31323e-10)

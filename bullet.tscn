@@ -1,6 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://c81c0h3nlb8o1"]
-
-[ext_resource type="Script" path="res://bullet.gd" id="1_owkjg"]
+[gd_scene load_steps=3 format=3 uid="uid://c81c0h3nlb8o1"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_kqn3p"]
 radius = 0.05
@@ -14,7 +12,6 @@ size = Vector3(0.05, 0.2, 0.05)
 [node name="Node3D" type="CharacterBody3D"]
 collision_layer = 0
 collision_mask = 3
-script = ExtResource("1_owkjg")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)

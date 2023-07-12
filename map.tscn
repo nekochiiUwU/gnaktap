@@ -11,11 +11,12 @@ sky_material = SubResource("ProceduralSkyMaterial_vxqex")
 background_mode = 1
 sky = SubResource("Sky_bt5t6")
 ambient_light_source = 1
+ambient_light_color = Color(0.235294, 0.235294, 0.235294, 1)
 reflected_light_source = 1
-sdfgi_bounce_feedback = 0.08
-sdfgi_cascades = 1
-sdfgi_max_distance = 25.6
-glow_blend_mode = 0
+tonemap_mode = 3
+tonemap_exposure = 0.5
+glow_enabled = true
+glow_blend_mode = 1
 volumetric_fog_density = 0.2
 volumetric_fog_temporal_reprojection_enabled = false
 
@@ -34,12 +35,12 @@ environment = SubResource("Environment_phn6l")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.173648, -0.925417, -0.336824, 0, -0.34202, 0.939693, -0.984808, -0.163176, -0.0593912, 0, 4.94395, 8.82341)
+shadow_enabled = true
 shadow_opacity = 0.5
-shadow_blur = 1.52
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.173648, -0.925417, 0.336824, 0, -0.34202, -0.939693, 0.984808, -0.163176, 0.0593912, 0, 4.94395, 8.82341)
-light_energy = 0.75
+light_energy = 0.5
 shadow_opacity = 0.9
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]

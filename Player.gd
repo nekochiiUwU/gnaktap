@@ -13,7 +13,7 @@ var jump:        float =  7.
 var speed:       float =  5.
 var sensi:     Vector2 = -Vector2(.005, .005)
 var joy_sensi: Vector2 = -Vector2(.1, .1)
-
+var hitmarker_time: float = 0
 
 func _ready():
 	Game = get_node("../../..")
@@ -56,6 +56,14 @@ func _input(event):
 
 func _physics_process(delta):
 	if is_multiplayer_authority():
+		if hitmarker_time:
+			var x = 1 - ((Game.time - hitmarker_time) / .3)
+			# 1 > 0 // 0.3s
+			if x <= 0 or hitmarker_time > Game.time:
+				get_node("Head/UI/Hitmarker").visible = false
+				hitmarker_time = 0
+			print(x)
+			get_node("Head/UI/Hitmarker").modulate = Color(x, x, x)
 		health += delta
 		get_node("Head/UI/HealthBar").value = health
 		var input_rotation = Input.get_vector("camera_left", "camera_right", "camera_up", "camera_down")
@@ -136,7 +144,9 @@ func shoot(pos, rot):
 	var new_bullet = bullet.instantiate()
 	new_bullet.position = pos
 	new_bullet.rotation = rot
+	new_bullet.set_script(load("res://bullet.gd"))
 	new_bullet.damages = damages
+	new_bullet._owner = name
 	if is_multiplayer_authority():
 		new_bullet.collision_mask = 0b10
 	Game.get_node("Entities").add_child(new_bullet)
@@ -149,3 +159,9 @@ func online_syncronisation(_position: Vector3, _rotation: Vector3, _head_rotatio
 	get_node("Head").rotation = _head_rotation
 	get_node("%Weapon").position = weapon_position
 	health = _health
+
+@rpc("any_peer", "call_remote", "unreliable", 5)
+func hitmarker(damages: float):
+	print("hit")
+	get_node("Head/UI/Hitmarker").visible = true
+	hitmarker_time = Game.time

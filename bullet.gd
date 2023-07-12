@@ -3,6 +3,7 @@ extends CharacterBody3D
 var spawntime
 var game
 var damages
+var _owner:     String
 var speed:       float =  50.
 var grav:        float =  12.
 var lifetime = 1
@@ -18,9 +19,11 @@ func _physics_process(delta):
 	if game.time - spawntime > lifetime:
 		queue_free()
 	
+	
 	if collision and collision.get_collision_count():
 		for i in collision.get_collision_count():
 			var object = collision.get_collider(i)
 			if object is Player:
 				object.get_hit(damages)
+				get_node("../Players/" + _owner).rpc_id(int(_owner), "hitmarker", damages)
 		queue_free()
