@@ -64,6 +64,7 @@ func _physics_process(delta):
 				hitmarker_time = 0
 			print(x)
 			get_node("Head/UI/Hitmarker").modulate = Color(x, x, x)
+			get_node("Head/UI/Hitmarker").scale = Vector2(x, x)
 		health += delta
 		get_node("Head/UI/HealthBar").value = health
 		var input_rotation = Input.get_vector("camera_left", "camera_right", "camera_up", "camera_down")
