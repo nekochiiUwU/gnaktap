@@ -1,175 +1,215 @@
-[gd_scene load_steps=22 format=3 uid="uid://bk3p2jyntv3bd"]
+[gd_scene load_steps=20 format=3 uid="uid://bk3p2jyntv3bd"]
 
-[sub_resource type="Gradient" id="Gradient_u4f1q"]
+[sub_resource type="Gradient" id="Gradient_ndx21"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.505747)
-colors = PackedColorArray(0, 0, 0, 1, 0.0820076, 0.351563, 0, 1)
+offsets = PackedFloat32Array(0, 0.318493, 0.321918, 0.866438)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0.0449756, 0.0151291, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_m4shd"]
-gradient = SubResource("Gradient_u4f1q")
-fill_to = Vector2(0.126667, 0.126667)
-repeat = 1
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wnj4q"]
+frequency = 1.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_554bt"]
-albedo_texture = SubResource("GradientTexture2D_m4shd")
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3dtce"]
+width = 4
+height = 128
+in_3d_space = true
+seamless = true
+color_ramp = SubResource("Gradient_ndx21")
+noise = SubResource("FastNoiseLite_wnj4q")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8dlgx"]
+albedo_color = Color(0, 0, 0, 1)
 metallic = 0.5
-roughness = 0.1
+roughness = 0.75
+emission_enabled = true
+emission_energy_multiplier = 16.0
+emission_texture = SubResource("NoiseTexture2D_3dtce")
 uv1_scale = Vector3(3, 2, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_g8vfx"]
-material = SubResource("StandardMaterial3D_554bt")
-size = Vector3(0.1, 0.1, 0.3)
+[sub_resource type="BoxMesh" id="BoxMesh_qarw4"]
+material = SubResource("StandardMaterial3D_8dlgx")
+size = Vector3(0.05, 0.1, 0.1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_2ej4m"]
-material = SubResource("StandardMaterial3D_554bt")
+[sub_resource type="BoxMesh" id="BoxMesh_g8vfx"]
+material = SubResource("StandardMaterial3D_8dlgx")
 size = Vector3(0.1, 0.1, 0.3)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ey5og"]
-material = SubResource("StandardMaterial3D_554bt")
+material = SubResource("StandardMaterial3D_8dlgx")
 size = Vector3(0.05, 0.05, 0.2)
 
-[sub_resource type="BoxMesh" id="BoxMesh_qarw4"]
-material = SubResource("StandardMaterial3D_554bt")
-size = Vector3(0.05, 0.1, 0.1)
+[sub_resource type="BoxMesh" id="BoxMesh_2ej4m"]
+material = SubResource("StandardMaterial3D_8dlgx")
+size = Vector3(0.1, 0.1, 0.3)
 
 [sub_resource type="BoxMesh" id="BoxMesh_6gy3v"]
-material = SubResource("StandardMaterial3D_554bt")
+material = SubResource("StandardMaterial3D_8dlgx")
 size = Vector3(0.1, 0.15, 0.15)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qcnsp"]
+albedo_color = Color(0.730469, 0.575124, 0.372757, 1)
+metallic = 0.5
+roughness = 0.75
+uv1_scale = Vector3(3, 2, 1)
+
 [sub_resource type="PrismMesh" id="PrismMesh_bwlij"]
-material = SubResource("StandardMaterial3D_554bt")
+material = SubResource("StandardMaterial3D_qcnsp")
 left_to_right = 1.0
 size = Vector3(0.2, 0.4, 0.099)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ptinh"]
-material = SubResource("StandardMaterial3D_554bt")
-size = Vector3(0.025, 0.013, 0.25)
+material = SubResource("StandardMaterial3D_8dlgx")
+size = Vector3(0.025, 0.02, 0.25)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_v0tt1"]
-viewport_path = NodePath("SubViewport")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gubfn"]
-albedo_color = Color(0, 0, 0, 1)
-metallic = 0.2
-metallic_specular = 0.0
-roughness = 0.75
+viewport_path = NodePath("SupScope/SubViewport")
 
 [sub_resource type="BoxMesh" id="BoxMesh_7geov"]
-material = SubResource("StandardMaterial3D_gubfn")
-size = Vector3(0.01, 0.074, 0.3)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8dlgx"]
-albedo_color = Color(0, 0, 0, 1)
-metallic = 0.2
-roughness = 0.75
+material = SubResource("StandardMaterial3D_8dlgx")
+size = Vector3(0.01, 0.07, 0.3)
 
 [sub_resource type="BoxMesh" id="BoxMesh_hy7ix"]
 material = SubResource("StandardMaterial3D_8dlgx")
-size = Vector3(0.075, 0.01, 0.3)
+size = Vector3(0.05, 0.01, 0.3)
 
-[sub_resource type="Gradient" id="Gradient_hphq8"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.735632)
+[sub_resource type="Animation" id="Animation_hvafs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weapon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.25, 0.25, -0.667)]
+}
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_0w3ji"]
+[sub_resource type="Animation" id="Animation_c2fio"]
+resource_name = "no_scope"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weapon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.1, 1),
+"update": 0,
+"values": [Vector3(0, -0.1, -0.6), Vector3(0.25, -0.2, -0.667)]
+}
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_x6ap3"]
-color_ramp = SubResource("Gradient_hphq8")
-noise = SubResource("FastNoiseLite_0w3ji")
+[sub_resource type="Animation" id="Animation_fw4ki"]
+resource_name = "scope"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weapon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.1, 1),
+"update": 0,
+"values": [Vector3(0.25, -0.2, -0.667), Vector3(0, -0.1, -0.6)]
+}
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5hdb8"]
-albedo_texture = SubResource("NoiseTexture2D_x6ap3")
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l6klv"]
+_data = {
+"RESET": SubResource("Animation_hvafs"),
+"no_scope": SubResource("Animation_c2fio"),
+"scope": SubResource("Animation_fw4ki")
+}
 
-[sub_resource type="SphereMesh" id="SphereMesh_srcuk"]
-material = SubResource("StandardMaterial3D_5hdb8")
+[node name="Weapon" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.25, -0.667)
 
-[sub_resource type="Environment" id="Environment_ccbto"]
-ssr_max_steps = 32
-
-[node name="Node3D" type="Node3D"]
+[node name="Chargeur" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0.2, 1, 0, -0.1, -0.15)
+rotation_edit_mode = 2
+mesh = SubResource("BoxMesh_qarw4")
 
 [node name="Body" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -0.2, 1, 0, 0, 0)
 rotation_edit_mode = 2
 mesh = SubResource("BoxMesh_g8vfx")
 
-[node name="Front" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -0.2, 1, 0, 0, -0.3)
-rotation_edit_mode = 2
-mesh = SubResource("BoxMesh_2ej4m")
-
 [node name="Canon" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -0.2, 1, 0, 0, -0.550108)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -0.2, 1, 0.000441655, 0, -0.550108)
 rotation_edit_mode = 2
 mesh = SubResource("BoxMesh_ey5og")
 
-[node name="Chargeur" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0.2, 1, 0, -0.1, -0.25)
+[node name="Front" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -0.2, 1, 0.000240856, 0, -0.3)
 rotation_edit_mode = 2
-mesh = SubResource("BoxMesh_qarw4")
+mesh = SubResource("BoxMesh_2ej4m")
 
 [node name="PoignéeB" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -0.2, 1, 0, -0.125, 0.06)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -0.2, 1, 0, -0.125, 0.05)
 rotation_edit_mode = 2
 mesh = SubResource("BoxMesh_6gy3v")
 
 [node name="Crosse" type="MeshInstance3D" parent="."]
-transform = Transform3D(0, 0, -1, 1, 0, 0, -0.2, -1, 0, 0, -0.0479383, 0.15538)
+transform = Transform3D(0, 0, -1, 1, 0, 0, -0.2, -1, 0, 0, -0.051, 0.15)
 rotation_edit_mode = 2
 mesh = SubResource("PrismMesh_bwlij")
 
 [node name="SupScope" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -0.2, 1, 0, 0.056, -0.0914599)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -0.2, 1, 0, 0.06, 0)
 rotation_edit_mode = 2
 mesh = SubResource("BoxMesh_ptinh")
 
-[node name="Scope" type="Sprite3D" parent="SupScope"]
-transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, -6.55651e-07, 0.0410088, 0.131914)
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="SupScope"]
+remote_path = NodePath("../SubViewport/Node3D")
+update_scale = false
+
+[node name="SubViewport" type="SubViewport" parent="SupScope"]
+size = Vector2i(500, 500)
+
+[node name="Node3D" type="Node3D" parent="SupScope/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1.0155, 0.195838, 0, -0.2031, 0.979189, 0.25, 0.31, -0.667)
+
+[node name="Scope" type="Sprite3D" parent="SupScope/SubViewport/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, -2.98023e-08, 1, 0, 0.011, 0.147)
 rotation_edit_mode = 2
 pixel_size = 0.0001
-transparent = false
 double_sided = false
 texture = SubResource("ViewportTexture_v0tt1")
 
+[node name="Camera3D2" type="Camera3D" parent="SupScope/SubViewport/Node3D/Scope"]
+transform = Transform3D(1, 0, 0, 0, 0.948144, -0.182848, 0, 0.189629, 0.983303, 0, 0, 0)
+rotation_edit_mode = 2
+current = true
+fov = 10.0
+
 [node name="ScopeR" type="MeshInstance3D" parent="SupScope"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.033, 0.043, 5.98952e-05)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03, 0.04, -9.31323e-10)
 rotation_edit_mode = 2
 mesh = SubResource("BoxMesh_7geov")
 skeleton = NodePath("../..")
 
 [node name="ScopeL" type="MeshInstance3D" parent="SupScope"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.033, 0.043, 5.98952e-05)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 0.04, -9.31323e-10)
 rotation_edit_mode = 2
 mesh = SubResource("BoxMesh_7geov")
 skeleton = NodePath("../..")
 
 [node name="ScopeB" type="MeshInstance3D" parent="SupScope"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.55651e-07, 0.0105207, -0.000436366)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
 rotation_edit_mode = 2
 mesh = SubResource("BoxMesh_hy7ix")
 skeleton = NodePath("../..")
 
 [node name="ScopeT" type="MeshInstance3D" parent="SupScope"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.55651e-07, 0.075135, 0.0013789)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07, 0)
 rotation_edit_mode = 2
 mesh = SubResource("BoxMesh_hy7ix")
 skeleton = NodePath("../..")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.099, 0.109)
-current = true
-fov = 80.0
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0.196116, 0, -0.2, 0.980581, 0.0648897, -0.22519, -2)
-mesh = SubResource("SphereMesh_srcuk")
-skeleton = NodePath("")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_ccbto")
-
-[node name="SubViewport" type="SubViewport" parent="."]
-
-[node name="Camera3D2" type="Camera3D" parent="SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.6)
-fov = 20.0
+[node name="Animation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_l6klv")
+}

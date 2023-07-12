@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://weitoykb1612"]
+[gd_scene load_steps=8 format=3 uid="uid://weitoykb1612"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fjljj"]
+[ext_resource type="PackedScene" uid="uid://bk3p2jyntv3bd" path="res://Weapon.tscn" id="2_u5gc6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vhf1b"]
 resource_local_to_scene = true
@@ -17,18 +18,6 @@ rings = 4
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a7pkv"]
 radius = 0.4
 height = 1.8
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ha65q"]
-albedo_color = Color(1, 0, 0.988235, 1)
-roughness = 0.75
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_qvvqb"]
-material = SubResource("StandardMaterial3D_ha65q")
-top_radius = 0.1
-bottom_radius = 0.05
-height = 0.66
-radial_segments = 16
-rings = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1gsey"]
 bg_color = Color(0, 0, 0, 0.12549)
@@ -55,11 +44,8 @@ visible = false
 spot_range = 10.0
 spot_angle = 60.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Head"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.33)
-mesh = SubResource("CylinderMesh_qvvqb")
-
 [node name="Camera" type="Camera3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4)
 fov = 120.0
 
 [node name="UI" type="Control" parent="Head"]
@@ -68,6 +54,7 @@ anchors_preset = 0
 
 [node name="HealthBar" type="ProgressBar" parent="Head/UI"]
 texture_filter = 1
+layout_mode = 0
 offset_left = -100.0
 offset_top = 300.0
 offset_right = 100.0
@@ -79,6 +66,7 @@ value = 80.0
 show_percentage = false
 
 [node name="TB" type="ColorRect" parent="Head/UI"]
+layout_mode = 0
 offset_left = -2.0
 offset_top = -9.0
 offset_right = 2.0
@@ -86,12 +74,14 @@ offset_bottom = -3.0
 color = Color(0, 0, 0, 0.25098)
 
 [node name="TF" type="ColorRect" parent="Head/UI/TB"]
+layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
 offset_right = 3.0
 offset_bottom = 5.0
 
 [node name="RB" type="ColorRect" parent="Head/UI"]
+layout_mode = 0
 offset_left = 3.0
 offset_top = -2.0
 offset_right = 9.0
@@ -99,12 +89,14 @@ offset_bottom = 2.0
 color = Color(0, 0, 0, 0.25098)
 
 [node name="RF" type="ColorRect" parent="Head/UI/RB"]
+layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
 offset_right = 5.0
 offset_bottom = 3.0
 
 [node name="DB" type="ColorRect" parent="Head/UI"]
+layout_mode = 0
 offset_left = -2.0
 offset_top = 3.0
 offset_right = 2.0
@@ -112,12 +104,14 @@ offset_bottom = 9.0
 color = Color(0, 0, 0, 0.25098)
 
 [node name="DF" type="ColorRect" parent="Head/UI/DB"]
+layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
 offset_right = 3.0
 offset_bottom = 5.0
 
 [node name="LB" type="ColorRect" parent="Head/UI"]
+layout_mode = 0
 offset_left = -9.0
 offset_top = -2.0
 offset_right = -3.0
@@ -125,7 +119,16 @@ offset_bottom = 2.0
 color = Color(0, 0, 0, 0.25098)
 
 [node name="LF" type="ColorRect" parent="Head/UI/LB"]
+layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
 offset_right = 5.0
 offset_bottom = 3.0
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Head"]
+remote_path = NodePath("../../Hand")
+
+[node name="Hand" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+
+[node name="Weapon" parent="Hand" instance=ExtResource("2_u5gc6")]

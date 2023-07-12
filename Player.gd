@@ -3,7 +3,7 @@ extends CharacterBody3D
 
 @onready var bullet = preload("res://bullet.tscn")
 
-var game
+var Game
 
 var health:      float =  100.
 var damages:     float =  34.
@@ -16,7 +16,7 @@ var joy_sensi: Vector2 = -Vector2(.1, .1)
 
 
 func _ready():
-	game = get_node("../../..")
+	Game = get_node("../../..")
 	if is_multiplayer_authority():
 		calibrate_ui()
 		get_viewport().size_changed.connect(calibrate_ui)
@@ -43,6 +43,15 @@ func _input(event):
 			$Head.rotation.x = clamp(-1.57, $Head.rotation.x + event.relative.y * sensi.y, 1.57)
 			$Head.rotation.z += event.relative.x * sensi.x / 10
 			get_node("Head/Camera").fov = min(get_node("Head/Camera").fov + abs(event.relative.x * sensi.x * 5), 160)
+		if event is InputEventMouseButton:
+			if event.button_index == MOUSE_BUTTON_RIGHT:
+				if event.is_pressed():
+					if get_node("Hand/Weapon/Animation").current_animation != "scope":
+						get_node("Hand/Weapon/Animation").current_animation = "scope"
+						get_node("Hand/Weapon/Animation").play()
+				else:
+					get_node("Hand/Weapon/Animation").current_animation = "no_scope"
+					get_node("Hand/Weapon/Animation").play()
 
 
 func _physics_process(delta):
@@ -88,12 +97,13 @@ func _physics_process(delta):
 
 func _process(_delta):
 	if is_multiplayer_authority():
-		rpc("online_syncronisation", position, rotation, get_node("Head").rotation, health)
+		rpc("online_syncronisation", position, rotation, get_node("Head").rotation, health, get_node("Hand/Weapon").position)
 
 
 func spawn():
 	get_node("Head/Camera").current = true
-	transform = game.spawnpoints[randi() % len(game.spawnpoints)].transform
+	if Game:
+		transform = Game.spawnpoints[randi() % len(Game.spawnpoints)].transform
 	health = 100
 
 
@@ -108,7 +118,7 @@ func die():
 	process_mode = Node.PROCESS_MODE_DISABLED
 	rotation.z += 90
 	position.y -= 0.8
-	rpc("online_syncronisation", position, rotation, get_node("Head").rotation, health)
+	rpc("online_syncronisation", position, rotation, get_node("Head").rotation, health, get_node("Hand/Weapon").position)
 	await get_tree().create_timer(2.0).timeout
 	spawn()
 	process_mode = Node.PROCESS_MODE_INHERIT
@@ -122,12 +132,13 @@ func shoot(pos, rot):
 	new_bullet.damages = damages
 	if is_multiplayer_authority():
 		new_bullet.collision_mask = 0b10
-	game.get_node("Entities").add_child(new_bullet)
+	Game.get_node("Entities").add_child(new_bullet)
 
 
 @rpc("authority", "call_remote", "unreliable", 0)
-func online_syncronisation(_position: Vector3, _rotation: Vector3, _head_rotation: Vector3, _health: float):
+func online_syncronisation(_position: Vector3, _rotation: Vector3, _head_rotation: Vector3, _health: float, weapon_position: Vector3):
 	position = _position
 	rotation = _rotation
 	get_node("Head").rotation = _head_rotation
+	get_node("Hand/Weapon").position = weapon_position
 	health = _health

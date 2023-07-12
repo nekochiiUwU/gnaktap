@@ -1,8 +1,12 @@
+Node3D
+RemoteTransform3D
+AnimationPlayer
+MeshInstance3D
+SpotLight3D
+WorldEnvironment
 Sprite3D
 SubViewport
-MeshInstance3D
 Camera3D
-WorldEnvironment
 OmniLight3D
 Camera2D
 Control
@@ -10,7 +14,6 @@ ColorRect
 ProgressBar
 CollisionShape3D
 CharacterBody3D
-Node3D
 MultiplayerSynchronizer
 Button
 SpinBox
@@ -19,6 +22,5 @@ Sprite2D
 RichTextLabel
 Node
 DirectionalLight3D
-SpotLight3D
 GridMap
 TileMap
