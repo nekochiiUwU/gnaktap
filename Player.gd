@@ -25,7 +25,7 @@ func _ready():
 		get_node("Collision").queue_free()
 		get_node("Head/Light").queue_free()
 		get_node("Head/UI").queue_free()
-		get_node("Head/Camera").queue_free()
+		get_node("%Camera").queue_free()
 
 
 func calibrate_ui():
@@ -42,16 +42,16 @@ func _input(event):
 			rotation.y += event.relative.x * sensi.x
 			$Head.rotation.x = clamp(-1.57, $Head.rotation.x + event.relative.y * sensi.y, 1.57)
 			$Head.rotation.z += event.relative.x * sensi.x / 10
-			get_node("Head/Camera").fov = min(get_node("Head/Camera").fov + abs(event.relative.x * sensi.x * 5), 160)
+			get_node("%Camera").fov = min(get_node("%Camera").fov + abs(event.relative.x * sensi.x * 5), 160)
 		if event is InputEventMouseButton:
 			if event.button_index == MOUSE_BUTTON_RIGHT:
 				if event.is_pressed():
-					if get_node("Hand/Weapon/Animation").current_animation != "scope":
-						get_node("Hand/Weapon/Animation").current_animation = "scope"
-						get_node("Hand/Weapon/Animation").play()
+					if get_node("%Weapon/Animation").current_animation != "scope":
+						get_node("%Weapon/Animation").current_animation = "scope"
+						get_node("%Weapon/Animation").play()
 				else:
-					get_node("Hand/Weapon/Animation").current_animation = "no_scope"
-					get_node("Hand/Weapon/Animation").play()
+					get_node("%Weapon/Animation").current_animation = "no_scope"
+					get_node("%Weapon/Animation").play()
 
 
 func _physics_process(delta):
@@ -63,7 +63,7 @@ func _physics_process(delta):
 			rotation.y += input_rotation.x * joy_sensi.x
 			$Head.rotation.x = clamp(-1.57, $Head.rotation.x + input_rotation.y * joy_sensi.y, 1.57)
 			$Head.rotation.z += input_rotation.x * joy_sensi.x / 10
-			get_node("Head/Camera").fov = min(get_node("Head/Camera").fov + abs(input_rotation.x * sensi.x * 5), 160)
+			get_node("%Camera").fov = min(get_node("%Camera").fov + abs(input_rotation.x * sensi.x * 5), 160)
 		#print(velocity.dot(transform.basis.x))
 		var input = Input.get_vector("move_left", "move_right", "move_forward", "move_backward").normalized()
 		input = Vector3(input.x, 0, input.y)
@@ -93,15 +93,22 @@ func _physics_process(delta):
 		move_and_slide()
 		$Head.rotation.z -= velocity.dot(transform.basis.x) / 1000
 		$Head.rotation.z /= 1.1
-		get_node("Head/Camera").fov = (get_node("Head/Camera").fov - 120) / 1.2 + 120
+		get_node("Arm/Hand").rotation.z = ($Head.rotation.z + get_node("Arm/Hand").rotation.z*1) / 2
+		get_node("Arm/Hand").position.x = get_node("Arm/Hand").rotation.z / 4
+		get_node("%Camera").fov = (get_node("%Camera").fov - 120) / 1.2 + 120
 
 func _process(_delta):
 	if is_multiplayer_authority():
-		rpc("online_syncronisation", position, rotation, get_node("Head").rotation, health, get_node("Hand/Weapon").position)
+		rpc("online_syncronisation", position, rotation, get_node("Head").rotation, health, get_node("%Weapon").position)
 
 
 func spawn():
-	get_node("Head/Camera").current = true
+	var a = int(rotation.z) % 360 + abs(rotation.z - int(rotation.z))
+	a /= 180
+	if a > 1:
+		a = 2 - a # (a e [0, 1])
+
+	get_node("%Camera").current = true
 	if Game:
 		transform = Game.spawnpoints[randi() % len(Game.spawnpoints)].transform
 	health = 100
@@ -118,7 +125,7 @@ func die():
 	process_mode = Node.PROCESS_MODE_DISABLED
 	rotation.z += 90
 	position.y -= 0.8
-	rpc("online_syncronisation", position, rotation, get_node("Head").rotation, health, get_node("Hand/Weapon").position)
+	rpc("online_syncronisation", position, rotation, get_node("Head").rotation, health, get_node("%Weapon").position)
 	await get_tree().create_timer(2.0).timeout
 	spawn()
 	process_mode = Node.PROCESS_MODE_INHERIT
@@ -140,5 +147,5 @@ func online_syncronisation(_position: Vector3, _rotation: Vector3, _head_rotatio
 	position = _position
 	rotation = _rotation
 	get_node("Head").rotation = _head_rotation
-	get_node("Hand/Weapon").position = weapon_position
+	get_node("%Weapon").position = weapon_position
 	health = _health

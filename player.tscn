@@ -45,6 +45,7 @@ spot_range = 10.0
 spot_angle = 60.0
 
 [node name="Camera" type="Camera3D" parent="Head"]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4)
 fov = 120.0
 
@@ -126,9 +127,14 @@ offset_right = 5.0
 offset_bottom = 3.0
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Head"]
-remote_path = NodePath("../../Hand")
+remote_path = NodePath("../../Arm")
 
-[node name="Hand" type="Node3D" parent="."]
+[node name="Arm" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
 
-[node name="Weapon" parent="Hand" instance=ExtResource("2_u5gc6")]
+[node name="Hand" type="Node3D" parent="Arm"]
+
+[node name="Weapon" parent="Arm/Hand" instance=ExtResource("2_u5gc6")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.25, -0.667)
+rotation_edit_mode = 2
