@@ -257,3 +257,5 @@ root_node = NodePath("../../..")
 libraries = {
 "": SubResource("AnimationLibrary_o4a6p")
 }
+
+[node name="hitmarker_sfx" type="AudioStreamPlayer" parent="."]

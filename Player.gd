@@ -163,6 +163,8 @@ func online_syncronisation(_position: Vector3, _rotation: Vector3, _head_rotatio
 
 @rpc("any_peer", "call_remote", "unreliable", 5)
 func hitmarker(damages: float):
+	get_node("hitmarker_sfx").stream = load("res://hitmarker.mp3")
+	get_node("hitmarker_sfx").play()
 	print("hit")
 	get_node("Head/UI/Hitmarker").visible = true
 	hitmarker_time = Game.time
