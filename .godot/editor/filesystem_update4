@@ -1,11 +1,5 @@
-res://player.tscn
-res://mesh.tres
 res://main_menu.tscn
-res://map.tscn
-res://Weapon.tscn
+res://player.tscn
 res://Player.gd
-res://Target.gd
-res://bullet.gd
-res://network.gd
 res://target.tscn
-res://bullet.tscn
+res://Weapon.tscn

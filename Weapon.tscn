@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bk3p2jyntv3bd"]
+[gd_scene load_steps=23 format=3 uid="uid://bk3p2jyntv3bd"]
 
 [sub_resource type="Gradient" id="Gradient_ndx21"]
 interpolation_mode = 1
@@ -110,7 +110,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(0.05, 1),
 "update": 0,
-"values": [Vector3(0, -0.1, -0.6), Vector3(0.25, -0.2, -0.667)]
+"values": [Vector3(0, -0.1, -0.1), Vector3(0.25, -0.2, -0.667)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -137,7 +137,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(0.05, 1),
 "update": 0,
-"values": [Vector3(0.25, -0.2, -0.667), Vector3(0, -0.1, -0.6)]
+"values": [Vector3(0.25, -0.2, -0.667), Vector3(0, -0.1, -0.1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -159,12 +159,72 @@ _data = {
 "scope": SubResource("Animation_fw4ki")
 }
 
+[sub_resource type="Animation" id="Animation_0evfm"]
+resource_name = "new_animation"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Chargeur:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.1, -0.2), Vector3(-0.2, -0.3, 0.2), Vector3(0, -0.1, -0.2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Chargeur:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-2.0944, 0.698132, 0.698132), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ht2kd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Chargeur:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.1, -0.2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Chargeur:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_20bas"]
+_data = {
+"RESET": SubResource("Animation_ht2kd"),
+"new_animation": SubResource("Animation_0evfm")
+}
+
 [node name="Weapon" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.25, -0.667)
 
 [node name="Chargeur" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0.2, 1, 0, -0.1, -0.15)
-rotation_edit_mode = 2
+transform = Transform3D(1, 0, 0, 0, 1.0198, 0, 0, 0, 1, 0, -0.1, -0.2)
 mesh = SubResource("BoxMesh_qarw4")
 
 [node name="Body" type="MeshInstance3D" parent="."]
@@ -220,7 +280,7 @@ update_scale = false
 size = Vector2i(500, 500)
 
 [node name="Node3D" type="Node3D" parent="SupScope/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1.0155, 0.195838, 0, -0.2031, 0.979189, 0.25, 0.31, -0.667)
+transform = Transform3D(1, 0, 0, 0, 1.0155, 0.195838, 0, -0.2031, 0.979189, 0.25, -0.14, -0.667)
 
 [node name="Scope" type="Sprite3D" parent="SupScope/SubViewport/Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, -2.98023e-08, 1, 0, 0.011, 0.147)
@@ -230,9 +290,9 @@ double_sided = false
 texture = SubResource("ViewportTexture_v0tt1")
 
 [node name="Camera3D2" type="Camera3D" parent="SupScope/SubViewport/Node3D/Scope"]
-transform = Transform3D(1, 0, 0, 0, 0.948144, -0.196148, 0, 0.189629, 0.980737, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.948144, -0.196148, 0, 0.189629, 0.980737, 0, 0.0378745, -0.196395)
 current = true
-fov = 10.0
+fov = 30.0
 
 [node name="Glass" type="MeshInstance3D" parent="SupScope"]
 transform = Transform3D(1, 0, 0, 0, 1.0155, 0.195838, 0, -4.47035e-08, 1.01836, 0, 0.0399587, 0.149698)
@@ -266,4 +326,9 @@ skeleton = NodePath("../..")
 root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_l6klv")
+}
+
+[node name="RemoadAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_20bas")
 }

@@ -15,6 +15,7 @@ var hitmarker_time: float = 0
 var shot_time:      float = 0
 var reloading:      bool = false
 var target_score:   int = 0
+var incoming_recoil: Vector2 = Vector2()
 
 #weapon stats
 var weapon_type:  String = "full auto"
@@ -81,6 +82,11 @@ func _physics_process(delta):
 				hitmarker_time = 0
 			get_node("Head/UI/Hitmarker").modulate = Color(x, x, x)
 			get_node("Head/UI/Hitmarker").scale = Vector2(x, x)
+		if incoming_recoil:
+			get_node("Head").rotation_degrees.x += incoming_recoil.y / 2
+			rotation_degrees.y += incoming_recoil.x / 2
+			incoming_recoil /= 2
+			
 		health += delta
 		get_node("Head/UI/HealthBar").value = health
 		var input_rotation = Input.get_vector("camera_left", "camera_right", "camera_up", "camera_down")
@@ -150,14 +156,15 @@ func try_shoot():
 		#a completer avec burst, shotgun, verrou...
 		pass
 	ammo -= 1
+	accuracy = 5
 	update_ammo()
-	var ori = get_node("Head").global_rotation
-	ori.x += randf_range(deg_to_rad(-accuracy), deg_to_rad(accuracy))
-	ori.y += randf_range(deg_to_rad(-accuracy), deg_to_rad(accuracy))
+	var ori = get_node("Head").global_rotation_degrees
+	ori.x += randf_range(0, accuracy) - accuracy / 2
+	ori.y += randf_range(0, accuracy) - accuracy / 2
 	shot_time = Game.time
-	get_node("Head").rotation.x += randf_range(0, deg_to_rad(recoil))
-	get_node("Head").rotation.y += randf_range(deg_to_rad(-recoil/2), deg_to_rad(recoil/2))
-	rpc("shoot", get_node("Head").global_position, ori)
+	incoming_recoil.y += randf_range(0, recoil)
+	incoming_recoil.x += randf_range(-recoil/2, recoil/2)
+	rpc("shoot", get_node("Head/Camera").global_position, ori)
 
 
 func reload():
@@ -202,7 +209,7 @@ func die():
 func shoot(pos, rot):
 	var new_bullet = bullet.instantiate()
 	new_bullet.position = pos
-	new_bullet.rotation = rot
+	new_bullet.rotation_degrees = rot
 	new_bullet.set_script(load("res://bullet.gd"))
 	new_bullet.damages = damages
 	new_bullet.speed = bullet_speed

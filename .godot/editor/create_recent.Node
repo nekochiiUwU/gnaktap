@@ -1,3 +1,4 @@
+AnimationPlayer
 CollisionShape3D
 CollisionPolygon3D
 MeshInstance3D
@@ -7,7 +8,6 @@ AudioStreamPlayer
 Control
 OmniLight3D
 Node3D
-AnimationPlayer
 SpotLight3D
 RemoteTransform3D
 WorldEnvironment
