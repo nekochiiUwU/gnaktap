@@ -1,6 +1,10 @@
+CollisionShape3D
+CollisionPolygon3D
+MeshInstance3D
+CharacterBody3D
+Label
 AudioStreamPlayer
 Control
-MeshInstance3D
 OmniLight3D
 Node3D
 AnimationPlayer
@@ -13,8 +17,6 @@ Camera3D
 Camera2D
 ColorRect
 ProgressBar
-CollisionShape3D
-CharacterBody3D
 MultiplayerSynchronizer
 Button
 SpinBox

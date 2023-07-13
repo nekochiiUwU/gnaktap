@@ -13,6 +13,7 @@ func _ready():
 	spawntime = game.time
 	velocity = -transform.basis.z * speed
 
+
 func _physics_process(delta):
 	velocity.y -= grav*delta
 	var collision = move_and_collide(velocity*delta)
@@ -25,5 +26,9 @@ func _physics_process(delta):
 			var object = collision.get_collider(i)
 			if object is Player:
 				object.get_hit(damages)
+				get_node("../Players/" + _owner).rpc_id(int(_owner), "hitmarker", damages)
+			elif object is Target:
+				object.get_hit(damages)
+				get_node("../Players/" + _owner).rpc_id(int(_owner), "target", 1)
 				get_node("../Players/" + _owner).rpc_id(int(_owner), "hitmarker", damages)
 		queue_free()

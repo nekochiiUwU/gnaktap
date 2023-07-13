@@ -6,14 +6,31 @@ extends CharacterBody3D
 var Game
 
 var health:      float =  100.
-var damages:     float =  34.
 var gravity:     float = -ProjectSettings.get_setting("physics/3d/default_gravity")
 var air_speed:   float =  50.
 var jump:        float =  7.
-var speed:       float =  5.
 var sensi:     Vector2 = -Vector2(.005, .005)
 var joy_sensi: Vector2 = -Vector2(.1, .1)
 var hitmarker_time: float = 0
+var shot_time:      float = 0
+var reloading:      bool = false
+var target_score:   int = 0
+
+#weapon stats
+var weapon_type:  String = "full auto"
+var scope:        String = "none" #pour plus tard
+var accessory:    String = "none" #pour plus tard
+var speed:        float  =  5.
+var damages:      float  = 34.
+var fire_rate:    float  = 600 #en RPM -> tir tous les 60/fire_rate
+var accuracy:     float  = 5 #en degres
+var recoil:       float  = 5 #en degres, a voir
+var max_ammo:     int    = 30
+var ammo:         int    = max_ammo
+var reload_speed:  float  = 1.2
+var bullet_speed: float  = 50. #stat ennuyeuse un peu ?
+
+
 
 func _ready():
 	Game = get_node("../../..")
@@ -62,7 +79,6 @@ func _physics_process(delta):
 			if x <= 0 or hitmarker_time > Game.time:
 				get_node("Head/UI/Hitmarker").visible = false
 				hitmarker_time = 0
-			print(x)
 			get_node("Head/UI/Hitmarker").modulate = Color(x, x, x)
 			get_node("Head/UI/Hitmarker").scale = Vector2(x, x)
 		health += delta
@@ -77,8 +93,8 @@ func _physics_process(delta):
 		var input = Input.get_vector("move_left", "move_right", "move_forward", "move_backward").normalized()
 		input = Vector3(input.x, 0, input.y)
 		
-		if Input.is_action_just_pressed("shoot"):
-			rpc("shoot", get_node("Head").global_position, get_node("Head").global_rotation)
+		if Input.is_action_pressed("shoot"):
+			try_shoot()
 		
 		if is_on_floor():
 			if Input.is_action_pressed("jump"):
@@ -109,6 +125,48 @@ func _physics_process(delta):
 func _process(_delta):
 	if is_multiplayer_authority():
 		rpc("online_syncronisation", position, rotation, get_node("Head").rotation, health, get_node("%Weapon").position)
+
+
+func update_ammo():
+	get_node("Head/UI/Ammo").text = str(ammo)+"/"+str(max_ammo)
+
+
+func try_shoot():
+	if shot_time - Game.time + 60/fire_rate > 0:
+		return
+	if reloading:
+		return
+	if ammo == 0:
+		if !reloading and !Input.is_action_just_pressed("shoot"):
+			reload() #ou pas, au choix
+		return
+	if weapon_type == "full auto": 
+		#aucun check en plus
+		pass
+	elif weapon_type == "semi-auto": 
+		if !Input.is_action_just_pressed("shoot"):
+			return
+	elif weapon_type == "autre chose":
+		#a completer avec burst, shotgun, verrou...
+		pass
+	ammo -= 1
+	update_ammo()
+	var ori = get_node("Head").global_rotation
+	ori.x += randf_range(deg_to_rad(-accuracy), deg_to_rad(accuracy))
+	ori.y += randf_range(deg_to_rad(-accuracy), deg_to_rad(accuracy))
+	shot_time = Game.time
+	get_node("Head").rotation.x += randf_range(0, deg_to_rad(recoil))
+	get_node("Head").rotation.y += randf_range(deg_to_rad(-recoil/2), deg_to_rad(recoil/2))
+	rpc("shoot", get_node("Head").global_position, ori)
+
+
+func reload():
+	print("reloading...")
+	reloading = true
+	await get_tree().create_timer(reload_speed).timeout
+	ammo = max_ammo
+	update_ammo()
+	reloading = false
 
 
 func spawn():
@@ -147,9 +205,10 @@ func shoot(pos, rot):
 	new_bullet.rotation = rot
 	new_bullet.set_script(load("res://bullet.gd"))
 	new_bullet.damages = damages
+	new_bullet.speed = bullet_speed
 	new_bullet._owner = name
 	if is_multiplayer_authority():
-		new_bullet.collision_mask = 0b10
+		new_bullet.collision_mask = 0b110
 	Game.get_node("Entities").add_child(new_bullet)
 
 
@@ -165,6 +224,10 @@ func online_syncronisation(_position: Vector3, _rotation: Vector3, _head_rotatio
 func hitmarker(damages: float):
 	get_node("hitmarker_sfx").stream = load("res://hitmarker.mp3")
 	get_node("hitmarker_sfx").play()
-	print("hit")
 	get_node("Head/UI/Hitmarker").visible = true
 	hitmarker_time = Game.time
+
+@rpc("any_peer", "call_remote", "unreliable", 6)
+func target(score: int):
+	target_score += score
+	print("target hit ! score : ",target_score)

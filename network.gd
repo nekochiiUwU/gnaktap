@@ -35,7 +35,7 @@ func create_room(): # Server Function // Create an server and initialize it
 	var upnp = UPNP.new()
 	upnp.discover(2000, 2, "InternetGatewayDevice")
 	get_node("Net Status/Server help").text = "Server help
-1) Do an port-forward on your firewall using the UDP protocol. (Needed: Port)
+1) Do a port-forward on your firewall using the UDP protocol. (Needed: Port)
 2) Do the same on your router with the UDP protocol. (Needed: Local IPv4, Port)
 3) Give your IP to the players. (Needed: Public IPv4)
 
@@ -68,6 +68,7 @@ func join_room(): # Client Function // Create an client and connect him to the s
 # --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- #
 
 @onready var Player: Object = preload("res://player.tscn")
+@onready var Target: Object = preload("res://target.tscn")
 
 
 @rpc("authority", "call_remote", "reliable", 1)
@@ -109,15 +110,21 @@ func instanciate_player(id: int): # Server Function // Instanciate an Player nod
 	var player = Player.instantiate()
 	player.name = str(id)
 	player.set_multiplayer_authority(id)
-	get_node("/root/Game/Entities/Players").add_child(player) # Will instanciate an Player instance
+	get_node("/root/Game/Entities/Players").add_child(player) # Will instanciate a Player instance
 	# The spawn on the other clients will be managed by the Player Spawner's node
 
 
 @rpc("authority", "call_local", "reliable", 1)
-func uninstanciate_player(id: int): # Server Function // Uninstanciate an Player node
+func uninstanciate_player(id: int): # Server Function // Uninstanciate a Player node
 	print("Client ", id, "'s Player scene unspawned")
 	get_node("/root/Game/Entities/Players/" + str(id)).queue_free() # Refair to instanciate_player()
 
+
+@rpc("authority", "call_local", "reliable", 1)
+func instanciate_target(): # Server Function // Instanciate a Target node for his client
+	var target = Target.instantiate()
+	get_node("/root/Game/Entities").add_child(target) # Will instanciate a Target instance
+	# The spawn on the other clients will be managed by the Target Spawner's node
 
 # --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- #
 # --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- #
@@ -201,6 +208,8 @@ func start_game():
 	if is_server:
 		for id in players:
 			rpc("instanciate_player", id)
+			for i in range(2):
+				rpc("instanciate_target")
 		get_node("/root/Game").visible = false
 
 func start_lobby():

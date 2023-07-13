@@ -238,6 +238,15 @@ offset_top = 1.0
 offset_right = 5.0
 offset_bottom = 3.0
 
+[node name="Ammo" type="Label" parent="Head/UI"]
+layout_mode = 0
+offset_left = -550.0
+offset_top = 300.0
+offset_right = -507.0
+offset_bottom = 326.0
+text = "17/30"
+vertical_alignment = 1
+
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Head"]
 remote_path = NodePath("../../Arm")
 
