@@ -1,5 +1,7 @@
 extends Node3D
 
+@onready var Target: Object = preload("res://target.tscn")
+
 var spawnpoints = []
 var time = 0
 
@@ -16,8 +18,9 @@ func spawn_map(_id):
 	var map = load("res://map.tscn").instantiate()
 	add_child(map)
 	spawnpoints = map.get_node("Spawnpoints").get_children()
-	for i in range(2):
-		rpc("instanciate_target")
+	if multiplayer.is_server():
+		for i in range(2):
+			rpc("instanciate_target")
 
 
 @rpc("authority", "call_local", "reliable", 1)

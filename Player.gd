@@ -177,6 +177,9 @@ func try_shoot():
 	#get_node("Arm/Hand/Shoot Node").position.x += sign(get_node("%Weapon").position.x) + .1 * incoming_recoil.y * 0.01
 	#get_node("Arm/Hand/Shoot Node").rotation.x += .05
 	rpc("shoot", get_node("%Camera").global_position, ori)
+	
+	if position.y < -30:
+		die()
 
 
 func reload():

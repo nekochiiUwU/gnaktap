@@ -1,6 +1,4 @@
 res://main_menu.tscn
 res://bullet.tscn
-res://bullet.gd
-res://network.gd
 res://Game.gd
-res://Target.gd
+res://network.gd

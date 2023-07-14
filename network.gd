@@ -68,7 +68,6 @@ func join_room(): # Client Function // Create an client and connect him to the s
 # --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- #
 
 @onready var Player: Object = preload("res://player.tscn")
-@onready var Target: Object = preload("res://target.tscn")
 
 
 @rpc("authority", "call_remote", "reliable", 1)
