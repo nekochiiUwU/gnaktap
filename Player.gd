@@ -74,6 +74,7 @@ func _input(event):
 
 func _physics_process(delta):
 	if is_multiplayer_authority():
+
 		if hitmarker_time:
 			var x = 1 - ((Game.time - hitmarker_time) / .3)
 			# 1 > 0 // 0.3s
@@ -82,13 +83,20 @@ func _physics_process(delta):
 				hitmarker_time = 0
 			get_node("Head/UI/Hitmarker").modulate = Color(x, x, x)
 			get_node("Head/UI/Hitmarker").scale = Vector2(x, x)
+
 		if incoming_recoil:
 			get_node("Head").rotation_degrees.x += incoming_recoil.y / 2
 			rotation_degrees.y += incoming_recoil.x / 2
 			incoming_recoil /= 2
-			
+
+		if get_node("Arm/Hand/Shoot Node").position:
+			get_node("Arm/Hand/Shoot Node").position /= 1.05
+		if get_node("Arm/Hand/Shoot Node").rotation:
+			get_node("Arm/Hand/Shoot Node").rotation /= 1.05
+
 		health += delta
 		get_node("Head/UI/HealthBar").value = health
+
 		var input_rotation = Input.get_vector("camera_left", "camera_right", "camera_up", "camera_down")
 		if input_rotation:
 			rotation.y += input_rotation.x * joy_sensi.x
@@ -164,12 +172,17 @@ func try_shoot():
 	shot_time = Game.time
 	incoming_recoil.y += randf_range(0, recoil)
 	incoming_recoil.x += randf_range(-recoil/2, recoil/2)
-	rpc("shoot", get_node("Head/Camera").global_position, ori)
+	get_node("Arm/Hand/Shoot Node").position.z += 0* -0.02 * (get_node("%Weapon").position.z + 0.45) + incoming_recoil.x * 0.0
+	get_node("Arm/Hand/Shoot Node").position.y += 0*(get_node("%Weapon").position.y + 0.09) * -.03 + incoming_recoil.y * 0.0
+	#get_node("Arm/Hand/Shoot Node").position.x += sign(get_node("%Weapon").position.x) + .1 * incoming_recoil.y * 0.01
+	#get_node("Arm/Hand/Shoot Node").rotation.x += .05
+	rpc("shoot", get_node("%Camera").global_position, ori)
 
 
 func reload():
 	print("reloading...")
-	reloading = true
+	get_node("%Weapon/RemoadAnimation").play("anim")
+	get_node("%Weapon/RemoadAnimation").speed_scale = 1 / reload_speed
 	await get_tree().create_timer(reload_speed).timeout
 	ammo = max_ammo
 	update_ammo()
@@ -227,14 +240,14 @@ func online_syncronisation(_position: Vector3, _rotation: Vector3, _head_rotatio
 	get_node("%Weapon").position = weapon_position
 	health = _health
 
-@rpc("any_peer", "call_remote", "unreliable", 5)
+@rpc("any_peer", "call_local", "unreliable", 5)
 func hitmarker(damages: float):
 	get_node("hitmarker_sfx").stream = load("res://hitmarker.mp3")
 	get_node("hitmarker_sfx").play()
 	get_node("Head/UI/Hitmarker").visible = true
 	hitmarker_time = Game.time
 
-@rpc("any_peer", "call_remote", "unreliable", 6)
+@rpc("any_peer", "call_local", "unreliable", 6)
 func target(score: int):
 	target_score += score
 	print("target hit ! score : ",target_score)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://weitoykb1612"]
+[gd_scene load_steps=8 format=3 uid="uid://weitoykb1612"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fjljj"]
 [ext_resource type="PackedScene" uid="uid://bk3p2jyntv3bd" path="res://Weapon.tscn" id="2_u5gc6"]
@@ -24,111 +24,6 @@ bg_color = Color(0, 0, 0, 0.12549)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wi8oh"]
 bg_color = Color(0.545098, 1, 0, 1)
-
-[sub_resource type="Animation" id="Animation_hq254"]
-loop_mode = 1
-step = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Hand/Shoot Node:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.01),
-"transitions": PackedFloat32Array(0.1, 0.1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.005, 0.01, 0.025)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Hand/Shoot Node:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.03),
-"transitions": PackedFloat32Array(0.5, 0.1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.0872665, -0.0436332, 0.0872665)]
-}
-
-[sub_resource type="Animation" id="Animation_vslpq"]
-resource_name = "shoot"
-loop_mode = 1
-step = 0.01
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Hand/Shoot Node:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Hand/Shoot Node:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Hand/Shoot Node:position:z")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Hand/Shoot Node:rotation:x")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.65, 139.5),
-"times": PackedFloat32Array(0)
-}
-tracks/4/type = "bezier"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Hand/Shoot Node:rotation:y")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/5/type = "bezier"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Hand/Shoot Node:rotation:z")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_o4a6p"]
-_data = {
-"RESET": SubResource("Animation_hq254"),
-"shoot": SubResource("Animation_vslpq")
-}
 
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 0, 1, 0)
@@ -257,15 +152,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
 [node name="Hand" type="Node3D" parent="Arm"]
 
 [node name="Shoot Node" type="Node3D" parent="Arm/Hand"]
+transform = Transform3D(1, -0.000298276, -0.000149116, 0.000298232, 1, -0.000298232, 0.000149205, 0.000298187, 1, 1.39331e-05, 2.78661e-05, 0.000278659)
 
 [node name="Weapon" parent="Arm/Hand/Shoot Node" instance=ExtResource("2_u5gc6")]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -0.2, -0.667)
 rotation_edit_mode = 2
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Arm/Hand/Shoot Node"]
-root_node = NodePath("../../..")
-libraries = {
-"": SubResource("AnimationLibrary_o4a6p")
-}
 
 [node name="hitmarker_sfx" type="AudioStreamPlayer" parent="."]
