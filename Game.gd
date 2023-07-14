@@ -16,6 +16,16 @@ func spawn_map(_id):
 	var map = load("res://map.tscn").instantiate()
 	add_child(map)
 	spawnpoints = map.get_node("Spawnpoints").get_children()
+	for i in range(2):
+		rpc("instanciate_target")
+
+
+@rpc("authority", "call_local", "reliable", 1)
+func instanciate_target(): # Server Function // Instanciate a Target node for his client
+	var target = Target.instantiate()
+	target.set_multiplayer_authority(1)
+	get_node("/root/Game/Entities").add_child(target) # Will instanciate a Target instance
+	# The spawn on the other clients will be managed by the Target Spawner's node
 
 
 func _process(delta):

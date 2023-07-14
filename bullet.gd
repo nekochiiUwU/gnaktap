@@ -28,7 +28,8 @@ func _physics_process(delta):
 				object.get_hit(damages)
 				get_node("../Players/" + _owner).rpc_id(int(_owner), "hitmarker", damages)
 			elif object is Target:
-				object.get_hit(damages)
-				get_node("../Players/" + _owner).rpc_id(int(_owner), "target", 1)
-				get_node("../Players/" + _owner).rpc_id(int(_owner), "hitmarker", damages)
+				if multiplayer.get_unique_id() == 1:
+					object.get_hit(damages)
+					get_node("../Players/" + _owner).rpc_id(int(_owner), "target", 1)
+					get_node("../Players/" + _owner).rpc_id(int(_owner), "hitmarker", damages)
 		queue_free()

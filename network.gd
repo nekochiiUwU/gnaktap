@@ -120,12 +120,6 @@ func uninstanciate_player(id: int): # Server Function // Uninstanciate a Player 
 	get_node("/root/Game/Entities/Players/" + str(id)).queue_free() # Refair to instanciate_player()
 
 
-@rpc("authority", "call_local", "reliable", 1)
-func instanciate_target(): # Server Function // Instanciate a Target node for his client
-	var target = Target.instantiate()
-	get_node("/root/Game/Entities").add_child(target) # Will instanciate a Target instance
-	# The spawn on the other clients will be managed by the Target Spawner's node
-
 # --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- #
 # --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- #
 # --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- #
@@ -208,8 +202,7 @@ func start_game():
 	if is_server:
 		for id in players:
 			rpc("instanciate_player", id)
-			for i in range(2):
-				rpc("instanciate_target")
+
 		get_node("/root/Game").visible = false
 
 func start_lobby():
