@@ -21,7 +21,7 @@ func _ready():
 	Upgrade_Ui.visible = false
 	var stat_buttons = Upgrade_Ui.get_children()
 	var stats = inventory["points"].keys()
-	for i in range(len(stat_buttons)):
+	for i in range(0, len(stat_buttons)-1):
 		var button = stat_buttons[i]
 		button.name = stats[i]
 		button.text = button.name + "\n" + str(inventory["points"][button.name])
@@ -30,19 +30,26 @@ func _ready():
 
 func update_upgrade_ui():
 	var stat_buttons = Upgrade_Ui.get_children()
+	Upgrade_Ui.get_node("Points").text = "Points : " + str(get_node("/root/Game/Entities/Players/"+str(multiplayer.get_unique_id())).target_score)
 	for button in stat_buttons:
-		button.text = button.name + "\n" + str(inventory["points"][button.name])
+		if button.name == "Points":
+			continue
+		button.get_node("Availablity").text = "Available :" + str(inventory["points"][button.name])
+		button.text = button.name + "\n" + str(get_node("/root/Game/Entities/Players/"+str(multiplayer.get_unique_id())).inventory["points"][button.name])
 
 
 func buy_stat(stat):
+	if inventory["points"][str(stat)] <= 0 or get_node("/root/Game/Entities/Players/"+str(multiplayer.get_unique_id())).target_score <= 0:
+		return
 	inventory["points"][str(stat)] -= 1
-	update_upgrade_ui()
 	for key in inventory["points"].keys():
 		if key != str(stat):
 			get_node("/root/Game/Entities/Players/"+str(multiplayer.get_unique_id())).inventory["points"][str(key)] -= 1/8
 		else:
 			get_node("/root/Game/Entities/Players/"+str(multiplayer.get_unique_id())).inventory["points"][str(key)] += 1
 	get_node("/root/Game/Entities/Players/"+str(multiplayer.get_unique_id())).update_stats()
+	get_node("/root/Game/Entities/Players/"+str(multiplayer.get_unique_id())).target_score -= 1
+	update_upgrade_ui()
 
 
 func interact():

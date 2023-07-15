@@ -1,3 +1,4 @@
+Label
 RichTextLabel
 ColorRect
 Button
@@ -9,7 +10,6 @@ MeshInstance3D
 AnimationPlayer
 CollisionPolygon3D
 CharacterBody3D
-Label
 AudioStreamPlayer
 OmniLight3D
 Node3D
