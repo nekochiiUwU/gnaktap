@@ -106,7 +106,6 @@ skeleton = NodePath("")
 shape = SubResource("BoxShape3D_vunb1")
 
 [node name="Area3D" type="Area3D" parent="Shop"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Shop/Area3D"]
 shape = SubResource("SphereShape3D_j2e3c")

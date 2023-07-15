@@ -37,7 +37,12 @@ func update_upgrade_ui():
 func buy_stat(stat):
 	inventory["points"][str(stat)] -= 1
 	update_upgrade_ui()
-	get_node("/root/Game/Entities/Players/"+str(multiplayer.get_unique_id())).inventory["points"][str(stat)] += 1
+	for key in inventory["points"].keys():
+		if key != str(stat):
+			get_node("/root/Game/Entities/Players/"+str(multiplayer.get_unique_id())).inventory["points"][str(key)] -= 1/8
+		else:
+			get_node("/root/Game/Entities/Players/"+str(multiplayer.get_unique_id())).inventory["points"][str(key)] += 1
+	get_node("/root/Game/Entities/Players/"+str(multiplayer.get_unique_id())).update_stats()
 
 
 func interact():

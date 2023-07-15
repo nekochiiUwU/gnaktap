@@ -59,6 +59,7 @@ func _ready():
 		get_node("Head/Light").queue_free()
 		get_node("Head/UI").queue_free()
 		get_node("%Camera").queue_free()
+	update_stats()
 
 
 func calibrate_ui():
@@ -155,6 +156,10 @@ func _physics_process(delta):
 		get_node("Arm/Hand").rotation.z = ($Head.rotation.z + get_node("Arm/Hand").rotation.z*1) / 2
 		get_node("Arm/Hand").position.x = get_node("Arm/Hand").rotation.z / 4
 		get_node("%Camera").fov = (get_node("%Camera").fov - 120) / 1.2 + 120
+		
+		if position.y < -30:
+			die()
+
 
 func _process(_delta):
 	if is_multiplayer_authority():
@@ -166,12 +171,12 @@ func update_ammo():
 
 
 func try_shoot():
-	if shot_time - Game.time + 60/fire_rate > 0:
+	if shot_time - Game.time + fire_rate > 0:
 		return
 	if reloading:
 		return
 	if ammo == 0:
-		if !reloading and !Input.is_action_just_pressed("shoot"):
+		if !reloading and Input.is_action_just_pressed("shoot"):
 			reload() #ou pas, au choix
 		return
 	if weapon_type == "full auto": 
@@ -258,6 +263,21 @@ func die():
 	process_mode = Node.PROCESS_MODE_INHERIT
 
 
+func update_stats():
+	var p = inventory["points"]
+	speed = 5 + p["speed"]/10 #au hasard
+	air_speed = speed * 6 
+	damages = int(exp(1.2 * 0.8 * log(p["damages"])) + 4) # je recopie tel quel mon code scratch btw
+	fire_rate = 2.5 - exp(0.21 * log(p["fire_rate"]))
+	accuracy = 11.5 - exp(0.65 * log(p["accuracy"]))
+	recoil = 9 - exp(0.51 * log(p["recoil"]))
+	max_ammo = int(p["max_ammo"]*exp(0.27 * p["max_ammo"]) - 8) # ????
+	reload_speed = 8 - exp(0.55 * log(p["reload_speed"]))
+	bullet_speed = exp(0.85 * log(p["bullet_speed"]))
+	update_ammo()
+	print(p)
+
+
 @rpc("authority", "call_local", "unreliable", 2)
 func shoot(pos, rot):
 	var new_bullet = bullet.instantiate()
@@ -265,7 +285,7 @@ func shoot(pos, rot):
 	new_bullet.rotation_degrees = rot
 	new_bullet.set_script(load("res://bullet.gd"))
 	new_bullet.damages = damages
-	new_bullet.speed = bullet_speed
+	new_bullet.speed = bullet_speed # faire en rpc !
 	new_bullet._owner = name
 	if is_multiplayer_authority():
 		new_bullet.collision_mask = 0b110

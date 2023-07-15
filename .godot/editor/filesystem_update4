@@ -1,7 +1,7 @@
 res://main_menu.tscn
-res://map.tscn
 res://mesh.tres
-res://Shop.gd
 res://Player.gd
+res://Shop.gd
+res://map.tscn
 res://upgrade_ui.tscn
 res://network.tscn
