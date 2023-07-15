@@ -52,7 +52,7 @@ offset_bottom = 343.0
 theme_override_colors/font_color = Color(0.176471, 0.176471, 0.176471, 1)
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_ym7dn")
-text = "127.0.0.1"
+text = "78.203.84.228"
 placeholder_text = "Server's public IP: (Select the text to show it)"
 
 [node name="Port" type="SpinBox" parent="Network/Start"]

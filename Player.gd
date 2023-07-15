@@ -17,6 +17,21 @@ var reloading:      bool = false
 var target_score:   int = 0
 var incoming_recoil: Vector2 = Vector2()
 
+var interact_objects: Array = []
+
+var inventory = {
+	"points": {
+		"damages": 30,
+		"speed": 30,
+		"fire_rate": 30,
+		"accuracy": 30,
+		"recoil": 30,
+		"max_ammo": 30,
+		"reload_speed": 30,
+		"bullet_speed": 30
+	}
+}
+
 #weapon stats
 var weapon_type:  String = "full auto"
 var scope:        String = "none" #pour plus tard
@@ -74,6 +89,11 @@ func _input(event):
 
 func _physics_process(delta):
 	if is_multiplayer_authority():
+		if Input.is_action_just_pressed("interact"):
+			interact()
+
+		if Input.is_action_just_pressed("reload"):
+			reload()
 
 		if hitmarker_time:
 			var x = 1 - ((Game.time - hitmarker_time) / .3)
@@ -204,6 +224,23 @@ func spawn():
 	health = 100
 
 
+func new_interact(object):
+	interact_objects.append(object)
+
+
+func lost_interact(object):
+	interact_objects.erase(object)
+
+
+func interact():
+	if interact_objects:
+		var closest = interact_objects[0]
+		for object in interact_objects:
+			if position.distance_to(object.position) < position.distance_to(closest.position):
+				closest = object
+		closest.interact()
+
+
 func get_hit(damages):
 	health -= damages
 	print(health)
@@ -243,12 +280,14 @@ func online_syncronisation(_position: Vector3, _rotation: Vector3, _head_rotatio
 	get_node("%Weapon").position = weapon_position
 	health = _health
 
+
 @rpc("any_peer", "call_local", "unreliable", 5)
 func hitmarker(damages: float):
 	get_node("hitmarker_sfx").stream = load("res://hitmarker.mp3")
 	get_node("hitmarker_sfx").play()
 	get_node("Head/UI/Hitmarker").visible = true
 	hitmarker_time = Game.time
+
 
 @rpc("any_peer", "call_local", "unreliable", 6)
 func target(score: int):

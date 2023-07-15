@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://camjx4tc7t0eq"]
+
+[node name="Upgrade Ui" type="ColorRect"]
+offset_right = 640.0
+offset_bottom = 192.0
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 144.0
+offset_bottom = 80.0
+text = "bullet_speed
+30"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 16.0
+offset_right = 304.0
+offset_bottom = 80.0
+text = "bullet_speed
+30"
+
+[node name="Button3" type="Button" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 112.0
+offset_right = 144.0
+offset_bottom = 176.0
+text = "bullet_speed
+30"
+
+[node name="Button4" type="Button" parent="."]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 112.0
+offset_right = 304.0
+offset_bottom = 176.0
+text = "bullet_speed
+30"
+
+[node name="Button5" type="Button" parent="."]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 16.0
+offset_right = 464.0
+offset_bottom = 80.0
+text = "bullet_speed
+30"
+
+[node name="Button6" type="Button" parent="."]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 112.0
+offset_right = 464.0
+offset_bottom = 176.0
+text = "bullet_speed
+30"
+
+[node name="Button7" type="Button" parent="."]
+layout_mode = 0
+offset_left = 496.0
+offset_top = 16.0
+offset_right = 624.0
+offset_bottom = 80.0
+text = "bullet_speed
+30"
+
+[node name="Button8" type="Button" parent="."]
+layout_mode = 0
+offset_left = 496.0
+offset_top = 112.0
+offset_right = 624.0
+offset_bottom = 176.0
+text = "bullet_speed
+30"
