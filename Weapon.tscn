@@ -241,6 +241,7 @@ spot_angle_attenuation = 0.069348
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0.2, 1, 0, 0, 0)
 rotation_edit_mode = 2
 spot_range = 24.0
+spot_angle = 70.0
 
 [node name="Front" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -0.2, 1, 0.000240856, 0, -0.3)
