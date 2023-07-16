@@ -2,3 +2,7 @@ res://main_menu.tscn
 res://Player.gd
 res://map.tscn
 res://mesh.tres
+res://game.tscn
+res://target.tscn
+res://Target.gd
+res://bullet.gd

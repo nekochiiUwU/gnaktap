@@ -22,7 +22,7 @@ func _process(_delta):
 func get_hit(_owner, _damages):
 	health -= _damages
 	if health < 0:
-		get_node("../" + _owner).target(2)
+		get_node("../Players/" + _owner).rpc_id(int(_owner), "target", 2)
 		die() 
 
 

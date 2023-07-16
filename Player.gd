@@ -275,7 +275,7 @@ func get_hit(_owner, _damages):
 	health -= _damages
 	print(health)
 	if health < 0:
-		get_node("../" + _owner).target(5)
+		get_node("../" + _owner).rpc_id(int(_owner), "target", 5)
 		die() 
 
 

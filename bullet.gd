@@ -25,7 +25,7 @@ func _physics_process(delta):
 		for i in collision.get_collision_count():
 			var object = collision.get_collider(i)
 			if object is Player:
-				object.get_hit(damages)
+				object.get_hit(_owner, damages)
 				get_node("../Players/" + _owner).rpc_id(int(_owner), "hitmarker", damages)
 			elif object is Target:
 				if multiplayer.get_unique_id() == 1:
