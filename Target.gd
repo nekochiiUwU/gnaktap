@@ -9,7 +9,7 @@ func _ready():
 
 
 func spawn():
-	position = Vector3(randf_range(-4,4), randf_range(1, 5), randf_range(-4,4))
+	position = Vector3(randf_range(-8, 8), randf_range(1, 10), randf_range(-8, 8))
 	health = 100
 	visible = true
 

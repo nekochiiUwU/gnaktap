@@ -215,8 +215,9 @@ func try_shoot():
 	shot_time = Game.time
 	incoming_recoil.y += randf_range(0, recoil)
 	incoming_recoil.x += randf_range(-recoil/2, recoil/2)
-	get_node("Arm/Hand/Shoot Node").position.z += 0* -0.02 * (get_node("%Weapon").position.z + 0.45) + incoming_recoil.x * 0.0
-	get_node("Arm/Hand/Shoot Node").position.y += 0*(get_node("%Weapon").position.y + 0.09) * -.03 + incoming_recoil.y * 0.0
+	get_node("Arm/Hand/Shoot Node").position.z += -0.02 * (get_node("%Weapon").position.z + 0.45) + abs(incoming_recoil.x) / 50
+	get_node("Arm/Hand/Shoot Node").position.z = min(get_node("Arm/Hand/Shoot Node").position.z, 0.1)
+	get_node("Arm/Hand/Shoot Node").position.y += 1*(get_node("%Weapon").position.y + 0.09) * -.03 + incoming_recoil.y * 0.0
 	#get_node("Arm/Hand/Shoot Node").position.x += sign(get_node("%Weapon").position.x) + .1 * incoming_recoil.y * 0.01
 	#get_node("Arm/Hand/Shoot Node").rotation.x += .05
 	rpc("shoot", get_node("%Weapon/Canon").global_position, ori, damages, bullet_speed)

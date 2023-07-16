@@ -6,3 +6,6 @@ res://game.tscn
 res://target.tscn
 res://Target.gd
 res://bullet.gd
+res://bullet.tscn
+res://player.tscn
+res://Weapon.tscn
