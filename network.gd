@@ -152,11 +152,20 @@ func init(_TARGET_IP: String, _PORT: int, _is_server: bool):
 		PORT = _PORT
 
 func _ready():
+	calibrate_ui()
+	get_viewport().size_changed.connect(calibrate_ui)
 	if is_server:
 		get_node("Net Status/Server help").visible = true
 		create_room()
 	else:
 		join_room()
+
+
+func calibrate_ui():
+	var window_size = get_viewport().size
+	get_node("Net Status").scale.x = float(window_size.x) / 1152
+	get_node("Net Status").scale.y = float(window_size.y) / 648
+
 
 func _process(_delta):
 	if ENet.get_connection_status() != current_connection_status:

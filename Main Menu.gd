@@ -2,11 +2,18 @@ extends Node2D
 
 
 func _ready():
-	pass
+	calibrate_ui()
+	get_viewport().size_changed.connect(calibrate_ui)
 
 
 func _process(_delta):
 	pass
+
+
+func calibrate_ui():
+	var window_size = get_viewport().size
+	scale.x = float(window_size.x) / 1152
+	scale.y = float(window_size.y) / 648
 
 
 func _on_start_client_pressed():
