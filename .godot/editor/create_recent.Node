@@ -1,6 +1,7 @@
+MeshInstance3D
+Player
 Camera3D
 CSGMesh3D
-MeshInstance3D
 Label3D
 GPUParticles3D
 Line2D
@@ -29,4 +30,3 @@ ProgressBar
 MultiplayerSynchronizer
 SpinBox
 TextEdit
-Sprite2D

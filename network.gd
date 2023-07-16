@@ -146,8 +146,10 @@ var is_server: bool = false
 
 func init(_TARGET_IP: String, _PORT: int, _is_server: bool):
 	is_server = _is_server
-	TARGET_IP = _TARGET_IP
-	PORT = _PORT
+	if _TARGET_IP:
+		TARGET_IP = _TARGET_IP
+	if _PORT:
+		PORT = _PORT
 
 func _ready():
 	if is_server:

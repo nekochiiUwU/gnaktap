@@ -1,9 +1,9 @@
 res://main_menu.tscn
-res://Player.gd
-res://Shop.gd
-res://Weapon.tscn
-res://upgrade_ui.tscn
-res://bullet.tscn
-res://player.tscn
+res://network.gd
 res://map.tscn
 res://mesh.tres
+res://game.tscn
+res://Game.gd
+res://Player.gd
+res://player.tscn
+res://Weapon.tscn

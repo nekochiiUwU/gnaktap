@@ -12,7 +12,6 @@ func _ready():
 
 
 func _exit_tree():
-	spawn_map(0)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 

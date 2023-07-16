@@ -107,7 +107,6 @@ func _physics_process(delta):
 			position.y += current_crouch_modifier
 		else:
 			var current_crouch_modifier = (1.8 - get_node("Mesh").mesh.height) / 5
-			print(get_node("Mesh").mesh.height)
 			get_node("Mesh").mesh.height += current_crouch_modifier
 			get_node("Mesh").position.y -= current_crouch_modifier/2
 			get_node("Collision").shape.height += current_crouch_modifier
@@ -244,7 +243,8 @@ func spawn():
 
 	get_node("%Camera").current = true
 	if Game:
-		transform = Game.spawnpoints[randi() % len(Game.spawnpoints)].transform
+		if Game.spawnpoints:
+			transform = Game.spawnpoints[randi() % len(Game.spawnpoints)].transform
 	health = 100
 
 

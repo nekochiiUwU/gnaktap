@@ -1,7 +1,7 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1689453714
+::res://::1689507206
 bullet.gd::GDScript::-1::1689370598::0::1::::<>CharacterBody3D<>::
-bullet.tscn::PackedScene::7142913519403393106::1689453561::0::1::::<><>::
+bullet.tscn::PackedScene::7142913519403393106::1689463245::0::1::::<><>::
 distrib.blend::PackedScene::1857919524845335963::1689373386::1689373429::1::::<><>::
 Game.gd::GDScript::-1::1689453458::0::1::::<>Node3D<>::
 game.tscn::PackedScene::3678001432857770308::1689199072::0::1::::<><>::res://Game.gd
@@ -9,15 +9,16 @@ headshot_hitmarker.mp3::AudioStreamMP3::6161555275849405466::1689200660::1689200
 hitmarker.mp3::AudioStreamMP3::8432054623826471518::1689200660::1689200661::1::::<><>::
 icon.svg::CompressedTexture2D::7836633539864202342::1688633006::1689453718::1::::<><>::
 Main Menu.gd::GDScript::-1::1688833039::0::1::::<>Node2D<>::
-main_menu.tscn::PackedScene::3189636057581629710::1689453460::0::1::::<><>::res://Main Menu.gd
-map.tscn::PackedScene::8332103927413140277::1689418596::0::1::::<><>::uid://b68x4f3s67leq::::res://mesh.tres<>res://Shop.gd<>uid://camjx4tc7t0eq::::res://upgrade_ui.tscn
-mesh.tres::MeshLibrary::4631847887944757236::1689447206::0::1::::<><>::
+main_menu.tscn::PackedScene::3189636057581629710::1689463244::0::1::::<><>::res://Main Menu.gd
+map.tscn::PackedScene::8332103927413140277::1689467756::0::1::::<><>::uid://b68x4f3s67leq::::res://mesh.tres<>res://Shop.gd<>uid://camjx4tc7t0eq::::res://upgrade_ui.tscn
+mesh.tres::MeshLibrary::4631847887944757236::1689467756::0::1::::<><>::
 network.gd::GDScript::-1::1689452795::0::1::::<>Node<>::
 network.tscn::PackedScene::4792291493832649467::1689382945::0::1::::<><>::res://network.gd
-Player.gd::GDScript::-1::1689452735::0::1::::Player<>CharacterBody3D<>::
-player.tscn::PackedScene::1552932509938233515::1689447206::0::1::::<><>::res://Player.gd<>uid://bk3p2jyntv3bd::::res://Weapon.tscn
-Shop.gd::GDScript::-1::1689452917::0::1::::Shop<>StaticBody3D<>::
+Player.gd::GDScript::-1::1689463086::0::1::::Player<>CharacterBody3D<>::
+player.tscn::PackedScene::1552932509938233515::1689465978::0::1::::<><>::res://Player.gd<>uid://bk3p2jyntv3bd::::res://Weapon.tscn
+Scope.tscn::PackedScene::2097332269013724424::1689463528::0::1::::<><>::
+Shop.gd::GDScript::-1::1689455723::0::1::::Shop<>StaticBody3D<>::
 Target.gd::GDScript::-1::1689452735::0::1::::Target<>CharacterBody3D<>::
 target.tscn::PackedScene::2883008122872351445::1689254240::0::1::::<><>::res://Target.gd
-upgrade_ui.tscn::PackedScene::4798202979292477716::1689447206::0::1::::<><>::
-Weapon.tscn::PackedScene::3147071178916393741::1689288164::0::1::::<><>::
+upgrade_ui.tscn::PackedScene::4798202979292477716::1689465978::0::1::::<><>::
+Weapon.tscn::PackedScene::3147071178916393741::1689465977::0::1::::<><>::
