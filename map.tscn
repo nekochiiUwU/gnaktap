@@ -94,34 +94,34 @@ shadow_opacity = 0.9
 [node name="Spawnpoints" type="Node3D" parent="."]
 
 [node name="0" type="Node3D" parent="Spawnpoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 20)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 13, 5, -12)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Spawnpoints/0"]
-transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0, 0)
+transform = Transform3D(-1, -1.50996e-07, 6.60024e-15, 0, -4.37114e-08, -1, 1.50996e-07, -1, 4.37114e-08, 0, 0, 0)
 layers = 524288
 mesh = SubResource("CylinderMesh_hpf58")
 
 [node name="1" type="Node3D" parent="Spawnpoints"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1, 1, 45)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 12, 5, 13)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Spawnpoints/1"]
-transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0, 0)
+transform = Transform3D(-1, -1.50996e-07, 6.60024e-15, 0, -4.37114e-08, -1, 1.50996e-07, -1, 4.37114e-08, 0, 0, 0)
 layers = 524288
 mesh = SubResource("CylinderMesh_hpf58")
 
 [node name="2" type="Node3D" parent="Spawnpoints"]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -26, 1, 44)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 5, 12)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Spawnpoints/2"]
-transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0, 0)
+transform = Transform3D(-1, -1.50996e-07, 6.60024e-15, 0, -4.37114e-08, -1, 1.50996e-07, -1, 4.37114e-08, 0, 0, 0)
 layers = 524288
 mesh = SubResource("CylinderMesh_hpf58")
 
 [node name="3" type="Node3D" parent="Spawnpoints"]
-transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -25, 1, 19)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12, 5, -13)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Spawnpoints/3"]
-transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0, 0)
+transform = Transform3D(-1, -1.50996e-07, 6.60024e-15, 0, -4.37114e-08, -1, 1.50996e-07, -1, 4.37114e-08, 0, 0, 0)
 layers = 524288
 mesh = SubResource("CylinderMesh_hpf58")
 

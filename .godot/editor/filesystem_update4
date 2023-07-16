@@ -1,2 +1,4 @@
 res://main_menu.tscn
 res://Player.gd
+res://map.tscn
+res://mesh.tres
