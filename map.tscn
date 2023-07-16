@@ -126,7 +126,7 @@ layers = 524288
 mesh = SubResource("CylinderMesh_hpf58")
 
 [node name="Shop" type="StaticBody3D" parent="."]
-transform = Transform3D(0.906308, 0, -0.422618, 0, 1, 0, 0.422618, 0, 0.906308, -18.8, 4.125, 40)
+transform = Transform3D(0.906308, 0, -0.422618, 0, 1, 0, 0.422618, 0, 0.906308, -6, 8.125, 8)
 script = ExtResource("2_aorr0")
 
 [node name="Cube" type="MeshInstance3D" parent="Shop"]
@@ -145,11 +145,11 @@ shape = SubResource("SphereShape3D_j2e3c")
 [node name="Upgrade Ui" parent="Shop" instance=ExtResource("3_s7lsx")]
 
 [node name="Shop2" type="StaticBody3D" parent="."]
-transform = Transform3D(-1, 0, -3.27826e-07, 0, 1, 0, 3.27826e-07, 0, -1, -12.3, -2.875, 28)
+transform = Transform3D(-1, 0, -3.27826e-07, 0, 1, 0, 3.27826e-07, 0, -1, 0.5, 1.125, -4)
 script = ExtResource("2_aorr0")
 
 [node name="Cube" type="MeshInstance3D" parent="Shop2"]
-transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, -1.19209e-07, 0, 0.4)
 mesh = SubResource("ArrayMesh_ayho6")
 skeleton = NodePath("")
 
@@ -164,7 +164,7 @@ shape = SubResource("SphereShape3D_j2e3c")
 [node name="Upgrade Ui" parent="Shop2" instance=ExtResource("3_s7lsx")]
 
 [node name="Shop3" type="StaticBody3D" parent="."]
-transform = Transform3D(-2.84114e-07, 0, 1, 0, 1, 0, -1, 0, -2.84114e-07, -0.799999, -2.875, 35.5)
+transform = Transform3D(-2.84114e-07, 0, 1, 0, 1, 0, -1, 0, -2.84114e-07, 12, 1.125, 3.5)
 script = ExtResource("2_aorr0")
 
 [node name="Cube" type="MeshInstance3D" parent="Shop3"]
