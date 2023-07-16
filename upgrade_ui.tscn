@@ -1,17 +1,15 @@
 [gd_scene format=3 uid="uid://camjx4tc7t0eq"]
 
-[node name="Upgrade Ui" type="ColorRect"]
-offset_top = 472.0
-offset_right = 1152.0
-offset_bottom = 648.0
-color = Color(0.0784314, 0.0784314, 0.0784314, 0.223529)
+[node name="Upgrade Ui" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
 offset_left = 30.0
-offset_top = 96.0
+offset_top = 568.0
 offset_right = 140.0
-offset_bottom = 160.0
+offset_bottom = 632.0
 text = "bullet_speed
 30"
 
@@ -26,13 +24,14 @@ text = "Available : 30"
 [node name="Button2" type="Button" parent="."]
 layout_mode = 0
 offset_left = 170.0
-offset_top = 96.0
+offset_top = 568.0
 offset_right = 280.0
-offset_bottom = 160.0
+offset_bottom = 632.0
 text = "bullet_speed
 30"
 
 [node name="Availablity" type="Label" parent="Button2"]
+layout_mode = 0
 offset_left = 2.0
 offset_top = -32.0
 offset_right = 104.0
@@ -42,13 +41,14 @@ text = "Available : 30"
 [node name="Button3" type="Button" parent="."]
 layout_mode = 0
 offset_left = 590.0
-offset_top = 96.0
+offset_top = 568.0
 offset_right = 700.0
-offset_bottom = 160.0
+offset_bottom = 632.0
 text = "bullet_speed
 30"
 
 [node name="Availablity" type="Label" parent="Button3"]
+layout_mode = 0
 offset_left = 2.0
 offset_top = -32.0
 offset_right = 104.0
@@ -58,13 +58,14 @@ text = "Available : 30"
 [node name="Button4" type="Button" parent="."]
 layout_mode = 0
 offset_left = 730.0
-offset_top = 96.0
+offset_top = 568.0
 offset_right = 840.0
-offset_bottom = 160.0
+offset_bottom = 632.0
 text = "bullet_speed
 30"
 
 [node name="Availablity" type="Label" parent="Button4"]
+layout_mode = 0
 offset_left = 2.0
 offset_top = -32.0
 offset_right = 104.0
@@ -74,13 +75,14 @@ text = "Available : 30"
 [node name="Button5" type="Button" parent="."]
 layout_mode = 0
 offset_left = 310.0
-offset_top = 96.0
+offset_top = 568.0
 offset_right = 420.0
-offset_bottom = 160.0
+offset_bottom = 632.0
 text = "bullet_speed
 30"
 
 [node name="Availablity" type="Label" parent="Button5"]
+layout_mode = 0
 offset_left = 2.0
 offset_top = -32.0
 offset_right = 104.0
@@ -90,13 +92,14 @@ text = "Available : 30"
 [node name="Button6" type="Button" parent="."]
 layout_mode = 0
 offset_left = 870.0
-offset_top = 96.0
+offset_top = 568.0
 offset_right = 980.0
-offset_bottom = 160.0
+offset_bottom = 632.0
 text = "bullet_speed
 30"
 
 [node name="Availablity" type="Label" parent="Button6"]
+layout_mode = 0
 offset_left = 2.0
 offset_top = -32.0
 offset_right = 104.0
@@ -106,13 +109,14 @@ text = "Available : 30"
 [node name="Button7" type="Button" parent="."]
 layout_mode = 0
 offset_left = 450.0
-offset_top = 96.0
+offset_top = 568.0
 offset_right = 560.0
-offset_bottom = 160.0
+offset_bottom = 632.0
 text = "bullet_speed
 30"
 
 [node name="Availablity" type="Label" parent="Button7"]
+layout_mode = 0
 offset_left = 2.0
 offset_top = -32.0
 offset_right = 104.0
@@ -122,23 +126,33 @@ text = "Available : 30"
 [node name="Button8" type="Button" parent="."]
 layout_mode = 0
 offset_left = 1010.0
-offset_top = 96.0
+offset_top = 568.0
 offset_right = 1120.0
-offset_bottom = 160.0
+offset_bottom = 632.0
 text = "bullet_speed
 30"
 
 [node name="Availablity" type="Label" parent="Button8"]
+layout_mode = 0
 offset_left = 2.0
 offset_top = -32.0
 offset_right = 104.0
 offset_bottom = -6.0
 text = "Available : 30"
 
+[node name="Bg" type="ColorRect" parent="."]
+z_index = -1
+layout_mode = 0
+offset_top = 472.0
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+color = Color(0.0784314, 0.0784314, 0.0784314, 0.223529)
+
 [node name="Points" type="Label" parent="."]
 layout_mode = 0
 offset_left = 32.0
-offset_top = 16.0
+offset_top = 488.0
 offset_right = 103.0
-offset_bottom = 42.0
+offset_bottom = 514.0
 text = "Points : 0"

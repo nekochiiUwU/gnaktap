@@ -1,9 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://c81c0h3nlb8o1"]
+[gd_scene load_steps=4 format=3 uid="uid://c81c0h3nlb8o1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fr2fb"]
+distance_fade_mode = 1
+distance_fade_max_distance = 2.0
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_kqn3p"]
+material = SubResource("StandardMaterial3D_fr2fb")
 radius = 0.05
 height = 0.2
-radial_segments = 8
+radial_segments = 4
 rings = 4
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cqeve"]
@@ -20,3 +25,9 @@ mesh = SubResource("CapsuleMesh_kqn3p")
 [node name="Collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 shape = SubResource("BoxShape3D_cqeve")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.218526, 0)
+modulate = Color(1, 0, 1, 1)
+outline_modulate = Color(0, 1, 0, 1)
+text = "RATIO"

@@ -111,7 +111,8 @@ func instanciate_player(id: int): # Server Function // Instanciate an Player nod
 	player.set_multiplayer_authority(id)
 	get_node("/root/Game/Entities/Players").add_child(player) # Will instanciate a Player instance
 	# The spawn on the other clients will be managed by the Player Spawner's node
-
+	if id == multiplayer.get_unique_id():
+		get_node("/root/Game").local_player = player
 
 @rpc("authority", "call_local", "reliable", 1)
 func uninstanciate_player(id: int): # Server Function // Uninstanciate a Player node
@@ -173,8 +174,9 @@ func _process(_delta):
 
 
 func server_process():
-	return
-	if state == States.LOBBY:
+	if 1:
+		pass
+	elif state == States.LOBBY:
 		print("Waiting players to be ready")
 		print(players)
 	elif state == States.GAME:
@@ -185,8 +187,9 @@ func server_process():
 
 
 func client_process():
-	return
-	if state == States.LOBBY:
+	if 1:
+		pass
+	elif state == States.LOBBY:
 		print("Waiting server to start the game")
 		print(players)
 	elif state == States.GAME:

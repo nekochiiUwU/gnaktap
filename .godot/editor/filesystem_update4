@@ -1,8 +1,9 @@
-res://upgrade_ui.tscn
-res://mesh.tres
-res://Shop.gd
 res://main_menu.tscn
-res://map.tscn
-res://network.tscn
 res://Player.gd
+res://Shop.gd
+res://Weapon.tscn
+res://upgrade_ui.tscn
+res://bullet.tscn
 res://player.tscn
+res://map.tscn
+res://mesh.tres

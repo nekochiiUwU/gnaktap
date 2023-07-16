@@ -152,7 +152,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
 [node name="Hand" type="Node3D" parent="Arm"]
 
 [node name="Shoot Node" type="Node3D" parent="Arm/Hand"]
-transform = Transform3D(1, -0.000298276, -0.000149116, 0.000298232, 1, -0.000298232, 0.000149205, 0.000298187, 1, 1.39331e-05, 2.78661e-05, 0.000278659)
+transform = Transform3D(1, -0.000298276, -0.000149116, 0.000298232, 1, -0.000298232, 0.000149205, 0.000298187, 1, 0, 0, 0)
 
 [node name="Weapon" parent="Arm/Hand/Shoot Node" instance=ExtResource("2_u5gc6")]
 unique_name_in_owner = true

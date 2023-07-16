@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bk3p2jyntv3bd"]
+[gd_scene load_steps=27 format=3 uid="uid://bk3p2jyntv3bd"]
 
 [sub_resource type="Gradient" id="Gradient_ndx21"]
 interpolation_mode = 1
@@ -56,20 +56,48 @@ material = SubResource("StandardMaterial3D_qcnsp")
 left_to_right = 1.0
 size = Vector3(0.2, 0.4, 0.099)
 
+[sub_resource type="Gradient" id="Gradient_a7fgr"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.318493, 0.321918, 0.866438)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0.0449756, 0.0151291, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_aov0p"]
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ww3xh"]
+width = 4
+height = 128
+in_3d_space = true
+seamless = true
+color_ramp = SubResource("Gradient_a7fgr")
+noise = SubResource("FastNoiseLite_aov0p")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s563i"]
+albedo_color = Color(0, 0, 0, 1)
+metallic = 0.5
+roughness = 0.75
+emission_enabled = true
+emission_energy_multiplier = 16.0
+emission_texture = SubResource("NoiseTexture2D_ww3xh")
+uv1_scale = Vector3(3, 2, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_ptinh"]
-material = SubResource("StandardMaterial3D_8dlgx")
-size = Vector3(0.025, 0.02, 0.25)
+material = SubResource("StandardMaterial3D_s563i")
+size = Vector3(0.005, 0.03, 0.02)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_v0tt1"]
-viewport_path = NodePath("SupScope/SubViewport")
+[sub_resource type="BoxMesh" id="BoxMesh_1xvlx"]
+material = SubResource("StandardMaterial3D_s563i")
+size = Vector3(0.01, 0.015, 0.005)
 
-[sub_resource type="BoxMesh" id="BoxMesh_7geov"]
-material = SubResource("StandardMaterial3D_8dlgx")
-size = Vector3(0.01, 0.07, 0.3)
+[sub_resource type="TorusMesh" id="TorusMesh_3hv6x"]
+material = SubResource("StandardMaterial3D_s563i")
+inner_radius = 0.015
+outer_radius = 0.025
+rings = 16
+ring_segments = 4
 
-[sub_resource type="BoxMesh" id="BoxMesh_hy7ix"]
-material = SubResource("StandardMaterial3D_8dlgx")
-size = Vector3(0.05, 0.01, 0.3)
+[sub_resource type="BoxMesh" id="BoxMesh_fcks2"]
+size = Vector3(0.05, 0.05, 0.05)
 
 [sub_resource type="Animation" id="Animation_hvafs"]
 length = 0.001
@@ -84,18 +112,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0.25, -0.2, -0.667)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Weapon/SupScope/SubViewport/Node3D/Scope/Camera3D2:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.197396, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_c2fio"]
@@ -112,18 +128,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(0, -0.095, -0.57), Vector3(0.25, -0.2, -0.667)]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Weapon/SupScope/SubViewport/Node3D/Scope/Camera3D2:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.05, 1),
-"update": 0,
-"values": [Vector3(0.197396, 0, 0), Vector3(0, -0.174533, 0)]
-}
 
 [sub_resource type="Animation" id="Animation_fw4ki"]
 resource_name = "scope"
@@ -138,18 +142,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(0.05, 1),
 "update": 0,
 "values": [Vector3(0.25, -0.2, -0.667), Vector3(0, -0.095, -0.57)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Weapon/SupScope/SubViewport/Node3D/Scope/Camera3D2:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.05, 1),
-"update": 0,
-"values": [Vector3(0.000868231, -0.173765, 0), Vector3(0.197222, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l6klv"]
@@ -220,7 +212,7 @@ _data = {
 }
 
 [node name="Weapon" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -0.2, -0.667)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.095, -0.57)
 
 [node name="Chargeur" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1.0198, 0, 0, 0, 1, 0, -0.1, -0.2)
@@ -242,13 +234,12 @@ rotation_edit_mode = 2
 light_color = Color(1, 0, 0, 1)
 light_energy = 128.0
 spot_range = 32.0
-spot_angle = 0.25
+spot_angle = 0.5
 spot_angle_attenuation = 0.069348
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="Canon"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0.2, 1, 0, 0, 0)
 rotation_edit_mode = 2
-visible = false
 spot_range = 24.0
 
 [node name="Front" type="MeshInstance3D" parent="."]
@@ -266,60 +257,23 @@ transform = Transform3D(0, 0, -1, 1, 0, 0, -0.2, -1, 0, 0, -0.051, 0.15)
 rotation_edit_mode = 2
 mesh = SubResource("PrismMesh_bwlij")
 
-[node name="SupScope" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -0.2, 1, 0, 0.06, 0)
-rotation_edit_mode = 2
+[node name="Mire2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.065, -0.4)
 mesh = SubResource("BoxMesh_ptinh")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="SupScope"]
-remote_path = NodePath("../SubViewport/Node3D")
-update_scale = false
-
-[node name="SubViewport" type="SubViewport" parent="SupScope"]
-size = Vector2i(500, 500)
-
-[node name="Node3D" type="Node3D" parent="SupScope/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1.0155, 0.195838, 0, -0.2031, 0.979189, 0, -0.035, -0.57)
-
-[node name="Scope" type="Sprite3D" parent="SupScope/SubViewport/Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, -2.98023e-08, 1, 0, 0.011, 0.147)
+[node name="Sup Mire" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.055, 0.05)
 rotation_edit_mode = 2
-pixel_size = 0.0001
-double_sided = false
-texture = SubResource("ViewportTexture_v0tt1")
+mesh = SubResource("BoxMesh_1xvlx")
 
-[node name="Camera3D2" type="Camera3D" parent="SupScope/SubViewport/Node3D/Scope"]
-transform = Transform3D(1, 0, 0, 0, 0.948144, -0.196148, 0, 0.189629, 0.980737, 0, 0.0378745, -0.196395)
-current = true
-fov = 30.0
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="Sup Mire"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.0303782, 0)
+mesh = SubResource("TorusMesh_3hv6x")
 
-[node name="Glass" type="MeshInstance3D" parent="SupScope"]
-transform = Transform3D(1, 0, 0, 0, 1.0155, 0.195838, 0, -4.47035e-08, 1.01836, 0, 0.0399587, 0.149698)
-rotation_edit_mode = 2
-
-[node name="ScopeR" type="MeshInstance3D" parent="SupScope"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03, 0.04, -9.31323e-10)
-rotation_edit_mode = 2
-mesh = SubResource("BoxMesh_7geov")
-skeleton = NodePath("../..")
-
-[node name="ScopeL" type="MeshInstance3D" parent="SupScope"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 0.04, -9.31323e-10)
-rotation_edit_mode = 2
-mesh = SubResource("BoxMesh_7geov")
-skeleton = NodePath("../..")
-
-[node name="ScopeB" type="MeshInstance3D" parent="SupScope"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
-rotation_edit_mode = 2
-mesh = SubResource("BoxMesh_hy7ix")
-skeleton = NodePath("../..")
-
-[node name="ScopeT" type="MeshInstance3D" parent="SupScope"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07, 0)
-rotation_edit_mode = 2
-mesh = SubResource("BoxMesh_hy7ix")
-skeleton = NodePath("../..")
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Sup Mire/CSGMesh3D2"]
+transform = Transform3D(0.707107, 0.707107, 0, 3.09086e-08, -3.09086e-08, 1, 0.707107, -0.707107, -4.37114e-08, 0, 0, -0.0330025)
+operation = 2
+mesh = SubResource("BoxMesh_fcks2")
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 root_node = NodePath("../..")

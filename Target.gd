@@ -14,7 +14,7 @@ func spawn():
 	visible = true
 
 
-func _process(delta):
+func _process(_delta):
 	if is_multiplayer_authority():
 		rpc("online_syncronisation", position, rotation, health, visible)
 

@@ -18,6 +18,7 @@ var target_score:   int = 0
 var incoming_recoil: Vector2 = Vector2()
 
 var interact_objects: Array = []
+var current_interact = null
 
 var inventory = {
 	"points": {
@@ -72,20 +73,21 @@ func calibrate_ui():
 
 func _input(event):
 	if is_multiplayer_authority():
-		if event is InputEventMouseMotion:
-			rotation.y += event.relative.x * sensi.x
-			$Head.rotation.x = clamp(-1.57, $Head.rotation.x + event.relative.y * sensi.y, 1.57)
-			$Head.rotation.z += event.relative.x * sensi.x / 10
-			get_node("%Camera").fov = min(get_node("%Camera").fov + abs(event.relative.x * sensi.x * 5), 160)
-		if event is InputEventMouseButton:
-			if event.button_index == MOUSE_BUTTON_RIGHT:
-				if event.is_pressed():
-					if get_node("%Weapon/Animation").current_animation != "scope":
-						get_node("%Weapon/Animation").current_animation = "scope"
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			if event is InputEventMouseMotion:
+				rotation.y += event.relative.x * sensi.x
+				$Head.rotation.x = clamp(-1.57, $Head.rotation.x + event.relative.y * sensi.y, 1.57)
+				$Head.rotation.z += event.relative.x * sensi.x / 10
+				get_node("%Camera").fov = min(get_node("%Camera").fov + abs(event.relative.x * sensi.x * 5), 160)
+			if event is InputEventMouseButton:
+				if event.button_index == MOUSE_BUTTON_RIGHT:
+					if event.is_pressed():
+						if get_node("%Weapon/Animation").current_animation != "scope":
+							get_node("%Weapon/Animation").current_animation = "scope"
+							get_node("%Weapon/Animation").play()
+					else:
+						get_node("%Weapon/Animation").current_animation = "no_scope"
 						get_node("%Weapon/Animation").play()
-				else:
-					get_node("%Weapon/Animation").current_animation = "no_scope"
-					get_node("%Weapon/Animation").play()
 
 
 func _physics_process(delta):
@@ -95,6 +97,22 @@ func _physics_process(delta):
 
 		if Input.is_action_just_pressed("reload"):
 			reload()
+
+		if Input.is_action_pressed("crouch"):
+			var current_crouch_modifier = (1.5 - get_node("Mesh").mesh.height) / 5
+			get_node("Mesh").mesh.height += current_crouch_modifier
+			get_node("Mesh").position.y -= current_crouch_modifier/2
+			get_node("Collision").shape.height += current_crouch_modifier
+			get_node("Collision").position.y -= current_crouch_modifier/2
+			position.y += current_crouch_modifier
+		else:
+			var current_crouch_modifier = (1.8 - get_node("Mesh").mesh.height) / 5
+			print(get_node("Mesh").mesh.height)
+			get_node("Mesh").mesh.height += current_crouch_modifier
+			get_node("Mesh").position.y -= current_crouch_modifier/2
+			get_node("Collision").shape.height += current_crouch_modifier
+			get_node("Collision").position.y -= current_crouch_modifier/2
+			position.y += current_crouch_modifier
 
 		if hitmarker_time:
 			var x = 1 - ((Game.time - hitmarker_time) / .3)
@@ -127,10 +145,11 @@ func _physics_process(delta):
 		#print(velocity.dot(transform.basis.x))
 		var input = Input.get_vector("move_left", "move_right", "move_forward", "move_backward").normalized()
 		input = Vector3(input.x, 0, input.y)
-		
-		if Input.is_action_pressed("shoot"):
-			try_shoot()
-		
+
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			if Input.is_action_pressed("shoot"):
+				try_shoot()
+
 		if is_on_floor():
 			if Input.is_action_pressed("jump"):
 				velocity.y = jump
@@ -191,7 +210,7 @@ func try_shoot():
 	ammo -= 1
 	accuracy = 5
 	update_ammo()
-	var ori = get_node("Head").global_rotation_degrees
+	var ori = get_node("%Weapon/Canon").global_rotation_degrees
 	ori.x += randf_range(0, accuracy) - accuracy / 2
 	ori.y += randf_range(0, accuracy) - accuracy / 2
 	shot_time = Game.time
@@ -201,7 +220,7 @@ func try_shoot():
 	get_node("Arm/Hand/Shoot Node").position.y += 0*(get_node("%Weapon").position.y + 0.09) * -.03 + incoming_recoil.y * 0.0
 	#get_node("Arm/Hand/Shoot Node").position.x += sign(get_node("%Weapon").position.x) + .1 * incoming_recoil.y * 0.01
 	#get_node("Arm/Hand/Shoot Node").rotation.x += .05
-	rpc("shoot", get_node("%Camera").global_position, ori, damages, bullet_speed)
+	rpc("shoot", get_node("%Weapon/Canon").global_position, ori, damages, bullet_speed)
 	
 	if position.y < -30:
 		die()
@@ -235,19 +254,25 @@ func new_interact(object):
 
 func lost_interact(object):
 	interact_objects.erase(object)
+	if object == current_interact:
+		current_interact = null
 
 
 func interact():
-	if interact_objects:
+	if current_interact:
+		current_interact.stop_interact()
+		current_interact = null
+	elif interact_objects:
 		var closest = interact_objects[0]
 		for object in interact_objects:
 			if position.distance_to(object.position) < position.distance_to(closest.position):
 				closest = object
 		closest.interact()
+		current_interact = closest
 
 
-func get_hit(damages):
-	health -= damages
+func get_hit(_damages):
+	health -= _damages
 	print(health)
 	if health < 0:
 		die() 
@@ -303,7 +328,7 @@ func online_syncronisation(_position: Vector3, _rotation: Vector3, _head_rotatio
 
 
 @rpc("any_peer", "call_local", "unreliable", 5)
-func hitmarker(damages: float):
+func hitmarker(_damages: float):
 	get_node("hitmarker_sfx").stream = load("res://hitmarker.mp3")
 	get_node("hitmarker_sfx").play()
 	get_node("Head/UI/Hitmarker").visible = true
