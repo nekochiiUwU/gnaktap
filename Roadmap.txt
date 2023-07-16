@@ -1,0 +1,18 @@
+0)
+	Map
+	Vfx
+
+1)
+	Headshots
+	Items
+
+3)
+	tab menu
+	Lobby
+	Sfx
+	weapon type
+
+4)
+	Target
+	Weapons
+	round

@@ -53,7 +53,7 @@ update_scale = false
 size = Vector2i(500, 500)
 
 [node name="Node3D" type="Node3D" parent="SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1.0155, 0.195838, 0, -0.2031, 0.979189, 0.25, -0.14, -0.667)
+transform = Transform3D(1, 0, 0, 0, 1.0155, 0.195838, 0, -0.2031, 0.979189, 0, 0.06, 0)
 
 [node name="Scope" type="Sprite3D" parent="SubViewport/Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, -2.98023e-08, 1, 0, 0.011, 0.147)
