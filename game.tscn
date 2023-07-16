@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bsnwe8bxalslo"]
+[gd_scene load_steps=2 format=3 uid="uid://bsnwe8bxalslo"]
 
 [ext_resource type="Script" path="res://Game.gd" id="1_ni810"]
-[ext_resource type="PackedScene" uid="uid://weitoykb1612" path="res://player.tscn" id="2_12wbt"]
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_ni810")
@@ -9,6 +8,3 @@ script = ExtResource("1_ni810")
 [node name="Entities" type="Node3D" parent="."]
 
 [node name="Players" type="Node3D" parent="Entities"]
-
-[node name="Player" parent="Entities/Players" instance=ExtResource("2_12wbt")]
-transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 0, 1.81932, 20.3019)

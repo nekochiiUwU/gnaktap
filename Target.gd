@@ -9,7 +9,7 @@ func _ready():
 
 
 func spawn():
-	position = Vector3(randf_range(-12,12), randf_range(1, 6), randf_range(-6,6))
+	position = Vector3(randf_range(-4,4), randf_range(1, 5), randf_range(-4,4))
 	health = 100
 	visible = true
 
@@ -19,10 +19,11 @@ func _process(_delta):
 		rpc("online_syncronisation", position, rotation, health, visible)
 
 
-func get_hit(damages):
-	health -= damages
+func get_hit(_owner, _damages):
+	health -= _damages
 	if health < 0:
-		die()
+		get_node("../" + _owner).target(2)
+		die() 
 
 
 func die():

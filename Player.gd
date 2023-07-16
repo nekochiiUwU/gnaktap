@@ -181,7 +181,7 @@ func _physics_process(delta):
 
 func _process(_delta):
 	if is_multiplayer_authority():
-		rpc("online_syncronisation", position, rotation, get_node("Head").rotation, health, get_node("%Weapon").position)
+		rpc("online_syncronisation", position, rotation, get_node("Head").rotation, health, get_node("%Weapon").position, get_node("Mesh").mesh.height)
 
 
 func update_ammo():
@@ -271,10 +271,11 @@ func interact():
 		current_interact = closest
 
 
-func get_hit(_damages):
+func get_hit(_owner, _damages):
 	health -= _damages
 	print(health)
 	if health < 0:
+		get_node("../" + _owner).target(5)
 		die() 
 
 
@@ -282,7 +283,7 @@ func die():
 	process_mode = Node.PROCESS_MODE_DISABLED
 	rotation.z += 90
 	position.y -= 0.8
-	rpc("online_syncronisation", position, rotation, get_node("Head").rotation, health, get_node("%Weapon").position)
+	rpc("online_syncronisation", position, rotation, get_node("Head").rotation, health, get_node("%Weapon").position, get_node("Mesh").mesh.height)
 	await get_tree().create_timer(2.0).timeout
 	spawn()
 	process_mode = Node.PROCESS_MODE_INHERIT
@@ -319,12 +320,19 @@ func shoot(pos, rot, dmg, bspeed):
 
 
 @rpc("authority", "call_remote", "unreliable", 0)
-func online_syncronisation(_position: Vector3, _rotation: Vector3, _head_rotation: Vector3, _health: float, weapon_position: Vector3):
+func online_syncronisation(
+		_position: Vector3, 
+		_rotation: Vector3, 
+		_head_rotation: Vector3, 
+		_health: float, 
+		weapon_position: Vector3, 
+		mesh_height: float):
 	position = _position
 	rotation = _rotation
 	get_node("Head").rotation = _head_rotation
 	get_node("%Weapon").position = weapon_position
 	health = _health
+	get_node("Mesh").mesh.height = mesh_height
 
 
 @rpc("any_peer", "call_local", "unreliable", 5)
