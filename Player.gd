@@ -227,7 +227,7 @@ func try_shoot():
 
 
 func reload():
-	print("reloading...")
+	reloading = true
 	get_node("%Weapon/RemoadAnimation").play("anim")
 	get_node("%Weapon/RemoadAnimation").speed_scale = 1 / reload_speed
 	await get_tree().create_timer(reload_speed).timeout

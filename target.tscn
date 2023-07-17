@@ -3,11 +3,11 @@
 [ext_resource type="Script" path="res://Target.gd" id="1_dkwyj"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_mioyg"]
-radius = 1.5
-height = 3.0
+radius = 0.75
+height = 1.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_nhaow"]
-radius = 1.5
+radius = 0.75
 
 [node name="Target" type="CharacterBody3D"]
 collision_layer = 4

@@ -1,2 +1,8 @@
+res://target.tscn
+res://mesh.tres
+res://main_menu.tscn
 res://Scope.tscn
-res://Roadmap.txt
+res://game.tscn
+res://map.tscn
+res://shop.tscn
+res://player.tscn
