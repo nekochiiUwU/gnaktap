@@ -23,7 +23,7 @@ var current_interact = null
 
 
 var inventory = {
-	"items":["base","test","test2"],
+	"items":["base"],
 	"points": {
 		"damages": 30,
 		"speed": 30,
@@ -55,16 +55,18 @@ var bullet_speed: float  = 50. #stat ennuyeuse un peu ?
 func _ready():
 	Game = get_node("../../..")
 	if is_multiplayer_authority():
-		get_node("Arm/Hand/Shoot Node/Weapon/Canon/AudioStreamPlayer3D").volume_db = -32
+		get_node("Arm/Hand/Shoot Node/Weapon/Canon/AudioStreamPlayer3D").volume_db = -24
 		calibrate_ui()
 		get_viewport().size_changed.connect(calibrate_ui)
 		spawn()
+		update_stats()
+		die()
 	else:
 		get_node("Collision").queue_free()
 		get_node("Head/Light").queue_free()
 		get_node("Head/UI").queue_free()
 		get_node("%Camera").queue_free()
-	update_stats()
+
 
 
 func calibrate_ui():
@@ -247,10 +249,13 @@ func spawn():
 		a = 2 - a # (a e [0, 1])
 
 	get_node("%Camera").current = true
+	get_node("Head/UI").visible = true
 	if Game:
 		if Game.spawnpoints:
 			transform = Game.spawnpoints[randi() % len(Game.spawnpoints)].transform
 	health = 100
+	ammo = max_ammo
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
 func new_interact(object):
@@ -285,13 +290,15 @@ func get_hit(_owner, _damages):
 
 
 func die():
-	process_mode = Node.PROCESS_MODE_DISABLED
 	rotation.z += 90
 	position.y -= 0.8
 	rpc("online_syncronisation", position, rotation, get_node("Head").rotation, health, get_node("%Weapon").position, get_node("Mesh").mesh.height)
-	await get_tree().create_timer(2.0).timeout
-	spawn()
-	process_mode = Node.PROCESS_MODE_INHERIT
+	get_node("%Camera").current = false
+	get_node("Head/UI").visible = false
+	Game.add_child(Game.Death_Ui)
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	process_mode = Node.PROCESS_MODE_DISABLED
+
 
 func update_stats():
 	var items = inventory["items"]
@@ -303,16 +310,16 @@ func update_stats():
 	for v in range(len(Game.conversion)):
 		for i in items: #%ages
 			set(Game.conversion[v], get(Game.conversion[v]) * (1+float(Game.stats_items[i][1][v])/100))
+	recoil = 25-recoil
+	accuracy = 35-accuracy
+	reload_speed = 5*(30/(30+reload_speed))
 	for v in Game.conversion:
 		if !(v == "accuracy" or v == "reload_speed" or v == "recoil") and get(v) < 1:
 			set(v, 1)
 		elif get(v) < 0:
 			set(v, 0)
-	ammo = max_ammo
 	air_speed = speed * 10
-	recoil = 25-recoil
-	accuracy = 35-accuracy
-	reload_speed = 5-(30/(30+reload_speed))
+	ammo = max_ammo
 	update_ammo()
 	print_stats()
 

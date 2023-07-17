@@ -160,3 +160,4 @@ unique_name_in_owner = true
 rotation_edit_mode = 2
 
 [node name="hitmarker_sfx" type="AudioStreamPlayer" parent="."]
+volume_db = 16.0

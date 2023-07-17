@@ -1,18 +1,19 @@
 extends Node3D
 
 @onready var Target: Object = preload("res://target.tscn")
+@onready var Death_Ui: Node = preload("res://death_ui.tscn").instantiate()
 
 var spawnpoints = []
 var time = 0
 
-var local_player
+var local_player: Player
 
 var memo = ["dmg","msp","rpm","acc","rcl","amm","rld","bsp"] #[[flat],[%]]
 var conversion = ["damages","speed","fire_rate","accuracy","recoil","max_ammo","reload_speed","bullet_speed"] #[[flat],[%]]
 var stats_items = {
-	"base":[[20, 15, 600, 35, 0, 25, 2.5, 25], [0, 0, 0, 0, 0, 0, 0, 0]],
-	"test":[[0,0,0,0,20,0,0,0], [0,0,3,0,0,0,-61,0]],
-	"test2":[[0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0]]
+	"base":[[20, 5, 300, 20, 20, 25, 20, 25], [0, 0, 0, 0, 0, 0, 0, 0], 5],
+	"test":[[0,0,0,0,20,0,0,0], [0,0,3,0,0,0,-61,0], 5],
+	"test2":[[0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0], 5]
 }
 #25 recoil
 
@@ -41,6 +42,11 @@ func instanciate_target(id: String): # Server Function // Instanciate a Target n
 
 
 func _process(delta):
+	stats_items = {
+	"base":[[20, 5, 300, 20, 20, 25, 20, 25], [0, 0, 0, 0, 0, 0, 0, 0], 5],
+	"test":[[0,0,1000,0,20,0,0,0], [0,0,3,0,0,0,-61,0], 5],
+	"test2":[[0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0], 5]
+}
 	time += delta
 	if Input.is_action_just_pressed("quit"):
 		get_node("/root/Main Menu").visible = true

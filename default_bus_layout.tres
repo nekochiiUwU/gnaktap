@@ -14,6 +14,7 @@ damping = 0.25
 wet = 0.1
 
 [resource]
+bus/0/volume_db = -16.4004
 bus/1/name = &"World"
 bus/1/solo = false
 bus/1/mute = false
@@ -21,6 +22,6 @@ bus/1/bypass_fx = false
 bus/1/volume_db = 0.0
 bus/1/send = &"Master"
 bus/1/effect/0/effect = SubResource("AudioEffectReverb_j26t7")
-bus/1/effect/0/enabled = true
+bus/1/effect/0/enabled = false
 bus/1/effect/1/effect = SubResource("AudioEffectReverb_ge5uy")
 bus/1/effect/1/enabled = true

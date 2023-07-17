@@ -12,16 +12,19 @@ var inventory = {
 
 
 func _ready():
-	Game = get_node("../..")
+	Game = get_node("/root/Game")
 	
 	inventory = Game.stats_items
 	calibrate_ui()
 	get_viewport().size_changed.connect(calibrate_ui)
-	Items_Ui.visible = false
 	var disp_items = inventory.keys()
 	for i in disp_items:
 		item_list.add_item(i)
 	item_list.connect("item_selected", select)
+	Items_Ui.get_node("Selected/Button").connect("pressed", buy_item)
+	if item_list.item_count:
+		item_list.deselect_all()
+		item_list.select(0)
 
 func select(selected_item):
 	var s = Items_Ui.get_node("Selected")
@@ -36,9 +39,12 @@ func select(selected_item):
 		if item[1][i] != 0:
 			stats += Game.conversion[i] + ": " + str(item[1][i]) + "%, "
 	s.get_node("Stats").text = stats
-	
+	Items_Ui.get_node("Selected/Button").text = "Buy: " + str(item[2]) + "pts"
+	s.visible = true
+
 
 func update_Items_Ui():
+	Items_Ui.get_node("Points").text = "Points : " + str(get_node("/root/Game").local_player.target_score)
 	pass
 	"""
 	var stat_buttons = Items_Ui.get_children()
@@ -51,7 +57,21 @@ func update_Items_Ui():
 	"""
 
 
-func buy_stat(stat):
+func buy_item():
+	var s = Items_Ui.get_node("Selected")
+	var item = s.get_node("Name").text
+	if item in item_list.get_item_text(item_list.get_selected_items()[0]) and \
+			!Game.local_player.inventory["items"].has(item) and \
+			Game.stats_items[item][2] <= Game.local_player.target_score:
+		Game.local_player.target_score -= Game.stats_items[item][2]
+		Game.local_player.inventory["items"].append(item)
+		item_list.remove_item(item_list.get_selected_items()[0])
+		Game.local_player.update_stats()
+		if item_list.item_count:
+			item_list.select(0)
+		else:
+			item_list.deselect_all()
+			s.visible = false
 	pass
 	"""
 	if inventory["points"][str(stat)] <= 0 or get_node("/root/Game/").local_player.target_score <= 0:

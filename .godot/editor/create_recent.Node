@@ -1,9 +1,14 @@
+CheckButton
+Button
+CollisionShape3D
+Shop
+Control
+Node
 RichTextLabel
 Label
 Sprite2D
 ColorRect
 ItemList
-CollisionShape3D
 Area3D
 AudioStreamPlayer3D
 AnimationPlayer
@@ -15,8 +20,6 @@ Label3D
 GPUParticles3D
 Line2D
 CPUParticles3D
-Control
-Button
 StaticBody3D
 CollisionPolygon3D
 CharacterBody3D
@@ -28,5 +31,3 @@ RemoteTransform3D
 WorldEnvironment
 Sprite3D
 SubViewport
-Camera2D
-ProgressBar
