@@ -2,3 +2,4 @@ res://main_menu.tscn
 res://Weapon.tscn
 res://player.tscn
 res://Player.gd
+res://default_bus_layout.tres

@@ -52,6 +52,7 @@ var bullet_speed: float  = 50. #stat ennuyeuse un peu ?
 func _ready():
 	Game = get_node("../../..")
 	if is_multiplayer_authority():
+		get_node("Arm/Hand/Shoot Node/Weapon/Canon/AudioStreamPlayer3D").volume_db = -16
 		calibrate_ui()
 		get_viewport().size_changed.connect(calibrate_ui)
 		spawn()
@@ -308,7 +309,10 @@ func update_stats():
 
 @rpc("authority", "call_local", "unreliable", 2)
 func shoot(pos, rot, dmg, bspeed):
-	get_node("Arm/Hand/Shoot Node/Weapon/Canon/AudioStreamPlayer3D").play(0.)
+	var shoot_stream_player = get_node("Arm/Hand/Shoot Node/Weapon/Canon/AudioStreamPlayer3D")
+	shoot_stream_player.pitch_scale += randf_range(.95, 1.1)
+	shoot_stream_player.pitch_scale /= 2
+	get_node("Arm/Hand/Shoot Node/Weapon/Canon/AudioStreamPlayer3D").play(randf_range(0, .02))
 	var new_bullet = bullet.instantiate()
 	new_bullet.position = pos
 	new_bullet.rotation_degrees = rot
