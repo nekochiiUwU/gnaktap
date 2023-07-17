@@ -9,7 +9,7 @@ var health:      float =  100.
 var gravity:     float = -ProjectSettings.get_setting("physics/3d/default_gravity")
 var air_speed:   float =  50.
 var jump:        float =  7.
-var sensi:     Vector2 = -Vector2(.005, .005)
+var sensi:     Vector2 = -Vector2(.0005, .0005)
 var joy_sensi: Vector2 = -Vector2(.1, .1)
 var hitmarker_time: float = 0
 var shot_time:      float = 0
@@ -20,7 +20,10 @@ var incoming_recoil: Vector2 = Vector2()
 var interact_objects: Array = []
 var current_interact = null
 
+
+
 var inventory = {
+	"items":["base","test","test2"],
 	"points": {
 		"damages": 30,
 		"speed": 30,
@@ -52,7 +55,7 @@ var bullet_speed: float  = 50. #stat ennuyeuse un peu ?
 func _ready():
 	Game = get_node("../../..")
 	if is_multiplayer_authority():
-		get_node("Arm/Hand/Shoot Node/Weapon/Canon/AudioStreamPlayer3D").volume_db = -16
+		get_node("Arm/Hand/Shoot Node/Weapon/Canon/AudioStreamPlayer3D").volume_db = -32
 		calibrate_ui()
 		get_viewport().size_changed.connect(calibrate_ui)
 		spawn()
@@ -190,7 +193,7 @@ func update_ammo():
 
 
 func try_shoot():
-	if shot_time - Game.time + fire_rate > 0:
+	if shot_time - Game.time + 60/fire_rate > 0:
 		return
 	if reloading:
 		return
@@ -207,12 +210,12 @@ func try_shoot():
 	elif weapon_type == "autre chose":
 		#a completer avec burst, shotgun, verrou...
 		pass
+	
 	ammo -= 1
-	accuracy = 5
 	update_ammo()
 	var ori = get_node("%Weapon/Canon").global_rotation_degrees
-	ori.x += randf_range(0, accuracy) - accuracy / 2
-	ori.y += randf_range(0, accuracy) - accuracy / 2
+	ori.x += randf_range(-accuracy/2, accuracy/2)
+	ori.y += randf_range(-accuracy/2, accuracy/2)
 	shot_time = Game.time
 	incoming_recoil.y += randf_range(0, recoil)
 	incoming_recoil.x += randf_range(-recoil/2, recoil/2)
@@ -290,7 +293,34 @@ func die():
 	spawn()
 	process_mode = Node.PROCESS_MODE_INHERIT
 
+func update_stats():
+	var items = inventory["items"]
+	for v in Game.conversion:
+		set(v, 0)
+	for i in items: #flat
+		for v in range(len(Game.conversion)):
+			set(Game.conversion[v], get(Game.conversion[v]) + Game.stats_items[i][0][v])
+	for v in range(len(Game.conversion)):
+		for i in items: #%ages
+			set(Game.conversion[v], get(Game.conversion[v]) * (1+float(Game.stats_items[i][1][v])/100))
+	for v in Game.conversion:
+		if !(v == "accuracy" or v == "reload_speed" or v == "recoil") and get(v) < 1:
+			set(v, 1)
+		elif get(v) < 0:
+			set(v, 0)
+	ammo = max_ammo
+	air_speed = speed * 10
+	recoil = 25-recoil
+	accuracy = 35-accuracy
+	reload_speed = 5-(30/(30+reload_speed))
+	update_ammo()
+	print_stats()
 
+func print_stats():
+	for v in Game.conversion:
+		print(v + ":" + str(get(v)))
+
+""" old
 func update_stats():
 	var p = inventory["points"]
 	speed = 3 + float(p["speed"])/10.
@@ -305,7 +335,7 @@ func update_stats():
 	bullet_speed = exp(0.85 * log(p["bullet_speed"]))
 	update_ammo()
 	print(p)
-
+"""
 
 @rpc("authority", "call_local", "unreliable", 2)
 func shoot(pos, rot, dmg, bspeed):

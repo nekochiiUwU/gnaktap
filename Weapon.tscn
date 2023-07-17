@@ -232,6 +232,7 @@ mesh = SubResource("BoxMesh_ey5og")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Canon"]
 stream = ExtResource("1_y8rgj")
+volume_db = -31.428
 max_distance = 20.0
 panning_strength = 3.0
 bus = &"World"

@@ -7,6 +7,15 @@ var time = 0
 
 var local_player
 
+var memo = ["dmg","msp","rpm","acc","rcl","amm","rld","bsp"] #[[flat],[%]]
+var conversion = ["damages","speed","fire_rate","accuracy","recoil","max_ammo","reload_speed","bullet_speed"] #[[flat],[%]]
+var stats_items = {
+	"base":[[20, 15, 600, 35, 0, 25, 2.5, 25], [0, 0, 0, 0, 0, 0, 0, 0]],
+	"test":[[0,0,0,0,20,0,0,0], [0,0,3,0,0,0,-61,0]],
+	"test2":[[0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0]]
+}
+#25 recoil
+
 func _ready():
 	spawn_map(0)
 

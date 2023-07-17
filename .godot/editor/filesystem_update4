@@ -1,5 +1,15 @@
+res://default_bus_layout.tres
+res://player.tscn
+res://merge.gd
+res://Game.gd
+res://Player.gd
 res://main_menu.tscn
 res://Weapon.tscn
-res://player.tscn
-res://Player.gd
-res://default_bus_layout.tres
+res://shop.tscn
+res://upgrade_ui.tscn
+res://Shop old pour pas le perdre.gd
+res://Shop.gd
+res://mesh.tres
+res://map.tscn
+res://items ui.tscn
+res://upgradui.tscn

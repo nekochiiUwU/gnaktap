@@ -1,3 +1,8 @@
+RichTextLabel
+Label
+Sprite2D
+ColorRect
+ItemList
 CollisionShape3D
 Area3D
 AudioStreamPlayer3D
@@ -11,9 +16,6 @@ GPUParticles3D
 Line2D
 CPUParticles3D
 Control
-Label
-RichTextLabel
-ColorRect
 Button
 StaticBody3D
 CollisionPolygon3D
@@ -28,5 +30,3 @@ Sprite3D
 SubViewport
 Camera2D
 ProgressBar
-MultiplayerSynchronizer
-SpinBox

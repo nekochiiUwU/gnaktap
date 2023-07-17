@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://47lay2m3f1ys"]
 
 [ext_resource type="Script" path="res://Shop.gd" id="1_6qybg"]
-[ext_resource type="PackedScene" uid="uid://camjx4tc7t0eq" path="res://upgrade_ui.tscn" id="2_d8gc3"]
+[ext_resource type="PackedScene" uid="uid://camjx4tc7t0eq" path="res://items ui.tscn" id="2_1llgr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b82e0"]
 
@@ -58,7 +58,7 @@ shape = SubResource("BoxShape3D_vunb1")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_j2e3c")
 
-[node name="Upgrade Ui" parent="." instance=ExtResource("2_d8gc3")]
+[node name="Items UI" parent="." instance=ExtResource("2_1llgr")]
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
