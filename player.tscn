@@ -157,7 +157,6 @@ transform = Transform3D(1, -0.000298276, -0.000149116, 0.000298232, 1, -0.000298
 
 [node name="Weapon" parent="Arm/Hand/Shoot Node" instance=ExtResource("2_u5gc6")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -0.2, -0.667)
 rotation_edit_mode = 2
 
 [node name="hitmarker_sfx" type="AudioStreamPlayer" parent="."]

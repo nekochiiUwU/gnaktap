@@ -308,6 +308,7 @@ func update_stats():
 
 @rpc("authority", "call_local", "unreliable", 2)
 func shoot(pos, rot, dmg, bspeed):
+	get_node("Arm/Hand/Shoot Node/Weapon/Canon/AudioStreamPlayer3D").play(0.)
 	var new_bullet = bullet.instantiate()
 	new_bullet.position = pos
 	new_bullet.rotation_degrees = rot

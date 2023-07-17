@@ -1,3 +1,7 @@
+CollisionShape3D
+Area3D
+AudioStreamPlayer3D
+AnimationPlayer
 MeshInstance3D
 Player
 Camera3D
@@ -11,10 +15,7 @@ Label
 RichTextLabel
 ColorRect
 Button
-CollisionShape3D
-Area3D
 StaticBody3D
-AnimationPlayer
 CollisionPolygon3D
 CharacterBody3D
 AudioStreamPlayer
@@ -29,4 +30,3 @@ Camera2D
 ProgressBar
 MultiplayerSynchronizer
 SpinBox
-TextEdit

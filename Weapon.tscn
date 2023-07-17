@@ -1,4 +1,6 @@
-[gd_scene load_steps=27 format=3 uid="uid://bk3p2jyntv3bd"]
+[gd_scene load_steps=28 format=3 uid="uid://bk3p2jyntv3bd"]
+
+[ext_resource type="AudioStream" uid="uid://x2xffs6mmse5" path="res://untitled.ogg" id="1_y8rgj"]
 
 [sub_resource type="Gradient" id="Gradient_ndx21"]
 interpolation_mode = 1
@@ -212,7 +214,7 @@ _data = {
 }
 
 [node name="Weapon" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.095, -0.57)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -0.2, -0.667)
 
 [node name="Chargeur" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1.0198, 0, 0, 0, 1, 0, -0.1, -0.2)
@@ -227,6 +229,11 @@ mesh = SubResource("BoxMesh_g8vfx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -0.2, 1, 0.000441655, 0, -0.550108)
 rotation_edit_mode = 2
 mesh = SubResource("BoxMesh_ey5og")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Canon"]
+stream = ExtResource("1_y8rgj")
+max_distance = 20.0
+panning_strength = 3.0
 
 [node name="Front" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -0.2, 1, 0.000240856, 0, -0.3)
