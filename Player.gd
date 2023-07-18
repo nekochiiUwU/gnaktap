@@ -57,6 +57,7 @@ var nb_shot:       int = 2
 
 func _ready():
 	Game = get_node("../../..")
+	visible = false
 	if is_multiplayer_authority():
 		get_node("Arm/Hand/Shoot Node/Weapon/Canon/AudioStreamPlayer3D").volume_db = -24
 		get_node("Arm/Hand/Shoot Node/Weapon/Canon/AudioStreamPlayer3D").unit_size= 15
@@ -66,6 +67,7 @@ func _ready():
 		update_stats()
 		die()
 	else:
+		get_node("HeadCollision").queue_free()
 		get_node("Collision").queue_free()
 		get_node("Head/Light").queue_free()
 		get_node("Head/UI").queue_free()
@@ -183,7 +185,7 @@ func _physics_process(delta):
 
 func _process(_delta):
 	if is_multiplayer_authority():
-		rpc("online_syncronisation", position, rotation, get_node("Head").rotation, health, get_node("%Weapon").position, get_node("Mesh").mesh.height)
+		rpc("online_syncronisation", position, rotation, get_node("Head").rotation, health, visible, get_node("%Weapon").position, get_node("Mesh").mesh.height)
 
 
 func update_ammo():
@@ -258,6 +260,7 @@ func spawn():
 
 	get_node("%Camera").current = true
 	get_node("Head/UI").visible = true
+	visible = true
 	if Game:
 		if Game.spawnpoints:
 			transform = Game.spawnpoints[randi() % len(Game.spawnpoints)].transform
@@ -300,16 +303,15 @@ func get_hit(_owner, _damages, collision):
 
 
 func die():
+	rotation.z += 90
+	position.y -= 0.8
+	process_mode = Node.PROCESS_MODE_DISABLED
 	if is_multiplayer_authority():
 		get_node("%Camera").current = false
 		get_node("Head/UI").visible = false
 		Game.add_child(Game.Death_Ui)
-		rpc("online_syncronisation", position, rotation, get_node("Head").rotation, health, get_node("%Weapon").position, get_node("Mesh").mesh.height)
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	process_mode = Node.PROCESS_MODE_DISABLED
-	rotation.z += 90
-	position.y -= 0.8
-	
+		rpc("online_syncronisation", position, rotation, get_node("Head").rotation, health, visible, get_node("%Weapon").position, get_node("Mesh").mesh.height)
 
 
 func update_stats():
@@ -364,6 +366,7 @@ func online_syncronisation(
 		_rotation: Vector3, 
 		_head_rotation: Vector3, 
 		_health: float, 
+		_visible: bool,
 		weapon_position: Vector3, 
 		mesh_height: float):
 	position = _position
@@ -371,6 +374,7 @@ func online_syncronisation(
 	get_node("Head").rotation = _head_rotation
 	get_node("%Weapon").position = weapon_position
 	health = _health
+	visible = _visible
 	get_node("Mesh").mesh.height = mesh_height
 
 
