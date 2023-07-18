@@ -65,3 +65,5 @@ func _process(delta):
 		queue_free()
 	if Input.is_action_just_pressed("lock_mouse"):
 		Input.mouse_mode = (int(!Input.mouse_mode) * 2) as Input.MouseMode
+	if Input.is_action_just_pressed("fullscreen"):
+		get_viewport().get_window().mode = int(!get_viewport().get_window().mode)*3

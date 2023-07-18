@@ -101,6 +101,8 @@ func nb_shot_update(_has_changed):
 
 
 func calibrate_ui():
+	if !is_inside_tree():
+		return
 	var window_size = get_viewport().size
 	Items_Ui.scale.x = float(window_size.x) / 1152
 	Items_Ui.scale.y = float(window_size.y) / 648

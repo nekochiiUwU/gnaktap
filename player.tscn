@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://weitoykb1612"]
+[gd_scene load_steps=9 format=3 uid="uid://weitoykb1612"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fjljj"]
 [ext_resource type="PackedScene" uid="uid://bk3p2jyntv3bd" path="res://Weapon.tscn" id="2_u5gc6"]
@@ -19,6 +19,10 @@ rings = 4
 radius = 0.4
 height = 1.8
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_77dev"]
+radius = 0.45
+height = 0.9
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1gsey"]
 bg_color = Color(0, 0, 0, 0.12549)
 
@@ -35,6 +39,10 @@ mesh = SubResource("CapsuleMesh_ogwai")
 
 [node name="Collision" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_a7pkv")
+
+[node name="HeadCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CapsuleShape3D_77dev")
 
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)

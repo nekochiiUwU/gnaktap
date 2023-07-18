@@ -1,3 +1,6 @@
+CollisionShape3D
+MeshInstance3D
+OccluderInstance3D
 Label
 HSlider
 OptionButton
@@ -5,7 +8,6 @@ Button
 ItemList
 MenuBar
 CheckButton
-CollisionShape3D
 Shop
 Control
 Node
@@ -15,7 +17,6 @@ ColorRect
 Area3D
 AudioStreamPlayer3D
 AnimationPlayer
-MeshInstance3D
 Player
 Camera3D
 CSGMesh3D
@@ -29,4 +30,3 @@ CharacterBody3D
 AudioStreamPlayer
 OmniLight3D
 Node3D
-SpotLight3D

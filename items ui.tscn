@@ -23,6 +23,7 @@ mouse_filter = 2
 color = Color(0.0784314, 0.0784314, 0.0784314, 0.223529)
 
 [node name="Mode" type="ColorRect" parent="."]
+layout_mode = 0
 offset_left = 896.0
 offset_right = 1152.0
 offset_bottom = 112.0
@@ -64,6 +65,7 @@ offset_bottom = 18.0
 text = "balles/tir"
 
 [node name="Nombre" type="Label" parent="Mode/Slider"]
+layout_mode = 0
 offset_left = 72.0
 offset_top = -24.0
 offset_right = 104.0

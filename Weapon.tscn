@@ -234,7 +234,6 @@ mesh = SubResource("BoxMesh_ey5og")
 stream = ExtResource("1_y8rgj")
 volume_db = -16.0
 max_distance = 20.0
-panning_strength = 3.0
 bus = &"World"
 
 [node name="Front" type="MeshInstance3D" parent="."]

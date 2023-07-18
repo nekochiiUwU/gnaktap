@@ -1,9 +1,7 @@
 res://default_bus_layout.tres
 res://main_menu.tscn
 res://mesh.tres
-res://Game.gd
 res://Player.gd
-res://upgradui.tscn
 res://items ui.tscn
 res://Weapon.tscn
 res://player.tscn
@@ -11,4 +9,6 @@ res://shop.tscn
 res://map.tscn
 res://death_ui.tscn
 res://Shop.gd
-res://death_ui.gd
+res://Game.gd
+res://bullet.gd
+res://Roadmap.txt

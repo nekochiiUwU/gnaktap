@@ -10,7 +10,6 @@
 	tab menu
 	Lobby
 	Sfx
-	weapon type
 
 4)
 	Target
