@@ -3,7 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://djweheeomdvdu" path="res://icon.svg" id="1_6x6gk"]
 
 [node name="Items Ui" type="Control"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 
@@ -22,6 +21,54 @@ offset_right = 640.0
 offset_bottom = 648.0
 mouse_filter = 2
 color = Color(0.0784314, 0.0784314, 0.0784314, 0.223529)
+
+[node name="Mode" type="ColorRect" parent="."]
+offset_left = 896.0
+offset_right = 1152.0
+offset_bottom = 112.0
+mouse_filter = 2
+color = Color(0.0784314, 0.0784314, 0.0784314, 0.223529)
+
+[node name="Select" type="OptionButton" parent="Mode"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 240.0
+offset_bottom = 56.0
+item_count = 4
+selected = 0
+fit_to_longest_item = false
+popup/item_0/text = "semi auto"
+popup/item_0/id = 1
+popup/item_1/text = "full auto"
+popup/item_1/id = 0
+popup/item_2/text = "burst"
+popup/item_2/id = 2
+popup/item_3/text = "shotgun"
+popup/item_3/id = 3
+
+[node name="Slider" type="HSlider" parent="Mode"]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 88.0
+offset_right = 240.0
+offset_bottom = 104.0
+rounded = true
+
+[node name="Label" type="Label" parent="Mode/Slider"]
+layout_mode = 0
+offset_left = -80.0
+offset_top = -8.0
+offset_right = -10.0
+offset_bottom = 18.0
+text = "balles/tir"
+
+[node name="Nombre" type="Label" parent="Mode/Slider"]
+offset_left = 72.0
+offset_top = -24.0
+offset_right = 104.0
+offset_bottom = 2.0
+text = "0"
 
 [node name="Points" type="Label" parent="."]
 layout_mode = 0
@@ -42,7 +89,6 @@ same_column_width = true
 fixed_column_width = 128
 
 [node name="Selected" type="ColorRect" parent="."]
-visible = false
 layout_mode = 0
 offset_left = 16.0
 offset_top = 536.0

@@ -22,7 +22,6 @@ script = ExtResource("1_oj7mm")
 script = ExtResource("2_d5jvm")
 
 [node name="Items UI" parent="Death Shop" instance=ExtResource("3_v0eqn")]
-visible = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Death Shop"]
 shape = SubResource("SeparationRayShape3D_st4tp")
@@ -43,6 +42,7 @@ shortcut = SubResource("Shortcut_p0blg")
 text = "Respawn"
 
 [node name="Auto Respawn" type="CheckButton" parent="Control"]
+layout_mode = 0
 offset_left = 974.0
 offset_top = 497.0
 offset_right = 1136.0

@@ -25,11 +25,17 @@ func _ready():
 	if item_list.item_count:
 		item_list.deselect_all()
 		item_list.select(0)
+	Items_Ui.get_node("Mode/Select").selected = 0
+	Items_Ui.get_node("Mode/Slider").visible = false
+	Items_Ui.get_node("Mode/Select").connect("item_selected", update_mode)
+	Items_Ui.get_node("Mode/Slider").connect("drag_ended", nb_shot_update)
+	
+
 
 func select(selected_item):
 	var s = Items_Ui.get_node("Selected")
 	s.get_node("Name").text = item_list.get_item_text(selected_item)
-	var stats:String
+	var stats:String = ""
 	var item = Game.stats_items[item_list.get_item_text(selected_item)]
 	for i in range(len(item[0])):
 		if item[0][i] != 0:
@@ -73,19 +79,25 @@ func buy_item():
 			item_list.deselect_all()
 			s.visible = false
 	pass
-	"""
-	if inventory["points"][str(stat)] <= 0 or get_node("/root/Game/").local_player.target_score <= 0:
-		return
-	inventory["points"][str(stat)] -= 1
-	for key in inventory["points"].keys():
-		if key != str(stat):
-			get_node("/root/Game").local_player.inventory["points"][str(key)] -= 1./8
-		else:
-			get_node("/root/Game").local_player.inventory["points"][str(key)] += 1
-	get_node("/root/Game").local_player.update_stats()
-	get_node("/root/Game").local_player.target_score -= 1
-	update_Items_Ui()
-	"""
+
+
+func update_mode(mode):
+	var new_mode = Items_Ui.get_node("Mode/Select").get_item_text(mode)
+	if new_mode == "burst" or new_mode == "shotgun":
+		var slider = Items_Ui.get_node("Mode/Slider")
+		slider.visible = true
+		slider.min_value = 2
+		slider.max_value = (Game.local_player.max_ammo)/2
+		slider.value = Game.local_player.nb_shot
+		nb_shot_update(true)
+	else:
+		Items_Ui.get_node("Mode/Slider").visible = false
+	Game.local_player.weapon_type = new_mode
+
+
+func nb_shot_update(_has_changed):
+	Game.local_player.nb_shot = Items_Ui.get_node("Mode/Slider").value
+	Items_Ui.get_node("Mode/Slider/Nombre").text = str(Items_Ui.get_node("Mode/Slider").value)
 
 
 func calibrate_ui():

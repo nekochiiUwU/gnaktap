@@ -14,7 +14,7 @@ var joy_sensi: Vector2 = -Vector2(.1, .1)
 var hitmarker_time: float = 0
 var shot_time:      float = 0
 var reloading:      bool = false
-var target_score:   int = 0
+var target_score:   int = 5
 var incoming_recoil: Vector2 = Vector2()
 
 var interact_objects: Array = []
@@ -37,7 +37,7 @@ var inventory = {
 }
 
 #weapon stats
-var weapon_type:  String = "full auto"
+var weapon_type:  String = "semi auto"
 var scope:        String = "none" #pour plus tard
 var accessory:    String = "none" #pour plus tard
 var speed:        float  =  5.
@@ -47,8 +47,9 @@ var accuracy:     float  = 5 #en degres
 var recoil:       float  = 5 #en degres, a voir
 var max_ammo:     int    = 30
 var ammo:         int    = max_ammo
-var reload_speed:  float  = 1.2
-var bullet_speed: float  = 50. #stat ennuyeuse un peu ?
+var reload_speed:  float = 1.2
+var bullet_speed: float  = 50. 
+var nb_shot:       int = 2
 
 
 
@@ -195,7 +196,7 @@ func update_ammo():
 
 
 func try_shoot():
-	if shot_time - Game.time + 60/fire_rate > 0:
+	if shot_time + 60/fire_rate - Game.time > 0:
 		return
 	if reloading:
 		return
@@ -204,21 +205,30 @@ func try_shoot():
 			reload() #ou pas, au choix
 		return
 	if weapon_type == "full auto": 
-		#aucun check en plus
-		pass
-	elif weapon_type == "semi-auto": 
-		if !Input.is_action_just_pressed("shoot"):
-			return
-	elif weapon_type == "autre chose":
-		#a completer avec burst, shotgun, verrou...
-		pass
-	
+		shoot()
+		shot_time = Game.time
+	elif weapon_type == "semi auto": 
+		if Input.is_action_just_pressed("shoot"):
+			shoot()
+			shot_time = Game.time
+	elif weapon_type == "burst":
+		shot_time = Game.time + (nb_shot-1)*(60/fire_rate)
+		for i in range(nb_shot):
+			if ammo != 0:
+				shoot()
+				await get_tree().create_timer((60/fire_rate)/(2*nb_shot)).timeout #ca marche lol
+	elif weapon_type == "shotgun":
+		for i in range(nb_shot):
+			shoot()
+		shot_time = Game.time
+
+
+func shoot():
 	ammo -= 1
 	update_ammo()
 	var ori = get_node("%Weapon/Canon").global_rotation_degrees
 	ori.x += randf_range(-accuracy/2, accuracy/2)
 	ori.y += randf_range(-accuracy/2, accuracy/2)
-	shot_time = Game.time
 	incoming_recoil.y += randf_range(0, recoil)
 	incoming_recoil.x += randf_range(-recoil/2, recoil/2)
 	get_node("Arm/Hand/Shoot Node").position.z += -0.02 * (get_node("%Weapon").position.z + 0.45) + abs(incoming_recoil.x) / 50
@@ -226,10 +236,7 @@ func try_shoot():
 	get_node("Arm/Hand/Shoot Node").position.y += 1*(get_node("%Weapon").position.y + 0.09) * -.03 + incoming_recoil.y * 0.0
 	#get_node("Arm/Hand/Shoot Node").position.x += sign(get_node("%Weapon").position.x) + .1 * incoming_recoil.y * 0.01
 	#get_node("Arm/Hand/Shoot Node").rotation.x += .05
-	rpc("shoot", get_node("%Weapon/Canon").global_position, ori, damages, bullet_speed)
-	
-	if position.y < -30:
-		die()
+	rpc("shoot_bullet", get_node("%Weapon/Canon").global_position, ori, damages, bullet_speed)
 
 
 func reload():
@@ -310,9 +317,11 @@ func update_stats():
 	for v in range(len(Game.conversion)):
 		for i in items: #%ages
 			set(Game.conversion[v], get(Game.conversion[v]) * (1+float(Game.stats_items[i][1][v])/100))
-	recoil = 25-recoil
-	accuracy = 35-accuracy
-	reload_speed = 5*(30/(30+reload_speed))
+	speed = speed/20
+	bullet_speed = bullet_speed/4
+	recoil = (250-recoil)/10
+	accuracy = (350-accuracy)/10
+	reload_speed = 5*(150/(150+reload_speed))
 	for v in Game.conversion:
 		if !(v == "accuracy" or v == "reload_speed" or v == "recoil") and get(v) < 1:
 			set(v, 1)
@@ -327,25 +336,8 @@ func print_stats():
 	for v in Game.conversion:
 		print(v + ":" + str(get(v)))
 
-""" old
-func update_stats():
-	var p = inventory["points"]
-	speed = 3 + float(p["speed"])/10.
-	air_speed = speed * 10
-	print(speed)
-	damages = int(exp(0.96 * log(p["damages"])) + 4) # je recopie tel quel mon code scratch btw
-	fire_rate = 2.5 - exp(0.21 * log(p["fire_rate"]))
-	accuracy = 11.5 - exp(0.65 * log(p["accuracy"]))
-	recoil = 9 - exp(0.51 * log(p["recoil"]))
-	max_ammo = int(exp(1.27 * log(p["max_ammo"])) - 8)
-	reload_speed = 8 - exp(0.55 * log(p["reload_speed"]))
-	bullet_speed = exp(0.85 * log(p["bullet_speed"]))
-	update_ammo()
-	print(p)
-"""
-
 @rpc("authority", "call_local", "unreliable", 2)
-func shoot(pos, rot, dmg, bspeed):
+func shoot_bullet(pos, rot, dmg, bspeed):
 	var shoot_stream_player = get_node("Arm/Hand/Shoot Node/Weapon/Canon/AudioStreamPlayer3D")
 	shoot_stream_player.pitch_scale += randf_range(.95, 1.1)
 	shoot_stream_player.pitch_scale /= 2
