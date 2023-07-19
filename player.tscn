@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://weitoykb1612"]
+[gd_scene load_steps=10 format=3 uid="uid://weitoykb1612"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fjljj"]
 [ext_resource type="PackedScene" uid="uid://bk3p2jyntv3bd" path="res://Weapon.tscn" id="2_u5gc6"]
+[ext_resource type="PackedScene" uid="uid://660few3mqdcj" path="res://cut.tscn" id="3_djnnl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vhf1b"]
 resource_local_to_scene = true
@@ -167,5 +168,7 @@ transform = Transform3D(1, -0.000298276, -0.000149116, 0.000298232, 1, -0.000298
 unique_name_in_owner = true
 rotation_edit_mode = 2
 
+[node name="Cut" parent="Arm/Hand" instance=ExtResource("3_djnnl")]
+transform = Transform3D(0.228853, -0.628778, 0.743145, -0.254171, 0.698328, 0.669131, -0.939694, -0.342018, -2.69018e-06, 0.35, -0.2, -0.6)
+
 [node name="hitmarker_sfx" type="AudioStreamPlayer" parent="."]
-volume_db = 24.0

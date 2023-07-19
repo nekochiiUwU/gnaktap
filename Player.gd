@@ -15,13 +15,13 @@ var shot_time:      float = 0
 var reloading:      bool = false
 var target_score:   int = 100
 var incoming_recoil: Vector2 = Vector2()
+var active_weapon: String = "main" #"main" ou "cut"
 var crouch_height = 1.5
 var normal_height = 1.8
 var crouch_value = 0
 
 var interact_objects: Array = []
 var current_interact = null
-
 
 
 var inventory = {
@@ -58,8 +58,9 @@ var nb_shot:       int = 2
 func _ready():
 	Game = get_node("../../..")
 	visible = false
+	get_node("Arm/Hand/Cut").visible = false
 	if is_multiplayer_authority():
-		get_node("Arm/Hand/Shoot Node/Weapon/Canon/AudioStreamPlayer3D").volume_db = -24
+		get_node("Arm/Hand/Shoot Node/Weapon/Canon/AudioStreamPlayer3D").volume_db = -32
 		get_node("Arm/Hand/Shoot Node/Weapon/Canon/AudioStreamPlayer3D").unit_size= 15
 		calibrate_ui()
 		get_viewport().size_changed.connect(calibrate_ui)
@@ -154,6 +155,14 @@ func _physics_process(delta):
 		var input = Input.get_vector("move_left", "move_right", "move_forward", "move_backward").normalized()
 		input = Vector3(input.x, 0, input.y)
 
+		if Input.is_action_pressed("switch weapon"):
+			switch_weapon()
+
+		if Input.is_action_pressed("take cut") and !(active_weapon == "cut"):
+			switch_weapon()
+		elif Input.is_action_pressed("take main") and !(active_weapon == "main"):
+			switch_weapon()
+
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			if Input.is_action_pressed("shoot"):
 				try_shoot()
@@ -164,7 +173,7 @@ func _physics_process(delta):
 		else:
 			velocity.y += gravity * delta
 		
-		input *= speed/(crouch_value*1.5+1)
+		input *= (speed/(crouch_value*1.5+1))*(1+0.2*float(active_weapon == "cut"))
 		velocity += transform.basis * input
 
 		velocity.x *= .5
@@ -192,39 +201,42 @@ func update_ammo():
 
 
 func try_shoot():
-	if shot_time + 60/fire_rate - Game.time > 0:
-		return
-	if reloading:
-		return
-	if ammo <= 0:
-		if !reloading and Input.is_action_just_pressed("shoot"):
-			reload() #ou pas, au choix
-		return
-	if weapon_type == "full auto": 
-		shoot()
-		ammo -= 1
-		update_ammo()
-		shot_time = Game.time
-	elif weapon_type == "semi auto" and Input.is_action_just_pressed("shoot"): 
-		shoot()
-		ammo -= 1
-		update_ammo()
-		shot_time = Game.time
-	elif weapon_type == "burst" and Input.is_action_just_pressed("shoot"):
-		shot_time = Game.time + (nb_shot-1)*(60/fire_rate)
-		print("test")
-		for i in range(nb_shot):
-			if ammo > 0:
-				shoot()
-				ammo -= 1
-				update_ammo()
-				await get_tree().create_timer((60/fire_rate)/(2*nb_shot)).timeout #ca marche lol
-	elif weapon_type == "shotgun" and Input.is_action_just_pressed("shoot"):
-		for i in range(nb_shot):
+	if active_weapon == "cut":
+		rpc("slash")
+	elif active_weapon == "main":
+		if shot_time + 60/fire_rate - Game.time > 0:
+			return
+		if reloading:
+			return
+		if ammo <= 0:
+			if !reloading and Input.is_action_just_pressed("shoot"):
+				reload() #ou pas, au choix
+			return
+		if weapon_type == "full auto": 
 			shoot()
-		ammo -= 1
-		update_ammo()
-		shot_time = Game.time
+			ammo -= 1
+			update_ammo()
+			shot_time = Game.time
+		elif weapon_type == "semi auto" and Input.is_action_just_pressed("shoot"): 
+			shoot()
+			ammo -= 1
+			update_ammo()
+			shot_time = Game.time
+		elif weapon_type == "burst" and Input.is_action_just_pressed("shoot"):
+			shot_time = Game.time + (nb_shot-1)*(60/fire_rate)
+			print("test")
+			for i in range(nb_shot):
+				if ammo > 0:
+					shoot()
+					ammo -= 1
+					update_ammo()
+					await get_tree().create_timer((60/fire_rate)/(2*nb_shot)).timeout #ca marche lol
+		elif weapon_type == "shotgun" and Input.is_action_just_pressed("shoot"):
+			for i in range(nb_shot):
+				shoot()
+			ammo -= 1
+			update_ammo()
+			shot_time = Game.time
 
 
 func shoot():
@@ -294,12 +306,27 @@ func interact():
 		current_interact = closest
 
 
+func switch_weapon():
+	if active_weapon == "main":
+		#range main
+		#prend cut
+		get_node("Arm/Hand/Shoot Node").visible = false
+		get_node("Arm/Hand/Cut").visible = true
+		active_weapon = "cut"
+	elif active_weapon == "cut":
+		#range cut
+		#prend main
+		get_node("Arm/Hand/Cut").visible = false
+		get_node("Arm/Hand/Shoot Node").visible = true
+		active_weapon = "main"
+
+
 func get_hit(_owner, _damages, collision):
 	if collision == "HeadCollision":
 		health -= 2*_damages
 	else:
 		health -= _damages
-	if health < 0:
+	if health <= 0:
 		get_node("../" + _owner).rpc_id(int(_owner), "target", 5)
 		die() 
 
@@ -365,6 +392,12 @@ func shoot_bullet(pos, rot, dmg, bspeed):
 	Game.get_node("Entities").add_child(new_bullet)
 
 
+@rpc("any_peer", "call_local", "unreliable", 2)
+func slash():
+	if !get_node("Arm/Hand/Cut/AnimationPlayer").is_playing():
+		get_node("Arm/Hand/Cut/AnimationPlayer").play("slash")
+
+
 @rpc("authority", "call_remote", "unreliable", 0)
 func online_syncronisation(
 		_position: Vector3, 
@@ -385,13 +418,15 @@ func online_syncronisation(
 
 @rpc("any_peer", "call_local", "reliable", 5)
 func hitmarker(_damages: float, collision):
+	get_node("Head/UI/Hitmarker").scale = Vector2(0.5,0.5)+(Vector2(0.8,0.8)*_damages)/20
 	if collision == "HeadCollision":
+		get_node("hitmarker_sfx").volume_db = 8+(16*_damages)/100
 		get_node("hitmarker_sfx").stream = load("res://headshot_hitmarker.mp3")
-		get_node("Head/UI/Hitmarker").scale = Vector2(2,2)
+		get_node("Head/UI/Hitmarker").scale *= 2
 		get_node("Head/UI/Hitmarker").modulate = Color(1,0,0)
 	else:
+		get_node("hitmarker_sfx").volume_db = 8+(16*_damages)/100
 		get_node("hitmarker_sfx").stream = load("res://hitmarker.mp3")
-		get_node("Head/UI/Hitmarker").scale = Vector2(1,1)
 		get_node("Head/UI/Hitmarker").modulate = Color(1,1,1)
 	get_node("hitmarker_sfx").play()
 	get_node("Head/UI/Hitmarker").visible = true

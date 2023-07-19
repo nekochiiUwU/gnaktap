@@ -1,8 +1,12 @@
+AnimationPlayer
+Node3D
+Area3D
+CharacterBody3D
+CollisionShape3D
 Label
 HSlider
 Button
 Control
-CollisionShape3D
 MeshInstance3D
 OccluderInstance3D
 OptionButton
@@ -14,9 +18,7 @@ Node
 RichTextLabel
 Sprite2D
 ColorRect
-Area3D
 AudioStreamPlayer3D
-AnimationPlayer
 Player
 Camera3D
 CSGMesh3D
@@ -26,7 +28,5 @@ Line2D
 CPUParticles3D
 StaticBody3D
 CollisionPolygon3D
-CharacterBody3D
 AudioStreamPlayer
 OmniLight3D
-Node3D

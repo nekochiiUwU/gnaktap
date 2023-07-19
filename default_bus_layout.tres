@@ -14,7 +14,7 @@ damping = 0.25
 wet = 0.1
 
 [resource]
-bus/0/volume_db = -16.4004
+bus/0/volume_db = -8.00903
 bus/1/name = &"World"
 bus/1/solo = false
 bus/1/mute = false
