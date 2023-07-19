@@ -142,7 +142,6 @@ func _physics_process(delta):
 		if get_node("Arm/Hand/Shoot Node").rotation:
 			get_node("Arm/Hand/Shoot Node").rotation /= 1.05
 
-		health += delta
 		get_node("Head/UI/HealthBar").value = health
 
 		var input_rotation = Input.get_vector("camera_left", "camera_right", "camera_up", "camera_down")
@@ -322,8 +321,11 @@ func update_stats():
 		for v in range(len(Game.conversion)):
 			set(Game.conversion[v], get(Game.conversion[v]) + Game.stats_items[i][0][v])
 	for v in range(len(Game.conversion)):
+		var ptage = 0
 		for i in items: #%ages
-			set(Game.conversion[v], get(Game.conversion[v]) * (1+float(Game.stats_items[i][1][v])/100))
+			ptage += float(Game.stats_items[i][1][v])/100
+		set(Game.conversion[v], get(Game.conversion[v]) * (1+ptage))
+	damages = damages/10
 	speed = speed/20
 	bullet_speed = bullet_speed/4
 	recoil = (250-recoil)/10
