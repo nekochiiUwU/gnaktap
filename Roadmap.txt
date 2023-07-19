@@ -4,6 +4,7 @@
 
 1)
 	Items
+	knife
 
 3)
 	tab menu

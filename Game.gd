@@ -27,6 +27,12 @@ var stats_items = {
 
 func _ready():
 	spawn_map(0)
+	calibrate_ui()
+	get_viewport().size_changed.connect(calibrate_ui)
+	get_node("Pause/VolumeSlider").connect("value_changed", update_volume)
+	get_node("Pause/SensiSlider").connect("value_changed", update_sensi)
+	get_node("Pause/Resume").connect("pressed", resume)
+	get_node("Pause/Quit").connect("pressed", quit)
 
 
 func _exit_tree():
@@ -39,6 +45,7 @@ func spawn_map(_id):
 	spawnpoints = map.get_node("Spawnpoints").get_children()
 	for i in range(2):
 		instanciate_target(str(i))
+	
 
 
 func instanciate_target(id: String): # Server Function // Instanciate a Target node for his client
@@ -57,13 +64,44 @@ func _process(delta):
 	"test2":[[0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0], 5]
 }"""
 	time += delta
-	if Input.is_action_just_pressed("quit"):
-		get_node("/root/Main Menu").visible = true
-		get_node("/root/Main Menu").process_mode = Node.PROCESS_MODE_INHERIT
-		if get_node("/root/").has_node("Network"):
-			get_node("/root/Network").start_lobby()
-		queue_free()
+	if Input.is_action_just_pressed("escape"):
+		get_node("Pause").visible = !get_node("Pause").visible
+		Input.mouse_mode = (int(!get_node("Pause").visible) * 2) as Input.MouseMode
 	if Input.is_action_just_pressed("lock_mouse"):
 		Input.mouse_mode = (int(!Input.mouse_mode) * 2) as Input.MouseMode
 	if Input.is_action_just_pressed("fullscreen"):
-		get_viewport().get_window().mode = int(!get_viewport().get_window().mode)*3
+		get_viewport().get_window().mode = int(!get_viewport().get_window().mode)*3 as Window.Mode
+
+
+func update_sensi(sensi):
+	get_node("Pause/SensiSlider/Title").text = "Sensitivity : " + str(float(int(sensi*10000))/100)
+	local_player.sensi = Vector2(1,1)*-sensi/100
+
+
+func update_volume(volume):
+	get_node("Pause/VolumeSlider/Title").text = "Volume : " + str(volume)
+	AudioServer.set_bus_volume_db(0, volume-64)
+	if volume < 11:
+		get_node("Pause/VolumeSlider/Title").text = "Volume : " + str(0)
+		AudioServer.set_bus_volume_db(0, -INF)
+
+
+func quit():
+	get_node("/root/Main Menu")._on_stop_network_pressed()
+	get_node("/root/Main Menu").visible = true
+	get_node("/root/Main Menu").process_mode = Node.PROCESS_MODE_INHERIT
+	if get_node("/root/").has_node("Network"):
+		get_node("/root/Network").start_lobby()
+	queue_free()
+
+
+func resume():
+	get_node("Pause").visible = 0
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+
+func calibrate_ui():
+	var window_size = get_viewport().size
+	get_node("Pause").scale.x = float(window_size.x) / 1152
+	get_node("Pause").scale.y = float(window_size.y) / 648
+	get_node("Pause").position = Vector2()

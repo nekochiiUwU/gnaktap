@@ -8,7 +8,7 @@ var Game
 var health:      float =  100.
 var gravity:     float = -ProjectSettings.get_setting("physics/3d/default_gravity")
 var jump:        float =  7.
-var sensi:     Vector2 = -Vector2(.0005, .0005)
+var sensi:     Vector2 = -Vector2(.001, .001)
 var joy_sensi: Vector2 = -Vector2(.1, .1)
 var hitmarker_time: float = 0
 var shot_time:      float = 0
@@ -107,7 +107,7 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("interact"):
 			interact()
 
-		if Input.is_action_just_pressed("reload"):
+		if Input.is_action_just_pressed("reload") and ammo != max_ammo:
 			reload()
 
 		var current_crouch_modifier
@@ -203,10 +203,12 @@ func try_shoot():
 	if weapon_type == "full auto": 
 		shoot()
 		ammo -= 1
+		update_ammo()
 		shot_time = Game.time
 	elif weapon_type == "semi auto" and Input.is_action_just_pressed("shoot"): 
 		shoot()
 		ammo -= 1
+		update_ammo()
 		shot_time = Game.time
 	elif weapon_type == "burst" and Input.is_action_just_pressed("shoot"):
 		shot_time = Game.time + (nb_shot-1)*(60/fire_rate)
@@ -215,16 +217,17 @@ func try_shoot():
 			if ammo > 0:
 				shoot()
 				ammo -= 1
+				update_ammo()
 				await get_tree().create_timer((60/fire_rate)/(2*nb_shot)).timeout #ca marche lol
 	elif weapon_type == "shotgun" and Input.is_action_just_pressed("shoot"):
 		for i in range(nb_shot):
 			shoot()
 		ammo -= 1
+		update_ammo()
 		shot_time = Game.time
 
 
 func shoot():
-	update_ammo()
 	var ori = get_node("%Weapon/Canon").global_rotation_degrees
 	var actual_acc = accuracy/(crouch_value*0.5+1)
 	ori.x += randf_range(-actual_acc/2, actual_acc/2)

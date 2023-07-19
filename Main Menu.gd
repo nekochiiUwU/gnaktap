@@ -39,7 +39,6 @@ func _on_stop_network_pressed():
 	get_node("Network/Start").visible = true
 
 
-
 func _on_start_game_pressed():
 	visible = false
 	process_mode = Node.PROCESS_MODE_DISABLED

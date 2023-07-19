@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://bmdrfo4bjudvv"]
+
+[node name="Pause" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = 182.0
+offset_right = 120.0
+offset_bottom = 272.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "QUIT"
+
+[node name="Resume" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -68.0
+offset_right = 120.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "RESUME"
+
+[node name="Options" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = 57.0
+offset_right = 120.0
+offset_bottom = 147.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "OPTIONS"
+
+[node name="VolumeSlider" type="HSlider" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -296.0
+offset_top = 48.0
+offset_right = -32.0
+offset_bottom = 64.0
+grow_horizontal = 0
+min_value = 10.0
+max_value = 72.0
+value = 40.0
+exp_edit = true
+
+[node name="Title" type="Label" parent="VolumeSlider"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = -26.0
+offset_right = 104.0
+offset_bottom = -3.0
+text = "Volume"
+
+[node name="SensiSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 856.0
+offset_top = 120.0
+offset_right = 1120.0
+offset_bottom = 136.0
+min_value = 0.01
+max_value = 1.0
+step = 0.0
+value = 0.1
+exp_edit = true
+
+[node name="Title" type="Label" parent="SensiSlider"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = -26.0
+offset_right = 104.0
+offset_bottom = -3.0
+text = "Sensitivity
+"
