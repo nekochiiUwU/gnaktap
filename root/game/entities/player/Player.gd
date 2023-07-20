@@ -92,15 +92,6 @@ func _input(event):
 				$Head.rotation.x = clamp(-PI/2, $Head.rotation.x + event.relative.y * sensi.y, PI/2)
 				$Head.rotation.z += event.relative.x * sensi.x / 10
 				get_node("%Camera").fov = min(get_node("%Camera").fov + abs(event.relative.x * sensi.x * 5), 160)
-			if event is InputEventMouseButton:
-				if event.button_index == MOUSE_BUTTON_RIGHT:
-					if event.is_pressed():
-						if get_node("%Weapon/Animation").current_animation != "scope":
-							get_node("%Weapon/Animation").current_animation = "scope"
-							get_node("%Weapon/Animation").play()
-					else:
-						get_node("%Weapon/Animation").current_animation = "no_scope"
-						get_node("%Weapon/Animation").play()
 
 
 func _physics_process(delta):
@@ -108,7 +99,7 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("interact"):
 			interact()
 
-		if Input.is_action_just_pressed("reload") and ammo != max_ammo:
+		if Input.is_action_just_pressed("reload") and ammo != max_ammo and !reloading:
 			reload()
 
 		var current_crouch_modifier
@@ -166,6 +157,22 @@ func _physics_process(delta):
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			if Input.is_action_pressed("shoot"):
 				try_shoot()
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			if Input.is_action_pressed("secondary fire"):
+				if active_weapon == "main" and reloading == false:
+					if get_node("%Weapon/Animation").assigned_animation != "scope":
+						get_node("%Weapon/Animation").current_animation = "scope"
+						get_node("%Weapon/Animation").play()
+				elif active_weapon == "cut":
+					rpc("stab")
+				else:
+					if get_node("%Weapon/Animation").assigned_animation != "no_scope":
+						get_node("%Weapon/Animation").current_animation = "no_scope"
+						get_node("%Weapon/Animation").play()
+			else:
+				if get_node("%Weapon/Animation").assigned_animation != "no_scope":
+					get_node("%Weapon/Animation").current_animation = "no_scope"
+					get_node("%Weapon/Animation").play()
 
 		if is_on_floor():
 			if Input.is_action_pressed("jump"):
@@ -397,6 +404,10 @@ func slash():
 	if !get_node("Arm/Hand/Cut/AnimationPlayer").is_playing():
 		get_node("Arm/Hand/Cut/AnimationPlayer").play("slash")
 
+@rpc("any_peer", "call_local", "unreliable", 2)
+func stab():
+	if !get_node("Arm/Hand/Cut/AnimationPlayer").is_playing():
+		get_node("Arm/Hand/Cut/AnimationPlayer").play("stab")
 
 @rpc("authority", "call_remote", "unreliable", 0)
 func online_syncronisation(

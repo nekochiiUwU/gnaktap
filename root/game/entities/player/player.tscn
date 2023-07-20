@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://weitoykb1612"]
 
-[ext_resource type="Script" path="res://root/game/entities/player/Player.gd" id="1_fjljj"]
+[ext_resource type="Script" path="res://root/game/entities/player/player.gd" id="1_ayqu4"]
 [ext_resource type="PackedScene" uid="uid://bk3p2jyntv3bd" path="res://root/game/entities/player/weapons/main/weapon.tscn" id="2_u5gc6"]
 [ext_resource type="PackedScene" uid="uid://660few3mqdcj" path="res://root/game/entities/player/weapons/cut/cut.tscn" id="3_djnnl"]
 
@@ -33,7 +33,7 @@ bg_color = Color(0.545098, 1, 0, 1)
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 0, 1, 0)
 collision_mask = 2
-script = ExtResource("1_fjljj")
+script = ExtResource("1_ayqu4")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_ogwai")

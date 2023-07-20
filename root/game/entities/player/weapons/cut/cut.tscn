@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://660few3mqdcj"]
+[gd_scene load_steps=19 format=3 uid="uid://660few3mqdcj"]
 
 [ext_resource type="Script" path="res://root/game/entities/player/weapons/cut/cut.gd" id="1_mgti4"]
 
@@ -220,14 +220,56 @@ tracks/2/keys = {
 "values": [false, true, false]
 }
 
+[sub_resource type="Animation" id="Animation_6ppby"]
+resource_name = "stab"
+length = 0.45
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.175, 0.35, 0.45),
+"transitions": PackedFloat32Array(1, 1, 0.170755, 1.10957, 1),
+"update": 0,
+"values": [Vector3(0.35, -0.2, -0.6), Vector3(0.35, -0.2, -0.448258), Vector3(0.236, -0.2, -1.027), Vector3(0.195701, -0.2, -0.839906), Vector3(0.35, -0.2, -0.6)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.375, 0.45),
+"transitions": PackedFloat32Array(1, 1, 0.241484, 0.683022, 1),
+"update": 0,
+"values": [Vector3(-0.733038, 1.5708, -0.349066), Vector3(-0.426019, 1.61339, -1.21959), Vector3(-0.192502, 1.64887, -1.40797), Vector3(-0.203622, 1.61126, -1.21741), Vector3(-0.733038, 1.5708, -0.349066)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Area3D:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tsudw"]
 _data = {
 "RESET": SubResource("Animation_oq1lx"),
-"slash": SubResource("Animation_hshte")
+"slash": SubResource("Animation_hshte"),
+"stab": SubResource("Animation_6ppby")
 }
 
 [node name="Cut" type="Node3D"]
-transform = Transform3D(0.228853, -0.628778, 0.743145, -0.254171, 0.698328, 0.669131, -0.939694, -0.342018, -2.69018e-06, 0.35, -0.2, -0.6)
+transform = Transform3D(0.228853, -0.628778, 0.743145, -0.254171, 0.698328, 0.66913, -0.939694, -0.342018, -2.69018e-06, 0.35, -0.2, -0.6)
 script = ExtResource("1_mgti4")
 
 [node name="Cylinder" type="MeshInstance3D" parent="."]
@@ -251,6 +293,7 @@ mesh = SubResource("ArrayMesh_raaxt")
 skeleton = NodePath("")
 
 [node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, -2.98023e-08, -2.01574e-08, 0, 1, 5.58221e-08, 2.15732e-09, -6.50908e-09, 1, 0, 0, 0)
 collision_layer = 0
 collision_mask = 7
 monitoring = false

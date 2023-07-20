@@ -9,7 +9,13 @@ func _ready():
 
 func _on_area_3d_body_entered(body):
 	var _owner = str(get_node("../../..").name)
-	var damages = 50
+	var damages
+	if get_node("AnimationPlayer").current_animation == "slash":
+		damages = 50
+	elif get_node("AnimationPlayer").current_animation == "stab":
+		damages = 34
+	else:
+		damages = 0 # ?????
 	if body is Player:
 		body.get_hit(_owner, damages, "Collision")
 		get_node("../../..").rpc_id(int(_owner), "hitmarker", damages, "Collision")
