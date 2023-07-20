@@ -1,3 +1,9 @@
+Control
+ColorRect
+ItemList
+VBoxContainer
+RichTextLabel
+GridContainer
 AnimationPlayer
 Node3D
 Area3D
@@ -6,18 +12,14 @@ CollisionShape3D
 Label
 HSlider
 Button
-Control
 MeshInstance3D
 OccluderInstance3D
 OptionButton
-ItemList
 MenuBar
 CheckButton
 Shop
 Node
-RichTextLabel
 Sprite2D
-ColorRect
 AudioStreamPlayer3D
 Player
 Camera3D
@@ -28,5 +30,3 @@ Line2D
 CPUParticles3D
 StaticBody3D
 CollisionPolygon3D
-AudioStreamPlayer
-OmniLight3D

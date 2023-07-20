@@ -1,0 +1,61 @@
+[gd_scene load_steps=2 format=3 uid="uid://d8d84mpdg1gg"]
+
+[ext_resource type="Script" path="res://root/main_menu/lobby/lobby.gd" id="1_nk0oh"]
+
+[node name="Lobby" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_nk0oh")
+
+[node name="Players Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 768.0
+offset_top = 40.0
+offset_right = 1136.0
+offset_bottom = 552.0
+color = Color(0, 0, 0, 0.176471)
+
+[node name="Players Title" type="RichTextLabel" parent="Players Background"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = -32.0
+offset_right = 376.0
+offset_bottom = -8.0
+text = "Press N to switch the network status visibility"
+
+[node name="Ready" type="Button" parent="."]
+layout_mode = 0
+offset_left = 832.0
+offset_top = 568.0
+offset_right = 1136.0
+offset_bottom = 632.0
+toggle_mode = true
+text = "Ready"
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 40.0
+offset_right = 128.0
+offset_bottom = 72.0
+text = "Quit"
+
+[node name="Network Tips" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 776.0
+offset_top = 48.0
+offset_right = 1144.0
+offset_bottom = 72.0
+text = "Players:"
+
+[node name="Players List" type="ItemList" parent="."]
+layout_mode = 0
+offset_left = 776.0
+offset_top = 72.0
+offset_right = 1128.0
+offset_bottom = 544.0
+item_count = 1
+item_0/text = ""
+
+[connection signal="pressed" from="Ready" to="." method="_on_ready_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

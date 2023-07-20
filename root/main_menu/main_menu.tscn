@@ -1,0 +1,93 @@
+[gd_scene load_steps=4 format=3 uid="uid://blpc3s4y0xk4e"]
+
+[ext_resource type="Script" path="res://root/main_menu/main_menu.gd" id="1_vtk6x"]
+[ext_resource type="PackedScene" uid="uid://d8d84mpdg1gg" path="res://root/main_menu/lobby/lobby.tscn" id="2_ti2r7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ym7dn"]
+bg_color = Color(0.176471, 0.176471, 0.176471, 1)
+
+[node name="Main Menu" type="Node2D"]
+script = ExtResource("1_vtk6x")
+
+[node name="Connect" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Start" type="Control" parent="Connect"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="IP Link 0" type="ColorRect" parent="Connect"]
+layout_mode = 0
+offset_left = 616.0
+offset_top = 296.0
+offset_right = 624.0
+offset_bottom = 313.0
+color = Color(1, 0, 0, 1)
+
+[node name="IP Link 1" type="ColorRect" parent="Connect"]
+layout_mode = 0
+offset_left = 720.0
+offset_top = 296.0
+offset_right = 728.0
+offset_bottom = 313.0
+color = Color(1, 0, 0, 1)
+
+[node name="IP Link" type="ColorRect" parent="Connect"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 296.0
+offset_right = 48.0
+offset_bottom = 312.0
+color = Color(1, 0, 0, 1)
+
+[node name="IP" type="TextEdit" parent="Connect"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 312.0
+offset_right = 360.0
+offset_bottom = 343.0
+theme_override_colors/font_color = Color(0.176471, 0.176471, 0.176471, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_ym7dn")
+text = "78.203.84.228"
+placeholder_text = "Server's public IP: (Default = 127.0.0.1)"
+
+[node name="Port" type="SpinBox" parent="Connect"]
+layout_mode = 0
+offset_left = 584.0
+offset_top = 312.0
+offset_right = 776.0
+offset_bottom = 343.0
+min_value = 21212.0
+max_value = 21212.0
+value = 21212.0
+allow_greater = true
+alignment = 2
+prefix = "Port:"
+custom_arrow_step = 1.0
+
+[node name="Start Client" type="Button" parent="Connect"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 40.0
+offset_right = 664.0
+offset_bottom = 296.0
+text = "Start Client"
+
+[node name="Start Server" type="Button" parent="Connect"]
+layout_mode = 0
+offset_left = 680.0
+offset_top = 40.0
+offset_right = 1144.0
+offset_bottom = 296.0
+text = "Start Server"
+
+[node name="Lobby" parent="." instance=ExtResource("2_ti2r7")]
+visible = false
+
+[connection signal="pressed" from="Connect/Start Client" to="." method="_on_start_client_pressed"]
+[connection signal="pressed" from="Connect/Start Server" to="." method="_on_start_server_pressed"]
