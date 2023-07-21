@@ -1,3 +1,4 @@
+Node
 Control
 ColorRect
 ItemList
@@ -18,7 +19,6 @@ OptionButton
 MenuBar
 CheckButton
 Shop
-Node
 Sprite2D
 AudioStreamPlayer3D
 Player

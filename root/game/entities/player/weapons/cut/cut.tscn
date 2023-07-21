@@ -299,7 +299,7 @@ collision_mask = 7
 monitoring = false
 monitorable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="Collision" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.273515, 0)
 shape = SubResource("BoxShape3D_shao1")
 

@@ -32,9 +32,11 @@ func _process(_delta):
 
 func _on_ready_pressed():
 	if !get_node("Ready").button_pressed:
-		get_node("/root/Game").queue_free()
+		if get_node("/root/").has_node("Game"):
+			get_node("/root/Game").queue_free()
 	else:
-		get_node("/root/").add_child(load("res://root/game/game.tscn").instantiate())
+		if !get_node("/root/").has_node("Game"):
+			get_node("/root/").add_child(load("res://root/game/game.tscn").instantiate())
 	if get_node("/root/").has_node("Network"):
 		get_node("/root/Network").start_game()
 	if !multiplayer.is_server():

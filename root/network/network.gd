@@ -119,7 +119,8 @@ func instanciate_player(id: int): # Server Function // Instanciate an Player nod
 @rpc("authority", "call_local", "reliable", 1)
 func uninstanciate_player(id: int): # Server Function // Uninstanciate a Player node
 	print("Client ", id, "'s Player scene unspawned")
-	get_node("/root/Game/Entities/Players/" + str(id)).queue_free() # Refair to instanciate_player()
+	if get_node("/root/").has_node("/Game/Entities/Players/" + str(id)):
+		get_node("/root/Game/Entities/Players/" + str(id)).queue_free() # Refair to instanciate_player()
 
 
 # --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- #

@@ -1,4 +1,5 @@
 res://root/game/entities/player/player.tscn
-res://root/game/entities/player/weapons/main/weapon.tscn
-res://root/game/entities/player/weapons/cut/cut.tscn
+res://root/game/entities/player/functions.gd
 res://root/game/entities/player/player.gd
+res://root/game/entities/player/rpc_functions.gd
+res://root/main_menu/main_menu.tscn

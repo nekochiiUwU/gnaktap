@@ -279,12 +279,12 @@ func spawn():
 	if a > 1:
 		a = 2 - a # (a e [0, 1])
 
-	if Game:
-		if Game.spawnpoints:
-			transform = Game.spawnpoints[randi() % len(Game.spawnpoints)].transform
 	get_node("%Camera").current = true
 	get_node("Head/UI").visible = true
 	visible = true
+	if Game:
+		if Game.spawnpoints:
+			transform = Game.spawnpoints[randi() % len(Game.spawnpoints)].transform
 	health = 100
 	ammo = max_ammo
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

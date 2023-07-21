@@ -4,7 +4,7 @@ extends Node3D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if is_multiplayer_authority():
-		get_node("Area3D").queue_free()
+		get_node("Area3D/Collision").disabled = true
 
 
 func _on_area_3d_body_entered(body):
