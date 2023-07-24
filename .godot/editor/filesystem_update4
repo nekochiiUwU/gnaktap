@@ -1,3 +1,5 @@
+res://root/game/maps/map.tscn
+res://assets/models/mesh.tres
+res://root/main_menu/main_menu.tscn
 res://root/game/entities/player/player.tscn
-res://root/game/entities/player/player.gd
-res://Roadmap.txt
+res://root/game/maps/map.VoxelGI_data.res

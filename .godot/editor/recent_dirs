@@ -1,12 +1,1 @@
-res://assets/textures
-res://root/main_menu
-res://root/network
-res://root/game
-res://root/game/maps/components
-res://root/game/entities/target
-res://root/game/entities/player/weapons/cut
-res://root/game/entities/player/death_ui
-res://root/game/entities/player/weapons/main
-res://root/game/entities/player
-res://
-C:/Blender/BLender 3.0
+res://root/game/maps
