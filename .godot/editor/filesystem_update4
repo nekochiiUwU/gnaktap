@@ -1,3 +1,4 @@
-res://root/game/maps/map.tscn
-res://assets/models/mesh.tres
 res://root/main_menu/main_menu.tscn
+res://assets/models/mesh.tres
+res://root/game/game.gd
+res://root/game/maps/map.tscn
