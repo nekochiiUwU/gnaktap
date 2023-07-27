@@ -1,5 +1,9 @@
-res://root/game/maps/map.tscn
-res://assets/models/mesh.tres
 res://root/main_menu/main_menu.tscn
-res://root/game/game.gd
+res://assets/models/mesh.tres
+res://root/game/maps/components/shop.gd
+res://root/game/maps/map.tscn
+res://root/game/misc/items_ui.tscn
+res://root/game/entities/player/death_ui/death_ui.gd
+res://root/game/entities/player/death_ui/death_ui.tscn
 res://root/game/entities/player/player.gd
+res://root/game/game.gd

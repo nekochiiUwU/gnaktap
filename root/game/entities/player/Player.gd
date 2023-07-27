@@ -231,7 +231,6 @@ func try_shoot():
 			shot_time = Game.time
 		elif weapon_type == "burst" and Input.is_action_just_pressed("shoot"):
 			shot_time = Game.time + (nb_shot-1)*(60/fire_rate)
-			print("test")
 			for i in range(nb_shot):
 				if ammo > 0:
 					shoot()

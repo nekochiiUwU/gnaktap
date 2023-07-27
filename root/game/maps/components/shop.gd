@@ -21,7 +21,8 @@ func _ready():
 	for i in disp_items:
 		item_list.add_item(i)
 	item_list.connect("item_selected", select)
-	Items_Ui.get_node("Selected/Button").connect("pressed", buy_item)
+	Items_Ui.get_node("Stats/Items").connect("item_selected", select_owned)
+	Items_Ui.get_node("Selected/Button").connect("pressed", buy_or_sell)
 	if item_list.item_count:
 		item_list.deselect_all()
 		item_list.select(0)
@@ -29,11 +30,11 @@ func _ready():
 	Items_Ui.get_node("Mode/Slider").visible = false
 	Items_Ui.get_node("Mode/Select").connect("item_selected", update_mode)
 	Items_Ui.get_node("Mode/Slider").connect("drag_ended", nb_shot_update)
-	
 
 
 func select(selected_item):
 	var s = Items_Ui.get_node("Selected")
+	item_list = get_node("Items UI/ItemList")
 	s.get_node("Name").text = item_list.get_item_text(selected_item)
 	var stats:String = ""
 	var item = Game.stats_items[item_list.get_item_text(selected_item)]
@@ -49,23 +50,46 @@ func select(selected_item):
 	s.visible = true
 
 
+func select_owned(selected_item):
+	var s = Items_Ui.get_node("Selected")
+	item_list = Items_Ui.get_node("Stats/Items")
+	s.get_node("Name").text = item_list.get_item_text(selected_item)
+	var stats:String = ""
+	var item = Game.stats_items[item_list.get_item_text(selected_item)]
+	for i in range(len(item[0])):
+		if item[0][i] != 0:
+			stats += Game.conversion[i] + ": " + str(item[0][i]) + ", "
+	stats += "\n"
+	for i in range(len(item[1])):
+		if item[1][i] != 0:
+			stats += Game.conversion[i] + ": " + str(item[1][i]) + "%, "
+	s.get_node("Stats").text = stats
+	Items_Ui.get_node("Selected/Button").text = "Sell: " + str(item[2]) + "pts"
+	s.visible = true
+
+
 func update_Items_Ui():
 	Items_Ui.get_node("Points").text = "Points : " + str(get_node("/root/Game").local_player.target_score)
-	pass
-	"""
-	var stat_buttons = Items_Ui.get_children()
-	Items_Ui.get_node("Points").text = "Points : " + str(get_node("/root/Game").local_player.target_score)
-	for button in stat_buttons:
-		if button.name == "Points" or button.name == "Bg":
-			continue
-		button.get_node("Availablity").text = "Available :" + str(inventory["points"][button.name])
-		button.text = button.name + "\n" + str(get_node("/root/Game").local_player.inventory["points"][button.name])
-	"""
+	for stat in Game.conversion:
+		Items_Ui.get_node("Stats/"+stat+"/Value").text = str(float(int(get_node("/root/Game").local_player.get(stat)*100))/100)
+	var item_list = Items_Ui.get_node("Stats/Items")
+	item_list.clear()
+	var items = get_node("/root/Game").local_player.inventory["items"]
+	for i in items:
+		item_list.add_item(i)
+
+
+func buy_or_sell():
+	if Items_Ui.get_node("Selected/Button").text.begins_with("Buy"):
+		buy_item()
+	else:
+		sell_item()
 
 
 func buy_item():
 	var s = Items_Ui.get_node("Selected")
 	var item = s.get_node("Name").text
+	item_list = get_node("Items UI/ItemList")
 	if item in item_list.get_item_text(item_list.get_selected_items()[0]) and \
 			!Game.local_player.inventory["items"].has(item) and \
 			Game.stats_items[item][2] <= Game.local_player.target_score:
@@ -73,12 +97,31 @@ func buy_item():
 		Game.local_player.inventory["items"].append(item)
 		item_list.remove_item(item_list.get_selected_items()[0])
 		Game.local_player.update_stats()
+		update_Items_Ui()
 		if item_list.item_count:
 			item_list.select(0)
 		else:
 			item_list.deselect_all()
 			s.visible = false
-	pass
+
+
+func sell_item():
+	var s = Items_Ui.get_node("Selected")
+	var item = s.get_node("Name").text
+	item_list = Items_Ui.get_node("Stats/Items")
+	if item in item_list.get_item_text(item_list.get_selected_items()[0]) and \
+			Game.local_player.inventory["items"].has(item) and \
+			!(item_list.get_item_text(item_list.get_selected_items()[0]) == "base"):
+		Game.local_player.target_score += Game.stats_items[item][2]
+		Game.local_player.inventory["items"].erase(item)
+		get_node("Items UI/ItemList").add_item(item_list.get_item_text(item_list.get_selected_items()[0]))
+		Game.local_player.update_stats()
+		update_Items_Ui()
+		if item_list.item_count:
+			item_list.select(0)
+		else:
+			item_list.deselect_all()
+			s.visible = false
 
 
 func update_mode(mode):

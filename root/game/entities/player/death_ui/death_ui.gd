@@ -12,19 +12,19 @@ func _ready():
 	calibrate_ui()
 	get_viewport().size_changed.connect(calibrate_ui)
 
-
 # Called when the node enters the scene tree for the first time.
 func _enter_tree():
-	
 	Game = get_node("/root/Game")
 	death_time = Game.time
 	can_respawn = false
 	get_node("Control/Respawn").disabled = true
+	get_node("Death Shop").call_deferred("update_Items_Ui")
 	await get_tree().create_timer(2.).timeout
 	can_respawn = true
 	get_node("Control/Respawn").disabled = false
 	if get_node("Control/Auto Respawn").button_pressed:
 		_on_respawn_button_down()
+	
 
 func _process(_delta):
 	var time_remaining = max(death_time + 2 - Game.time, 0)
