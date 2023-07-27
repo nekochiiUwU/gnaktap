@@ -363,7 +363,7 @@ func update_stats():
 			ptage += float(Game.stats_items[i][1][v])/100
 		set(Game.conversion[v], get(Game.conversion[v]) * (1+ptage))
 	damages = damages/10
-	speed = speed/20
+	speed = speed/30
 	bullet_speed = bullet_speed/4
 	recoil = (250-recoil)/10
 	accuracy = (350-accuracy)/10
