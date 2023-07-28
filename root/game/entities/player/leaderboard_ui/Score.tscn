@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://bw60v0kbrjxot"]
+
+[node name="Score" type="ColorRect"]
+offset_top = 40.0
+offset_right = 640.0
+offset_bottom = 80.0
+color = Color(0.121569, 0.121569, 0.121569, 0.364706)
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 0
+offset_top = 8.0
+offset_right = 64.0
+offset_bottom = 34.0
+text = "neko"
+
+[node name="Kills" type="Label" parent="."]
+offset_left = 128.0
+offset_top = 8.0
+offset_right = 192.0
+offset_bottom = 34.0
+text = "0"
+
+[node name="Deaths" type="Label" parent="."]
+offset_left = 192.0
+offset_top = 8.0
+offset_right = 256.0
+offset_bottom = 34.0
+text = "0"
+
+[node name="Items" type="ItemList" parent="."]
+layout_mode = 0
+offset_left = 272.0
+offset_top = 8.0
+offset_right = 560.0
+offset_bottom = 34.0
+
+[node name="Points" type="Label" parent="."]
+offset_left = 576.0
+offset_top = 8.0
+offset_right = 640.0
+offset_bottom = 34.0
+text = "0"

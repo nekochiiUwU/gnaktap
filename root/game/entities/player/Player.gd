@@ -14,6 +14,8 @@ var hitmarker_time: float = 0
 var shot_time:      float = 0
 var reloading:      bool = false
 var target_score:   int = 100
+var kills:          int = 0
+var deaths:         int = 0
 var incoming_recoil: Vector2 = Vector2()
 var active_weapon: String = "main" #"main" ou "cut"
 var crouch_height = 1.5
@@ -334,12 +336,14 @@ func get_hit(_owner, _damages, collision):
 		health -= _damages
 	if health <= 0:
 		get_node("../" + _owner).rpc_id(int(_owner), "target", 5)
+		get_node("../" + _owner).rpc_id(int(_owner), "kill")
 		die() 
 
 
 func die():
 	rotation.z += 90
 	position.y -= 0.8
+	deaths += 1
 	process_mode = Node.PROCESS_MODE_DISABLED
 	if is_multiplayer_authority():
 		get_node("%Camera").current = false
@@ -447,3 +451,8 @@ func hitmarker(_damages: float, collision):
 func target(score: int):
 	target_score += score
 	print("target hit ! score : ",target_score)
+
+@rpc("any_peer", "call_local", "unreliable", 6)
+func kill():
+	kills += 1
+	print("kill !")
