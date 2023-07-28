@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1690533961
+::res://::1690539634
 Roadmap.txt::TextFile::-1::1690533730::0::1::::<><>::
 ::res://assets/::1690533730
 ::res://assets/audios/::1690533730
@@ -8,9 +8,9 @@ hitmarker.mp3::AudioStreamMP3::5076839856993599892::1690533730::1690533730::1:::
 shoot.ogg::AudioStreamOggVorbis::843689092473838461::1690533730::1690533730::1::::<><>::
 ::res://assets/misc/::1690533730
 default_bus_layout.tres::AudioBusLayout::4541676226900218771::1690533730::0::1::::<><>::
-::res://assets/models/::1690533730
-mesh.tres::MeshLibrary::4631847887944757236::1690533982::0::1::::<><>::
-::res://assets/textures/::1690533730
+::res://assets/models/::1690533982
+mesh.tres::MeshLibrary::4631847887944757236::1690539709::0::1::::<><>::
+::res://assets/textures/::1690535323
 check.png::CompressedTexture2D::2654159459858688882::1690533730::1690533730::1::::<><>::
 icon.svg::CompressedTexture2D::836223796841886182::1690533730::1690533730::1::::<><>::
 waiting.png::CompressedTexture2D::6200195875815730365::1690533730::1690533730::1::::<><>::
@@ -22,12 +22,16 @@ game.tscn::PackedScene::3678001432857770308::1690533730::0::1::::<><>::res://roo
 ::res://root/game/entities/bullet/::1690533730
 bullet.gd::GDScript::-1::1690533730::0::1::::<>CharacterBody3D<>::
 bullet.tscn::PackedScene::7142913519403393106::1690533730::0::1::::<><>::
-::res://root/game/entities/player/::1690533961
-player.gd::GDScript::-1::1690533730::0::1::::Player<>CharacterBody3D<>::
+::res://root/game/entities/player/::1690534287
+player.gd::GDScript::-1::1690534286::0::1::::Player<>CharacterBody3D<>::
 player.tscn::PackedScene::1552932509938233515::1690534011::0::1::::<><>::res://root/game/entities/player/player.gd<>uid://bk3p2jyntv3bd::::res://root/game/entities/player/weapons/main/weapon.tscn<>uid://660few3mqdcj::::res://root/game/entities/player/weapons/cut/cut.tscn
 ::res://root/game/entities/player/death_ui/::1690533730
 death_ui.gd::GDScript::-1::1690533730::0::1::::<>Control<>::
-death_ui.tscn::PackedScene::5820468253977601850::1690533730::0::1::::<><>::res://root/game/entities/player/death_ui/death_ui.gd<>res://root/game/maps/components/shop.gd<>uid://camjx4tc7t0eq::::res://root/game/misc/items_ui.tscn
+death_ui.tscn::PackedScene::5820468253977601850::1690533730::0::1::::<><>::res://root/game/entities/player/death_ui/death_ui.gd<>res://root/game/maps/components/shop.gd<>uid://camjx4tc7t0eq
+::res://root/game/entities/player/leaderboard_ui/::1690534840
+leaderboard_ui.tscn::PackedScene::8166832426106742078::1690539709::0::1::::<><>::uid://bw60v0kbrjxot::::res://root/game/entities/player/leaderboard_ui/Score.tscn
+score.gd::GDScript::-1::1690539696::0::1::::<>Node<>::
+Score.tscn::PackedScene::3996127709197162691::1690534829::0::1::::<><>::
 ::res://root/game/entities/player/weapons/::1690533730
 ::res://root/game/entities/player/weapons/cut/::1690533730
 cut.gd::GDScript::-1::1690533730::0::1::::<>Node3D<>::
@@ -40,7 +44,7 @@ scope.tscn::PackedScene::2097332269013724424::1690533730::0::1::::<><>::
 target.gd::GDScript::-1::1690533730::0::1::::Target<>CharacterBody3D<>::
 target.tscn::PackedScene::2883008122872351445::1690533730::0::1::::<><>::res://root/game/entities/target/target.gd
 ::res://root/game/maps/::1690533730
-map.tscn::PackedScene::8332103927413140277::1690533730::0::1::::<><>::uid://b68x4f3s67leq::::res://assets/models/mesh.tres<>uid://47lay2m3f1ys::::res://root/game/maps/components/shop.tscn
+map.tscn::PackedScene::8332103927413140277::1690533730::0::1::::<><>::uid://b68x4f3s67leq
 ::res://root/game/maps/components/::1690533730
 shop.gd::GDScript::-1::1690533730::0::1::::Shop<>StaticBody3D<>::
 shop.tscn::PackedScene::2102205743406275666::1690533730::0::1::::<><>::res://root/game/maps/components/shop.gd<>uid://camjx4tc7t0eq
@@ -50,7 +54,7 @@ items_ui.tscn::PackedScene::4798202979292477716::1690533730::0::1::::<><>::
 pause.tscn::PackedScene::3235921838642706171::1690533730::0::1::::<><>::
 ::res://root/main_menu/::1690533730
 main_menu.gd::GDScript::-1::1690533730::0::1::::<>Node2D<>::
-main_menu.tscn::PackedScene::3189636057581629710::1690533730::0::1::::<><>::res://root/main_menu/main_menu.gd<>uid://d8d84mpdg1gg::::res://root/main_menu/lobby/lobby.tscn
+main_menu.tscn::PackedScene::3189636057581629710::1690533730::0::1::::<><>::res://root/main_menu/main_menu.gd<>uid://d8d84mpdg1gg
 ::res://root/main_menu/lobby/::1690533730
 lobby.gd::GDScript::-1::1690533730::0::1::::<>Control<>::
 lobby.tscn::PackedScene::278933621375844346::1690533730::0::1::::<><>::res://root/main_menu/lobby/lobby.gd
