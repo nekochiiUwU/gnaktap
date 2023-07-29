@@ -69,7 +69,7 @@ func join_room(): # Client Function // Create an client and connect him to the s
 # ---  2) Random functions for 1) --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- #
 # --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- #
 
-@onready var Player: Object = preload("res://root/game/entities/player/player.tscn")
+@onready var __Player = preload("res://root/game/entities/player/player.tscn")
 
 var players_ready = []
 
@@ -136,7 +136,7 @@ func disconnect_peer(id: int): # Server Function // Clean up each client on his 
 @rpc("authority", "call_local", "reliable", 1)
 func instanciate_player(id: int): # Server Function // Instanciate an Player node for his client
 	print("Client ", id, "'s Player scene spawned")
-	var player = Player.instantiate()
+	var player = __Player.instantiate()
 	player.name = str(id)
 	player.set_multiplayer_authority(id)
 	# The spawn on the other clients will be managed by the Player Spawner's node

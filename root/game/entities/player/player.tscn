@@ -6,6 +6,7 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vhf1b"]
 resource_local_to_scene = true
+albedo_color = Color(0, 1, 0.768627, 1)
 roughness = 0.75
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ogwai"]

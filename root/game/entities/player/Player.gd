@@ -68,7 +68,7 @@ func _ready():
 		get_node("Arm/Hand/Shoot Node/Weapon/Canon/AudioStreamPlayer3D").unit_size= 15
 		calibrate_ui()
 		get_viewport().size_changed.connect(calibrate_ui)
-		#spawn()
+		spawn()
 		update_stats()
 		die()
 	else:
@@ -212,8 +212,8 @@ func _physics_process(delta):
 
 
 func _process(_delta):
-	if is_multiplayer_authority():
-		rpc("online_syncronisation", position, rotation, get_node("Head").rotation, health, visible, get_node("%Weapon").position, get_node("Mesh").mesh.height)
+	if multiplayer.get_unique_id() == int(str(name)):
+		rpc("online_synchronisation", get_online_synchronisation_data())
 
 
 func update_ammo():
@@ -360,7 +360,7 @@ func die():
 		get_node("Head/UI").visible = false
 		Game.add_child(Game.Death_Ui)
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		rpc("online_syncronisation", position, rotation, get_node("Head").rotation, health, visible, get_node("%Weapon").position, get_node("Mesh").mesh.height)
+		rpc("online_synchronisation", get_online_synchronisation_data())
 
 
 func update_stats():
@@ -422,26 +422,35 @@ func stab():
 	if !get_node("Arm/Hand/Cut/AnimationPlayer").is_playing():
 		get_node("Arm/Hand/Cut/AnimationPlayer").play("stab")
 
+
+func get_online_synchronisation_data():
+	return [position, rotation, get_node("Head").rotation, health, visible, kills, deaths, 
+			get_node("%Weapon").position, get_node("Mesh").mesh.height, inventory["items"]]
+
+
 @rpc("authority", "call_remote", "unreliable", 0)
-func online_syncronisation(
-		_position: Vector3, 
-		_rotation: Vector3, 
-		_head_rotation: Vector3, 
-		_health: float, 
-		_visible: bool,
-		_kills: int, 
-		_deaths: int, 
-		weapon_position: Vector3, 
-		mesh_height: float):
-	position = _position
-	rotation = _rotation
-	get_node("Head").rotation = _head_rotation
-	health = _health
-	visible = _visible
-	kills = _kills
-	deaths = _deaths
-	get_node("%Weapon").position = weapon_position
-	get_node("Mesh").mesh.height = mesh_height
+func online_synchronisation(data: Array = [
+		"position", 
+		"rotation", 
+		"head_rotation", 
+		"health", 
+		"visible", 
+		"kills", 
+		"deaths", 
+		"weapon_position", 
+		"mesh_height", 
+		"inventory_items"
+		]):
+	position = data[0]
+	rotation = data[1]
+	get_node("Head").rotation = data[2]
+	health = data[3]
+	visible = data[4]
+	kills = data[5]
+	deaths = data[6]
+	get_node("%Weapon").position = data[7]
+	get_node("Mesh").mesh.height = data[8]
+	inventory["items"] = data[9]
 
 
 @rpc("any_peer", "call_local", "reliable", 5)
