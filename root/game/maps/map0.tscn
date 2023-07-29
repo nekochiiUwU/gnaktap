@@ -14,17 +14,10 @@ sky = SubResource("Sky_bt5t6")
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.1
-reflected_light_source = 1
 ssr_max_steps = 512
 ssr_depth_tolerance = 128.0
-ssil_radius = 8.0
-ssil_intensity = 8.0
-ssil_sharpness = 0.0
-ssil_normal_rejection = 0.0
-sdfgi_read_sky_light = false
-sdfgi_cascades = 1
-sdfgi_max_distance = 25.6
 glow_blend_mode = 1
+volumetric_fog_albedo = Color(0, 0.615686, 1, 1)
 volumetric_fog_temporal_reprojection_enabled = false
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xp2qq"]
@@ -47,7 +40,6 @@ size = Vector3(367.878, 211.009, 17)
 [sub_resource type="PlaneMesh" id="PlaneMesh_bwjqu"]
 
 [node name="Map" type="GridMap"]
-transform = Transform3D(1.0015, 0, 0, 0, 1.0015, 0, 0, 0, 1.0015, 0, 0, 0)
 mesh_library = ExtResource("1_whyo0")
 cell_size = Vector3(1, 1, 1)
 collision_layer = 2
@@ -64,11 +56,9 @@ environment = SubResource("Environment_phn6l")
 transform = Transform3D(0.173648, -0.925417, -0.336824, 0, -0.34202, 0.939693, -0.984808, -0.163176, -0.0593912, 0, 4.94395, 8.82341)
 light_energy = 0.6
 shadow_enabled = true
-directional_shadow_mode = 0
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.173648, -0.925417, 0.336824, 0, -0.34202, -0.939693, 0.984808, -0.163176, 0.0593912, 0, 4.94395, 8.82341)
-visible = false
 light_energy = 0.5
 shadow_opacity = 0.9
 

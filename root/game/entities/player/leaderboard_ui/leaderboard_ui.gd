@@ -1,11 +1,23 @@
 extends Control
 
-var Game
+var _Score = load("res://root/game/entities/player/leaderboard_ui/score.tscn")
 
-
-func _ready():
-	Game = get_node("../../../..") #enfant de player ? à voir
-	#pseudo-code :
+func _enter_tree():
+	var Players = get_node("../../../..")
+	remove_child(get_child(1))
+	var Scores = Control.new()
+	add_child(Scores)
+	Scores.name = "Control"
+	Scores.position.y = 40
+	
+	for player in Players.get_children():
+		var Score: Control = _Score.instantiate()
+		Score.position.y = get_node("Control").get_child_count() * 40
+		Score.name = player.name
+		Score.Players = Players
+		get_node("Control").add_child(Score)
+		Score.update()
+	# pseudo-code :
 	"""
 	pour chaque joueur de network:
 		ajouter une scène de score en enfant

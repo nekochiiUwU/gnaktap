@@ -2,6 +2,7 @@ class_name Player
 extends CharacterBody3D
 
 @onready var bullet = preload("res://root/game/entities/bullet/bullet.tscn")
+var leaderboard
 
 var Game
 
@@ -62,11 +63,12 @@ func _ready():
 	visible = false
 	get_node("Arm/Hand/Cut").visible = false
 	if is_multiplayer_authority():
+		leaderboard = load("res://root/game/entities/player/leaderboard_ui/leaderboard_ui.tscn").instantiate()
 		get_node("Arm/Hand/Shoot Node/Weapon/Canon/AudioStreamPlayer3D").volume_db = -32
 		get_node("Arm/Hand/Shoot Node/Weapon/Canon/AudioStreamPlayer3D").unit_size= 15
 		calibrate_ui()
 		get_viewport().size_changed.connect(calibrate_ui)
-		spawn()
+		#spawn()
 		update_stats()
 		die()
 	else:
@@ -151,6 +153,14 @@ func _physics_process(delta):
 		if Input.is_action_pressed("switch weapon"):
 			switch_weapon()
 
+		if Input.is_action_pressed("show_leaderboard"):
+			if !leaderboard.is_inside_tree():
+				get_node("Head/UI").add_child(leaderboard)
+		else:
+			if leaderboard.is_inside_tree():
+				get_node("Head/UI").remove_child(leaderboard)
+			
+
 		if Input.is_action_pressed("take cut") and !(active_weapon == "cut"):
 			switch_weapon()
 		elif Input.is_action_pressed("take main") and !(active_weapon == "main"):
@@ -159,6 +169,7 @@ func _physics_process(delta):
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			if Input.is_action_pressed("shoot"):
 				try_shoot()
+		
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			if Input.is_action_pressed("secondary fire"):
 				if active_weapon == "main" and reloading == false:
@@ -335,7 +346,6 @@ func get_hit(_owner, _damages, collision):
 	else:
 		health -= _damages
 	if health <= 0:
-		get_node("../" + _owner).rpc_id(int(_owner), "target", 5)
 		get_node("../" + _owner).rpc_id(int(_owner), "kill")
 		die() 
 
@@ -419,14 +429,18 @@ func online_syncronisation(
 		_head_rotation: Vector3, 
 		_health: float, 
 		_visible: bool,
+		_kills: int, 
+		_deaths: int, 
 		weapon_position: Vector3, 
 		mesh_height: float):
 	position = _position
 	rotation = _rotation
 	get_node("Head").rotation = _head_rotation
-	get_node("%Weapon").position = weapon_position
 	health = _health
 	visible = _visible
+	kills = _kills
+	deaths = _deaths
+	get_node("%Weapon").position = weapon_position
 	get_node("Mesh").mesh.height = mesh_height
 
 
@@ -452,7 +466,8 @@ func target(score: int):
 	target_score += score
 	print("target hit ! score : ",target_score)
 
-@rpc("any_peer", "call_local", "unreliable", 6)
+@rpc("any_peer", "call_local", "reliable", 6)
 func kill():
 	kills += 1
+	target(5)
 	print("kill !")

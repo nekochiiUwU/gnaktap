@@ -19,6 +19,8 @@ var players = [] # Contain all connected players
 func create_room(): # Server Function // Create an server and initialize it
 	print("Server creation started")
 
+	players_ready = []
+
 	if multiplayer.multiplayer_peer:
 		multiplayer.multiplayer_peer.close()
 
@@ -69,11 +71,36 @@ func join_room(): # Client Function // Create an client and connect him to the s
 
 @onready var Player: Object = preload("res://root/game/entities/player/player.tscn")
 
+var players_ready = []
 
 @rpc("authority", "call_remote", "reliable", 1)
 func synchronise_peers(_players: Array): # Server Function // Clean up each client on his disconnect
 	players = _players
 
+
+@rpc("authority", "call_local", "reliable", 0)
+func start_game(map_id: int):
+	ENet.refuse_new_connections = true
+	state = States.GAME
+	var Game: Node3D = load("res://root/game/game.tscn").instantiate()
+	get_node("/root/").add_child(Game)
+	Game.init(map_id)
+	if is_server:
+		while len(players_ready) != len(players):
+			await get_tree().create_timer(.5).timeout
+			print("Waiting for players to load the game")
+		for id in players:
+			rpc("instanciate_player", id)
+		get_node("/root/Game").visible = false
+	else:
+		rpc_id(1, "client_ready")
+
+
+@rpc("any_peer", "call_remote", "reliable", 1)
+func client_ready():
+	var sender = multiplayer.get_remote_sender_id()
+	if !players_ready.has(sender):
+		players_ready.append(sender)
 
 @rpc("authority", "call_remote", "reliable", 1)
 func connect_peer(id: int): # Server Function // Initialize each client on his connection
@@ -102,6 +129,9 @@ func disconnect_peer(id: int): # Server Function // Clean up each client on his 
 	"is server: " + str(is_server) + \
 	", players: " + str(players)
 
+	if players_ready.has(id):
+		players_ready.erase(id)
+
 
 @rpc("authority", "call_local", "reliable", 1)
 func instanciate_player(id: int): # Server Function // Instanciate an Player node for his client
@@ -109,12 +139,14 @@ func instanciate_player(id: int): # Server Function // Instanciate an Player nod
 	var player = Player.instantiate()
 	player.name = str(id)
 	player.set_multiplayer_authority(id)
-	get_node("/root/Game/Entities/Players").add_child(player) # Will instanciate a Player instance
 	# The spawn on the other clients will be managed by the Player Spawner's node
 	if id == multiplayer.get_unique_id():
 		get_node("/root/Game").local_player = player
 		get_node("/root/Main Menu").visible = false
 		get_node("/root/Main Menu").process_mode = Node.PROCESS_MODE_DISABLED
+		player.process_mode = Node.PROCESS_MODE_DISABLED
+	get_node("/root/Game/Entities/Players").add_child(player) # Will instanciate a Player instance
+
 
 @rpc("authority", "call_local", "reliable", 1)
 func uninstanciate_player(id: int): # Server Function // Uninstanciate a Player node
@@ -126,6 +158,71 @@ func uninstanciate_player(id: int): # Server Function // Uninstanciate a Player 
 # --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- #
 # --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- #
 # --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- #
+
+"""
+
+var rpc_return_functions: Dictionary = {}
+
+
+func send_rpc_call_with_return(
+		peer_id: int = 0, # 0 = all
+		path: String = ".", # "." = /root/Network
+		function: String = "print", # "print" = print(argv)
+		argv: Array = [], # [] = 0 arguments
+		return_function: Callable = func x(): return # func x(): return = Do nothing
+		):
+	var rpc_id = 0
+	var assigned_rpc_ides = rpc_return_functions.keys()
+	while rpc_id in assigned_rpc_ides:
+		rpc_id += 1
+	if peer_id == 0:
+		rpc("rpc_call_with_return", function, path, argv)
+	else:
+		rpc_id(peer_id, "rpc_call_with_return", function, path, argv)
+
+
+@rpc("any_peer", "call_remote", "reliable")
+func rpc_call_reliable(path: String, function: String, argv: Array = []):
+	var node = get_node(path)
+	if node != null:
+		if node.has_method(function):
+			callv(function, argv)
+		else:
+			push_warning("Function " + function + "() not found on " + path + " (" + node + ")")
+	else:
+		push_warning("Node " + path + " not found (Relative to " + str(get_path()) + ")")
+
+
+@rpc("any_peer", "call_remote", "unreliable")
+func rpc_call_unreliable(path: String, function: String, argv: Array = []):
+	var node = get_node(path)
+	if node != null:
+		if node.has_method(function):
+			callv(function, argv)
+		else:
+			push_warning("Function " + function + "() not found on " + path + " (" + node + ")")
+	else:
+		push_warning("Node " + path + " not found (Relative to " + str(get_path()) + ")")
+
+
+@rpc("any_peer", "call_remote", "reliable")
+func rpc_call_with_return(rpc_id: int, path: String, function: String, argv: Array = []):
+	var node = get_node(path)
+	if node != null:
+		if node.has_method(function):
+			rpc_id(multiplayer.get_remote_sender_id(), "rpc_return", rpc_id, Array(callv(function, argv)))
+		else:
+			push_warning("Function " + function + "() not found on " + path + " (" + node + ")")
+	else:
+		push_warning("Node " + path + " not found (Relative to " + str(get_path()) + ")")
+
+
+@rpc("any_peer", "call_remote", "reliable", 0)
+func rpc_return(rpc_id: int, argv: Array):
+	rpc_return_functions[rpc_id].callv(argv)
+
+
+"""
 
 enum States {
 	STOPPED = 0, 
@@ -162,6 +259,7 @@ func _ready():
 		create_room()
 	else:
 		join_room()
+	set_multiplayer_authority(1)
 
 
 func calibrate_ui():
@@ -212,14 +310,6 @@ func client_process():
 	else:
 		print("Mhm")
 
-func start_game():
-	ENet.refuse_new_connections = true
-	state = States.GAME
-	if is_server:
-		for id in players:
-			rpc("instanciate_player", id)
-
-		get_node("/root/Game").visible = false
 
 func start_lobby():
 	ENet.refuse_new_connections = false

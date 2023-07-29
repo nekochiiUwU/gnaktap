@@ -72,7 +72,7 @@ func update_Items_Ui():
 	Items_Ui.get_node("Points").text = "Points : " + str(get_node("/root/Game").local_player.target_score)
 	for stat in Game.conversion:
 		Items_Ui.get_node("Stats/"+stat+"/Value").text = str(float(int(get_node("/root/Game").local_player.get(stat)*100))/100)
-	var item_list = Items_Ui.get_node("Stats/Items")
+	item_list = Items_Ui.get_node("Stats/Items")
 	item_list.clear()
 	var items = get_node("/root/Game").local_player.inventory["items"]
 	for i in items:

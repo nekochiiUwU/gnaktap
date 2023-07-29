@@ -9,21 +9,26 @@ var texture_ready = {
 
 var players_ready = []
 
+func init():
+	visible = true
+	get_node("Ready").disabled = true
+	players_ready = []
+
 
 func _process(_delta):
-	if get_node("/root/").has_node("Network") and multiplayer.has_multiplayer_peer():
+	if multiplayer.has_multiplayer_peer() and get_node("/root/").has_node("Network"):
 		while len(get_node("/root/Network").players) > Players_List.item_count:
 			Players_List.add_item("")
-		if is_multiplayer_authority():
-			rpc("syncronise_ready", players_ready)
+		while len(get_node("/root/Network").players) < Players_List.item_count:
+			Players_List.remove_item(Players_List.item_count-1)
+		
 		for i in range(len(get_node("/root/Network").players)):
 			Players_List.set_item_icon(i, 
 				texture_ready[get_node("/root/Network").players[i] in players_ready]
 			)
 			Players_List.set_item_text(i, str(get_node("/root/Network").players[i]))
-		while len(get_node("/root/Network").players) < Players_List.item_count:
-			Players_List.remove_item(Players_List.item_count-1)
-		if multiplayer.get_unique_id() == 1:
+		
+		if is_multiplayer_authority():
 			$Ready.disabled = len(get_node("/root/Network").players) != len(players_ready)
 			rpc("syncronise_ready", players_ready)
 		else:
@@ -31,17 +36,14 @@ func _process(_delta):
 
 
 func _on_ready_pressed():
-	if !get_node("Ready").button_pressed:
-		if get_node("/root/").has_node("Game"):
-			get_node("/root/Game").queue_free()
-	else:
-		if !get_node("/root/").has_node("Game"):
-			get_node("/root/").add_child(load("res://root/game/game.tscn").instantiate())
-	if get_node("/root/").has_node("Network"):
-		get_node("/root/Network").start_game()
-	if !multiplayer.is_server():
-		rpc_id(1, "set_ready", get_node("Ready").button_pressed)
+	if get_node("/root/").has_node("Game"):
+		get_node("/root/Game").queue_free()
 
+	if multiplayer.has_multiplayer_peer():
+		if !multiplayer.is_server():
+			rpc_id(1, "set_ready", get_node("Ready").button_pressed)
+		else:
+			get_node("/root/Network").rpc("start_game", randi() % 2)
 
 func _on_quit_pressed():
 	visible = false

@@ -21,7 +21,7 @@ func _on_start_client_pressed():
 	var network = load("res://root/network/network.tscn").instantiate()
 	network.init(get_node("Connect/IP").text, get_node("Connect/Port").value, false)
 	get_node("/root/").add_child(network)
-	get_node("Lobby").visible = true
+	get_node("Lobby").init()
 
 
 func _on_start_server_pressed():
@@ -29,6 +29,4 @@ func _on_start_server_pressed():
 	var network = load("res://root/network/network.tscn").instantiate()
 	network.init(get_node("Connect/IP").text, get_node("Connect/Port").value, true)
 	get_node("/root/").add_child(network)
-	get_node("Lobby").visible = true
-	get_node("Lobby/Ready").disabled = true
-	get_node("Lobby").players_ready = []
+	get_node("Lobby").init()

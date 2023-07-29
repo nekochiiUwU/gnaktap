@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var Target: Object = preload("res://root/game/entities/target/target.tscn")
+var _Target: PackedScene = load("res://root/game/entities/target/target.tscn")
 @onready var Death_Ui: Node = preload("res://root/game/entities/player/death_ui/death_ui.tscn").instantiate()
 
 var spawnpoints = []
@@ -47,8 +47,11 @@ var stats_items = {
 #ordre ["damages","speed","fire_rate","accuracy","recoil","max_ammo","reload_speed","bullet_speed"] #[[flat],[%]]
 #25 recoil
 
-func _ready():
-	spawn_map(0)
+var map_id: int = 0
+
+func init(_map_id: int):
+	map_id = _map_id
+	spawn_map()
 	calibrate_ui()
 	get_viewport().size_changed.connect(calibrate_ui)
 	get_node("Pause/VolumeSlider").connect("value_changed", update_volume)
@@ -61,8 +64,8 @@ func _exit_tree():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 
-func spawn_map(_id):
-	var map = load("res://root/game/maps/map.tscn").instantiate()
+func spawn_map():
+	var map = load("res://root/game/maps/map"+str(map_id)+".tscn").instantiate()
 	add_child(map)
 	spawnpoints = map.get_node("Spawnpoints").get_children()
 	for i in range(2):
@@ -71,10 +74,10 @@ func spawn_map(_id):
 
 
 func instanciate_target(id: String): # Server Function // Instanciate a Target node for his client
-	var target = Target.instantiate()
+	var target = _Target.instantiate()
 	target.name = "Target" + id
 	target.set_multiplayer_authority(1)
-	get_node("/root/Game/Entities").add_child(target) # Will instanciate a Target instance
+	get_node("Entities").add_child(target) # Will instanciate a Target instance
 	# The spawn on the other clients will be managed by the Target Spawner's node
 
 

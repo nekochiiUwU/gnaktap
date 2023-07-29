@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://domcsivde3a83"]
+[gd_scene load_steps=2 format=3 uid="uid://domcsivde3a83"]
 
-[ext_resource type="PackedScene" uid="uid://bw60v0kbrjxot" path="res://root/game/entities/player/leaderboard_ui/score.tscn" id="1_2gnyu"]
 [ext_resource type="Script" path="res://root/game/entities/player/leaderboard_ui/leaderboard_ui.gd" id="1_tm1ti"]
 
 [node name="leaderboard_ui" type="Control"]
@@ -8,6 +7,10 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -576.0
+offset_top = -320.0
+offset_right = -576.0
+offset_bottom = -320.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tm1ti")
@@ -20,42 +23,46 @@ color = Color(0.121569, 0.121569, 0.121569, 0.364706)
 
 [node name="Name" type="Label" parent="Légende"]
 layout_mode = 0
+offset_left = 8.0
 offset_top = 8.0
-offset_right = 64.0
+offset_right = 72.0
 offset_bottom = 34.0
-text = "Nom"
+text = "Name"
 
 [node name="Kills" type="Label" parent="Légende"]
 layout_mode = 0
-offset_left = 128.0
+offset_left = 136.0
 offset_top = 8.0
-offset_right = 192.0
+offset_right = 200.0
 offset_bottom = 34.0
 text = "Kills"
 
 [node name="Deaths" type="Label" parent="Légende"]
 layout_mode = 0
-offset_left = 192.0
+offset_left = 200.0
 offset_top = 8.0
-offset_right = 256.0
+offset_right = 264.0
 offset_bottom = 34.0
 text = "Deaths"
 
 [node name="Items" type="Label" parent="Légende"]
 layout_mode = 0
-offset_left = 384.0
+offset_left = 264.0
 offset_top = 8.0
-offset_right = 448.0
+offset_right = 328.0
 offset_bottom = 34.0
 text = "Items"
 
 [node name="Points" type="Label" parent="Légende"]
 layout_mode = 0
-offset_left = 576.0
+offset_left = 584.0
 offset_top = 8.0
-offset_right = 640.0
+offset_right = 648.0
 offset_bottom = 34.0
 text = "Points"
 
-[node name="Score" parent="." instance=ExtResource("1_2gnyu")]
-layout_mode = 0
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_top = 40.0
+offset_right = 40.0
+offset_bottom = 80.0
