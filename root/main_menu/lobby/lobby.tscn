@@ -57,5 +57,10 @@ offset_bottom = 544.0
 item_count = 1
 item_0/text = ""
 
+[node name="Scores" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [connection signal="pressed" from="Ready" to="." method="_on_ready_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

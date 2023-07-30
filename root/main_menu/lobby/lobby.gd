@@ -10,9 +10,31 @@ var texture_ready = {
 var players_ready = []
 
 func init():
+	print("init")
 	visible = true
 	get_node("Ready").disabled = true
+	get_parent().visible = true
+	get_parent().process_mode = Node.PROCESS_MODE_INHERIT
 	players_ready = []
+
+
+func set_last_round_leaderboard(data: Dictionary):
+	if has_node("Scores"):
+		remove_child(get_node("Scores"))
+	var Leaderboard_UI = load("res://root/game/entities/player/leaderboard_ui/leaderboard_ui.tscn").instantiate()
+	Leaderboard_UI.disabled = true
+	add_child(Leaderboard_UI)
+	Leaderboard_UI.name = "Scores"
+	Leaderboard_UI.position.y = 80
+	Leaderboard_UI.position.x = 0
+	var _Score = load("res://root/game/entities/player/leaderboard_ui/score.tscn")
+	for player_name in data.keys():
+		var player = data[player_name]
+		var Score: Control = _Score.instantiate()
+		Score.position.y = (get_node("Scores").get_child_count() - 1) * 40
+		Score.name = player_name
+		get_node("Scores").add_child(Score)
+		Score.lobby_update(data[player_name])
 
 
 func _process(_delta):

@@ -87,12 +87,30 @@ func start_game(map_id: int):
 	Game.init(map_id)
 	if is_server:
 		while len(players_ready) != len(players):
-			await get_tree().create_timer(.5).timeout
-			print("Waiting for players to load the game")
+			await get_tree().create_timer(.1).timeout
+		players_ready = []
 		for id in players:
 			rpc("instanciate_player", id)
 		get_node("/root/Game").visible = false
 	else:
+		get_node("/root/Main Menu").visible = false
+		rpc_id(1, "client_ready")
+
+
+@rpc("authority", "call_local", "reliable", 0)
+func end_round(data: Dictionary):
+	ENet.refuse_new_connections = false
+	state = States.LOBBY
+	get_node("/root/Main Menu/Lobby").set_last_round_leaderboard(data)
+	if get_node("/root/").has_node("Game"):
+		get_node("/root/Game").queue_free()
+	if is_server:
+		while len(players_ready) != len(players):
+			await get_tree().create_timer(.1).timeout
+		print("I")
+		get_node("/root/Main Menu/Lobby").init()
+	else:
+		get_node("/root/Main Menu/Lobby").init()
 		rpc_id(1, "client_ready")
 
 

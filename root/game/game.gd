@@ -5,6 +5,7 @@ var _Target: PackedScene = load("res://root/game/entities/target/target.tscn")
 
 var spawnpoints = []
 var time = 0
+var match_duration: float = 60. * 30. * (1./60.)
 
 var local_player: Player
 
@@ -82,13 +83,21 @@ func instanciate_target(id: String): # Server Function // Instanciate a Target n
 
 
 func _process(delta):
-	"""
-	stats_items = {
-	"base":[[20, 5, 300, 20, 20, 25, 20, 25], [0, 0, 0, 0, 0, 0, 0, 0], 5],
-	"test":[[0,0,1000,0,20,0,0,0], [0,0,3,0,0,0,-61,0], 5],
-	"test2":[[0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0], 5]
-}"""
 	time += delta
+	if time > match_duration:
+		if multiplayer.has_multiplayer_peer():
+			if multiplayer.get_unique_id() == 1:
+				var data: Dictionary = {}
+				for player in get_node("Entities/Players").get_children():
+					data[str(player.name)] = [
+						str(player.kills), 
+						str(player.deaths), 
+						player.inventory["items"], 
+						str(player.target_score) # faudra rename cette variable un jour, REEL
+					]
+				get_node("/root/Network").players_ready = []
+				get_node("/root/Network").rpc("end_round", data)
+	
 	if Input.is_action_just_pressed("escape"):
 		get_node("Pause").visible = !get_node("Pause").visible
 		Input.mouse_mode = (int(!get_node("Pause").visible) * 2) as Input.MouseMode

@@ -2,7 +2,11 @@ extends Control
 
 var _Score = load("res://root/game/entities/player/leaderboard_ui/score.tscn")
 
+var disabled = false
+
 func _enter_tree():
+	if disabled:
+		return
 	var Players = get_node("../../../..")
 	remove_child(get_child(1))
 	var Scores = Control.new()
