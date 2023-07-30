@@ -29,7 +29,6 @@ func set_last_round_leaderboard(data: Dictionary):
 	Leaderboard_UI.position.x = 0
 	var _Score = load("res://root/game/entities/player/leaderboard_ui/score.tscn")
 	for player_name in data.keys():
-		var player = data[player_name]
 		var Score: Control = _Score.instantiate()
 		Score.position.y = (get_node("Scores").get_child_count() - 1) * 40
 		Score.name = player_name

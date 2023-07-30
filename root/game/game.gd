@@ -5,7 +5,7 @@ var _Target: PackedScene = load("res://root/game/entities/target/target.tscn")
 
 var spawnpoints = []
 var time = 0
-var match_duration: float = 60. * 30. * (1./60.)
+var match_duration: float = 60. * 4.
 
 var local_player: Player
 

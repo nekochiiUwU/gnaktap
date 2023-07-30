@@ -1,7 +1,7 @@
-Control
-Camera2D
 ColorRect
 RichTextLabel
+Control
+Camera2D
 ItemList
 MeshInstance3D
 CSGBox3D

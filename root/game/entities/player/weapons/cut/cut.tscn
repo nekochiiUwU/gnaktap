@@ -56,7 +56,7 @@ noise = SubResource("FastNoiseLite_wa5o8")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rrynj"]
 albedo_texture = SubResource("NoiseTexture2D_iby23")
-metallic = 1.0
+metallic = 0.75
 roughness = 0.2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_6d487"]
@@ -90,7 +90,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_6d487")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ttw0"]
-metallic = 0.9
+metallic = 0.75
 roughness = 0.1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_grs6q"]
@@ -125,7 +125,7 @@ shadow_mesh = SubResource("ArrayMesh_grs6q")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_awhaw"]
 albedo_texture = SubResource("NoiseTexture2D_iby23")
-metallic = 1.0
+metallic = 0.75
 roughness = 0.2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_f8wpk"]

@@ -425,7 +425,7 @@ func stab():
 
 func get_online_synchronisation_data():
 	return [position, rotation, get_node("Head").rotation, health, visible, kills, deaths, 
-			get_node("%Weapon").position, get_node("Mesh").mesh.height, inventory["items"]]
+			get_node("%Weapon").position, get_node("Mesh").mesh.height, inventory["items"], target_score]
 
 
 @rpc("authority", "call_remote", "unreliable", 0)
@@ -451,6 +451,7 @@ func online_synchronisation(data: Array = [
 	get_node("%Weapon").position = data[7]
 	get_node("Mesh").mesh.height = data[8]
 	inventory["items"] = data[9]
+	target_score = data[10]
 
 
 @rpc("any_peer", "call_local", "reliable", 5)

@@ -1,16 +1,7 @@
-0)
-	rounds
-	tab menu
-	Map (textures)
-
 1)
-	Items
-
-3)
 	Vfx
 	Sfx
 
-4)
+2)
 	Target
 	Weapons
-

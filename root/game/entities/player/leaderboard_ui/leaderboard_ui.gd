@@ -4,9 +4,12 @@ var _Score = load("res://root/game/entities/player/leaderboard_ui/score.tscn")
 
 var disabled = false
 
+var Game
+
 func _enter_tree():
 	if disabled:
 		return
+	Game = get_node("../../../../../..")
 	var Players = get_node("../../../..")
 	remove_child(get_child(1))
 	var Scores = Control.new()
@@ -21,18 +24,10 @@ func _enter_tree():
 		Score.Players = Players
 		get_node("Control").add_child(Score)
 		Score.update()
-	# pseudo-code :
-	"""
-	pour chaque joueur de network:
-		ajouter une scène de score en enfant
-		la mettre où il faut (on descend de 40px à chaque fois)
-		renommer la scène avec le nom du player
-		update la scène
-	"""
 
-"""
-func on_leaderboard_show():
-	for score in get_children():
-		if score.name != "Légende":
-			score.update()
-"""
+func _process(_delta):
+	if !disabled and is_inside_tree():
+		get_node("Légende/Timer/RichTextLabel").text = "[center]"
+		get_node("Légende/Timer/RichTextLabel").text += str(int((Game.match_duration - Game.time) / 60)) + ":"
+		get_node("Légende/Timer/RichTextLabel").text += str(int(Game.match_duration - Game.time) % 60)
+		_enter_tree()

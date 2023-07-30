@@ -1,8 +1,8 @@
 res://root/main_menu/main_menu.tscn
-res://root/network/network.gd
 res://root/game/game.gd
-res://root/main_menu/lobby/lobby.gd
-res://root/main_menu/lobby/lobby.tscn
-res://root/game/entities/player/leaderboard_ui/score.gd
-res://root/game/entities/player/leaderboard_ui/leaderboard_ui.tscn
 res://root/game/entities/player/leaderboard_ui/leaderboard_ui.gd
+res://root/game/entities/player/leaderboard_ui/leaderboard_ui.tscn
+res://root/network/network.gd
+res://root/main_menu/lobby/lobby.gd
+res://root/game/entities/player/player.gd
+res://root/game/entities/player/weapons/cut/cut.tscn
