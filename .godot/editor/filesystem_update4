@@ -1,4 +1,8 @@
-res://root/game/entities/player/death_ui/death_ui.tscn
-res://a.gdshader
-res://root/game/maps/components/shop.gd
 res://root/main_menu/main_menu.tscn
+res://a.gdshader
+res://root/game/misc/items_ui.tscn
+res://root/game/game.gd
+res://root/game/maps/components/shop.gd
+res://root/game/entities/player/death_ui/death_ui.tscn
+res://root/game/entities/player/player.gd
+res://root/game/maps/map1.tscn

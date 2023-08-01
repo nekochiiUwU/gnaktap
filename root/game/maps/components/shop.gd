@@ -18,10 +18,16 @@ func _ready():
 	get_viewport().size_changed.connect(calibrate_ui)
 	
 	if name == "Death Shop":
-		inventory = Game.stats_items
+		inventory = {
+			"smg kit":null,
+			"AR kit":null,
+			"sniper kit":null,
+		}
 	else:
-		for i in range(5):
+		for i in range(6):
 			var item = Game.stats_items.keys()[randi()%len(Game.stats_items)]
+			while item in inventory.keys():
+				item = Game.stats_items.keys()[randi()%len(Game.stats_items)]
 			inventory[item] = Game.stats_items[item]
 	var disp_items = inventory.keys()
 	
@@ -99,7 +105,8 @@ func buy_item():
 	item_list = get_node("Items UI/ItemList")
 	if item in item_list.get_item_text(item_list.get_selected_items()[0]) and \
 			!Game.local_player.inventory["items"].has(item) and \
-			Game.stats_items[item][2] <= Game.local_player.target_score:
+			Game.stats_items[item][2] <= Game.local_player.target_score and \
+			len(Game.local_player.inventory["items"]) < 6:
 		Game.local_player.target_score -= Game.stats_items[item][2]
 		Game.local_player.inventory["items"].append(item)
 		item_list.remove_item(item_list.get_selected_items()[0])

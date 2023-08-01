@@ -5,7 +5,7 @@ var _Target: PackedScene = load("res://root/game/entities/target/target.tscn")
 
 var spawnpoints = []
 var time = 0
-var match_duration: float = 60. * 4.
+var match_duration: float = 60. * 7.
 
 var local_player: Player
 
@@ -42,8 +42,7 @@ var stats_items = {
 	"spikin'":[[15, 3, 5, 0, 0, 0, 0, 0], [0, 0, 0, -5, 0, -3, 0, 0], 8],
 	"laser":[[-40, 0, 30, 15, 50, 0, -5, 15], [0, 0, 5, 0, 0, 0, -8, 5], 15],
 	"kiwi":[[0, 0, 8, 0, 14, 0, -20, 0], [0, -3, 0, 0, 4, 0, 15, 0], 10],
-	"prot":[[35, 0, 0, 0, 0, 7, -2, 12], [-2, 0, 0, 0, 0, -5, 3, 0], 12],
-	"sample":[[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], 0]
+	"prot":[[35, 0, 0, 0, 0, 7, -2, 12], [-2, 0, 0, 0, 0, -5, 3, 0], 12]
 }
 #ordre ["damages","speed","fire_rate","accuracy","recoil","max_ammo","reload_speed","bullet_speed"] #[[flat],[%]]
 #25 recoil
