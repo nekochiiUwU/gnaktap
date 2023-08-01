@@ -1,0 +1,103 @@
+[gd_scene load_steps=10 format=3 uid="uid://cjd33ehrhedys"]
+
+[ext_resource type="Shader" path="res://a.gdshader" id="1_7d1rk"]
+[ext_resource type="Script" path="res://a.gd" id="2_htefh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_na4re"]
+shader = ExtResource("1_7d1rk")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qe0ps"]
+shader = ExtResource("1_7d1rk")
+
+[sub_resource type="Gradient" id="Gradient_docd1"]
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_egfee"]
+gradient = SubResource("Gradient_docd1")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jkhlk"]
+shader = ExtResource("1_7d1rk")
+
+[sub_resource type="SystemFont" id="SystemFont_8gpby"]
+font_names = PackedStringArray("Calibri")
+
+[sub_resource type="Environment" id="Environment_rx38b"]
+background_mode = 4
+reflected_light_source = 1
+tonemap_mode = 3
+tonemap_exposure = 0.75
+glow_enabled = true
+glow_blend_mode = 0
+
+[node name="Loading Screen" type="Node2D"]
+material = SubResource("ShaderMaterial_na4re")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -576.0
+offset_top = -328.0
+offset_right = 576.0
+offset_bottom = 328.0
+color = Color(0.0313726, 0.0313726, 0.0313726, 1)
+
+[node name="Camera" type="Camera2D" parent="."]
+
+[node name="J\'ai pas de nom" type="Node2D" parent="Camera"]
+material = SubResource("ShaderMaterial_qe0ps")
+position = Vector2(-5.68434e-14, -32)
+rotation = -2.50951
+script = ExtResource("2_htefh")
+
+[node name="Polygon2D" type="Polygon2D" parent="Camera/J\'ai pas de nom"]
+use_parent_material = true
+polygon = PackedVector2Array(0, -8, -8, -16, 0, -32, 8, -16)
+
+[node name="Polygon2D" type="Polygon2D" parent="Camera/J\'ai pas de nom/Polygon2D"]
+use_parent_material = true
+polygon = PackedVector2Array(-24, -16, -16, -16, 0, -48, 16, -16, 24, -16, 48, -32, 24, -32, 0, -80, -24, -32, -48, -32)
+
+[node name="Polygon2D2" type="Polygon2D" parent="Camera/J\'ai pas de nom"]
+use_parent_material = true
+rotation = 2.0944
+polygon = PackedVector2Array(0, -8, -8, -16, 0, -32, 8, -16)
+
+[node name="Polygon2D" type="Polygon2D" parent="Camera/J\'ai pas de nom/Polygon2D2"]
+use_parent_material = true
+polygon = PackedVector2Array(-24, -16, -16, -16, 0, -48, 16, -16, 24, -16, 48, -32, 24, -32, 0, -80, -24, -32, -48, -32)
+
+[node name="Polygon2D3" type="Polygon2D" parent="Camera/J\'ai pas de nom"]
+use_parent_material = true
+rotation = -2.0944
+polygon = PackedVector2Array(0, -8, -8, -16, 0, -32, 8, -16)
+
+[node name="Polygon2D" type="Polygon2D" parent="Camera/J\'ai pas de nom/Polygon2D3"]
+use_parent_material = true
+polygon = PackedVector2Array(-24, -16, -16, -16, 0, -48, 16, -16, 24, -16, 48, -32, 24, -32, 0, -80, -24, -32, -48, -32)
+
+[node name="PointLight2D" type="PointLight2D" parent="Camera/J\'ai pas de nom"]
+energy = 8.0
+texture = SubResource("GradientTexture2D_egfee")
+texture_scale = 3.0
+
+[node name="Loading Text" type="RichTextLabel" parent="Camera"]
+material = SubResource("ShaderMaterial_jkhlk")
+offset_left = -88.0
+offset_top = 64.0
+offset_right = 104.0
+offset_bottom = 112.0
+theme_override_fonts/normal_font = SubResource("SystemFont_8gpby")
+theme_override_font_sizes/normal_font_size = 48
+text = "Loading..."
+
+[node name="Light" type="PointLight2D" parent="Camera/Loading Text"]
+position = Vector2(96, 28)
+scale = Vector2(1.66667, 0.625)
+energy = 8.0
+texture = SubResource("GradientTexture2D_egfee")
+texture_scale = 3.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rx38b")

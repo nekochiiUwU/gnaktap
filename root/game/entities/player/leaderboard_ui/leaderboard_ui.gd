@@ -8,22 +8,23 @@ var Game
 
 func _enter_tree():
 	if disabled:
-		return
+		get_node("Légende/Timer").visible = false
 	Game = get_node("../../../../../..")
 	var Players = get_node("../../../..")
-	remove_child(get_child(1))
-	var Scores = Control.new()
-	add_child(Scores)
-	Scores.name = "Control"
-	Scores.position.y = 40
-	
-	for player in Players.get_children():
-		var Score: Control = _Score.instantiate()
-		Score.position.y = get_node("Control").get_child_count() * 40
-		Score.name = player.name
-		Score.Players = Players
-		get_node("Control").add_child(Score)
-		Score.update()
+	if Players:
+		remove_child(get_child(1))
+		var Scores = Control.new()
+		add_child(Scores)
+		Scores.name = "Control"
+		Scores.position.y = 40
+		
+		for player in Players.get_children():
+			var Score: Control = _Score.instantiate()
+			Score.position.y = get_node("Control").get_child_count() * 40
+			Score.name = player.name
+			Score.Players = Players
+			get_node("Control").add_child(Score)
+			Score.update()
 
 func _process(_delta):
 	if !disabled and is_inside_tree():

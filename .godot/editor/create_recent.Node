@@ -1,9 +1,13 @@
+MeshInstance3D
 ColorRect
 RichTextLabel
-Control
+Node2D
+WorldEnvironment
 Camera2D
+PointLight2D
+Polygon2D
+Control
 ItemList
-MeshInstance3D
 CSGBox3D
 Label
 CSGMesh3D

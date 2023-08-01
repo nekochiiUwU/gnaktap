@@ -12,12 +12,19 @@ var inventory = {
 
 
 func _ready():
-	Game = get_node("/root/Game")
 	
-	inventory = Game.stats_items
+	Game = get_node("/root/Game")
 	calibrate_ui()
 	get_viewport().size_changed.connect(calibrate_ui)
+	
+	if name == "Death Shop":
+		inventory = Game.stats_items
+	else:
+		for i in range(5):
+			var item = Game.stats_items.keys()[randi()%len(Game.stats_items)]
+			inventory[item] = Game.stats_items[item]
 	var disp_items = inventory.keys()
+	
 	for i in disp_items:
 		item_list.add_item(i)
 	item_list.connect("item_selected", select)
