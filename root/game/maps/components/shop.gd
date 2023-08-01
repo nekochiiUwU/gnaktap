@@ -103,11 +103,6 @@ func buy_item():
 	var s = Items_Ui.get_node("Selected")
 	var item = s.get_node("Name").text
 	item_list = get_node("Items UI/ItemList")
-	if item_list.item_count:
-		item_list.select(0)
-	else:
-		item_list.deselect_all()
-		s.visible = false
 	if item in item_list.get_item_text(item_list.get_selected_items()[0]) and \
 			!Game.local_player.inventory["items"].has(item) and \
 			Game.stats_items[item][2] <= Game.local_player.target_score and \
@@ -117,11 +112,8 @@ func buy_item():
 		item_list.remove_item(item_list.get_selected_items()[0])
 		Game.local_player.update_stats()
 		update_Items_Ui()
-		if item_list.item_count:
-			item_list.select(0)
-		else:
-			item_list.deselect_all()
-			s.visible = false
+		item_list.deselect_all()
+		s.visible = false
 
 
 func sell_item():
