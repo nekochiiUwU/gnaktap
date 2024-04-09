@@ -1,6 +1,6 @@
 {
     "asset" : {
-        "generator" : "Khronos glTF Blender I/O v3.2.43",
+        "generator" : "Khronos glTF Blender I/O v1.7.33",
         "version" : "2.0"
     },
     "extensionsUsed" : [
@@ -30,9 +30,9 @@
         {
             "name" : "Scene",
             "nodes" : [
-                0,
                 1,
-                2
+                3,
+                4
             ]
         }
     ],
@@ -43,12 +43,24 @@
                     "light" : 0
                 }
             },
+            "name" : "Light_Orientation",
+            "rotation" : [
+                -0.7071067690849304,
+                0,
+                0,
+                0.7071067690849304
+            ]
+        },
+        {
+            "children" : [
+                0
+            ],
             "name" : "Light",
             "rotation" : [
-                -0.2841663062572479,
-                0.7269423604011536,
-                0.34203392267227173,
-                0.5232754349708557
+                0.16907575726509094,
+                0.7558803558349609,
+                -0.27217137813568115,
+                0.570947527885437
             ],
             "translation" : [
                 4.076245307922363,
@@ -58,12 +70,24 @@
         },
         {
             "camera" : 0,
+            "name" : "Camera_Orientation",
+            "rotation" : [
+                -0.7071067690849304,
+                0,
+                0,
+                0.7071067690849304
+            ]
+        },
+        {
+            "children" : [
+                2
+            ],
             "name" : "Camera",
             "rotation" : [
-                -0.20997299253940582,
-                0.3857799470424652,
-                0.09062844514846802,
-                0.8937962055206299
+                0.483536034822464,
+                0.33687159419059753,
+                -0.20870360732078552,
+                0.7804827094078064
             ],
             "translation" : [
                 7.358891487121582,
@@ -129,7 +153,7 @@
         {
             "bufferView" : 0,
             "componentType" : 5126,
-            "count" : 268,
+            "count" : 266,
             "max" : [
                 1.125,
                 1.125,
@@ -145,13 +169,13 @@
         {
             "bufferView" : 1,
             "componentType" : 5126,
-            "count" : 268,
+            "count" : 266,
             "type" : "VEC3"
         },
         {
             "bufferView" : 2,
             "componentType" : 5126,
-            "count" : 268,
+            "count" : 266,
             "type" : "VEC2"
         },
         {
@@ -164,28 +188,28 @@
     "bufferViews" : [
         {
             "buffer" : 0,
-            "byteLength" : 3216,
+            "byteLength" : 3192,
             "byteOffset" : 0
         },
         {
             "buffer" : 0,
-            "byteLength" : 3216,
-            "byteOffset" : 3216
+            "byteLength" : 3192,
+            "byteOffset" : 3192
         },
         {
             "buffer" : 0,
-            "byteLength" : 2144,
-            "byteOffset" : 6432
+            "byteLength" : 2128,
+            "byteOffset" : 6384
         },
         {
             "buffer" : 0,
             "byteLength" : 960,
-            "byteOffset" : 8576
+            "byteOffset" : 8512
         }
     ],
     "buffers" : [
         {
-            "byteLength" : 9536,
+            "byteLength" : 9472,
             "uri" : "distrib-ffec1ccfbdce69b601b31733b37398a7.bin"
         }
     ]
