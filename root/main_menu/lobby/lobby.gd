@@ -64,7 +64,7 @@ func _on_ready_pressed():
 		if !multiplayer.is_server():
 			rpc_id(1, "set_ready", get_node("Ready").button_pressed)
 		else:
-			get_node("/root/Network").rpc("start_game", randi() % 2)
+			get_node("/root/Network").rpc("start_game", 2)
 
 func _on_quit_pressed():
 	visible = false

@@ -1,8 +1,11 @@
-res://root/game/entities/player/player.tscn
-res://root/game/entities/player/player.gd
 res://root/main_menu/main_menu.tscn
+res://assets/models/mesh.tres
+res://root/game/entities/player/player.gd
 res://root/game/game.tscn
+res://root/game/entities/player/player.tscn
 res://root/game/entities/player/weapons/cut/cut.tscn
 res://root/game/maps/components/shop.tscn
-res://root/game/entities/player/leaderboard_ui/leaderboard_ui.gd
 res://root/game/entities/player/leaderboard_ui/score.tscn
+res://root/game/maps/map2.tscn
+res://root/game/maps/map1.tscn
+res://root/game/maps/map0.tscn

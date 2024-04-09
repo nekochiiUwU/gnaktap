@@ -18,7 +18,8 @@ var target_score:   int = 5
 var kills:          int = 0
 var deaths:         int = -1
 var incoming_recoil: Vector2 = Vector2()
-var active_weapon: String = "main" #"main" ou "cut"
+var active_weapon: int = 0 #emplacement dans l'equipement
+var equipement = ["rifle","cut"] #[primary,secondary]
 var crouch_height = 1.5
 var normal_height = 1.8
 var crouch_value = 0
@@ -161,9 +162,9 @@ func _physics_process(delta):
 				get_node("Head/UI").remove_child(leaderboard)
 			
 
-		if Input.is_action_pressed("take cut") and !(active_weapon == "cut"):
+		if Input.is_action_pressed("take cut") and !(active_weapon == 1):
 			switch_weapon()
-		elif Input.is_action_pressed("take main") and !(active_weapon == "main"):
+		elif Input.is_action_pressed("take main") and !(active_weapon == 0):
 			switch_weapon()
 
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
@@ -172,11 +173,11 @@ func _physics_process(delta):
 		
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			if Input.is_action_pressed("secondary fire"):
-				if active_weapon == "main" and reloading == false:
+				if equipement[active_weapon] == "rifle" and reloading == false:
 					if get_node("%Weapon/Animation").assigned_animation != "scope":
 						get_node("%Weapon/Animation").current_animation = "scope"
 						get_node("%Weapon/Animation").play()
-				elif active_weapon == "cut":
+				elif equipement[active_weapon] == "cut":
 					rpc("stab")
 				else:
 					if get_node("%Weapon/Animation").assigned_animation != "no_scope":
@@ -193,7 +194,7 @@ func _physics_process(delta):
 		else:
 			velocity.y += gravity * delta
 		
-		input *= (speed/(crouch_value*1.5+1))*(1+0.2*float(active_weapon == "cut"))
+		input *= (speed/(crouch_value*1.5+1))*(1+0.2*float(equipement[active_weapon] == "cut"))
 		velocity += transform.basis * input
 
 		velocity.x *= .5
@@ -221,9 +222,9 @@ func update_ammo():
 
 
 func try_shoot():
-	if active_weapon == "cut":
+	if equipement[active_weapon] == "cut":
 		rpc("slash")
-	elif active_weapon == "main":
+	elif equipement[active_weapon] == "rifle":
 		if shot_time + 60/fire_rate - Game.time > 0:
 			return
 		if reloading:
@@ -326,18 +327,18 @@ func interact():
 
 
 func switch_weapon():
-	if active_weapon == "main":
+	if active_weapon == 0:
 		#range main
 		#prend cut
 		get_node("Arm/Hand/Shoot Node").visible = false
 		get_node("Arm/Hand/Cut").visible = true
-		active_weapon = "cut"
-	elif active_weapon == "cut":
+		active_weapon = 1
+	elif active_weapon == 1:
 		#range cut
 		#prend main
 		get_node("Arm/Hand/Cut").visible = false
 		get_node("Arm/Hand/Shoot Node").visible = true
-		active_weapon = "main"
+		active_weapon = 0
 
 
 func get_hit(_owner, _damages, collision):

@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="Faster Fps"
+config/name="gnaktap"
 run/main_scene="res://root/main_menu/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://assets/textures/icon.svg"
+config/icon="res://assets/textures/gnaktap ico.png"
 
 [display]
 
