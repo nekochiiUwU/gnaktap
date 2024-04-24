@@ -18,7 +18,6 @@ func _enter_tree():
 	death_time = Game.time
 	can_respawn = false
 	get_node("Control/Respawn").disabled = true
-	get_node("Death Shop").call_deferred("update_Items_Ui")
 	await get_tree().create_timer(2.).timeout
 	can_respawn = true
 	get_node("Control/Respawn").disabled = false

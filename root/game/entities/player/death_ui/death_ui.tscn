@@ -1,11 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://co6qi5uj6qu0i"]
+[gd_scene load_steps=4 format=3 uid="uid://co6qi5uj6qu0i"]
 
 [ext_resource type="Script" path="res://root/game/entities/player/death_ui/death_ui.gd" id="1_oj7mm"]
-[ext_resource type="Script" path="res://root/game/maps/components/shop.gd" id="2_d5jvm"]
-[ext_resource type="PackedScene" uid="uid://camjx4tc7t0eq" path="res://root/game/misc/items_ui.tscn" id="3_v0eqn"]
-
-[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_st4tp"]
-length = 0.001
 
 [sub_resource type="InputEventKey" id="InputEventKey_gs6sc"]
 device = -1
@@ -19,14 +14,6 @@ events = [SubResource("InputEventKey_gs6sc")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_oj7mm")
-
-[node name="Death Shop" type="StaticBody3D" parent="."]
-script = ExtResource("2_d5jvm")
-
-[node name="Items UI" parent="Death Shop" instance=ExtResource("3_v0eqn")]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Death Shop"]
-shape = SubResource("SeparationRayShape3D_st4tp")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

@@ -29,8 +29,4 @@ func _physics_process(delta):
 			if object is Player:
 				object.get_hit(_owner, damages, collision.get_collider_shape().name)
 				get_node("../Players/" + _owner).rpc_id(int(_owner), "hitmarker", damages, collision.get_collider_shape().name)
-			elif object is Target:
-				if multiplayer.get_unique_id() == 1:
-					object.get_hit(_owner, damages)
-					get_node("../Players/" + _owner).rpc_id(int(_owner), "hitmarker", damages, "Collision")
 		queue_free()

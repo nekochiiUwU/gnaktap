@@ -9,8 +9,10 @@ var Game
 func _enter_tree():
 	if disabled:
 		get_node("Légende/Timer").visible = false
-	Game = get_node("../../../../../..")
-	var Players = get_node("../../../..")
+	var Players
+	if get_parent().name != "Lobby":
+		Players = get_node("../../../..")
+		Game = get_node("../../../../../..")
 	if Players:
 		remove_child(get_child(1))
 		var Scores = Control.new()
@@ -29,6 +31,7 @@ func _enter_tree():
 func _process(_delta):
 	if !disabled and is_inside_tree():
 		get_node("Légende/Timer/RichTextLabel").text = "[center]"
-		get_node("Légende/Timer/RichTextLabel").text += str(int((Game.match_duration - Game.time) / 60)) + ":"
-		get_node("Légende/Timer/RichTextLabel").text += str(int(Game.match_duration - Game.time) % 60)
+		get_node("Légende/Timer/RichTextLabel").text += str(int((Game.match_duration - Game.time)/60))+":"
+		get_node("Légende/Timer/RichTextLabel").text += str(int(float(int(Game.match_duration - Game.time)%60)/10))
+		get_node("Légende/Timer/RichTextLabel").text += str((int(Game.match_duration - Game.time)%60)%10)
 		_enter_tree()

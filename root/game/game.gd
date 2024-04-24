@@ -1,7 +1,10 @@
 extends Node3D
 
-var _Target: PackedScene = load("res://root/game/entities/target/target.tscn")
-@onready var Death_Ui: Node = preload("res://root/game/entities/player/death_ui/death_ui.tscn").instantiate()
+@onready var DeathUi: Node = preload("res://root/game/entities/player/death_ui/death_ui.tscn").instantiate()
+@onready var audio_samples: Dictionary = {
+	"hitmarker": preload("res://assets/audios/hitmarker.mp3"), 
+	"headshot_hitmarker": preload("res://assets/audios/headshot_hitmarker.mp3")
+}
 
 var spawnpoints = []
 var time = 0
@@ -9,6 +12,7 @@ var match_duration: float = 60. * 7.
 
 var local_player: Player
 
+"""
 var memo = ["dmg","msp","rpm","acc","rcl","amm","rld","bsp"] #[[flat],[%]]
 var conversion = ["damages","speed","fire_rate","accuracy","recoil","max_ammo","reload_speed","bullet_speed"] #[[flat],[%]]
 var stats_items = {
@@ -44,6 +48,7 @@ var stats_items = {
 	"kiwi":[[0, 0, 8, 0, 14, 0, -20, 0], [0, -3, 0, 0, 4, 0, 15, 0], 10],
 	"prot":[[35, 0, 0, 0, 0, 7, -2, 12], [-2, 0, 0, 0, 0, -5, 3, 0], 12]
 }
+"""
 #ordre ["damages","speed","fire_rate","accuracy","recoil","max_ammo","reload_speed","bullet_speed"] #[[flat],[%]]
 #25 recoil
 
@@ -68,17 +73,6 @@ func spawn_map():
 	var map = load("res://root/game/maps/map"+str(map_id)+".tscn").instantiate()
 	add_child(map)
 	spawnpoints = map.get_node("Spawnpoints").get_children()
-	for i in range(2):
-		instanciate_target(str(i))
-	
-
-
-func instanciate_target(id: String): # Server Function // Instanciate a Target node for his client
-	var target = _Target.instantiate()
-	target.name = "Target" + id
-	target.set_multiplayer_authority(1)
-	get_node("Entities").add_child(target) # Will instanciate a Target instance
-	# The spawn on the other clients will be managed by the Target Spawner's node
 
 
 func _process(delta):
@@ -92,7 +86,7 @@ func _process(delta):
 						str(player.kills), 
 						str(player.deaths), 
 						player.inventory["items"], 
-						str(player.target_score) # faudra rename cette variable un jour, REEL
+						str(player.score) # faudra rename cette variable un jour, REEL
 					]
 				get_node("/root/Network").players_ready = []
 				get_node("/root/Network").rpc("end_round", data)
@@ -108,7 +102,8 @@ func _process(delta):
 
 func update_sensi(sensi):
 	get_node("Pause/SensiSlider/Title").text = "Sensitivity : " + str(float(int(sensi*10000))/100)
-	local_player.sensi = Vector2(1,1)*-sensi/100
+	local_player.mouse_sensi = Vector2.ONE*-sensi/100
+	local_player.joy_sensi = local_player.mouse_sensi*5000
 
 
 func update_volume(volume):
@@ -128,7 +123,7 @@ func quit():
 
 
 func resume():
-	get_node("Pause").visible = 0
+	get_node("Pause").visible = false
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 

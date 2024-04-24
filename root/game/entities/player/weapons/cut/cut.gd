@@ -1,6 +1,18 @@
 extends Node3D
 
 
+func primary_process(_delta):
+	pass
+
+
+func secondary_process(_delta):
+	pass
+
+
+func idle_process(_delta):
+	pass
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if is_multiplayer_authority():
@@ -19,9 +31,4 @@ func _on_area_3d_body_entered(body):
 	if body is Player:
 		body.get_hit(_owner, damages, "Collision")
 		get_node("../../..").rpc_id(int(_owner), "hitmarker", damages, "Collision")
-	elif body is Target:
-		if multiplayer.get_unique_id() == 1:
-			body.get_hit(_owner, damages)
-			get_node("../../..").rpc_id(int(_owner), "hitmarker", damages, "Collision")
 	get_node("Area3D").set_deferred("monitoring", false)
-

@@ -45,13 +45,13 @@ offset_right = 264.0
 offset_bottom = 34.0
 text = "Deaths"
 
-[node name="Items" type="Label" parent="Légende"]
+[node name="Weapons" type="Label" parent="Légende"]
 layout_mode = 0
 offset_left = 264.0
 offset_top = 8.0
 offset_right = 328.0
 offset_bottom = 34.0
-text = "Items"
+text = "Weapons"
 
 [node name="Points" type="Label" parent="Légende"]
 layout_mode = 0

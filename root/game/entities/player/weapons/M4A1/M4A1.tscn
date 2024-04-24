@@ -1,0 +1,295 @@
+[gd_scene load_steps=32 format=3 uid="uid://bk3p2jyntv3bd"]
+
+[ext_resource type="Script" path="res://root/game/entities/player/weapons/M4A1/M4A1.gd" id="1_8r321"]
+[ext_resource type="AudioStream" uid="uid://maxo3ea2bje0" path="res://assets/audios/shoot.ogg" id="2_2anlg"]
+
+[sub_resource type="Gradient" id="Gradient_fu2vy"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.333, 0.666)
+colors = PackedColorArray(0, 0.501961, 1, 1, 0.12549, 0.768627, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wa5o8"]
+noise_type = 3
+frequency = 0.02
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_iby23"]
+color_ramp = SubResource("Gradient_fu2vy")
+noise = SubResource("FastNoiseLite_wa5o8")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d2vtt"]
+albedo_texture = SubResource("NoiseTexture2D_iby23")
+roughness = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_qarw4"]
+material = SubResource("StandardMaterial3D_d2vtt")
+size = Vector3(0.05, 0.1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jdfj3"]
+albedo_texture = SubResource("NoiseTexture2D_iby23")
+roughness = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_g8vfx"]
+material = SubResource("StandardMaterial3D_jdfj3")
+size = Vector3(0.1, 0.1, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eh2l1"]
+albedo_texture = SubResource("NoiseTexture2D_iby23")
+roughness = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_ey5og"]
+material = SubResource("StandardMaterial3D_eh2l1")
+size = Vector3(0.05, 0.05, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ukx7g"]
+albedo_texture = SubResource("NoiseTexture2D_iby23")
+roughness = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_2ej4m"]
+material = SubResource("StandardMaterial3D_ukx7g")
+size = Vector3(0.1, 0.1, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_06j6i"]
+albedo_texture = SubResource("NoiseTexture2D_iby23")
+roughness = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_6gy3v"]
+material = SubResource("StandardMaterial3D_06j6i")
+size = Vector3(0.1, 0.15, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qcnsp"]
+albedo_color = Color(0.730469, 0.575124, 0.372757, 1)
+metallic = 0.5
+roughness = 0.75
+uv1_scale = Vector3(3, 2, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_bwlij"]
+material = SubResource("StandardMaterial3D_qcnsp")
+left_to_right = 1.0
+size = Vector3(0.2, 0.4, 0.099)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3sqr6"]
+albedo_texture = SubResource("NoiseTexture2D_iby23")
+roughness = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_ptinh"]
+material = SubResource("StandardMaterial3D_3sqr6")
+size = Vector3(0.02, 0.03, 0.02)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w2txc"]
+albedo_texture = SubResource("NoiseTexture2D_iby23")
+roughness = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_1xvlx"]
+material = SubResource("StandardMaterial3D_w2txc")
+size = Vector3(0.01, 0.015, 0.005)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nibsm"]
+albedo_texture = SubResource("NoiseTexture2D_iby23")
+roughness = 0.1
+
+[sub_resource type="TorusMesh" id="TorusMesh_3hv6x"]
+material = SubResource("StandardMaterial3D_nibsm")
+inner_radius = 0.015
+outer_radius = 0.025
+rings = 16
+ring_segments = 4
+
+[sub_resource type="BoxMesh" id="BoxMesh_fcks2"]
+size = Vector3(0.05, 0.05, 0.05)
+
+[sub_resource type="Animation" id="Animation_hvafs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rifle:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.25, -0.2, -0.667)]
+}
+
+[sub_resource type="Animation" id="Animation_c2fio"]
+resource_name = "no_scope"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rifle:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.05, 1),
+"update": 0,
+"values": [Vector3(0, -0.095, -0.57), Vector3(0.25, -0.2, -0.667)]
+}
+
+[sub_resource type="Animation" id="Animation_fw4ki"]
+resource_name = "scope"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rifle:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.05, 1),
+"update": 0,
+"values": [Vector3(0.25, -0.2, -0.667), Vector3(0, -0.095, -0.57)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l6klv"]
+_data = {
+"RESET": SubResource("Animation_hvafs"),
+"no_scope": SubResource("Animation_c2fio"),
+"scope": SubResource("Animation_fw4ki")
+}
+
+[sub_resource type="Animation" id="Animation_ht2kd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Chargeur:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.1, -0.2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Chargeur:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0evfm"]
+resource_name = "anim"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Chargeur:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.1, -0.2), Vector3(-0.2, -0.3, 0.2), Vector3(0, -0.1, -0.2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Chargeur:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-2.0944, 0.698132, 0.698132), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_20bas"]
+_data = {
+"RESET": SubResource("Animation_ht2kd"),
+"anim": SubResource("Animation_0evfm")
+}
+
+[node name="Rifle" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -0.2, -0.667)
+script = ExtResource("1_8r321")
+
+[node name="Chargeur" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1.0198, 0, 0, 0, 1, 0, -0.1, -0.2)
+mesh = SubResource("BoxMesh_qarw4")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -0.2, 1, 0, 0, 0)
+rotation_edit_mode = 2
+mesh = SubResource("BoxMesh_g8vfx")
+
+[node name="Canon" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -0.2, 1, 0.000441655, 0, -0.550108)
+rotation_edit_mode = 2
+mesh = SubResource("BoxMesh_ey5og")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Canon"]
+stream = ExtResource("2_2anlg")
+volume_db = -16.0
+max_distance = 20.0
+
+[node name="Front" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -0.2, 1, 0.000240856, 0, -0.3)
+rotation_edit_mode = 2
+mesh = SubResource("BoxMesh_2ej4m")
+
+[node name="PoignéeB" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -0.2, 1, 0, -0.125, 0.05)
+rotation_edit_mode = 2
+mesh = SubResource("BoxMesh_6gy3v")
+
+[node name="Crosse" type="MeshInstance3D" parent="."]
+transform = Transform3D(0, 0, -1, 1, 0, 0, -0.2, -1, 0, 0, -0.051, 0.15)
+rotation_edit_mode = 2
+mesh = SubResource("PrismMesh_bwlij")
+
+[node name="Mire2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.065, -0.4)
+mesh = SubResource("BoxMesh_ptinh")
+
+[node name="Sup Mire" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.055, 0.05)
+rotation_edit_mode = 2
+mesh = SubResource("BoxMesh_1xvlx")
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="Sup Mire"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.0303782, 0)
+mesh = SubResource("TorusMesh_3hv6x")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Sup Mire/CSGMesh3D2"]
+transform = Transform3D(0.707107, 0.707107, 0, 3.09086e-08, -3.09086e-08, 1, 0.707107, -0.707107, -4.37114e-08, 0, 0, -0.0330025)
+operation = 2
+mesh = SubResource("BoxMesh_fcks2")
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_l6klv")
+}
+
+[node name="RemoadAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_20bas")
+}
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000441655, 0, -0.550108)
+rotation_edit_mode = 2
+light_color = Color(1, 0, 0, 1)
+light_energy = 128.0
+shadow_enabled = true
+shadow_normal_bias = 0.0
+spot_range = 32.0
+spot_angle = 1.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000441655, 0, -0.550108)
+rotation_edit_mode = 2
+visible = false
+spot_range = 24.0
+spot_angle = 70.0

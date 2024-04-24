@@ -36,6 +36,7 @@ sun_curve = 0.1
 
 [sub_resource type="Sky" id="Sky_jgtb3"]
 sky_material = SubResource("ProceduralSkyMaterial_sahk2")
+radiance_size = 0
 
 [sub_resource type="Environment" id="Environment_oua17"]
 background_mode = 2
@@ -45,13 +46,9 @@ ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_sky_contribution = 0.5
 ambient_light_energy = 0.5
 reflected_light_source = 2
-tonemap_mode = 3
-tonemap_exposure = 0.5
 tonemap_white = 0.5
-glow_blend_mode = 0
 fog_light_color = Color(0.627451, 0.690196, 0.768627, 1)
 fog_density = 0.05
-volumetric_fog_enabled = true
 volumetric_fog_emission = Color(0.439216, 0.439216, 0.439216, 1)
 volumetric_fog_anisotropy = 0.8
 volumetric_fog_length = 10.0
@@ -202,16 +199,9 @@ mesh = SubResource("BoxMesh_i0c3s")
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.657375, -0.405998, 0.634842, 0, 0.842453, 0.538771, -0.753563, 0.354175, -0.553808, 0, 6, 0)
 light_energy = 0.5
-shadow_enabled = true
 shadow_bias = 0.02
 shadow_blur = 2.0
 directional_shadow_mode = 0
-
-[node name="Camera3D" type="Camera3D" parent="Sun"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 46.985)
-projection = 1
-fov = 21.5
-size = 32.0
 
 [node name="Environment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_oua17")

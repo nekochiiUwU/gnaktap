@@ -17,6 +17,7 @@ color_ramp = SubResource("Gradient_fu2vy")
 noise = SubResource("FastNoiseLite_wa5o8")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ba0c"]
+no_depth_test = true
 albedo_color = Color(0, 1, 1, 1)
 albedo_texture = SubResource("NoiseTexture2D_2ismm")
 
@@ -57,6 +58,7 @@ color_ramp = SubResource("Gradient_fu2vy")
 noise = SubResource("FastNoiseLite_wa5o8")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rrynj"]
+no_depth_test = true
 albedo_texture = SubResource("NoiseTexture2D_iby23")
 metallic = 0.75
 roughness = 0.2
@@ -94,6 +96,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_6d487")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ttw0"]
+no_depth_test = true
 metallic = 0.75
 roughness = 0.1
 
@@ -130,6 +133,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_grs6q")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_awhaw"]
+no_depth_test = true
 albedo_texture = SubResource("NoiseTexture2D_iby23")
 metallic = 0.75
 roughness = 0.2
@@ -213,6 +217,7 @@ tracks/2/keys = {
 [sub_resource type="Animation" id="Animation_hshte"]
 resource_name = "slash"
 length = 0.8
+loop_mode = 1
 step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
