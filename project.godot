@@ -15,6 +15,13 @@ run/main_scene="res://root/main_menu/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://assets/textures/gnaktap ico.png"
 
+[custom]
+
+game/dynamic_fov=false
+game/shadows=false
+game/camera_bounce=false
+game/camera_rotation=false
+
 [debug]
 
 settings/stdout/print_fps=true
@@ -22,6 +29,10 @@ settings/stdout/print_fps=true
 [display]
 
 window/vsync/vsync_mode=0
+
+[global]
+
+camera_bounce_effect=false
 
 [input]
 
@@ -156,4 +167,6 @@ show_leaderboard={
 
 [rendering]
 
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
 occlusion_culling/use_occlusion_culling=true

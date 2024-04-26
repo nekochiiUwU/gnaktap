@@ -1,11 +1,3 @@
-res://root/main_menu/main_menu.tscn
-res://root/game/entities/player/player.tscn
-res://root/game/entities/player/weapons/cut/cut.tscn
-res://root/game/entities/player/player.gd
-res://root/game/entities/player/weapons/main/weapon.tscn
-res://root/game/entities/player/weapons/Rifle/components/scope.tscn
-res://root/game/entities/player/weapons/Rifle/rifle.tscn
-res://root/game/entities/player/weapons/Rifle/M4A1.tscn
-res://root/game/entities/player/weapons/cut/cut.gd
-res://root/game/entities/player/weapons/M4A1/M4A1.gd
+res://root/game/maps/map2.tscn
 res://root/game/entities/player/weapons/M4A1/M4A1.tscn
+res://root/game/entities/player/weapons/M4A1/components/scope.tscn

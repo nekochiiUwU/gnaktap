@@ -19,7 +19,6 @@ noise = SubResource("FastNoiseLite_wa5o8")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d2vtt"]
 albedo_texture = SubResource("NoiseTexture2D_iby23")
-roughness = 0.1
 
 [sub_resource type="BoxMesh" id="BoxMesh_qarw4"]
 material = SubResource("StandardMaterial3D_d2vtt")
@@ -27,7 +26,6 @@ size = Vector3(0.05, 0.1, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jdfj3"]
 albedo_texture = SubResource("NoiseTexture2D_iby23")
-roughness = 0.1
 
 [sub_resource type="BoxMesh" id="BoxMesh_g8vfx"]
 material = SubResource("StandardMaterial3D_jdfj3")
@@ -35,7 +33,6 @@ size = Vector3(0.1, 0.1, 0.3)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eh2l1"]
 albedo_texture = SubResource("NoiseTexture2D_iby23")
-roughness = 0.1
 
 [sub_resource type="BoxMesh" id="BoxMesh_ey5og"]
 material = SubResource("StandardMaterial3D_eh2l1")
@@ -43,7 +40,6 @@ size = Vector3(0.05, 0.05, 0.2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ukx7g"]
 albedo_texture = SubResource("NoiseTexture2D_iby23")
-roughness = 0.1
 
 [sub_resource type="BoxMesh" id="BoxMesh_2ej4m"]
 material = SubResource("StandardMaterial3D_ukx7g")
@@ -51,7 +47,6 @@ size = Vector3(0.1, 0.1, 0.3)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_06j6i"]
 albedo_texture = SubResource("NoiseTexture2D_iby23")
-roughness = 0.1
 
 [sub_resource type="BoxMesh" id="BoxMesh_6gy3v"]
 material = SubResource("StandardMaterial3D_06j6i")
@@ -59,8 +54,6 @@ size = Vector3(0.1, 0.15, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qcnsp"]
 albedo_color = Color(0.730469, 0.575124, 0.372757, 1)
-metallic = 0.5
-roughness = 0.75
 uv1_scale = Vector3(3, 2, 1)
 
 [sub_resource type="PrismMesh" id="PrismMesh_bwlij"]
@@ -70,7 +63,6 @@ size = Vector3(0.2, 0.4, 0.099)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3sqr6"]
 albedo_texture = SubResource("NoiseTexture2D_iby23")
-roughness = 0.1
 
 [sub_resource type="BoxMesh" id="BoxMesh_ptinh"]
 material = SubResource("StandardMaterial3D_3sqr6")
@@ -78,7 +70,6 @@ size = Vector3(0.02, 0.03, 0.02)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w2txc"]
 albedo_texture = SubResource("NoiseTexture2D_iby23")
-roughness = 0.1
 
 [sub_resource type="BoxMesh" id="BoxMesh_1xvlx"]
 material = SubResource("StandardMaterial3D_w2txc")
@@ -86,7 +77,6 @@ size = Vector3(0.01, 0.015, 0.005)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nibsm"]
 albedo_texture = SubResource("NoiseTexture2D_iby23")
-roughness = 0.1
 
 [sub_resource type="TorusMesh" id="TorusMesh_3hv6x"]
 material = SubResource("StandardMaterial3D_nibsm")

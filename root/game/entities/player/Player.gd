@@ -107,9 +107,11 @@ func _physics_process(delta):
 		#print("Gravity: ", round(-gravity*10)/10)
 		if is_on_floor():
 			dt += abs(velocity.x) + abs(velocity.z)
-			get_node("%Camera").fov += (abs(get_real_velocity().x) + abs(get_real_velocity().z))*.1
+			if ProjectSettings.get_setting("custom/game/dynamic_fov"):
+				get_node("%Camera").fov += (abs(get_real_velocity().x) + abs(get_real_velocity().z))*.1
 		else:
-			get_node("%Camera").fov += abs(get_real_velocity().y)*.1
+			if ProjectSettings.get_setting("custom/game/dynamic_fov"):
+				get_node("%Camera").fov += abs(get_real_velocity().length())*.05
 		if position.y < -30:
 			die()
 
@@ -129,21 +131,20 @@ func _process(delta):
 			switch_weapon(1)
 		weapon_process(delta)
 		rpc("online_synchronisation", get_online_synchronisation_data())
-		
-		$Head.rotation.z -= velocity.dot(transform.basis.x) * delta*.05
+		if ProjectSettings.get_setting("custom/game/camera_rotation"):
+			$Head.rotation.z -= velocity.dot(transform.basis.x) * delta*.05
 		$Head.rotation.z /= 1 + delta*10
-		get_node("Arm/Hand").rotation.z += $Head.rotation.z*delta*20
-		get_node("Arm/Hand").rotation.z /= 1 + delta*20
-		get_node("Arm/Hand").position.x = get_node("Arm/Hand").rotation.z / 4
+		get_node("Arm/Hand").rotation.z = -$Head.rotation.z
 		get_node("%Camera").fov = (get_node("%Camera").fov - 120) / 1.2 + 120
-		var x = float(is_on_floor()) * min(abs(velocity.x)+abs(velocity.z), 1)
-		get_node("%Camera").position.y += (pow(cos(dt*.018), 2)*.05-0.025) * delta * 10 * x /2
-		get_node("%Camera").position.x += (pow(sin(dt*.018), 1)*.05) * delta * 10 * x /2
-		get_node("%Camera").position.z += (-pow(sin(dt*.018*2), 1)*.02/2 - 0.4) * delta * 10 * x 
-		get_node("%Camera").position += Vector3(0, 0, -0.4) * delta * 10 * (1-x)
-		get_node("%Camera").position /= 1+delta*10
-		#get_node("Head").position = get_node("%Camera").position + Vector3(0, 0.45, 0.4)
-		print(x)
+		if ProjectSettings.get_setting("custom/game/camera_bounce"):
+			var x = float(is_on_floor()) * min(abs(velocity.x)+abs(velocity.z), 1)
+			get_node("%Camera").position.y += (pow(cos(dt*.018), 2)*.05-0.025) * delta * 10 * x /2
+			get_node("%Camera").position.x += (pow(sin(dt*.018), 1)*.05) * delta * 10 * x /2
+			get_node("%Camera").position.z += (-pow(sin(dt*.018*2), 1)*.02/2 - 0.4) * delta * 10 * x 
+			get_node("%Camera").position += Vector3(0, 0, -0.4) * delta * 10 * (1-x)
+			get_node("%Camera").position /= 1+delta*10
+		else:
+			get_node("Head").position = get_node("%Camera").position + Vector3(0, 0.45, 0.4)
 
 
 func crouch_process():
@@ -175,8 +176,10 @@ func rotation_process(angle: Vector2):
 		angle.y = clamp(-PI, angle.y, PI)
 		rotation.y += angle.x
 		$Head.rotation.x = clamp(-PI/2, $Head.rotation.x + angle.y, PI/2)
-		$Head.rotation.z += angle.x / 10
-		get_node("%Camera").fov = min(get_node("%Camera").fov + abs(angle.x * 5), 160)
+		if ProjectSettings.get_setting("custom/game/camera_rotation"):
+			$Head.rotation.z += angle.x / 10
+		if ProjectSettings.get_setting("custom/game/dynamic_fov"):
+			get_node("%Camera").fov = min(get_node("%Camera").fov + abs(angle.x * 5), 160)
 		while abs(rotation.x) > 2*PI:
 			rotation.x -= sign(rotation.x)*2*PI
 
