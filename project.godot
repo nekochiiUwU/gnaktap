@@ -17,10 +17,10 @@ config/icon="res://assets/textures/gnaktap ico.png"
 
 [custom]
 
-game/dynamic_fov=false
-game/shadows=false
-game/camera_bounce=false
-game/camera_rotation=false
+game/dynamic_fov=true
+game/shadows=true
+game/camera_bounce=true
+game/camera_rotation=true
 
 [debug]
 
@@ -29,10 +29,6 @@ settings/stdout/print_fps=true
 [display]
 
 window/vsync/vsync_mode=0
-
-[global]
-
-camera_bounce_effect=false
 
 [input]
 

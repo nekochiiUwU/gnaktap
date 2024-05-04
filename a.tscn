@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://cjd33ehrhedys"]
+[gd_scene load_steps=12 format=3 uid="uid://cjd33ehrhedys"]
 
 [ext_resource type="Shader" path="res://a.gdshader" id="1_7d1rk"]
 [ext_resource type="Script" path="res://a.gd" id="2_htefh"]
+[ext_resource type="Shader" path="res://assets/misc/post_traitment.gdshader" id="2_kl80f"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_na4re"]
 shader = ExtResource("1_7d1rk")
@@ -33,15 +34,21 @@ tonemap_exposure = 0.75
 glow_enabled = true
 glow_blend_mode = 0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4u12p"]
+shader = ExtResource("2_kl80f")
+shader_parameter/velocity = Vector3(0, 0, 0)
+shader_parameter/rotation = Vector3(0, 0, 0)
+shader_parameter/MOTION_BLUR_ENABLED = true
+shader_parameter/SAMPLE_COUNT = 8
+shader_parameter/INTENSITY = 1.0
+shader_parameter/CORRECTION = true
+shader_parameter/ALTERNATIVE_CORRECTION = true
+shader_parameter/LINEAR_INTENSITY = 1.0
+shader_parameter/RADIAL_INTENSITY = 1.0
+shader_parameter/MOTION_SEEKNESS = 1.0
+
 [node name="Loading Screen" type="Node2D"]
 material = SubResource("ShaderMaterial_na4re")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -576.0
-offset_top = -328.0
-offset_right = 576.0
-offset_bottom = 328.0
-color = Color(0.0313726, 0.0313726, 0.0313726, 1)
 
 [node name="Camera" type="Camera2D" parent="."]
 
@@ -101,3 +108,12 @@ texture_scale = 3.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_rx38b")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 1085
+material = SubResource("ShaderMaterial_4u12p")
+offset_left = -576.0
+offset_top = -328.0
+offset_right = 576.0
+offset_bottom = 328.0
+color = Color(0.0313726, 0.0313726, 0.0313726, 1)

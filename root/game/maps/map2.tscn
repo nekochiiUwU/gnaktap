@@ -1,57 +1,47 @@
-[gd_scene load_steps=33 format=3 uid="uid://c50m68ro4apnu"]
+[gd_scene load_steps=27 format=3 uid="uid://c50m68ro4apnu"]
 
-[sub_resource type="Gradient" id="Gradient_7ke0b"]
-offsets = PackedFloat32Array(0, 0.23, 0.27, 1)
-colors = PackedColorArray(0.25098, 0.12549, 0, 1, 0.501961, 0.501961, 0, 1, 0.501961, 0.768627, 0, 1, 0.25098, 0.768627, 0, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_otdpf"]
-noise_type = 5
-frequency = 0.0765
-domain_warp_enabled = true
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_podkx"]
-width = 256
-height = 256
-seamless = true
-color_ramp = SubResource("Gradient_7ke0b")
-noise = SubResource("FastNoiseLite_otdpf")
-
-[sub_resource type="Gradient" id="Gradient_yjek7"]
-offsets = PackedFloat32Array(0.25, 1)
-colors = PackedColorArray(0.503906, 0.503906, 0.503906, 1, 1, 1, 1, 1)
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ejl46"]
-width = 256
-height = 256
-seamless = true
-as_normal_map = true
-color_ramp = SubResource("Gradient_yjek7")
-noise = SubResource("FastNoiseLite_otdpf")
-
-[sub_resource type="Gradient" id="Gradient_8xv4d"]
-offsets = PackedFloat32Array(0.25, 1)
-colors = PackedColorArray(0.503906, 0.503906, 0.503906, 1, 1, 1, 1, 1)
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ose5l"]
-width = 256
-height = 256
-invert = true
-seamless = true
-normalize = false
-color_ramp = SubResource("Gradient_8xv4d")
-noise = SubResource("FastNoiseLite_otdpf")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7jx4h"]
-albedo_texture = SubResource("NoiseTexture2D_podkx")
-roughness_texture = SubResource("NoiseTexture2D_ose5l")
-normal_enabled = true
-normal_texture = SubResource("NoiseTexture2D_ejl46")
-uv1_scale = Vector3(8, 8, 8)
-texture_filter = 0
+[ext_resource type="Shader" path="res://root/game/maps/map2.gdshader" id="1_gq48b"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ftwah"]
-material = SubResource("StandardMaterial3D_7jx4h")
 size = Vector2(100, 100)
+
+[sub_resource type="Gradient" id="Gradient_v5edv"]
+colors = PackedColorArray(0.12549, 0.501961, 0, 1, 0.25098, 1, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_my8nk"]
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_06b5m"]
+width = 16
+height = 16
+seamless = true
+seamless_blend_skirt = 1.0
+color_ramp = SubResource("Gradient_v5edv")
+noise = SubResource("FastNoiseLite_my8nk")
+
+[sub_resource type="Gradient" id="Gradient_g6i10"]
+interpolation_mode = 1
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rh6c3"]
+gradient = SubResource("Gradient_g6i10")
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t5as1"]
+render_priority = 0
+shader = ExtResource("1_gq48b")
+shader_parameter/albedo = 1.0
+shader_parameter/albedo_texture = SubResource("NoiseTexture2D_06b5m")
+shader_parameter/emission = 2.0
+shader_parameter/emission_texture = SubResource("GradientTexture2D_rh6c3")
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/view_range = 10.0
+shader_parameter/distance_fade = 1.0
+shader_parameter/scale = Vector2(50, 50)
+shader_parameter/is_cubic = false
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sahk2"]
 sky_top_color = Color(0.12549, 0.501961, 0.768627, 1)
@@ -72,7 +62,7 @@ background_mode = 2
 sky = SubResource("Sky_jgtb3")
 ambient_light_color = Color(0.5, 0.5, 0.5, 1)
 ambient_light_sky_contribution = 0.5
-reflected_light_source = 2
+reflected_light_source = 1
 tonemap_exposure = 0.5
 fog_light_color = Color(0.627451, 0.690196, 0.768627, 1)
 fog_density = 0.05
@@ -87,37 +77,22 @@ adjustment_saturation = 0.75
 
 [sub_resource type="Gradient" id="Gradient_emian"]
 interpolation_mode = 1
-colors = PackedColorArray(0, 0.768627, 1, 1, 0, 1, 1, 1)
+offsets = PackedFloat32Array(0, 0.571429)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_8u4a3"]
 gradient = SubResource("Gradient_emian")
-width = 8
-height = 8
+width = 2
+height = 2
 fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(1, 1)
-metadata/_snap_enabled = true
-
-[sub_resource type="Gradient" id="Gradient_7u6xr"]
-interpolation_mode = 1
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ypjov"]
-gradient = SubResource("Gradient_7u6xr")
-width = 8
-height = 8
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(1, 1)
+fill_to = Vector2(0.5, 0.5)
+repeat = 2
 metadata/_snap_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fl2k0"]
-albedo_color = Color(1, 1, 0.984314, 1)
 albedo_texture = SubResource("GradientTexture2D_8u4a3")
-metallic = 1.0
-metallic_specular = 1.0
-metallic_texture = SubResource("GradientTexture2D_ypjov")
-roughness = 0.67
-uv1_scale = Vector3(6, 4, 2)
+roughness = 0.75
+uv1_scale = Vector3(3, 2, 1)
 texture_filter = 0
 
 [sub_resource type="BoxMesh" id="BoxMesh_7w6j5"]
@@ -130,20 +105,21 @@ colors = PackedColorArray(0.0627451, 0.0627451, 0.0627451, 1, 0.12549, 0.12549, 
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_j0sn3"]
 gradient = SubResource("Gradient_xljon")
-width = 6
-height = 6
+width = 3
+height = 3
 fill = 2
 fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.666667, 0.666667)
-metadata/_snap_enabled = true
+fill_to = Vector2(0.5, 0.333333)
 metadata/_snap_count = 6
+metadata/_snap_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mvghl"]
 albedo_texture = SubResource("GradientTexture2D_j0sn3")
 metallic = 1.0
 metallic_specular = 1.0
 roughness = 0.75
-uv1_scale = Vector3(96, 10, 5)
+uv1_triplanar = true
+uv1_world_triplanar = true
 texture_filter = 0
 
 [sub_resource type="BoxMesh" id="BoxMesh_xck6w"]
@@ -166,27 +142,7 @@ size = Vector3(4, 2, 8)
 material = SubResource("StandardMaterial3D_fl2k0")
 size = Vector3(4, 5, 4)
 
-[sub_resource type="Gradient" id="Gradient_aso6r"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.191304)
-colors = PackedColorArray(0.721569, 0.796078, 1, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_bhxeb"]
-gradient = SubResource("Gradient_aso6r")
-width = 256
-height = 256
-fill_to = Vector2(0.0625, 0.0625)
-repeat = 2
-metadata/_snap_enabled = true
-metadata/_snap_count = 16
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_51e2q"]
-albedo_texture = SubResource("GradientTexture2D_bhxeb")
-uv1_scale = Vector3(3, 2, 1)
-uv1_offset = Vector3(1.67, 0, 0)
-
 [sub_resource type="PrismMesh" id="PrismMesh_bwd1s"]
-material = SubResource("StandardMaterial3D_51e2q")
 size = Vector3(10, 7, 7)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xp2qq"]
@@ -210,10 +166,10 @@ use_collision = true
 collision_layer = 2
 collision_mask = 0
 mesh = SubResource("PlaneMesh_ftwah")
+material = SubResource("ShaderMaterial_t5as1")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.657375, -0.405998, 0.634841, 0, 0.842453, 0.538771, -0.753563, 0.354175, -0.553807, 0, 6, 0)
-shadow_enabled = true
 shadow_bias = 0.02
 shadow_blur = 2.0
 directional_shadow_mode = 0

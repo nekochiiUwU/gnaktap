@@ -1,3 +1,6 @@
+res://root/game/entities/player/player.tscn
+res://root/game/maps/map2.gdshader
+res://a.gdshader
+res://assets/misc/post_traitment.gdshader
 res://root/game/maps/map2.tscn
-res://root/game/entities/player/weapons/M4A1/M4A1.tscn
-res://root/game/entities/player/weapons/M4A1/components/scope.tscn
+res://root/game/entities/player/player.gd

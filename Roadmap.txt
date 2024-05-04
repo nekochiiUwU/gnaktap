@@ -1,7 +1,0 @@
-1)
-	Vfx
-	Sfx
-
-2)
-	Target
-	Weapons

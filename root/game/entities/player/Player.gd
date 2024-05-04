@@ -114,6 +114,12 @@ func _physics_process(delta):
 				get_node("%Camera").fov += abs(get_real_velocity().length())*.05
 		if position.y < -30:
 			die()
+		get_node("Head/UI/PostProcess").material.set_shader_parameter("velocity", 
+			get_node("Head/UI/PostProcess").material.get_shader_parameter("velocity") + input*delta
+		)
+		get_node("Head/UI/PostProcess").material.set_shader_parameter("velocity", 
+			get_node("Head/UI/PostProcess").material.get_shader_parameter("velocity") * (1-delta*60)
+		)
 
 var dt: float = 0.
 func _process(delta):
@@ -145,6 +151,9 @@ func _process(delta):
 			get_node("%Camera").position /= 1+delta*10
 		else:
 			get_node("Head").position = get_node("%Camera").position + Vector3(0, 0.45, 0.4)
+		get_node("Head/UI/PostProcess").material.set_shader_parameter("rotation", 
+			get_node("Head/UI/PostProcess").material.get_shader_parameter("rotation") * (1-delta*60)
+		)
 
 
 func crouch_process():
@@ -182,6 +191,9 @@ func rotation_process(angle: Vector2):
 			get_node("%Camera").fov = min(get_node("%Camera").fov + abs(angle.x * 5), 160)
 		while abs(rotation.x) > 2*PI:
 			rotation.x -= sign(rotation.x)*2*PI
+		get_node("Head/UI/PostProcess").material.set_shader_parameter("rotation", 
+			get_node("Head/UI/PostProcess").material.get_shader_parameter("rotation") - Vector3(angle.y, angle.x, 0)
+		)
 
 
 func weapon_process(delta):

@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://weitoykb1612"]
+[gd_scene load_steps=13 format=3 uid="uid://weitoykb1612"]
 
 [ext_resource type="Script" path="res://root/game/entities/player/player.gd" id="1_ayqu4"]
+[ext_resource type="Shader" path="res://assets/misc/post_traitment.gdshader" id="2_gb0na"]
 [ext_resource type="PackedScene" uid="uid://bk3p2jyntv3bd" path="res://root/game/entities/player/weapons/M4A1/M4A1.tscn" id="2_h85o5"]
 [ext_resource type="PackedScene" uid="uid://660few3mqdcj" path="res://root/game/entities/player/weapons/cut/cut.tscn" id="3_djnnl"]
 
@@ -24,6 +25,22 @@ height = 1.8
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_77dev"]
 radius = 0.45
 height = 0.9
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_arjs1"]
+shader = ExtResource("2_gb0na")
+shader_parameter/velocity = Vector3(0, 0, 0)
+shader_parameter/rotation = Vector3(0, 0, 0)
+shader_parameter/MOTION_BLUR_ENABLED = true
+shader_parameter/SAMPLE_COUNT = 4
+shader_parameter/INTENSITY = 1.0
+shader_parameter/CORRECTION = true
+shader_parameter/ALTERNATIVE_CORRECTION = false
+shader_parameter/LINEAR_INTENSITY = 1.0
+shader_parameter/RADIAL_INTENSITY = 0.5
+shader_parameter/MOTION_SEEKNESS = 0.25
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_p2muh"]
+size = Vector2(1152, 648)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1gsey"]
 bg_color = Color(0, 0, 0, 0.12549)
@@ -65,6 +82,11 @@ near = 0.001
 [node name="UI" type="Control" parent="Head"]
 layout_mode = 3
 anchors_preset = 0
+
+[node name="PostProcess" type="Sprite2D" parent="Head/UI"]
+z_index = -1
+material = SubResource("ShaderMaterial_arjs1")
+texture = SubResource("PlaceholderTexture2D_p2muh")
 
 [node name="HealthBar" type="ProgressBar" parent="Head/UI"]
 texture_filter = 1
