@@ -108,18 +108,19 @@ func _physics_process(delta):
 		if is_on_floor():
 			dt += abs(velocity.x) + abs(velocity.z)
 			if ProjectSettings.get_setting("custom/game/dynamic_fov"):
-				get_node("%Camera").fov += (abs(get_real_velocity().x) + abs(get_real_velocity().z))*.1
+				get_node("%Camera").fov += min((abs(get_real_velocity().x) + abs(get_real_velocity().z))*.1, 160)
 		else:
 			if ProjectSettings.get_setting("custom/game/dynamic_fov"):
-				get_node("%Camera").fov += abs(get_real_velocity().length())*.05
+				get_node("%Camera").fov += min(abs(get_real_velocity().length())*.05, 160)
 		if position.y < -30:
 			die()
 		get_node("Head/UI/PostProcess").material.set_shader_parameter("velocity", 
-			get_node("Head/UI/PostProcess").material.get_shader_parameter("velocity") + input*delta
+			get_node("Head/UI/PostProcess").material.get_shader_parameter("velocity") + (input+velocity.y*Vector3.UP) * delta
 		)
 		get_node("Head/UI/PostProcess").material.set_shader_parameter("velocity", 
-			get_node("Head/UI/PostProcess").material.get_shader_parameter("velocity") * (1-delta*60)
+			Vector3(get_node("Head/UI/PostProcess").material.get_shader_parameter("velocity")) / (1.+delta*60.)
 		)
+
 
 var dt: float = 0.
 func _process(delta):
@@ -141,7 +142,7 @@ func _process(delta):
 			$Head.rotation.z -= velocity.dot(transform.basis.x) * delta*.05
 		$Head.rotation.z /= 1 + delta*10
 		get_node("Arm/Hand").rotation.z = -$Head.rotation.z
-		get_node("%Camera").fov = (get_node("%Camera").fov - 120) / 1.2 + 120
+		get_node("%Camera").fov = (get_node("%Camera").fov - 100) / 1.2 + 100
 		if ProjectSettings.get_setting("custom/game/camera_bounce"):
 			var x = float(is_on_floor()) * min(abs(velocity.x)+abs(velocity.z), 1)
 			get_node("%Camera").position.y += (pow(cos(dt*.018), 2)*.05-0.025) * delta * 10 * x /2
@@ -149,6 +150,8 @@ func _process(delta):
 			get_node("%Camera").position.z += (-pow(sin(dt*.018*2), 1)*.02/2 - 0.4) * delta * 10 * x 
 			get_node("%Camera").position += Vector3(0, 0, -0.4) * delta * 10 * (1-x)
 			get_node("%Camera").position /= 1+delta*10
+			$Head.rotation.z += -(pow(cos(dt*.009), 2)*.01-.005) * delta * 10 * x
+			$Head.rotation.z += (pow(cos(dt*.0045), 2)*.01-.005) * delta * 10 * x
 		else:
 			get_node("Head").position = get_node("%Camera").position + Vector3(0, 0.45, 0.4)
 		get_node("Head/UI/PostProcess").material.set_shader_parameter("rotation", 

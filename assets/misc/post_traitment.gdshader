@@ -11,9 +11,9 @@ uniform int SAMPLE_COUNT : hint_range(0, 128, 1) = 4;
 uniform float INTENSITY: hint_range(0, 2, .01) = 1.;
 uniform bool CORRECTION = true;
 uniform bool ALTERNATIVE_CORRECTION = false;
-uniform float LINEAR_INTENSITY = 1.;
+uniform float LINEAR_INTENSITY = .2;
 uniform float RADIAL_INTENSITY = 1.;
-uniform float MOTION_SEEKNESS = .25;
+uniform float MOTION_SEEKNESS = .2;
 
 
 vec4 motion_blur_fragment(in vec2 _SCREEN_UV)
@@ -56,8 +56,13 @@ vec4 motion_blur_fragment(in vec2 _SCREEN_UV)
 
 
 void fragment() {
+	vec4 color = vec4(0.);
 	if (MOTION_BLUR_ENABLED)
-		COLOR = motion_blur_fragment(SCREEN_UV);
+		color = motion_blur_fragment(SCREEN_UV);
 	else
-		texture(SCREEN_TEXTURE, SCREEN_UV);
+		color = texture(SCREEN_TEXTURE, SCREEN_UV);
+	float factor = abs(min(velocity.y, 0.));
+	factor = -1.+(exp(pow(factor, 4.)));
+	color.rgb -= vec3(pow(SCREEN_UV.x*2.-1., 2)+pow(SCREEN_UV.y*2.-1., 2))*log(1.+factor);
+	COLOR = color;
 }

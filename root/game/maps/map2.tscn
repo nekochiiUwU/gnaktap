@@ -38,8 +38,8 @@ shader_parameter/emission = 2.0
 shader_parameter/emission_texture = SubResource("GradientTexture2D_rh6c3")
 shader_parameter/metallic = 0.0
 shader_parameter/roughness = 1.0
-shader_parameter/view_range = 10.0
-shader_parameter/distance_fade = 1.0
+shader_parameter/view_range = 1.0
+shader_parameter/distance_fade = 0.0
 shader_parameter/scale = Vector2(50, 50)
 shader_parameter/is_cubic = false
 
@@ -61,9 +61,17 @@ radiance_size = 0
 background_mode = 2
 sky = SubResource("Sky_jgtb3")
 ambient_light_color = Color(0.5, 0.5, 0.5, 1)
-ambient_light_sky_contribution = 0.5
+ambient_light_sky_contribution = 0.0
 reflected_light_source = 1
 tonemap_exposure = 0.5
+glow_levels/2 = 0.2
+glow_levels/3 = 0.4
+glow_levels/4 = 0.6
+glow_levels/5 = 0.8
+glow_levels/6 = 1.0
+glow_levels/7 = 1.2
+glow_intensity = 8.0
+glow_bloom = 0.01
 fog_light_color = Color(0.627451, 0.690196, 0.768627, 1)
 fog_density = 0.05
 volumetric_fog_emission = Color(0.439216, 0.439216, 0.439216, 1)
@@ -71,9 +79,10 @@ volumetric_fog_anisotropy = 0.8
 volumetric_fog_length = 10.0
 volumetric_fog_detail_spread = 6.0
 volumetric_fog_temporal_reprojection_enabled = false
-adjustment_brightness = 0.9
-adjustment_contrast = 1.4
-adjustment_saturation = 0.75
+adjustment_enabled = true
+adjustment_brightness = 1.25
+adjustment_contrast = 1.25
+adjustment_saturation = 1.25
 
 [sub_resource type="Gradient" id="Gradient_emian"]
 interpolation_mode = 1
@@ -170,7 +179,8 @@ material = SubResource("ShaderMaterial_t5as1")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.657375, -0.405998, 0.634841, 0, 0.842453, 0.538771, -0.753563, 0.354175, -0.553807, 0, 6, 0)
-shadow_bias = 0.02
+shadow_enabled = true
+shadow_bias = 0.03
 shadow_blur = 2.0
 directional_shadow_mode = 0
 
