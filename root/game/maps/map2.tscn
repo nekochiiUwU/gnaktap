@@ -1,9 +1,24 @@
-[gd_scene load_steps=27 format=3 uid="uid://c50m68ro4apnu"]
+[gd_scene load_steps=31 format=3 uid="uid://c50m68ro4apnu"]
 
 [ext_resource type="Shader" path="res://root/game/maps/map2.gdshader" id="1_gq48b"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ftwah"]
 size = Vector2(100, 100)
+
+[sub_resource type="Gradient" id="Gradient_encro"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.539568)
+colors = PackedColorArray(0.501961, 0.501961, 0.501961, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7v1wh"]
+gradient = SubResource("Gradient_encro")
+width = 2
+height = 2
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 1)
+repeat = 2
+metadata/_snap_enabled = true
+metadata/_snap_count = 4
 
 [sub_resource type="Gradient" id="Gradient_v5edv"]
 colors = PackedColorArray(0.12549, 0.501961, 0, 1, 0.25098, 1, 0, 1)
@@ -19,23 +34,13 @@ seamless_blend_skirt = 1.0
 color_ramp = SubResource("Gradient_v5edv")
 noise = SubResource("FastNoiseLite_my8nk")
 
-[sub_resource type="Gradient" id="Gradient_g6i10"]
-interpolation_mode = 1
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_rh6c3"]
-gradient = SubResource("Gradient_g6i10")
-fill = 2
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(1, 1)
-metadata/_snap_enabled = true
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t5as1"]
 render_priority = 0
 shader = ExtResource("1_gq48b")
 shader_parameter/albedo = 1.0
-shader_parameter/albedo_texture = SubResource("NoiseTexture2D_06b5m")
-shader_parameter/emission = 2.0
-shader_parameter/emission_texture = SubResource("GradientTexture2D_rh6c3")
+shader_parameter/albedo_texture = SubResource("GradientTexture2D_7v1wh")
+shader_parameter/emission = 0.0
+shader_parameter/emission_texture = SubResource("NoiseTexture2D_06b5m")
 shader_parameter/metallic = 0.0
 shader_parameter/roughness = 1.0
 shader_parameter/view_range = 1.0
@@ -59,19 +64,21 @@ radiance_size = 0
 
 [sub_resource type="Environment" id="Environment_oua17"]
 background_mode = 2
+background_energy_multiplier = 0.0
 sky = SubResource("Sky_jgtb3")
+ambient_light_source = 1
 ambient_light_color = Color(0.5, 0.5, 0.5, 1)
-ambient_light_sky_contribution = 0.0
+ambient_light_sky_contribution = 0.25
 reflected_light_source = 1
-tonemap_exposure = 0.5
+glow_enabled = true
 glow_levels/2 = 0.2
 glow_levels/3 = 0.4
 glow_levels/4 = 0.6
 glow_levels/5 = 0.8
 glow_levels/6 = 1.0
 glow_levels/7 = 1.2
-glow_intensity = 8.0
-glow_bloom = 0.01
+glow_strength = 1.25
+glow_blend_mode = 0
 fog_light_color = Color(0.627451, 0.690196, 0.768627, 1)
 fog_density = 0.05
 volumetric_fog_emission = Color(0.439216, 0.439216, 0.439216, 1)
@@ -79,34 +86,47 @@ volumetric_fog_anisotropy = 0.8
 volumetric_fog_length = 10.0
 volumetric_fog_detail_spread = 6.0
 volumetric_fog_temporal_reprojection_enabled = false
-adjustment_enabled = true
 adjustment_brightness = 1.25
 adjustment_contrast = 1.25
 adjustment_saturation = 1.25
 
-[sub_resource type="Gradient" id="Gradient_emian"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.571429)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+[sub_resource type="BoxMesh" id="BoxMesh_7w6j5"]
+size = Vector3(4, 4, 4)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_8u4a3"]
-gradient = SubResource("Gradient_emian")
-width = 2
-height = 2
-fill = 1
-fill_to = Vector2(0.5, 0.5)
-repeat = 2
+[sub_resource type="Gradient" id="Gradient_m3b0y"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bf11h"]
+gradient = SubResource("Gradient_m3b0y")
+width = 1
+
+[sub_resource type="Gradient" id="Gradient_g6i10"]
+interpolation_mode = 1
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rh6c3"]
+gradient = SubResource("Gradient_g6i10")
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 1)
 metadata/_snap_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fl2k0"]
-albedo_texture = SubResource("GradientTexture2D_8u4a3")
-roughness = 0.75
-uv1_scale = Vector3(3, 2, 1)
-texture_filter = 0
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_i52o2"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_7w6j5"]
-material = SubResource("StandardMaterial3D_fl2k0")
-size = Vector3(4, 1, 2)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vd1sj"]
+render_priority = 0
+shader = ExtResource("1_gq48b")
+shader_parameter/albedo = 1.0
+shader_parameter/albedo_texture = SubResource("GradientTexture1D_bf11h")
+shader_parameter/emission = 1.0
+shader_parameter/emission_texture = SubResource("GradientTexture2D_rh6c3")
+shader_parameter/metallic = 0.31
+shader_parameter/roughness = 0.5
+shader_parameter/view_range = 1.0
+shader_parameter/distance_fade = 0.0
+shader_parameter/scale = Vector2(4, 4)
+shader_parameter/is_cubic = true
+shader_parameter/random = SubResource("NoiseTexture2D_i52o2")
 
 [sub_resource type="Gradient" id="Gradient_xljon"]
 interpolation_mode = 1
@@ -136,23 +156,33 @@ material = SubResource("StandardMaterial3D_mvghl")
 size = Vector3(32, 5, 2)
 
 [sub_resource type="BoxMesh" id="BoxMesh_cajrl"]
-material = SubResource("StandardMaterial3D_fl2k0")
-size = Vector3(4, 1, 8)
+size = Vector3(4, 4, 4)
 
 [sub_resource type="BoxMesh" id="BoxMesh_b12jg"]
-material = SubResource("StandardMaterial3D_fl2k0")
-size = Vector3(2, 1, 6)
+size = Vector3(4, 4, 4)
 
 [sub_resource type="BoxMesh" id="BoxMesh_kyk23"]
-material = SubResource("StandardMaterial3D_fl2k0")
-size = Vector3(4, 2, 8)
+size = Vector3(4, 4, 4)
 
 [sub_resource type="BoxMesh" id="BoxMesh_sxueq"]
-material = SubResource("StandardMaterial3D_fl2k0")
-size = Vector3(4, 5, 4)
+size = Vector3(4, 4, 4)
 
 [sub_resource type="PrismMesh" id="PrismMesh_bwd1s"]
 size = Vector3(10, 7, 7)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uyamm"]
+render_priority = 0
+shader = ExtResource("1_gq48b")
+shader_parameter/albedo = 0.0
+shader_parameter/albedo_texture = SubResource("GradientTexture1D_bf11h")
+shader_parameter/emission = 1.0
+shader_parameter/emission_texture = SubResource("GradientTexture2D_rh6c3")
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/view_range = 1.0
+shader_parameter/distance_fade = 0.0
+shader_parameter/scale = Vector2(8, 6)
+shader_parameter/is_cubic = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xp2qq"]
 no_depth_test = true
@@ -179,10 +209,9 @@ material = SubResource("ShaderMaterial_t5as1")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.657375, -0.405998, 0.634841, 0, 0.842453, 0.538771, -0.753563, 0.354175, -0.553807, 0, 6, 0)
+visible = false
 shadow_enabled = true
 shadow_bias = 0.03
-shadow_blur = 2.0
-directional_shadow_mode = 0
 
 [node name="Environment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_oua17")
@@ -191,20 +220,22 @@ environment = SubResource("Environment_oua17")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
 
 [node name="CSGMesh3D2" type="CSGMesh3D" parent="Node3D"]
-transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -4, -5, -4)
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -2, -6.5, -6)
 gi_mode = 2
 use_collision = true
 collision_layer = 2
 collision_mask = 0
 mesh = SubResource("BoxMesh_7w6j5")
+material = SubResource("ShaderMaterial_vd1sj")
 
 [node name="CSGMesh3D3" type="CSGMesh3D" parent="Node3D"]
-transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, 4, -5, 0)
+transform = Transform3D(-4.47035e-08, 0, 1, 0, 1, 0, -1, 0, -4.47035e-08, 4, -6.5, -2)
 gi_mode = 2
 use_collision = true
 collision_layer = 2
 collision_mask = 0
 mesh = SubResource("BoxMesh_7w6j5")
+material = SubResource("ShaderMaterial_vd1sj")
 
 [node name="CSGMesh3D4" type="CSGMesh3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 17)
@@ -239,36 +270,40 @@ collision_mask = 0
 mesh = SubResource("BoxMesh_xck6w")
 
 [node name="CSGMesh3D8" type="CSGMesh3D" parent="Node3D"]
-transform = Transform3D(-0.683013, 0.183013, -0.707107, 0.258819, 0.965926, 0, 0.683013, -0.183013, -0.707107, -6, -5.6, 6)
+transform = Transform3D(-0.683013, 0.183013, -0.707107, 0.258819, 0.965926, 0, 0.683013, -0.183013, -0.707107, -6, -7, 6)
 gi_mode = 2
 use_collision = true
 collision_layer = 2
 collision_mask = 0
 mesh = SubResource("BoxMesh_cajrl")
+material = SubResource("ShaderMaterial_vd1sj")
 
 [node name="CSGMesh3D11" type="CSGMesh3D" parent="Node3D"]
-transform = Transform3D(-0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 3, -5, 10)
+transform = Transform3D(-0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 4, -6.5, 11)
 gi_mode = 2
 use_collision = true
 collision_layer = 2
 collision_mask = 0
 mesh = SubResource("BoxMesh_b12jg")
+material = SubResource("ShaderMaterial_vd1sj")
 
 [node name="CSGMesh3D9" type="CSGMesh3D" parent="Node3D"]
-transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 2, -4.5, -6)
+transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 2, -5.5, -6)
 gi_mode = 2
 use_collision = true
 collision_layer = 2
 collision_mask = 0
 mesh = SubResource("BoxMesh_kyk23")
+material = SubResource("ShaderMaterial_vd1sj")
 
 [node name="CSGMesh3D12" type="CSGMesh3D" parent="Node3D"]
-transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, -11, -3, -9)
+transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, -11, -3.5, -9)
 gi_mode = 2
 use_collision = true
 collision_layer = 2
 collision_mask = 0
 mesh = SubResource("BoxMesh_sxueq")
+material = SubResource("ShaderMaterial_vd1sj")
 
 [node name="CSGMesh3D14" type="CSGMesh3D" parent="Node3D"]
 transform = Transform3D(-0.707107, -0.5, 0.5, 2.17749e-08, 0.707107, 0.707107, -0.707107, 0.5, -0.5, -16, -5.49078, 16)
@@ -277,6 +312,7 @@ use_collision = true
 collision_layer = 2
 collision_mask = 0
 mesh = SubResource("PrismMesh_bwd1s")
+material = SubResource("ShaderMaterial_uyamm")
 
 [node name="CSGMesh3D15" type="CSGMesh3D" parent="Node3D"]
 transform = Transform3D(0.707107, 0.5, -0.5, 6.39218e-08, 0.707107, 0.707107, 0.707107, -0.5, 0.5, -16, -5.49078, 16)
@@ -285,22 +321,25 @@ use_collision = true
 collision_layer = 2
 collision_mask = 0
 mesh = SubResource("PrismMesh_bwd1s")
+material = SubResource("ShaderMaterial_uyamm")
 
 [node name="CSGMesh3D13" type="CSGMesh3D" parent="Node3D"]
-transform = Transform3D(-1, 0, 7.45058e-08, 0, 1, 0, -7.45058e-08, 0, -1, 11, -3, -10)
+transform = Transform3D(-1, 0, 7.45058e-08, 0, 1, 0, -7.45058e-08, 0, -1, 11, -3.5, -10)
 gi_mode = 2
 use_collision = true
 collision_layer = 2
 collision_mask = 0
 mesh = SubResource("BoxMesh_sxueq")
+material = SubResource("ShaderMaterial_vd1sj")
 
 [node name="CSGMesh3D10" type="CSGMesh3D" parent="Node3D"]
-transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, 9, -4.5, 9)
+transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, 9, -5.5, 9)
 gi_mode = 2
 use_collision = true
 collision_layer = 2
 collision_mask = 0
 mesh = SubResource("BoxMesh_kyk23")
+material = SubResource("ShaderMaterial_vd1sj")
 
 [node name="Spawnpoints" type="Node3D" parent="."]
 
@@ -311,3 +350,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 12)
 transform = Transform3D(-1, -1.50996e-07, 6.60024e-15, 0, -4.37114e-08, -1, 1.50996e-07, -1, 4.37114e-08, 0, 0, 0)
 layers = 524288
 mesh = SubResource("CylinderMesh_1mmdv")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.29285, 0)
+light_specular = 0.25
+light_bake_mode = 1
+shadow_enabled = true
+shadow_bias = 0.05
+shadow_blur = 10.0
+omni_range = 32.0
+omni_shadow_mode = 0

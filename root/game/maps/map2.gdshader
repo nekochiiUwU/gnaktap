@@ -1,4 +1,8 @@
 shader_type spatial;
+render_mode specular_toon;
+
+uniform sampler2D random;
+
 group_uniforms albedo;
 uniform float albedo: hint_range(0.0, 1.0, 0.01) = 1;
 uniform sampler2D albedo_texture: filter_nearest;
@@ -44,8 +48,10 @@ void fragment() {
 	EMISSION = (1.0+EMISSION)/2.0;
 
 	EMISSION *= texture(emission_texture, UV*true_scale).rgb*emission;
-	ALBEDO = (1.-max(max(EMISSION.r, EMISSION.g), EMISSION.b))*texture(albedo_texture, UV*true_scale).rgb*albedo;
+	//ALBEDO = (1.-max(max(EMISSION.r, EMISSION.g), EMISSION.b))*texture(albedo_texture, UV*true_scale).rgb*albedo;
+	ALBEDO = (1.-max(max(EMISSION.r, EMISSION.g), EMISSION.b))*vec3(SCREEN_UV.x, SCREEN_UV.y, min(FRAGCOORD.a, 1.))/2.*texture(albedo_texture, UV*true_scale).rgb*albedo;
 	ROUGHNESS = (1.-max(max(EMISSION.r, EMISSION.g), EMISSION.b))*roughness;
 	METALLIC = (1.-max(max(EMISSION.r, EMISSION.g), EMISSION.b))*metallic;
-	ALPHA = min(pow(FRAGCOORD.a*view_range, distance_fade*view_range), 1)+(max(max(EMISSION.r, EMISSION.g), EMISSION.b));
+	
+	//ALPHA = min(pow(FRAGCOORD.a*view_range, distance_fade*view_range), 1)+(max(max(EMISSION.r, EMISSION.g), EMISSION.b));
 }

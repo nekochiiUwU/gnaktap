@@ -15,8 +15,8 @@ resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_vhf1b")
 radius = 0.4
 height = 1.8
-radial_segments = 16
-rings = 4
+radial_segments = 8
+rings = 2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a7pkv"]
 radius = 0.4
@@ -30,27 +30,29 @@ height = 0.9
 shader = ExtResource("2_gb0na")
 shader_parameter/velocity = Vector3(0, 0, 0)
 shader_parameter/rotation = Vector3(0, 0, 0)
+shader_parameter/sneak_value = 0.0
 shader_parameter/MOTION_BLUR_ENABLED = true
 shader_parameter/SAMPLE_COUNT = 4
-shader_parameter/INTENSITY = 1.0
+shader_parameter/INTENSITY = 0.5
 shader_parameter/CORRECTION = true
-shader_parameter/ALTERNATIVE_CORRECTION = false
-shader_parameter/LINEAR_INTENSITY = 0.2
-shader_parameter/RADIAL_INTENSITY = 1.5
-shader_parameter/MOTION_SEEKNESS = 0.2
+shader_parameter/ALTERNATIVE_CORRECTION = true
+shader_parameter/LINEAR_INTENSITY = 1.0
+shader_parameter/RADIAL_INTENSITY = 1.0
+shader_parameter/MOTION_SEEKNESS = 0.5
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_p2muh"]
 size = Vector2(1152, 648)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1gsey"]
-bg_color = Color(0, 0, 0, 0.12549)
+bg_color = Color(0, 0, 0, 0.25098)
+skew = Vector2(1, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wi8oh"]
-bg_color = Color(0.545098, 1, 0, 1)
+bg_color = Color(0, 1, 0, 1)
+skew = Vector2(1, 0)
 
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 0, 1, 0)
-visible = false
 collision_mask = 2
 script = ExtResource("1_ayqu4")
 
@@ -91,15 +93,21 @@ texture = SubResource("PlaceholderTexture2D_p2muh")
 [node name="HealthBar" type="ProgressBar" parent="Head/UI"]
 texture_filter = 1
 layout_mode = 0
-offset_left = -100.0
-offset_top = 300.0
-offset_right = 100.0
-offset_bottom = 316.0
+offset_left = -128.0
+offset_top = 312.0
+offset_right = 128.0
+offset_bottom = 320.0
 theme_override_styles/background = SubResource("StyleBoxFlat_1gsey")
 theme_override_styles/fill = SubResource("StyleBoxFlat_wi8oh")
-step = 1.0
 value = 80.0
 show_percentage = false
+
+[node name="Line2D" type="Line2D" parent="Head/UI/HealthBar"]
+position = Vector2(132, -312)
+points = PackedVector2Array(-128, 312, 128, 312, 120, 320, -136, 320)
+closed = true
+width = 1.0
+default_color = Color(0, 0, 0, 0.501961)
 
 [node name="Hitmarker" type="Control" parent="Head/UI"]
 visible = false

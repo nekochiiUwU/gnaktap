@@ -115,7 +115,7 @@ func _physics_process(delta):
 		if position.y < -30:
 			die()
 		get_node("Head/UI/PostProcess").material.set_shader_parameter("velocity", 
-			get_node("Head/UI/PostProcess").material.get_shader_parameter("velocity") + (input+velocity.y*Vector3.UP) * delta
+			get_node("Head/UI/PostProcess").material.get_shader_parameter("velocity") + (input+velocity.y*Vector3.DOWN) * delta*60
 		)
 		get_node("Head/UI/PostProcess").material.set_shader_parameter("velocity", 
 			Vector3(get_node("Head/UI/PostProcess").material.get_shader_parameter("velocity")) / (1.+delta*60.)
@@ -125,6 +125,8 @@ func _physics_process(delta):
 var dt: float = 0.
 func _process(delta):
 	if is_multiplayer_authority():
+		if Input.is_key_pressed(KEY_0):
+			velocity.y += 1
 		crouch_process()
 		hitmarker_process()
 		rotation_process(Input.get_vector("camera_left", "camera_right", "camera_up", "camera_down")*delta*joy_sensi)
@@ -145,17 +147,24 @@ func _process(delta):
 		get_node("%Camera").fov = (get_node("%Camera").fov - 100) / 1.2 + 100
 		if ProjectSettings.get_setting("custom/game/camera_bounce"):
 			var x = float(is_on_floor()) * min(abs(velocity.x)+abs(velocity.z), 1)
-			get_node("%Camera").position.y += (pow(cos(dt*.018), 2)*.05-0.025) * delta * 10 * x /2
-			get_node("%Camera").position.x += (pow(sin(dt*.018), 1)*.05) * delta * 10 * x /2
-			get_node("%Camera").position.z += (-pow(sin(dt*.018*2), 1)*.02/2 - 0.4) * delta * 10 * x 
+			get_node("%Camera").position.x += (pow(sin(dt*.018), 1)*.25-.125) * delta * 10 * x
+			get_node("%Camera").position.y += (pow(cos(dt*.018), 2)*.35-0.175) * delta * 10 * x
+			get_node("%Camera").position.z += (pow(sin(dt*.036), 1)*.01-.005-.4) * delta * 10 * x 
 			get_node("%Camera").position += Vector3(0, 0, -0.4) * delta * 10 * (1-x)
 			get_node("%Camera").position /= 1+delta*10
 			$Head.rotation.z += -(pow(cos(dt*.009), 2)*.01-.005) * delta * 10 * x
 			$Head.rotation.z += (pow(cos(dt*.0045), 2)*.01-.005) * delta * 10 * x
+			$Head.rotation.x += (pow(cos(dt*.018), 2)*.02-.01) * delta * 10 * x
+			$Arm/Hand.position.x += (pow(sin(dt*.018), 1)*.225-.1125) * delta * 10 * x
+			$Arm/Hand.position.y += (pow(cos(dt*.018), 2)*.3-0.15) * delta * 10 * x
+			$Arm/Hand.position.z += (pow(sin(dt*.036), 1)*.005-.0025-.1) * delta * 10 * x 
+			$Arm/Hand.position += Vector3(0, 0, -.1) * delta * 10 * (1-x)
+			$Arm/Hand.position /= 1+delta*10
 		else:
 			get_node("Head").position = get_node("%Camera").position + Vector3(0, 0.45, 0.4)
+			$Arm/Hand.position = $Arm/Hand.position + Vector3(0, 0, -5)
 		get_node("Head/UI/PostProcess").material.set_shader_parameter("rotation", 
-			get_node("Head/UI/PostProcess").material.get_shader_parameter("rotation") * (1-delta*60)
+			get_node("Head/UI/PostProcess").material.get_shader_parameter("rotation") / (1+delta*60)
 		)
 
 
@@ -171,6 +180,8 @@ func crouch_process():
 	get_node("Collision").position.y -= current_crouch_modifier/2
 	position.y += current_crouch_modifier
 	crouch_value = float(get_node("Mesh").mesh.height-normal_height)/(crouch_height-normal_height)
+	get_node("Head/UI/PostProcess").material.set_shader_parameter("sneak_value", crouch_value/4)
+
 
 func hitmarker_process():
 	if hitmarker_time:
@@ -195,7 +206,7 @@ func rotation_process(angle: Vector2):
 		while abs(rotation.x) > 2*PI:
 			rotation.x -= sign(rotation.x)*2*PI
 		get_node("Head/UI/PostProcess").material.set_shader_parameter("rotation", 
-			get_node("Head/UI/PostProcess").material.get_shader_parameter("rotation") - Vector3(angle.y, angle.x, 0)
+			get_node("Head/UI/PostProcess").material.get_shader_parameter("rotation") - Vector3(angle.y, angle.x, 0)*60
 		)
 
 

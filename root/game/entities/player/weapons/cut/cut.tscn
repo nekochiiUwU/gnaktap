@@ -306,6 +306,7 @@ _data = {
 
 [node name="Cut" type="Node3D"]
 transform = Transform3D(0.228853, -0.628778, 0.743145, -0.254171, 0.698328, 0.66913, -0.939694, -0.342018, -2.69018e-06, 0.35, -0.2, -0.6)
+visible = false
 script = ExtResource("1_mgti4")
 
 [node name="Cylinder" type="MeshInstance3D" parent="."]

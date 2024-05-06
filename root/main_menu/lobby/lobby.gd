@@ -62,7 +62,8 @@ func _on_ready_pressed():
 
 	if multiplayer.has_multiplayer_peer():
 		if !multiplayer.is_server():
-			rpc_id(1, "set_ready", get_node("Ready").button_pressed)
+			if multiplayer.multiplayer_peer.get_connection_status() == 2:
+				rpc_id(1, "set_ready", get_node("Ready").button_pressed)
 		else:
 			get_node("/root/Network").rpc("start_game", 2)
 
