@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bk3p2jyntv3bd"]
+[gd_scene load_steps=30 format=3 uid="uid://bk3p2jyntv3bd"]
 
 [ext_resource type="Script" path="res://root/game/entities/player/weapons/M4A1/M4A1.gd" id="1_8r321"]
 [ext_resource type="AudioStream" uid="uid://maxo3ea2bje0" path="res://assets/audios/shoot.ogg" id="2_2anlg"]
@@ -6,86 +6,109 @@
 [sub_resource type="Gradient" id="Gradient_fu2vy"]
 interpolation_mode = 1
 offsets = PackedFloat32Array(0, 0.333, 0.666)
-colors = PackedColorArray(0, 0.501961, 1, 1, 0.12549, 0.768627, 1, 1, 1, 1, 1, 1)
+colors = PackedColorArray(0.501961, 1, 1, 1, 0.305882, 0.0313726, 0.403922, 1, 0.376471, 0, 0.376471, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_wa5o8"]
 noise_type = 3
-frequency = 0.02
+frequency = 0.9
 fractal_type = 0
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_iby23"]
+width = 16
+height = 64
+in_3d_space = true
+seamless = true
+seamless_blend_skirt = 1.0
 color_ramp = SubResource("Gradient_fu2vy")
 noise = SubResource("FastNoiseLite_wa5o8")
 
+[sub_resource type="Gradient" id="Gradient_f2bke"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.333, 0.664122)
+colors = PackedColorArray(1, 1, 1, 1, 0.0313726, 0.0313726, 0.0313726, 1, 0.533333, 0.533333, 0.533333, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5gjul"]
+noise_type = 3
+frequency = 0.9
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mibm6"]
+width = 16
+height = 64
+bump_strength = 1.0
+color_ramp = SubResource("Gradient_f2bke")
+noise = SubResource("FastNoiseLite_5gjul")
+
+[sub_resource type="Gradient" id="Gradient_p6ofd"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.333, 0.666)
+colors = PackedColorArray(1, 1, 1, 1, 0.0313726, 0.0313726, 0.0313726, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yr1cf"]
+noise_type = 3
+frequency = 0.9
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_37pxp"]
+width = 16
+height = 64
+as_normal_map = true
+bump_strength = 1.0
+color_ramp = SubResource("Gradient_p6ofd")
+noise = SubResource("FastNoiseLite_yr1cf")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d2vtt"]
 albedo_texture = SubResource("NoiseTexture2D_iby23")
+metallic = 1.0
+metallic_texture = SubResource("NoiseTexture2D_mibm6")
+roughness = 0.75
+normal_enabled = true
+normal_scale = -1.0
+normal_texture = SubResource("NoiseTexture2D_37pxp")
+texture_filter = 0
 
 [sub_resource type="BoxMesh" id="BoxMesh_qarw4"]
 material = SubResource("StandardMaterial3D_d2vtt")
 size = Vector3(0.05, 0.1, 0.1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jdfj3"]
-albedo_texture = SubResource("NoiseTexture2D_iby23")
-
 [sub_resource type="BoxMesh" id="BoxMesh_g8vfx"]
-material = SubResource("StandardMaterial3D_jdfj3")
+material = SubResource("StandardMaterial3D_d2vtt")
 size = Vector3(0.1, 0.1, 0.3)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eh2l1"]
-albedo_texture = SubResource("NoiseTexture2D_iby23")
 
 [sub_resource type="BoxMesh" id="BoxMesh_ey5og"]
-material = SubResource("StandardMaterial3D_eh2l1")
+material = SubResource("StandardMaterial3D_d2vtt")
 size = Vector3(0.05, 0.05, 0.2)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ukx7g"]
-albedo_texture = SubResource("NoiseTexture2D_iby23")
-
 [sub_resource type="BoxMesh" id="BoxMesh_2ej4m"]
-material = SubResource("StandardMaterial3D_ukx7g")
+material = SubResource("StandardMaterial3D_d2vtt")
 size = Vector3(0.1, 0.1, 0.3)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_06j6i"]
-albedo_texture = SubResource("NoiseTexture2D_iby23")
-
 [sub_resource type="BoxMesh" id="BoxMesh_6gy3v"]
-material = SubResource("StandardMaterial3D_06j6i")
+material = SubResource("StandardMaterial3D_d2vtt")
 size = Vector3(0.1, 0.15, 0.1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qcnsp"]
-albedo_color = Color(0.730469, 0.575124, 0.372757, 1)
-uv1_scale = Vector3(3, 2, 1)
-
 [sub_resource type="PrismMesh" id="PrismMesh_bwlij"]
-material = SubResource("StandardMaterial3D_qcnsp")
+material = SubResource("StandardMaterial3D_d2vtt")
 left_to_right = 1.0
 size = Vector3(0.2, 0.4, 0.099)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3sqr6"]
-albedo_texture = SubResource("NoiseTexture2D_iby23")
-
 [sub_resource type="BoxMesh" id="BoxMesh_ptinh"]
-material = SubResource("StandardMaterial3D_3sqr6")
+material = SubResource("StandardMaterial3D_d2vtt")
 size = Vector3(0.02, 0.03, 0.02)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w2txc"]
-albedo_texture = SubResource("NoiseTexture2D_iby23")
-
 [sub_resource type="BoxMesh" id="BoxMesh_1xvlx"]
-material = SubResource("StandardMaterial3D_w2txc")
+material = SubResource("StandardMaterial3D_d2vtt")
 size = Vector3(0.01, 0.015, 0.005)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nibsm"]
-albedo_texture = SubResource("NoiseTexture2D_iby23")
-
 [sub_resource type="TorusMesh" id="TorusMesh_3hv6x"]
-material = SubResource("StandardMaterial3D_nibsm")
+material = SubResource("StandardMaterial3D_d2vtt")
 inner_radius = 0.015
 outer_radius = 0.025
 rings = 16
 ring_segments = 4
 
 [sub_resource type="BoxMesh" id="BoxMesh_fcks2"]
+material = SubResource("StandardMaterial3D_d2vtt")
 size = Vector3(0.05, 0.05, 0.05)
 
 [sub_resource type="Animation" id="Animation_hvafs"]

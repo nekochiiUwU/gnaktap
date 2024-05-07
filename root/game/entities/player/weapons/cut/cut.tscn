@@ -1,25 +1,23 @@
-[gd_scene load_steps=23 format=3 uid="uid://660few3mqdcj"]
+[gd_scene load_steps=19 format=3 uid="uid://660few3mqdcj"]
 
 [ext_resource type="Script" path="res://root/game/entities/player/weapons/cut/cut.gd" id="1_mgti4"]
 
-[sub_resource type="Gradient" id="Gradient_fu2vy"]
+[sub_resource type="Gradient" id="Gradient_7osn4"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.333, 0.666)
-colors = PackedColorArray(0, 0.501961, 1, 1, 0.12549, 0.768627, 1, 1, 1, 1, 1, 1)
+offsets = PackedFloat32Array(0, 0.5)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_wa5o8"]
-noise_type = 3
-frequency = 0.02
-fractal_type = 0
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cgaes"]
+gradient = SubResource("Gradient_7osn4")
+width = 128
+height = 128
+fill_to = Vector2(0.03125, 0.03125)
+repeat = 2
+metadata/_snap_enabled = true
+metadata/_snap_count = 32
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2ismm"]
-color_ramp = SubResource("Gradient_fu2vy")
-noise = SubResource("FastNoiseLite_wa5o8")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ba0c"]
-no_depth_test = true
-albedo_color = Color(0, 1, 1, 1)
-albedo_texture = SubResource("NoiseTexture2D_2ismm")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rrynj"]
+albedo_color = Color(0.12549, 0.12549, 0.12549, 1)
+albedo_texture = SubResource("GradientTexture2D_cgaes")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_n83u3"]
 _surfaces = [{
@@ -44,7 +42,7 @@ _surfaces = [{
 "index_count": 180,
 "index_data": PackedByteArray(2, 0, 10, 0, 5, 0, 2, 0, 7, 0, 10, 0, 8, 0, 16, 0, 11, 0, 8, 0, 13, 0, 16, 0, 14, 0, 22, 0, 17, 0, 14, 0, 19, 0, 22, 0, 20, 0, 28, 0, 23, 0, 20, 0, 25, 0, 28, 0, 26, 0, 35, 0, 29, 0, 26, 0, 32, 0, 35, 0, 31, 0, 41, 0, 34, 0, 31, 0, 38, 0, 41, 0, 37, 0, 47, 0, 40, 0, 37, 0, 44, 0, 47, 0, 43, 0, 53, 0, 46, 0, 43, 0, 50, 0, 53, 0, 48, 0, 58, 0, 51, 0, 48, 0, 55, 0, 58, 0, 54, 0, 64, 0, 57, 0, 54, 0, 61, 0, 64, 0, 60, 0, 70, 0, 63, 0, 60, 0, 67, 0, 70, 0, 66, 0, 76, 0, 69, 0, 66, 0, 73, 0, 76, 0, 72, 0, 81, 0, 75, 0, 72, 0, 78, 0, 81, 0, 79, 0, 87, 0, 82, 0, 79, 0, 84, 0, 87, 0, 15, 0, 4, 0, 9, 0, 4, 0, 89, 0, 95, 0, 89, 0, 77, 0, 83, 0, 77, 0, 65, 0, 71, 0, 65, 0, 52, 0, 59, 0, 52, 0, 39, 0, 45, 0, 39, 0, 27, 0, 33, 0, 27, 0, 15, 0, 21, 0, 15, 0, 89, 0, 4, 0, 89, 0, 65, 0, 77, 0, 65, 0, 39, 0, 52, 0, 39, 0, 15, 0, 27, 0, 15, 0, 65, 0, 89, 0, 65, 0, 15, 0, 39, 0, 85, 0, 93, 0, 88, 0, 85, 0, 90, 0, 93, 0, 91, 0, 3, 0, 94, 0, 91, 0, 0, 0, 3, 0, 92, 0, 6, 0, 1, 0, 6, 0, 18, 0, 12, 0, 18, 0, 30, 0, 24, 0, 30, 0, 42, 0, 36, 0, 42, 0, 56, 0, 49, 0, 56, 0, 68, 0, 62, 0, 68, 0, 80, 0, 74, 0, 80, 0, 92, 0, 86, 0, 92, 0, 18, 0, 6, 0, 18, 0, 42, 0, 30, 0, 42, 0, 68, 0, 56, 0, 68, 0, 92, 0, 80, 0, 92, 0, 42, 0, 18, 0, 42, 0, 92, 0, 68, 0),
 "lods": [0.0289435, PackedByteArray(2, 0, 16, 0, 5, 0, 2, 0, 13, 0, 16, 0, 13, 0, 25, 0, 16, 0, 25, 0, 110, 0, 109, 0, 25, 0, 31, 0, 110, 0, 31, 0, 37, 0, 110, 0, 37, 0, 112, 0, 110, 0, 112, 0, 113, 0, 111, 0, 112, 0, 60, 0, 113, 0, 60, 0, 115, 0, 113, 0, 115, 0, 78, 0, 114, 0, 78, 0, 84, 0, 114, 0, 84, 0, 108, 0, 114, 0, 15, 0, 65, 0, 4, 0, 65, 0, 15, 0, 39, 0, 116, 0, 0, 0, 3, 0, 86, 0, 12, 0, 1, 0, 86, 0, 24, 0, 12, 0, 86, 0, 49, 0, 24, 0, 24, 0, 49, 0, 30, 0, 30, 0, 49, 0, 36, 0, 49, 0, 86, 0, 74, 0, 74, 0, 86, 0, 80, 0, 49, 0, 74, 0, 62, 0), 0.0585774, PackedByteArray(2, 0, 16, 0, 5, 0, 2, 0, 96, 0, 16, 0, 97, 0, 63, 0, 16, 0, 25, 0, 3, 0, 63, 0, 25, 0, 0, 0, 3, 0, 15, 0, 65, 0, 4, 0)],
-"material": SubResource("StandardMaterial3D_1ba0c"),
+"material": SubResource("StandardMaterial3D_rrynj"),
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 117,
@@ -52,16 +50,6 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_n83u3")
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_iby23"]
-color_ramp = SubResource("Gradient_fu2vy")
-noise = SubResource("FastNoiseLite_wa5o8")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rrynj"]
-no_depth_test = true
-albedo_texture = SubResource("NoiseTexture2D_iby23")
-metallic = 0.75
-roughness = 0.2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_6d487"]
 _surfaces = [{
@@ -96,7 +84,6 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_6d487")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ttw0"]
-no_depth_test = true
 metallic = 0.75
 roughness = 0.1
 
@@ -132,12 +119,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_grs6q")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_awhaw"]
-no_depth_test = true
-albedo_texture = SubResource("NoiseTexture2D_iby23")
-metallic = 0.75
-roughness = 0.2
-
 [sub_resource type="ArrayMesh" id="ArrayMesh_f8wpk"]
 _surfaces = [{
 "aabb": AABB(-0.06, -0.004, -0.06, 0.12, 0.008, 0.12),
@@ -162,7 +143,7 @@ _surfaces = [{
 "index_count": 180,
 "index_data": PackedByteArray(2, 0, 10, 0, 5, 0, 2, 0, 7, 0, 10, 0, 8, 0, 16, 0, 11, 0, 8, 0, 13, 0, 16, 0, 14, 0, 22, 0, 17, 0, 14, 0, 19, 0, 22, 0, 20, 0, 28, 0, 23, 0, 20, 0, 25, 0, 28, 0, 26, 0, 35, 0, 29, 0, 26, 0, 32, 0, 35, 0, 31, 0, 41, 0, 34, 0, 31, 0, 38, 0, 41, 0, 37, 0, 47, 0, 40, 0, 37, 0, 44, 0, 47, 0, 43, 0, 53, 0, 46, 0, 43, 0, 50, 0, 53, 0, 48, 0, 58, 0, 51, 0, 48, 0, 55, 0, 58, 0, 54, 0, 64, 0, 57, 0, 54, 0, 61, 0, 64, 0, 60, 0, 70, 0, 63, 0, 60, 0, 67, 0, 70, 0, 66, 0, 76, 0, 69, 0, 66, 0, 73, 0, 76, 0, 72, 0, 81, 0, 75, 0, 72, 0, 78, 0, 81, 0, 79, 0, 87, 0, 82, 0, 79, 0, 84, 0, 87, 0, 15, 0, 4, 0, 9, 0, 4, 0, 89, 0, 95, 0, 89, 0, 77, 0, 83, 0, 77, 0, 65, 0, 71, 0, 65, 0, 52, 0, 59, 0, 52, 0, 39, 0, 45, 0, 39, 0, 27, 0, 33, 0, 27, 0, 15, 0, 21, 0, 15, 0, 89, 0, 4, 0, 89, 0, 65, 0, 77, 0, 65, 0, 39, 0, 52, 0, 39, 0, 15, 0, 27, 0, 15, 0, 65, 0, 89, 0, 65, 0, 15, 0, 39, 0, 85, 0, 93, 0, 88, 0, 85, 0, 90, 0, 93, 0, 91, 0, 3, 0, 94, 0, 91, 0, 0, 0, 3, 0, 92, 0, 6, 0, 1, 0, 6, 0, 18, 0, 12, 0, 18, 0, 30, 0, 24, 0, 30, 0, 42, 0, 36, 0, 42, 0, 56, 0, 49, 0, 56, 0, 68, 0, 62, 0, 68, 0, 80, 0, 74, 0, 80, 0, 92, 0, 86, 0, 92, 0, 18, 0, 6, 0, 18, 0, 42, 0, 30, 0, 42, 0, 68, 0, 56, 0, 68, 0, 92, 0, 80, 0, 92, 0, 42, 0, 18, 0, 42, 0, 92, 0, 68, 0),
 "lods": [0.00539333, PackedByteArray(2, 0, 10, 0, 5, 0, 2, 0, 7, 0, 10, 0, 7, 0, 16, 0, 10, 0, 7, 0, 13, 0, 16, 0, 13, 0, 28, 0, 16, 0, 13, 0, 98, 0, 28, 0, 98, 0, 99, 0, 28, 0, 98, 0, 37, 0, 99, 0, 37, 0, 51, 0, 99, 0, 37, 0, 48, 0, 51, 0, 48, 0, 63, 0, 51, 0, 48, 0, 60, 0, 63, 0, 60, 0, 100, 0, 63, 0, 60, 0, 72, 0, 100, 0, 72, 0, 87, 0, 100, 0, 72, 0, 101, 0, 87, 0, 101, 0, 3, 0, 87, 0, 101, 0, 0, 0, 3, 0, 15, 0, 4, 0, 9, 0, 15, 0, 89, 0, 4, 0, 15, 0, 65, 0, 89, 0, 89, 0, 65, 0, 77, 0, 65, 0, 15, 0, 39, 0, 39, 0, 15, 0, 27, 0, 65, 0, 39, 0, 52, 0, 86, 0, 6, 0, 1, 0, 86, 0, 12, 0, 6, 0, 86, 0, 36, 0, 12, 0, 12, 0, 36, 0, 24, 0, 36, 0, 86, 0, 62, 0, 62, 0, 86, 0, 74, 0, 36, 0, 62, 0, 49, 0), 0.0161117, PackedByteArray(2, 0, 16, 0, 5, 0, 2, 0, 7, 0, 16, 0, 7, 0, 25, 0, 16, 0, 25, 0, 40, 0, 16, 0, 25, 0, 48, 0, 40, 0, 48, 0, 63, 0, 40, 0, 48, 0, 72, 0, 63, 0, 72, 0, 87, 0, 63, 0, 72, 0, 3, 0, 87, 0, 15, 0, 89, 0, 4, 0, 15, 0, 65, 0, 89, 0, 65, 0, 15, 0, 39, 0, 97, 0, 0, 0, 96, 0, 74, 0, 6, 0, 1, 0, 74, 0, 24, 0, 6, 0, 74, 0, 49, 0, 24, 0)],
-"material": SubResource("StandardMaterial3D_awhaw"),
+"material": SubResource("StandardMaterial3D_rrynj"),
 "name": "Material",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -306,11 +287,10 @@ _data = {
 
 [node name="Cut" type="Node3D"]
 transform = Transform3D(0.228853, -0.628778, 0.743145, -0.254171, 0.698328, 0.66913, -0.939694, -0.342018, -2.69018e-06, 0.35, -0.2, -0.6)
-visible = false
 script = ExtResource("1_mgti4")
 
 [node name="Cylinder" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.719452, 0, 0, 0, 1, 0, 0, 0, 0.565492, 0, -0.0166668, -0.000158122)
+transform = Transform3D(0.719452, 0, 6.47037e-09, 0, 1, 1.36642e-08, 2.8549e-09, 2.32936e-08, 0.565492, 0, -0.0166668, -0.000158116)
 mesh = SubResource("ArrayMesh_0if25")
 
 [node name="Cylinder_001" type="MeshInstance3D" parent="."]

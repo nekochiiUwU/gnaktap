@@ -1,0 +1,38 @@
+[gd_resource type="ShaderMaterial" load_steps=7 format=3 uid="uid://bmts63op7gdgt"]
+
+[ext_resource type="Shader" path="res://root/game/maps/map2.gdshader" id="1_ygapt"]
+
+[sub_resource type="Gradient" id="Gradient_m3b0y"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bf11h"]
+gradient = SubResource("Gradient_m3b0y")
+width = 1
+
+[sub_resource type="Gradient" id="Gradient_g6i10"]
+interpolation_mode = 1
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rh6c3"]
+gradient = SubResource("Gradient_g6i10")
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_i52o2"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ygapt")
+shader_parameter/albedo = 1.0
+shader_parameter/albedo_texture = SubResource("GradientTexture1D_bf11h")
+shader_parameter/emission = 1.0
+shader_parameter/emission_texture = SubResource("GradientTexture2D_rh6c3")
+shader_parameter/metallic = 0.31
+shader_parameter/roughness = 0.5
+shader_parameter/view_range = 1.0
+shader_parameter/distance_fade = 0.0
+shader_parameter/scale = Vector2(4, 4)
+shader_parameter/is_cubic = true
+shader_parameter/random = SubResource("NoiseTexture2D_i52o2")

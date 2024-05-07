@@ -1,9 +1,20 @@
-[gd_scene load_steps=31 format=3 uid="uid://c50m68ro4apnu"]
+[gd_scene load_steps=28 format=3 uid="uid://c50m68ro4apnu"]
 
-[ext_resource type="Shader" path="res://root/game/maps/map2.gdshader" id="1_gq48b"]
+[ext_resource type="Texture2D" uid="uid://bdeu4air8gico" path="res://assets/textures/sky_water_landscape.jpg" id="1_oq51g"]
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_ftwah"]
-size = Vector2(100, 100)
+[sub_resource type="Gradient" id="Gradient_v5edv"]
+colors = PackedColorArray(0.12549, 0.501961, 0, 1, 0.25098, 1, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_my8nk"]
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_06b5m"]
+width = 16
+height = 16
+seamless = true
+seamless_blend_skirt = 1.0
+color_ramp = SubResource("Gradient_v5edv")
+noise = SubResource("FastNoiseLite_my8nk")
 
 [sub_resource type="Gradient" id="Gradient_encro"]
 interpolation_mode = 1
@@ -20,56 +31,33 @@ repeat = 2
 metadata/_snap_enabled = true
 metadata/_snap_count = 4
 
-[sub_resource type="Gradient" id="Gradient_v5edv"]
-colors = PackedColorArray(0.12549, 0.501961, 0, 1, 0.25098, 1, 0, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hi02g"]
+albedo_texture = SubResource("NoiseTexture2D_06b5m")
+emission_enabled = true
+emission_energy_multiplier = 0.0
+emission_texture = SubResource("GradientTexture2D_7v1wh")
+uv1_scale = Vector3(50, 50, 50)
+texture_filter = 0
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_my8nk"]
-frequency = 1.0
+[sub_resource type="PlaneMesh" id="PlaneMesh_ftwah"]
+material = SubResource("StandardMaterial3D_hi02g")
+size = Vector2(100, 100)
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_06b5m"]
-width = 16
-height = 16
-seamless = true
-seamless_blend_skirt = 1.0
-color_ramp = SubResource("Gradient_v5edv")
-noise = SubResource("FastNoiseLite_my8nk")
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_efc00"]
+panorama = ExtResource("1_oq51g")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_t5as1"]
-render_priority = 0
-shader = ExtResource("1_gq48b")
-shader_parameter/albedo = 1.0
-shader_parameter/albedo_texture = SubResource("GradientTexture2D_7v1wh")
-shader_parameter/emission = 0.0
-shader_parameter/emission_texture = SubResource("NoiseTexture2D_06b5m")
-shader_parameter/metallic = 0.0
-shader_parameter/roughness = 1.0
-shader_parameter/view_range = 1.0
-shader_parameter/distance_fade = 0.0
-shader_parameter/scale = Vector2(50, 50)
-shader_parameter/is_cubic = false
+[sub_resource type="Sky" id="Sky_huobj"]
+sky_material = SubResource("PanoramaSkyMaterial_efc00")
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sahk2"]
-sky_top_color = Color(0.12549, 0.501961, 0.768627, 1)
-sky_horizon_color = Color(0.627451, 0.690196, 0.768627, 1)
-sky_curve = 0.2
-ground_bottom_color = Color(0.0627451, 0, 0.12549, 1)
-ground_horizon_color = Color(0.627451, 0.690196, 0.768627, 1)
-ground_curve = 0.1
-sun_angle_max = 20.0
-sun_curve = 0.1
-
-[sub_resource type="Sky" id="Sky_jgtb3"]
-sky_material = SubResource("ProceduralSkyMaterial_sahk2")
-radiance_size = 0
-
-[sub_resource type="Environment" id="Environment_oua17"]
+[sub_resource type="Environment" id="Environment_sfs7y"]
 background_mode = 2
-background_energy_multiplier = 0.0
-sky = SubResource("Sky_jgtb3")
-ambient_light_source = 1
-ambient_light_color = Color(0.5, 0.5, 0.5, 1)
-ambient_light_sky_contribution = 0.25
-reflected_light_source = 1
+background_energy_multiplier = 0.9
+sky = SubResource("Sky_huobj")
+ambient_light_source = 3
+ambient_light_sky_contribution = 0.75
+ambient_light_energy = 0.75
+reflected_light_source = 2
+tonemap_exposure = 0.9
 glow_enabled = true
 glow_levels/2 = 0.2
 glow_levels/3 = 0.4
@@ -93,40 +81,29 @@ adjustment_saturation = 1.25
 [sub_resource type="BoxMesh" id="BoxMesh_7w6j5"]
 size = Vector3(4, 4, 4)
 
-[sub_resource type="Gradient" id="Gradient_m3b0y"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(1, 1, 1, 1)
+[sub_resource type="Gradient" id="Gradient_x5r0y"]
+interpolation_color_space = 1
+offsets = PackedFloat32Array(0, 0.52518, 1)
+colors = PackedColorArray(1, 0.533333, 1, 1, 1, 1, 0.533333, 1, 0.533333, 1, 1, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_bf11h"]
-gradient = SubResource("Gradient_m3b0y")
-width = 1
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_76hyd"]
+frequency = 1.0
 
-[sub_resource type="Gradient" id="Gradient_g6i10"]
-interpolation_mode = 1
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_417hp"]
+width = 4
+height = 4
+in_3d_space = true
+seamless = true
+seamless_blend_skirt = 1.0
+color_ramp = SubResource("Gradient_x5r0y")
+noise = SubResource("FastNoiseLite_76hyd")
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_rh6c3"]
-gradient = SubResource("Gradient_g6i10")
-fill = 2
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(1, 1)
-metadata/_snap_enabled = true
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_i52o2"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vd1sj"]
-render_priority = 0
-shader = ExtResource("1_gq48b")
-shader_parameter/albedo = 1.0
-shader_parameter/albedo_texture = SubResource("GradientTexture1D_bf11h")
-shader_parameter/emission = 1.0
-shader_parameter/emission_texture = SubResource("GradientTexture2D_rh6c3")
-shader_parameter/metallic = 0.31
-shader_parameter/roughness = 0.5
-shader_parameter/view_range = 1.0
-shader_parameter/distance_fade = 0.0
-shader_parameter/scale = Vector2(4, 4)
-shader_parameter/is_cubic = true
-shader_parameter/random = SubResource("NoiseTexture2D_i52o2")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tnx21"]
+albedo_texture = SubResource("NoiseTexture2D_417hp")
+roughness = 0.75
+emission_enabled = true
+uv1_scale = Vector3(3, 2, 1)
+texture_filter = 0
 
 [sub_resource type="Gradient" id="Gradient_xljon"]
 interpolation_mode = 1
@@ -170,20 +147,6 @@ size = Vector3(4, 4, 4)
 [sub_resource type="PrismMesh" id="PrismMesh_bwd1s"]
 size = Vector3(10, 7, 7)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_uyamm"]
-render_priority = 0
-shader = ExtResource("1_gq48b")
-shader_parameter/albedo = 0.0
-shader_parameter/albedo_texture = SubResource("GradientTexture1D_bf11h")
-shader_parameter/emission = 1.0
-shader_parameter/emission_texture = SubResource("GradientTexture2D_rh6c3")
-shader_parameter/metallic = 0.0
-shader_parameter/roughness = 1.0
-shader_parameter/view_range = 1.0
-shader_parameter/distance_fade = 0.0
-shader_parameter/scale = Vector2(8, 6)
-shader_parameter/is_cubic = true
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xp2qq"]
 no_depth_test = true
 shading_mode = 0
@@ -205,16 +168,15 @@ use_collision = true
 collision_layer = 2
 collision_mask = 0
 mesh = SubResource("PlaneMesh_ftwah")
-material = SubResource("ShaderMaterial_t5as1")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.657375, -0.405998, 0.634841, 0, 0.842453, 0.538771, -0.753563, 0.354175, -0.553807, 0, 6, 0)
-visible = false
+transform = Transform3D(0.642788, 0.262003, -0.719846, 0, 0.939693, 0.34202, 0.766044, -0.219846, 0.604023, 0, 6, 0)
+light_energy = 0.75
 shadow_enabled = true
-shadow_bias = 0.03
+shadow_bias = 0.05
 
 [node name="Environment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_oua17")
+environment = SubResource("Environment_sfs7y")
 
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
@@ -226,7 +188,7 @@ use_collision = true
 collision_layer = 2
 collision_mask = 0
 mesh = SubResource("BoxMesh_7w6j5")
-material = SubResource("ShaderMaterial_vd1sj")
+material = SubResource("StandardMaterial3D_tnx21")
 
 [node name="CSGMesh3D3" type="CSGMesh3D" parent="Node3D"]
 transform = Transform3D(-4.47035e-08, 0, 1, 0, 1, 0, -1, 0, -4.47035e-08, 4, -6.5, -2)
@@ -235,7 +197,7 @@ use_collision = true
 collision_layer = 2
 collision_mask = 0
 mesh = SubResource("BoxMesh_7w6j5")
-material = SubResource("ShaderMaterial_vd1sj")
+material = SubResource("StandardMaterial3D_tnx21")
 
 [node name="CSGMesh3D4" type="CSGMesh3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 17)
@@ -276,7 +238,7 @@ use_collision = true
 collision_layer = 2
 collision_mask = 0
 mesh = SubResource("BoxMesh_cajrl")
-material = SubResource("ShaderMaterial_vd1sj")
+material = SubResource("StandardMaterial3D_tnx21")
 
 [node name="CSGMesh3D11" type="CSGMesh3D" parent="Node3D"]
 transform = Transform3D(-0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 4, -6.5, 11)
@@ -285,7 +247,7 @@ use_collision = true
 collision_layer = 2
 collision_mask = 0
 mesh = SubResource("BoxMesh_b12jg")
-material = SubResource("ShaderMaterial_vd1sj")
+material = SubResource("StandardMaterial3D_tnx21")
 
 [node name="CSGMesh3D9" type="CSGMesh3D" parent="Node3D"]
 transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 2, -5.5, -6)
@@ -294,7 +256,7 @@ use_collision = true
 collision_layer = 2
 collision_mask = 0
 mesh = SubResource("BoxMesh_kyk23")
-material = SubResource("ShaderMaterial_vd1sj")
+material = SubResource("StandardMaterial3D_tnx21")
 
 [node name="CSGMesh3D12" type="CSGMesh3D" parent="Node3D"]
 transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, -11, -3.5, -9)
@@ -303,7 +265,7 @@ use_collision = true
 collision_layer = 2
 collision_mask = 0
 mesh = SubResource("BoxMesh_sxueq")
-material = SubResource("ShaderMaterial_vd1sj")
+material = SubResource("StandardMaterial3D_tnx21")
 
 [node name="CSGMesh3D14" type="CSGMesh3D" parent="Node3D"]
 transform = Transform3D(-0.707107, -0.5, 0.5, 2.17749e-08, 0.707107, 0.707107, -0.707107, 0.5, -0.5, -16, -5.49078, 16)
@@ -312,7 +274,7 @@ use_collision = true
 collision_layer = 2
 collision_mask = 0
 mesh = SubResource("PrismMesh_bwd1s")
-material = SubResource("ShaderMaterial_uyamm")
+material = SubResource("StandardMaterial3D_tnx21")
 
 [node name="CSGMesh3D15" type="CSGMesh3D" parent="Node3D"]
 transform = Transform3D(0.707107, 0.5, -0.5, 6.39218e-08, 0.707107, 0.707107, 0.707107, -0.5, 0.5, -16, -5.49078, 16)
@@ -321,7 +283,7 @@ use_collision = true
 collision_layer = 2
 collision_mask = 0
 mesh = SubResource("PrismMesh_bwd1s")
-material = SubResource("ShaderMaterial_uyamm")
+material = SubResource("StandardMaterial3D_tnx21")
 
 [node name="CSGMesh3D13" type="CSGMesh3D" parent="Node3D"]
 transform = Transform3D(-1, 0, 7.45058e-08, 0, 1, 0, -7.45058e-08, 0, -1, 11, -3.5, -10)
@@ -330,7 +292,7 @@ use_collision = true
 collision_layer = 2
 collision_mask = 0
 mesh = SubResource("BoxMesh_sxueq")
-material = SubResource("ShaderMaterial_vd1sj")
+material = SubResource("StandardMaterial3D_tnx21")
 
 [node name="CSGMesh3D10" type="CSGMesh3D" parent="Node3D"]
 transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, 9, -5.5, 9)
@@ -339,7 +301,7 @@ use_collision = true
 collision_layer = 2
 collision_mask = 0
 mesh = SubResource("BoxMesh_kyk23")
-material = SubResource("ShaderMaterial_vd1sj")
+material = SubResource("StandardMaterial3D_tnx21")
 
 [node name="Spawnpoints" type="Node3D" parent="."]
 
@@ -353,6 +315,7 @@ mesh = SubResource("CylinderMesh_1mmdv")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.29285, 0)
+visible = false
 light_specular = 0.25
 light_bake_mode = 1
 shadow_enabled = true
