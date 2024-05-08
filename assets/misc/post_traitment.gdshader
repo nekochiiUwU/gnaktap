@@ -2,8 +2,9 @@ shader_type canvas_item;
 
 uniform sampler2D SCREEN_TEXTURE: hint_screen_texture;
 
-uniform vec3   velocity = vec3(0.);
-uniform vec3   rotation = vec3(0.);
+uniform vec3     velocity = vec3(0.);
+uniform vec3     rotation = vec3(0.);
+uniform float  absolute_y = 0.;
 uniform float sneak_value = 0.;
 
 group_uniforms motion_blur;
@@ -19,12 +20,13 @@ uniform float  MOTION_SEEKNESS  = 1.;
 vec4 motion_blur_fragment(in vec2 _SCREEN_UV)
 {
 	vec2 offset = vec2(0.);
-	offset += vec2(velocity.x, velocity.y) * LINEAR_INTENSITY*.001;
-	offset += vec2(rotation.y, rotation.x) * RADIAL_INTENSITY*.01;
+	offset += vec2(velocity.x, -velocity.y) * LINEAR_INTENSITY*.1;
+	offset += vec2(rotation.y, rotation.x) * RADIAL_INTENSITY;
 	if (velocity.z <= 0.)
-		offset += (_SCREEN_UV*4.-2.)*((-1.*velocity.z)/(velocity.z-2.))*LINEAR_INTENSITY*.01;
+		offset += (_SCREEN_UV*4.-2.)*((-1.*velocity.z)/(velocity.z-2.))*LINEAR_INTENSITY*10.;
 	else
-		offset += (_SCREEN_UV*1.-.5)*velocity.z*LINEAR_INTENSITY*.01;
+		offset += (_SCREEN_UV*1.-.5)*velocity.z*LINEAR_INTENSITY*1.;
+	offset /= vec2(1000., 1000.);
 	if (CORRECTION)
 	{
 		vec2 correction = vec2(sign(offset.x)/2.+.5, sign(offset.y)/2.+.5);
@@ -57,7 +59,7 @@ vec4 motion_blur_fragment(in vec2 _SCREEN_UV)
 
 vec3 vignette(in vec2 _SCREEN_UV) // Change name
 {
-	float factor = -max(velocity.y, 0.)*.1;
+	float factor = -min(absolute_y, 0.)*.1;
 	factor = (exp(-pow(factor/5., -2.))*.5)+sneak_value+pow(rotation.x+rotation.y+rotation.z, .33)*.01;
 	//factor = -max(velocity.y, 0.)*.01;
 	return vec3(pow(_SCREEN_UV.x*2.-1., 2)+pow(_SCREEN_UV.y*2.-1., 2))*(log(1.+factor));

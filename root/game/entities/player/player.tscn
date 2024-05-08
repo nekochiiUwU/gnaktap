@@ -30,15 +30,16 @@ height = 0.9
 shader = ExtResource("2_gb0na")
 shader_parameter/velocity = Vector3(0, 0, 0)
 shader_parameter/rotation = Vector3(0, 0, 0)
+shader_parameter/absolute_y = 0.0
 shader_parameter/sneak_value = 0.0
 shader_parameter/MOTION_BLUR_ENABLED = true
 shader_parameter/SAMPLE_COUNT = 4
-shader_parameter/INTENSITY = 0.5
+shader_parameter/INTENSITY = 1.0
 shader_parameter/CORRECTION = true
-shader_parameter/ALTERNATIVE_CORRECTION = true
+shader_parameter/ALTERNATIVE_CORRECTION = false
 shader_parameter/LINEAR_INTENSITY = 1.0
 shader_parameter/RADIAL_INTENSITY = 1.0
-shader_parameter/MOTION_SEEKNESS = 0.5
+shader_parameter/MOTION_SEEKNESS = 2.0
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_p2muh"]
 size = Vector2(1152, 648)
@@ -66,11 +67,22 @@ shape = SubResource("CapsuleShape3D_a7pkv")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CapsuleShape3D_77dev")
 
+[node name="WallrideR1" type="RayCast3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -0.25, 0)
+
+[node name="WallrideR2" type="RayCast3D" parent="."]
+transform = Transform3D(-2.18557e-08, -0.5, -0.866025, 1, -4.37114e-08, 0, -3.78552e-08, -0.866025, 0.5, 0, -0.25, 0)
+
+[node name="WallrideL1" type="RayCast3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -0.25, 0)
+
+[node name="WallrideL2" type="RayCast3D" parent="."]
+transform = Transform3D(-2.18557e-08, 0.5, 0.866025, -1, -4.37114e-08, 0, 3.78552e-08, -0.866025, 0.5, 0, -0.25, 0)
+
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
 
 [node name="Light" type="SpotLight3D" parent="Head"]
-visible = false
 spot_range = 10.0
 spot_angle = 60.0
 

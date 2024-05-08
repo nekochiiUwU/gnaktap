@@ -114,12 +114,12 @@ func _physics_process(delta):
 				get_node("%Camera").fov += min(abs(get_real_velocity().length())*.05, 160)
 		if position.y < -30:
 			die()
-		get_node("Head/UI/PostProcess").material.set_shader_parameter("velocity", 
-			get_node("Head/UI/PostProcess").material.get_shader_parameter("velocity") + (input+velocity.y*Vector3.DOWN) * delta*60
-		)
-		get_node("Head/UI/PostProcess").material.set_shader_parameter("velocity", 
-			Vector3(get_node("Head/UI/PostProcess").material.get_shader_parameter("velocity")) / (1.+delta*60.)
-		)
+		get_node("Head/UI/PostProcess").material.set_shader_parameter("velocity", Vector3(
+			velocity.length()*velocity.dot($Head/Camera.global_basis.x), 
+			velocity.length()*velocity.dot($Head/Camera.global_basis.y), 
+			velocity.length()*velocity.dot($Head/Camera.global_basis.z)
+		)*delta)
+		get_node("Head/UI/PostProcess").material.set_shader_parameter("absolute_y", velocity.y*delta)
 
 
 var dt: float = 0.

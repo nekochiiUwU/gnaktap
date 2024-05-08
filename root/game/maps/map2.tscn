@@ -51,24 +51,24 @@ sky_material = SubResource("PanoramaSkyMaterial_efc00")
 
 [sub_resource type="Environment" id="Environment_sfs7y"]
 background_mode = 2
-background_energy_multiplier = 0.9
+background_energy_multiplier = 0.0
 sky = SubResource("Sky_huobj")
 ambient_light_source = 3
 ambient_light_sky_contribution = 0.75
 ambient_light_energy = 0.75
 reflected_light_source = 2
 tonemap_exposure = 0.9
-glow_enabled = true
 glow_levels/2 = 0.2
 glow_levels/3 = 0.4
 glow_levels/4 = 0.6
 glow_levels/5 = 0.8
 glow_levels/6 = 1.0
 glow_levels/7 = 1.2
+glow_normalized = true
 glow_strength = 1.25
 glow_blend_mode = 0
-fog_light_color = Color(0.627451, 0.690196, 0.768627, 1)
-fog_density = 0.05
+fog_light_color = Color(0, 0, 0, 1)
+fog_density = 0.2
 volumetric_fog_emission = Color(0.439216, 0.439216, 0.439216, 1)
 volumetric_fog_anisotropy = 0.8
 volumetric_fog_length = 10.0
@@ -171,9 +171,13 @@ mesh = SubResource("PlaneMesh_ftwah")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.642788, 0.262003, -0.719846, 0, 0.939693, 0.34202, 0.766044, -0.219846, 0.604023, 0, 6, 0)
+visible = false
 light_energy = 0.75
 shadow_enabled = true
 shadow_bias = 0.05
+directional_shadow_split_2 = 0.3
+directional_shadow_fade_start = 0.5
+directional_shadow_pancake_size = 1.0
 
 [node name="Environment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_sfs7y")

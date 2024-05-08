@@ -26,6 +26,10 @@ game/camera_rotation=true
 
 settings/stdout/print_fps=true
 
+[display]
+
+window/vsync/vsync_mode=0
+
 [input]
 
 move_forward={
