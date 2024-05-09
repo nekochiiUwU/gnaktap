@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://weitoykb1612"]
 
-[ext_resource type="Script" path="res://root/game/entities/player/player.gd" id="1_ayqu4"]
+[ext_resource type="Script" path="res://root/game/entities/player/Player.gd" id="1_humwg"]
 [ext_resource type="Shader" path="res://assets/misc/post_traitment.gdshader" id="2_gb0na"]
 [ext_resource type="PackedScene" uid="uid://bk3p2jyntv3bd" path="res://root/game/entities/player/weapons/M4A1/M4A1.tscn" id="2_h85o5"]
 [ext_resource type="PackedScene" uid="uid://660few3mqdcj" path="res://root/game/entities/player/weapons/cut/cut.tscn" id="3_djnnl"]
@@ -79,7 +79,7 @@ skew = Vector2(1, 0)
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 0, 1, 0)
 collision_mask = 2
-script = ExtResource("1_ayqu4")
+script = ExtResource("1_humwg")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_ogwai")
