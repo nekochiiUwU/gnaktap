@@ -51,19 +51,21 @@ sky_material = SubResource("PanoramaSkyMaterial_efc00")
 
 [sub_resource type="Environment" id="Environment_sfs7y"]
 background_mode = 2
-background_energy_multiplier = 0.0
+background_energy_multiplier = 0.9
 sky = SubResource("Sky_huobj")
 ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_sky_contribution = 0.75
 ambient_light_energy = 0.75
 reflected_light_source = 2
-tonemap_exposure = 0.9
-glow_levels/2 = 0.2
-glow_levels/3 = 0.4
-glow_levels/4 = 0.6
+tonemap_exposure = 0.8
+glow_enabled = true
+glow_levels/2 = 0.1
+glow_levels/3 = 0.2
+glow_levels/4 = 0.4
 glow_levels/5 = 0.8
-glow_levels/6 = 1.0
-glow_levels/7 = 1.2
+glow_levels/6 = 1.6
+glow_levels/7 = 3.2
 glow_normalized = true
 glow_strength = 1.25
 glow_blend_mode = 0
@@ -171,7 +173,6 @@ mesh = SubResource("PlaneMesh_ftwah")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.642788, 0.262003, -0.719846, 0, 0.939693, 0.34202, 0.766044, -0.219846, 0.604023, 0, 6, 0)
-visible = false
 light_energy = 0.75
 shadow_enabled = true
 shadow_bias = 0.05

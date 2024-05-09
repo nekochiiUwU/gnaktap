@@ -5,3 +5,4 @@ res://a.gdshader
 res://root/game/entities/player/player.tscn
 res://root/game/maps/map2.tscn
 res://root/game/entities/player/player.gd
+res://root/game/entities/player/weapons/M4A1/M4A1.tscn

@@ -83,7 +83,7 @@ func _input(event):
 			if event is InputEventMouseMotion:
 				rotation_process(event.relative*mouse_sensi)
 
-
+var friction: float = 100
 func _physics_process(delta):
 	#joy_sensi = mouse_sensi * 10000
 	if is_multiplayer_authority():
@@ -93,17 +93,21 @@ func _physics_process(delta):
 		input *= x
 		gravity = (2-x/2)*-ProjectSettings.get_setting("physics/3d/default_gravity")
 		input = Vector3(input.x, 0, input.y)
-		velocity += transform.basis * input * delta * 100
+		velocity += transform.basis * input * delta * (friction/2+50)
 		if is_on_floor():
+			friction += 100*delta
+			friction /= 1+delta
 			if Input.is_action_pressed("jump"):
 				velocity.y = jump
 		else:
+			friction += 1*delta/10
+			friction /= 1+delta/10
 			velocity.y += gravity * delta
-		velocity.x /= 1 + delta * 100
-		velocity.z /= 1 + delta * 100
-
+		velocity.x /= 1 + delta * friction
+		velocity.z /= 1 + delta * friction
+		#print(friction)
 		move_and_slide()
-		#print("Speed: ", round((velocity * Vector3(1, 0, 1)).length()*10)/10)
+		print("Speed: ", round((velocity * Vector3(1, 0, 1)).length()*10)/10)
 		#print("Gravity: ", round(-gravity*10)/10)
 		if is_on_floor():
 			dt += abs(velocity.x) + abs(velocity.z)
@@ -144,7 +148,8 @@ func _process(delta):
 			$Head.rotation.z -= velocity.dot(transform.basis.x) * delta*.05
 		$Head.rotation.z /= 1 + delta*10
 		get_node("Arm/Hand").rotation.z = -$Head.rotation.z
-		get_node("%Camera").fov = (get_node("%Camera").fov - 100) / 1.2 + 100
+		get_node("%Camera").fov = (get_node("%Camera").fov - 100+crouch_value*20) / 1.2 + 100 - crouch_value*20
+		$Arm/Hand.rotation.z = crouch_value/10
 		if ProjectSettings.get_setting("custom/game/camera_bounce"):
 			var x = float(is_on_floor()) * min(abs(velocity.x)+abs(velocity.z), 1)
 			get_node("%Camera").position.x += (pow(sin(dt*.018), 1)*.25-.125) * delta * 10 * x
@@ -157,8 +162,10 @@ func _process(delta):
 			$Head.rotation.x += (pow(cos(dt*.018), 2)*.02-.01) * delta * 10 * x
 			$Arm/Hand.position.x += (pow(sin(dt*.018), 1)*.225-.1125) * delta * 10 * x
 			$Arm/Hand.position.y += (pow(cos(dt*.018), 2)*.3-0.15) * delta * 10 * x
-			$Arm/Hand.position.z += (pow(sin(dt*.036), 1)*.005-.0025-.1) * delta * 10 * x 
-			$Arm/Hand.position += Vector3(0, 0, -.1) * delta * 10 * (1-x)
+			$Arm/Hand.position.z += (pow(sin(dt*.036), 1)*.005-.0025-.1) * delta * 10 * x
+			$Arm/Hand.position.x += -velocity.dot($Head/Camera.global_basis.x)*.005 * delta * 10
+			$Arm/Hand.position.z += -velocity.dot($Head/Camera.global_basis.z)*.005 * delta * 10
+			$Arm/Hand.position += Vector3(0, -log(abs(velocity.y+1))*sign(velocity.y)*.02, -.1) * delta * 10 * (1-x)
 			$Arm/Hand.position /= 1+delta*10
 		else:
 			get_node("Head").position = get_node("%Camera").position + Vector3(0, 0.45, 0.4)

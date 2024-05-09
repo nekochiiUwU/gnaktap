@@ -26,7 +26,7 @@ vec4 motion_blur_fragment(in vec2 _SCREEN_UV)
 		offset += (_SCREEN_UV*4.-2.)*((-1.*velocity.z)/(velocity.z-2.))*LINEAR_INTENSITY*10.;
 	else
 		offset += (_SCREEN_UV*1.-.5)*velocity.z*LINEAR_INTENSITY*1.;
-	offset /= vec2(1000., 1000.);
+	offset /= vec2(500., 500.);
 	if (CORRECTION)
 	{
 		vec2 correction = vec2(sign(offset.x)/2.+.5, sign(offset.y)/2.+.5);
