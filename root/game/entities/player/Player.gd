@@ -23,7 +23,7 @@ var crouch_value:      float =  0.
 
 var interact_objects: Array = []
 var current_interact = null
-
+var speed_modifyer: float = 1.
 
 var inventory = {
 	"weapons": [
@@ -78,6 +78,7 @@ func calibrate_ui():
 
 
 func _input(event):
+	speed = 10.
 	if is_multiplayer_authority():
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			if event is InputEventMouseMotion:
@@ -89,6 +90,7 @@ func _physics_process(delta):
 	if is_multiplayer_authority():
 		var input = Input.get_vector("move_left", "move_right", "move_forward", "move_backward").normalized()
 		input *= speed*(1-crouch_value)+crouch_speed*crouch_value
+		input *= speed_modifyer
 		var x = 50/(inventory.weapons[active_weapon].weight+50)
 		input *= x
 		gravity = (2-x/2)*-ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -107,10 +109,10 @@ func _physics_process(delta):
 		velocity.z /= 1 + delta * friction
 		#print(friction)
 		move_and_slide()
-		print("Speed: ", round((velocity * Vector3(1, 0, 1)).length()*10)/10)
+		#print("Speed: ", round((velocity * Vector3(1, 0, 1)).length()*10)/10)
 		#print("Gravity: ", round(-gravity*10)/10)
 		if is_on_floor():
-			dt += abs(velocity.x) + abs(velocity.z)
+			dt += (abs(velocity.x) + abs(velocity.z))*.75
 			if ProjectSettings.get_setting("custom/game/dynamic_fov"):
 				get_node("%Camera").fov += min((abs(get_real_velocity().x) + abs(get_real_velocity().z))*.1, 160)
 		else:
@@ -142,29 +144,31 @@ func _process(delta):
 			switch_weapon(0)
 		elif Input.is_action_pressed("change_to_secondary_weapon"):
 			switch_weapon(1)
-		weapon_process(delta)
 		rpc("online_synchronisation", get_online_synchronisation_data())
 		if ProjectSettings.get_setting("custom/game/camera_rotation"):
-			$Head.rotation.z -= velocity.dot(transform.basis.x) * delta*.05
+			$Head.rotation.z -= velocity.dot(transform.basis.x) * delta*.04
 		$Head.rotation.z /= 1 + delta*10
-		get_node("Arm/Hand").rotation.z = -$Head.rotation.z
+		get_node("Arm/Hand").rotation.y += -$Head.rotation.z*2
+		get_node("Arm/Hand").rotation.y /= 2.
 		get_node("%Camera").fov = (get_node("%Camera").fov - 100+crouch_value*20) / 1.2 + 100 - crouch_value*20
 		$Arm/Hand.rotation.z = crouch_value/10
+		get_node("Arm/Hand").rotation.z += $Head.rotation.z*2
 		if ProjectSettings.get_setting("custom/game/camera_bounce"):
-			var x = float(is_on_floor()) * min(abs(velocity.x)+abs(velocity.z), 1)
-			get_node("%Camera").position.x += (pow(sin(dt*.018), 1)*.25-.125) * delta * 10 * x
-			get_node("%Camera").position.y += (pow(cos(dt*.018), 2)*.35-0.175) * delta * 10 * x
-			get_node("%Camera").position.z += (pow(sin(dt*.036), 1)*.01-.005-.4) * delta * 10 * x 
+			var x = float(is_on_floor()) * min(abs(velocity.x)+abs(velocity.z), 1)*min(speed_modifyer*2, 2)*(1-crouch_value)
+			x /= 2
+			get_node("%Camera").position.x += (pow(sin(dt*.02), 1)*.25-.125) * delta * 10 * x
+			get_node("%Camera").position.y += (pow(cos(dt*.02), 2)*.35-0.175) * delta * 10 * x
+			get_node("%Camera").position.z += (pow(sin(dt*.04), 1)*.01-.005-.4) * delta * 10 * x 
 			get_node("%Camera").position += Vector3(0, 0, -0.4) * delta * 10 * (1-x)
 			get_node("%Camera").position /= 1+delta*10
-			$Head.rotation.z += -(pow(cos(dt*.009), 2)*.01-.005) * delta * 10 * x
-			$Head.rotation.z += (pow(cos(dt*.0045), 2)*.01-.005) * delta * 10 * x
-			$Head.rotation.x += (pow(cos(dt*.018), 2)*.02-.01) * delta * 10 * x
-			$Arm/Hand.position.x += (pow(sin(dt*.018), 1)*.225-.1125) * delta * 10 * x
-			$Arm/Hand.position.y += (pow(cos(dt*.018), 2)*.3-0.15) * delta * 10 * x
-			$Arm/Hand.position.z += (pow(sin(dt*.036), 1)*.005-.0025-.1) * delta * 10 * x
-			$Arm/Hand.position.x += -velocity.dot($Head/Camera.global_basis.x)*.005 * delta * 10
-			$Arm/Hand.position.z += -velocity.dot($Head/Camera.global_basis.z)*.005 * delta * 10
+			$Head.rotation.z += -(pow(cos(dt*.01), 2)*.01-.005) * delta * 10 * x
+			$Head.rotation.z += (pow(cos(dt*.005), 2)*.01-.005) * delta * 10 * x
+			$Head.rotation.x += (pow(cos(dt*.02), 2)*.02-.01) * delta * 10 * x
+			$Arm/Hand.position.x += (pow(sin(dt*.02), 1)*.225-.1125) * delta * 10 * x
+			$Arm/Hand.position.y += (pow(cos(dt*.02), 2)*.3-0.15) * delta * 10 * x
+			$Arm/Hand.position.z += (pow(sin(dt*.04), 1)*.005-.0025-.1) * delta * 10 * x
+			$Arm/Hand.position.x += -velocity.dot($Head/Camera.global_basis.x)*.002 * delta * 10
+			$Arm/Hand.position.z += -velocity.dot($Head/Camera.global_basis.z)*.002 * delta * 10
 			$Arm/Hand.position += Vector3(0, -log(abs(velocity.y+1))*sign(velocity.y)*.02, -.1) * delta * 10 * (1-x)
 			$Arm/Hand.position /= 1+delta*10
 		else:
@@ -173,6 +177,9 @@ func _process(delta):
 		get_node("Head/UI/PostProcess").material.set_shader_parameter("rotation", 
 			get_node("Head/UI/PostProcess").material.get_shader_parameter("rotation") / (1+delta*60)
 		)
+		get_node("Head/Camera").rotation /= 1+delta*5
+		get_node("Head/Camera").position += Vector3(0, 0, -.4)*delta*5
+		get_node("Head/Camera").position /= 1+delta*5
 
 
 func crouch_process():
@@ -215,17 +222,6 @@ func rotation_process(angle: Vector2):
 		get_node("Head/UI/PostProcess").material.set_shader_parameter("rotation", 
 			get_node("Head/UI/PostProcess").material.get_shader_parameter("rotation") - Vector3(angle.y, angle.x, 0)*60
 		)
-
-
-func weapon_process(delta):
-	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		if Input.is_action_pressed("primary_attack"):
-			get_node("Arm/Hand/"+str(active_weapon)).primary_process(delta)
-			return
-		elif Input.is_action_pressed("secondary_attack"):
-			get_node("Arm/Hand/"+str(active_weapon)).secondary_process(delta)
-			return
-	get_node("Arm/Hand/"+str(active_weapon)).idle_process(delta)
 
 
 func spawn():

@@ -1,0 +1,27 @@
+[gd_resource type="AudioBusLayout" load_steps=4 format=3 uid="uid://cktm0xsmn5m3u"]
+
+[sub_resource type="AudioEffectEQ" id="AudioEffectEQ_f7xwy"]
+resource_name = "EQ"
+band_db/100_hz = -60.0
+band_db/320_hz = -60.0
+band_db/1000_hz = -60.0
+band_db/3200_hz = -60.0
+band_db/10000_hz = -60.0
+
+[sub_resource type="AudioEffectDelay" id="AudioEffectDelay_besnn"]
+resource_name = "Delay"
+dry = 0.0
+tap1_level_db = 0.0
+tap2_delay_ms = 1500.0
+tap2_level_db = 0.0
+
+[sub_resource type="AudioEffectChorus" id="AudioEffectChorus_ollol"]
+resource_name = "Chorus"
+
+[resource]
+bus/0/effect/0/effect = SubResource("AudioEffectEQ_f7xwy")
+bus/0/effect/0/enabled = true
+bus/0/effect/1/effect = SubResource("AudioEffectDelay_besnn")
+bus/0/effect/1/enabled = false
+bus/0/effect/2/effect = SubResource("AudioEffectChorus_ollol")
+bus/0/effect/2/enabled = false

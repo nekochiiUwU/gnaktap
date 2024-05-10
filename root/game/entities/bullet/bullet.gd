@@ -2,21 +2,25 @@ extends CharacterBody3D
 
 var spawntime
 var game
-var damages
+var damages:     float = 20.
 var _owner:     String
 var speed:       float =  50.
 var grav:        float =  12.
 var lifetime = 1
 
-func _ready():
+func init(__owner, _damages, _speed):
+	_owner = __owner
 	if _owner == str(multiplayer.get_unique_id()):
 		get_node("Collision").queue_free()
 	game = get_node("../..")
 	spawntime = game.time
+	damages = _damages
+	speed = _speed
 	velocity = -transform.basis.z * speed
 
 
 func _physics_process(delta):
+	$Light.light_energy /= 1+delta*30
 	velocity.y -= grav*delta
 	var collision = move_and_collide(velocity*delta)
 	if game.time - spawntime > lifetime:

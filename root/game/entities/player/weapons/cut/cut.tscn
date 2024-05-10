@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://660few3mqdcj"]
+[gd_scene load_steps=15 format=3 uid="uid://660few3mqdcj"]
 
 [ext_resource type="Script" path="res://root/game/entities/player/weapons/cut/cut.gd" id="1_mgti4"]
 
@@ -156,135 +156,6 @@ shadow_mesh = SubResource("ArrayMesh_f8wpk")
 [sub_resource type="BoxShape3D" id="BoxShape3D_shao1"]
 size = Vector3(0.308609, 0.505891, 0.0556827)
 
-[sub_resource type="Animation" id="Animation_oq1lx"]
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.5),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.35, -0.2, -0.6)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.5),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-0.733038, 1.5708, -0.349066)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Area3D:monitoring")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_hshte"]
-resource_name = "slash"
-length = 0.8
-loop_mode = 1
-step = 0.025
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.325, 0.4, 0.425, 0.55, 0.8),
-"transitions": PackedFloat32Array(1, 0.267944, 1, 1, 1, 4.28709, 1),
-"update": 0,
-"values": [Vector3(0.35, -0.2, -0.6), Vector3(0.539436, -0.163793, -0.610106), Vector3(0.52575, -0.161116, -0.696036), Vector3(0.184235, -0.234931, -0.786735), Vector3(-0.700849, -0.266208, -0.736816), Vector3(-0.732184, -0.273747, -0.632709), Vector3(0.35, -0.2, -0.6)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.325, 0.4, 0.425, 0.525, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1.23115, 1),
-"update": 0,
-"values": [Vector3(-0.733038, 1.5708, -0.349066), Vector3(0.746972, 1.08609, -0.0199013), Vector3(0.893034, 0.972216, -0.531417), Vector3(0.893034, 1.36469, -1.45052), Vector3(1.4941, 2.40359, -2.01529), Vector3(0.698132, 1.92161, -0.0907571), Vector3(-0.733038, 1.5708, -0.349066)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Area3D:monitoring")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.325, 0.55),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [false, true, false]
-}
-
-[sub_resource type="Animation" id="Animation_6ppby"]
-resource_name = "stab"
-length = 0.45
-step = 0.025
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.175, 0.35, 0.45),
-"transitions": PackedFloat32Array(1, 1, 0.170755, 1.10957, 1),
-"update": 0,
-"values": [Vector3(0.35, -0.2, -0.6), Vector3(0.35, -0.2, -0.448258), Vector3(0.236, -0.2, -1.027), Vector3(0.195701, -0.2, -0.839906), Vector3(0.35, -0.2, -0.6)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.075, 0.15, 0.375, 0.45),
-"transitions": PackedFloat32Array(1, 1, 0.241484, 0.683022, 1),
-"update": 0,
-"values": [Vector3(-0.733038, 1.5708, -0.349066), Vector3(-0.426019, 1.61339, -1.21959), Vector3(-0.192502, 1.64887, -1.40797), Vector3(-0.203622, 1.61126, -1.21741), Vector3(-0.733038, 1.5708, -0.349066)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Area3D:monitoring")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [false, true, false]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_tsudw"]
-_data = {
-"RESET": SubResource("Animation_oq1lx"),
-"slash": SubResource("Animation_hshte"),
-"stab": SubResource("Animation_6ppby")
-}
-
 [node name="Cut" type="Node3D"]
 transform = Transform3D(0.228853, -0.628778, 0.743145, -0.254171, 0.698328, 0.66913, -0.939694, -0.342018, -2.69018e-06, 0.35, -0.2, -0.6)
 script = ExtResource("1_mgti4")
@@ -315,10 +186,5 @@ monitorable = false
 [node name="Collision" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.273515, 0)
 shape = SubResource("BoxShape3D_shao1")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_tsudw")
-}
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
