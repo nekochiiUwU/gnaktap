@@ -13,13 +13,17 @@ func primary_process(_delta):
 			randf()*.04-.02,
 			0
 		)*2
-		rotation += rot
-		get_node("../../../Head/Camera").rotation += rot*.5
-		get_node("../../../Head/Camera").position.y -= rot.y
+		rotation += rot.x*-global_basis.x
+		rotation += rot.y*global_basis.y
+		rotation += rot.z*global_basis.z
+		get_node("../../../Head/Camera").rotation += rot.x*.5*-global_basis.x
+		get_node("../../../Head/Camera").rotation += rot.y*.5*global_basis.y
+		get_node("../../../Head/Camera").rotation += rot.z*.5*global_basis.z
+		get_node("../../../Head/Camera").position -= rot.y*global_basis.y
 		#get_node("../../../Head/Camera").position.x += rot.x
 		position.x += -rot.x
 		position.y += -rot.y
-		position.z += .02
+		position.z += .04
 
 
 @rpc("authority", "call_local", "unreliable")
@@ -43,15 +47,14 @@ func secondary_process(_delta):
 	position += Vector3(.0, 0., -0.75) * _delta*30
 	position /= 1 + _delta*30
 	get_node("../../../Head/Camera").fov *= .75
-	get_node("../../../").speed_modifyer += .5 * _delta*30
-	get_node("../../../").speed_modifyer /= 1 + _delta*30
+	get_node("../../../").speed_modifyer += .5 * _delta*60
+	get_node("../../../").speed_modifyer /= 1 + _delta*60
 	get_node("../../../Head/Camera").fov += log(rotation.length()*100+1)
 	#get_node("../../../Head/Camera").fov /= 1+_delta*60
 
 
 func _process(delta):
 	if is_multiplayer_authority():
-		print(get_node("../../../").active_weapon)
 		rotation.x /= 1+delta*5
 		rotation.y /= 1+delta*5
 		rotation.z /= 1+delta*5
@@ -62,8 +65,8 @@ func _process(delta):
 				if Input.is_action_pressed("secondary_attack"):
 					secondary_process(delta)
 				else:
-					position += Vector3(0.25, -0.1, -0.667) * delta*30
-					position /= 1 + delta*30
+					position += Vector3(0.25, -0.1, -0.667) * delta*10
+					position /= 1 + delta*10
 					get_node("../../../Head/Camera").fov *= 1.
 					get_node("../../../").speed_modifyer += 1. * delta*30
 					get_node("../../../").speed_modifyer /= 1 + delta*30

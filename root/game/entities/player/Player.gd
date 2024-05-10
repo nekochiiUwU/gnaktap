@@ -154,7 +154,7 @@ func _process(delta):
 		$Arm/Hand.rotation.z = crouch_value/10
 		get_node("Arm/Hand").rotation.z += $Head.rotation.z*2
 		if ProjectSettings.get_setting("custom/game/camera_bounce"):
-			var x = float(is_on_floor()) * min(abs(velocity.x)+abs(velocity.z), 1)*min(speed_modifyer*2, 2)*(1-crouch_value)
+			var x = float(is_on_floor()) * min(abs(velocity.x)+abs(velocity.z), 1)*min(speed_modifyer*2, 2)*(1-crouch_value*.8)
 			x /= 2
 			get_node("%Camera").position.x += (pow(sin(dt*.02), 1)*.25-.125) * delta * 10 * x
 			get_node("%Camera").position.y += (pow(cos(dt*.02), 2)*.35-0.175) * delta * 10 * x

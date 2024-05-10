@@ -38,3 +38,4 @@ shape = SubResource("BoxShape3D_cqeve")
 [node name="Light" type="OmniLight3D" parent="."]
 light_color = Color(1, 0.768627, 0, 1)
 light_energy = 2.0
+shadow_enabled = true
