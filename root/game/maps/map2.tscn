@@ -1,20 +1,6 @@
-[gd_scene load_steps=28 format=3 uid="uid://c50m68ro4apnu"]
+[gd_scene load_steps=25 format=3 uid="uid://c50m68ro4apnu"]
 
 [ext_resource type="Texture2D" uid="uid://bdeu4air8gico" path="res://assets/textures/sky_water_landscape.jpg" id="1_oq51g"]
-
-[sub_resource type="Gradient" id="Gradient_v5edv"]
-colors = PackedColorArray(0.12549, 0.501961, 0, 1, 0.25098, 1, 0, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_my8nk"]
-frequency = 1.0
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_06b5m"]
-width = 16
-height = 16
-seamless = true
-seamless_blend_skirt = 1.0
-color_ramp = SubResource("Gradient_v5edv")
-noise = SubResource("FastNoiseLite_my8nk")
 
 [sub_resource type="Gradient" id="Gradient_encro"]
 interpolation_mode = 1
@@ -32,27 +18,27 @@ metadata/_snap_enabled = true
 metadata/_snap_count = 4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hi02g"]
-albedo_texture = SubResource("NoiseTexture2D_06b5m")
-emission_enabled = true
+albedo_color = Color(0, 1, 0, 1)
 emission_energy_multiplier = 0.0
 emission_texture = SubResource("GradientTexture2D_7v1wh")
-uv1_scale = Vector3(50, 50, 50)
 texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ftwah"]
 material = SubResource("StandardMaterial3D_hi02g")
 size = Vector2(100, 100)
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_efc00"]
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_j3f70"]
 panorama = ExtResource("1_oq51g")
+filter = false
 
-[sub_resource type="Sky" id="Sky_huobj"]
-sky_material = SubResource("PanoramaSkyMaterial_efc00")
+[sub_resource type="Sky" id="Sky_amfe7"]
+sky_material = SubResource("PanoramaSkyMaterial_j3f70")
+radiance_size = 0
 
 [sub_resource type="Environment" id="Environment_sfs7y"]
 background_mode = 2
 background_energy_multiplier = 0.9
-sky = SubResource("Sky_huobj")
+sky = SubResource("Sky_amfe7")
 ambient_light_source = 3
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_sky_contribution = 0.75
@@ -206,6 +192,7 @@ material = SubResource("StandardMaterial3D_tnx21")
 
 [node name="CSGMesh3D4" type="CSGMesh3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 17)
+visible = false
 gi_mode = 2
 use_collision = true
 collision_layer = 2
@@ -214,6 +201,7 @@ mesh = SubResource("BoxMesh_xck6w")
 
 [node name="CSGMesh3D5" type="CSGMesh3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, -17)
+visible = false
 gi_mode = 2
 use_collision = true
 collision_layer = 2
@@ -222,6 +210,7 @@ mesh = SubResource("BoxMesh_xck6w")
 
 [node name="CSGMesh3D6" type="CSGMesh3D" parent="Node3D"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 17, -3, 0)
+visible = false
 gi_mode = 2
 use_collision = true
 collision_layer = 2
@@ -230,6 +219,7 @@ mesh = SubResource("BoxMesh_xck6w")
 
 [node name="CSGMesh3D7" type="CSGMesh3D" parent="Node3D"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -17, -3, 0)
+visible = false
 gi_mode = 2
 use_collision = true
 collision_layer = 2

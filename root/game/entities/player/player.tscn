@@ -57,13 +57,13 @@ shader_parameter/rotation = Vector3(0, 0, 0)
 shader_parameter/absolute_y = 0.0
 shader_parameter/sneak_value = 0.0
 shader_parameter/MOTION_BLUR_ENABLED = true
-shader_parameter/SAMPLE_COUNT = 4
+shader_parameter/SAMPLE_COUNT = 8
 shader_parameter/INTENSITY = 1.0
 shader_parameter/CORRECTION = true
 shader_parameter/ALTERNATIVE_CORRECTION = false
 shader_parameter/LINEAR_INTENSITY = 1.0
 shader_parameter/RADIAL_INTENSITY = 1.0
-shader_parameter/MOTION_SEEKNESS = 1.0
+shader_parameter/MOTION_SEEKNESS = 2.0
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_p2muh"]
 size = Vector2(1152, 648)

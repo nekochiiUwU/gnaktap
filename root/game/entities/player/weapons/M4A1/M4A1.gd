@@ -5,24 +5,20 @@ var rps: float = 20.
 var damages: float = 20.
 func primary_process(_delta):
 	var t = get_node("../../../").Game.time
+	rps = 13
 	if t - last_shoot > 1/rps:
 		rpc("shoot", $Lazer.global_position, $Lazer.global_rotation, damages)
 		last_shoot = t
 		var rot = Vector3(
-			randf()*.04-.02+.02, 
-			randf()*.04-.02,
+			randf()*.05-.025+.025, 
+			randf()*.05-.025,
 			0
-		)*2
-		rotation += rot.x*-global_basis.x
-		rotation += rot.y*global_basis.y
-		rotation += rot.z*global_basis.z
-		get_node("../../../Head/Camera").rotation += rot.x*.5*-global_basis.x
-		get_node("../../../Head/Camera").rotation += rot.y*.5*global_basis.y
-		get_node("../../../Head/Camera").rotation += rot.z*.5*global_basis.z
-		get_node("../../../Head/Camera").position -= rot.y*global_basis.y
-		#get_node("../../../Head/Camera").position.x += rot.x
-		position.x += -rot.x
-		position.y += -rot.y
+		)
+		rotation += rot
+		get_node("../../../Head/Camera").rotation += rot/2
+		get_node("../../../Head/Camera").position.y -= rot.x/2
+		position.x -= rot.y
+		position.y -= rot.x
 		position.z += .04
 
 
@@ -35,7 +31,7 @@ func shoot(_position, _rotation, _damages):
 	get_node("../../../../..").add_child(Bullet)
 	Bullet.global_position = _position
 	Bullet.global_rotation = _rotation
-	Bullet.init(str(get_node("../../..").name), _damages, 100)
+	Bullet.init(str(get_node("../../..").name), _damages, 200)
 	
 	
 

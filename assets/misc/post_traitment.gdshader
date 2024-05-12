@@ -60,7 +60,7 @@ vec4 motion_blur_fragment(in vec2 _SCREEN_UV)
 vec3 vignette(in vec2 _SCREEN_UV) // Change name
 {
 	float factor = -min(absolute_y, 0.)*.1;
-	factor = (exp(-pow(factor/5., -2.))*.5)+sneak_value+pow(rotation.x+rotation.y+rotation.z, .33)*.01;
+	factor = sneak_value;//+(exp(-pow(factor/5., -2.))*.5)+pow(rotation.x+rotation.y+rotation.z, .33)*.01;
 	//factor = -max(velocity.y, 0.)*.01;
 	return vec3(pow(_SCREEN_UV.x*2.-1., 2)+pow(_SCREEN_UV.y*2.-1., 2))*(log(1.+factor));
 }
