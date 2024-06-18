@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://660few3mqdcj"]
+[gd_scene load_steps=18 format=3 uid="uid://660few3mqdcj"]
 
 [ext_resource type="Script" path="res://root/game/entities/player/weapons/cut/cut.gd" id="1_mgti4"]
 
@@ -156,24 +156,98 @@ shadow_mesh = SubResource("ArrayMesh_f8wpk")
 [sub_resource type="BoxShape3D" id="BoxShape3D_shao1"]
 size = Vector3(0.308609, 0.505891, 0.0556827)
 
+[sub_resource type="Animation" id="Animation_0wldh"]
+resource_name = "slash"
+length = 0.5
+loop_mode = 1
+step = 0.05
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.35, -0.2, -0.6, 0.1, 1, 0.15, -0.3, -1.1, 0.3, 1, 0.15, -0.15, -0.8, 0.45, 1, 0.35, -0.2, -0.6)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.733038, 1.5708, -0.349066), Vector3(0, 1.91986, -1.5708), Vector3(0, 1.91986, -1.5708)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Area3D:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, false, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_t7wgp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.733038, 1.5708, -0.349066)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Area3D:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7kru0"]
+_data = {
+"RESET": SubResource("Animation_t7wgp"),
+"slash": SubResource("Animation_0wldh")
+}
+
 [node name="Cut" type="Node3D"]
-transform = Transform3D(0.228853, -0.628778, 0.743145, -0.254171, 0.698328, 0.66913, -0.939694, -0.342018, -2.69018e-06, 0.35, -0.2, -0.6)
+transform = Transform3D(0.228853, -0.628778, 0.743145, -0.254171, 0.698328, 0.66913, -0.939694, -0.342018, -2.86736e-06, 0.35, -0.2, -0.6)
 script = ExtResource("1_mgti4")
 
 [node name="Cylinder" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.719452, 0, 6.47037e-09, 0, 1, 1.36642e-08, 2.8549e-09, 2.32936e-08, 0.565492, 0, -0.0166668, -0.000158116)
+layers = 2
 mesh = SubResource("ArrayMesh_0if25")
 
 [node name="Cylinder_001" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.827484, 0, 0, 0, 1, 0, 0, 0, 0.582135, 0, 0.0622736, -0.000158122)
+layers = 2
 mesh = SubResource("ArrayMesh_820b8")
 
 [node name="Cube" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.9, 0, 0, 0, -3.37815, 0, 0, 0, 0.101668, 0, 0.23314, -0.000158122)
+layers = 2
 mesh = SubResource("ArrayMesh_p8tc5")
 
 [node name="Cylinder_002" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.55424, 0, 0, 0, 1, 0, 0, 0, 0.384421, 0, -0.0947802, -0.000158122)
+layers = 2
 mesh = SubResource("ArrayMesh_raaxt")
 
 [node name="Area3D" type="Area3D" parent="."]
@@ -186,5 +260,10 @@ monitorable = false
 [node name="Collision" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.273515, 0)
 shape = SubResource("BoxShape3D_shao1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7kru0")
+}
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

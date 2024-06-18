@@ -45,7 +45,6 @@ ambient_light_sky_contribution = 0.75
 ambient_light_energy = 0.75
 reflected_light_source = 2
 tonemap_exposure = 0.8
-glow_enabled = true
 glow_levels/2 = 0.1
 glow_levels/3 = 0.2
 glow_levels/4 = 0.4
@@ -160,8 +159,9 @@ mesh = SubResource("PlaneMesh_ftwah")
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.642788, 0.262003, -0.719846, 0, 0.939693, 0.34202, 0.766044, -0.219846, 0.604023, 0, 6, 0)
 light_energy = 0.75
-shadow_enabled = true
 shadow_bias = 0.05
+shadow_blur = 2.0
+directional_shadow_mode = 0
 directional_shadow_split_2 = 0.3
 directional_shadow_fade_start = 0.5
 directional_shadow_pancake_size = 1.0
@@ -192,7 +192,6 @@ material = SubResource("StandardMaterial3D_tnx21")
 
 [node name="CSGMesh3D4" type="CSGMesh3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 17)
-visible = false
 gi_mode = 2
 use_collision = true
 collision_layer = 2
@@ -201,7 +200,6 @@ mesh = SubResource("BoxMesh_xck6w")
 
 [node name="CSGMesh3D5" type="CSGMesh3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, -17)
-visible = false
 gi_mode = 2
 use_collision = true
 collision_layer = 2
@@ -210,7 +208,6 @@ mesh = SubResource("BoxMesh_xck6w")
 
 [node name="CSGMesh3D6" type="CSGMesh3D" parent="Node3D"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 17, -3, 0)
-visible = false
 gi_mode = 2
 use_collision = true
 collision_layer = 2
@@ -219,7 +216,6 @@ mesh = SubResource("BoxMesh_xck6w")
 
 [node name="CSGMesh3D7" type="CSGMesh3D" parent="Node3D"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -17, -3, 0)
-visible = false
 gi_mode = 2
 use_collision = true
 collision_layer = 2

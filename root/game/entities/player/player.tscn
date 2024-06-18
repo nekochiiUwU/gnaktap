@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://weitoykb1612"]
+[gd_scene load_steps=17 format=3 uid="uid://weitoykb1612"]
 
 [ext_resource type="Script" path="res://root/game/entities/player/Player.gd" id="1_humwg"]
 [ext_resource type="Shader" path="res://assets/misc/post_traitment.gdshader" id="2_gb0na"]
 [ext_resource type="PackedScene" uid="uid://bk3p2jyntv3bd" path="res://root/game/entities/player/weapons/M4A1/M4A1.tscn" id="2_h85o5"]
 [ext_resource type="PackedScene" uid="uid://660few3mqdcj" path="res://root/game/entities/player/weapons/cut/cut.tscn" id="3_djnnl"]
+[ext_resource type="AudioStream" uid="uid://celi2tgd0vx2k" path="res://assets/audios/hitmarker.mp3" id="5_7kbk4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vhf1b"]
 resource_local_to_scene = true
@@ -43,7 +44,6 @@ metadata/_snap_enabled = true
 auto_exposure_speed = 1.0
 dof_blur_far_distance = 16.0
 dof_blur_far_transition = 16.0
-dof_blur_near_enabled = true
 dof_blur_near_distance = 0.5
 dof_blur_near_transition = 0.5
 dof_blur_amount = 0.02
@@ -56,14 +56,14 @@ shader_parameter/velocity = Vector3(0, 0, 0)
 shader_parameter/rotation = Vector3(0, 0, 0)
 shader_parameter/absolute_y = 0.0
 shader_parameter/sneak_value = 0.0
-shader_parameter/MOTION_BLUR_ENABLED = true
-shader_parameter/SAMPLE_COUNT = 8
+shader_parameter/MOTION_BLUR_ENABLED = false
+shader_parameter/SAMPLE_COUNT = 4
 shader_parameter/INTENSITY = 1.0
 shader_parameter/CORRECTION = true
 shader_parameter/ALTERNATIVE_CORRECTION = false
 shader_parameter/LINEAR_INTENSITY = 1.0
 shader_parameter/RADIAL_INTENSITY = 1.0
-shader_parameter/MOTION_SEEKNESS = 2.0
+shader_parameter/MOTION_SEEKNESS = 1.0
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_p2muh"]
 size = Vector2(1152, 648)
@@ -91,17 +91,23 @@ shape = SubResource("CapsuleShape3D_a7pkv")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CapsuleShape3D_77dev")
 
-[node name="WallrideR1" type="RayCast3D" parent="."]
+[node name="Wallride" type="Node3D" parent="."]
+
+[node name="2" type="RayCast3D" parent="Wallride"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -0.25, 0)
+collision_mask = 2
 
-[node name="WallrideR2" type="RayCast3D" parent="."]
+[node name="1" type="RayCast3D" parent="Wallride"]
 transform = Transform3D(-2.18557e-08, -0.5, -0.866025, 1, -4.37114e-08, 0, -3.78552e-08, -0.866025, 0.5, 0, -0.25, 0)
+collision_mask = 2
 
-[node name="WallrideL1" type="RayCast3D" parent="."]
+[node name="-2" type="RayCast3D" parent="Wallride"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -0.25, 0)
+collision_mask = 2
 
-[node name="WallrideL2" type="RayCast3D" parent="."]
+[node name="-1" type="RayCast3D" parent="Wallride"]
 transform = Transform3D(-2.18557e-08, 0.5, 0.866025, -1, -4.37114e-08, 0, 3.78552e-08, -0.866025, 0.5, 0, -0.25, 0)
+collision_mask = 2
 
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
@@ -116,10 +122,10 @@ spot_angle_attenuation = 7.25835e-05
 
 [node name="Camera" type="Camera3D" parent="Head"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4)
-cull_mask = 524287
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2)
+cull_mask = 3
 attributes = SubResource("CameraAttributesPractical_dqig5")
-fov = 120.0
+fov = 90.0
 near = 0.001
 
 [node name="UI" type="Control" parent="Head"]
@@ -217,6 +223,14 @@ offset_top = 1.0
 offset_right = 5.0
 offset_bottom = 3.0
 
+[node name="Speed" type="RichTextLabel" parent="Head/UI"]
+layout_mode = 0
+offset_left = -32.0
+offset_top = 280.0
+offset_right = 32.0
+offset_bottom = 304.0
+text = "0.0 m/s"
+
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Head"]
 remote_path = NodePath("../../Arm")
 
@@ -227,10 +241,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
 
 [node name="0" parent="Arm/Hand" instance=ExtResource("2_h85o5")]
 unique_name_in_owner = true
-transform = Transform3D(1, -0.000298276, -0.000149101, 0.000298232, 1, -0.000298232, 0.00014919, 0.000298187, 1, 0.250159, -0.199727, -0.667022)
+transform = Transform3D(1, -0.000298276, -0.000149101, 0.000298232, 1, -0.000298232, 0.00014919, 0.000298187, 1, 0.25, -0.2, -0.667)
 rotation_edit_mode = 2
 
 [node name="1" parent="Arm/Hand" instance=ExtResource("3_djnnl")]
-transform = Transform3D(0.228853, -0.628778, 0.743145, -0.254171, 0.698328, 0.669131, -0.939694, -0.342018, -2.69018e-06, 0.35, -0.2, -0.6)
+transform = Transform3D(0.228853, -0.628778, 0.743146, -0.254171, 0.698328, 0.66913, -0.939694, -0.342018, -2.86736e-06, 0.35, -0.2, -0.6)
 
 [node name="hitmarker_sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_7kbk4")

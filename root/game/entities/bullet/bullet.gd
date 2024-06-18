@@ -12,17 +12,21 @@ func init(__owner, _damages, _speed):
 	_owner = __owner
 	if _owner == str(multiplayer.get_unique_id()):
 		get_node("Collision").queue_free()
+		var blink = load("res://root/game/entities/bullet/blink.tscn").instantiate()
+		blink.position = position
+		get_parent().add_child(blink)
 	game = get_node("../..")
 	spawntime = game.time
 	damages = _damages
 	speed = _speed
 	velocity = -transform.basis.z * speed
 	max_slides = 1
+	
 
 
 func _physics_process(delta):
 	#$Light.light_energy /= 1+delta*60
-	velocity.y -= grav*delta
+	velocity.y -= grav/10*delta
 	move_and_slide()
 	
 	var collision = move_and_collide(velocity*delta)

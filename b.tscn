@@ -1,0 +1,213 @@
+[gd_scene load_steps=16 format=3 uid="uid://iqm32aire18m"]
+
+[ext_resource type="Script" path="res://B.gd" id="1_rfync"]
+[ext_resource type="Material" uid="uid://bmts63op7gdgt" path="res://assets/misc/map2.tres" id="2_257jc"]
+[ext_resource type="Environment" uid="uid://b14f6lff2qxh4" path="res://assets/misc/environement.tres" id="3_nfu83"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_tc6cb"]
+radius = 0.2
+height = 0.7
+radial_segments = 32
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5o8ld"]
+albedo_color = Color(1, 0.25098, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_hfynq"]
+radius = 0.1
+height = 0.2
+radial_segments = 32
+rings = 16
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_e1gpb"]
+radius = 0.075
+height = 0.3
+radial_segments = 32
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_02ckm"]
+albedo_color = Color(1, 0.945098, 0.901961, 1)
+metallic = 0.05
+roughness = 0.75
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bcn13"]
+albedo_color = Color(0.768627, 1, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_l0tf3"]
+radius = 0.175
+height = 0.4
+radial_segments = 32
+rings = 16
+
+[sub_resource type="PrismMesh" id="PrismMesh_nyjo3"]
+
+[sub_resource type="Gradient" id="Gradient_ec24f"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_h4pqb"]
+gradient = SubResource("Gradient_ec24f")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_q87sp"]
+radius = 0.3
+height = 1.15
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_n61re"]
+size = Vector2(50, 50)
+
+[node name="B" type="Node3D"]
+
+[node name="B" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+script = ExtResource("1_rfync")
+
+[node name="B" type="Node3D" parent="B"]
+
+[node name="Mesh" type="MeshInstance3D" parent="B/B"]
+mesh = SubResource("CapsuleMesh_tc6cb")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_5o8ld")
+
+[node name="RH" type="Node3D" parent="B/B"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.2, 1.49012e-08)
+
+[node name="Mesh" type="MeshInstance3D" parent="B/B/RH"]
+mesh = SubResource("SphereMesh_hfynq")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_5o8ld")
+
+[node name="Sub" type="Node3D" parent="B/B/RH"]
+
+[node name="Mesh" type="MeshInstance3D" parent="B/B/RH/Sub"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+mesh = SubResource("CapsuleMesh_e1gpb")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_02ckm")
+
+[node name="Sub" type="Node3D" parent="B/B/RH/Sub"]
+transform = Transform3D(1, -7.45058e-09, -3.72529e-09, 0, 1, 2.98023e-08, -3.72529e-09, -2.98023e-08, 1, 0, -0.2, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="B/B/RH/Sub/Sub"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+mesh = SubResource("CapsuleMesh_e1gpb")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_02ckm")
+
+[node name="LH" type="Node3D" parent="B/B"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.2, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="B/B/LH"]
+mesh = SubResource("SphereMesh_hfynq")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_5o8ld")
+
+[node name="Sub" type="Node3D" parent="B/B/LH"]
+
+[node name="Mesh" type="MeshInstance3D" parent="B/B/LH/Sub"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+mesh = SubResource("CapsuleMesh_e1gpb")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_02ckm")
+
+[node name="Sub" type="Node3D" parent="B/B/LH/Sub"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="B/B/LH/Sub/Sub"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+mesh = SubResource("CapsuleMesh_e1gpb")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_02ckm")
+
+[node name="RL" type="Node3D" parent="B/B"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, -0.2, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="B/B/RL"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+mesh = SubResource("CapsuleMesh_e1gpb")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_bcn13")
+
+[node name="Sub" type="Node3D" parent="B/B/RL"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="B/B/RL/Sub"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.06, 0)
+mesh = SubResource("CapsuleMesh_e1gpb")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_02ckm")
+
+[node name="LL" type="Node3D" parent="B/B"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -0.2, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="B/B/LL"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -1.49012e-08)
+mesh = SubResource("CapsuleMesh_e1gpb")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_bcn13")
+
+[node name="Sub" type="Node3D" parent="B/B/LL"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -1.49012e-08)
+
+[node name="Mesh" type="MeshInstance3D" parent="B/B/LL/Sub"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.06, 0)
+mesh = SubResource("CapsuleMesh_e1gpb")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_02ckm")
+
+[node name="H" type="Node3D" parent="B/B"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="B/B/H"]
+mesh = SubResource("SphereMesh_l0tf3")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_02ckm")
+
+[node name="Camera3D" type="Camera3D" parent="B/B/H"]
+fov = 90.0
+
+[node name="Speed" type="RichTextLabel" parent="B/B/H/Camera3D"]
+offset_left = -576.0
+offset_top = 288.0
+offset_right = -320.0
+offset_bottom = 384.0
+
+[node name="Speed2" type="ProgressBar" parent="B/B/H/Camera3D"]
+offset_left = -576.0
+offset_top = 280.0
+offset_right = -64.0
+offset_bottom = 288.0
+max_value = 10.0
+show_percentage = false
+
+[node name="Camera2D" type="Camera2D" parent="B/B/H/Camera3D"]
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="B/B/H/Camera3D/Camera2D"]
+position = Vector2(-2.38419e-07, 8)
+scale = Vector2(16, -16)
+mesh = SubResource("PrismMesh_nyjo3")
+texture = SubResource("GradientTexture1D_h4pqb")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="B/B/H/Camera3D/Camera2D"]
+position = Vector2(0, 8)
+scale = Vector2(8, -16)
+mesh = SubResource("PrismMesh_nyjo3")
+
+[node name="Movement Shape" type="CollisionShape3D" parent="B"]
+shape = SubResource("CapsuleShape3D_q87sp")
+
+[node name="Cast" type="RayCast3D" parent="B"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+rotation_edit_mode = 2
+target_position = Vector3(0, -0.8, 0)
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+use_collision = true
+mesh = SubResource("PlaneMesh_n61re")
+material = ExtResource("2_257jc")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("3_nfu83")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.965926, -0.224144, 0.12941, 0, 0.5, 0.866025, -0.258819, -0.836516, 0.482963, 0, 0, 0)
+shadow_blur = 2.0
+directional_shadow_mode = 0
