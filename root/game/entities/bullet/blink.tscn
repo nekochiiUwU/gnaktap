@@ -69,4 +69,6 @@ double_sided = false
 texture = SubResource("GradientTexture2D_h1010")
 
 [node name="Light" type="OmniLight3D" parent="."]
-light_energy = 4.0
+light_energy = 3.0
+omni_range = 10.0
+omni_attenuation = 0.112656

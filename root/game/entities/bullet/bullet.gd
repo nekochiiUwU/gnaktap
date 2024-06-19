@@ -29,13 +29,13 @@ func _physics_process(delta):
 	velocity.y -= grav/10*delta
 	move_and_slide()
 	
-	var collision = move_and_collide(velocity*delta)
+	move_and_collide(velocity*delta)
 	if game.time - spawntime > lifetime:
 		queue_free()
 	
 	if get_slide_collision_count() != 0:
-		var object = get_slide_collision(0).get_collider()
-		if object is Player:
-			object.get_hit(_owner, damages, collision.get_collider_shape().name)
-			get_node("../Players/" + _owner).rpc_id(int(_owner), "hitmarker", damages, collision.get_collider_shape().name)
+		var object = get_slide_collision(0)
+		if object.get_collider() is Player:
+			var is_kill = object.get_collider().get_hit(_owner, damages, object.get_collider_shape().name)
+			get_node("../Players/" + _owner).rpc_id(int(_owner), "hitmarker", damages, object.get_collider_shape().name, is_kill)
 		queue_free()

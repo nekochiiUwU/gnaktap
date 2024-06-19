@@ -186,7 +186,7 @@ func _process(delta):
 		get_node("Head/UI/PostProcess").material.set_shader_parameter("rotation", 
 			get_node("Head/UI/PostProcess").material.get_shader_parameter("rotation") / (1+delta*60)
 		)
-		breath = Vector3(
+		var breath = Vector3(
 			sin(float(Time.get_ticks_msec())/600)/1000, 
 			sin(float(Time.get_ticks_msec())/500)/1000, 
 			sin(float(Time.get_ticks_msec())/500)/1000
@@ -200,7 +200,7 @@ func _process(delta):
 		#get_node("Head/Camera").position += Vector3(0, 0, -.4)*delta*5
 		#get_node("Head/Camera").position /= 1+delta*5
 
-var breath = Vector3()
+
 func crouch_process():
 	var current_crouch_modifier
 	if Input.is_action_pressed("crouch"):
@@ -272,8 +272,10 @@ func get_hit(_owner, _damages, collision):
 	else:
 		health -= _damages
 	if health <= 0:
-		get_node("../" + _owner).rpc_id(int(_owner), "kill")
-		die() 
+		# get_node("../" + _owner).rpc_id(int(_owner), "kill")
+		die()
+		return 1
+	return 0
 
 
 func die():
@@ -322,8 +324,13 @@ func online_inventory_synchronisation(_inventory: Dictionary):
 
 @rpc("any_peer", "call_local", "reliable", 5)
 func hitmarker(_damages: float, type: String, is_kill: bool):
+	print(get_node("Head"))
+	print(get_node("Head/UI"))
+	print(get_node("Head/UI/Hitmarker"))
+	print(name)
+	print(multiplayer.get_unique_id())
 	get_node("Head/UI/Hitmarker").scale = Vector2(0.5,0.5)+(Vector2(0.8,0.8)*_damages)/20
-	if type == "headshot":
+	if type == "HeadCollision":
 		get_node("hitmarker_sfx").volume_db = 8+(16*_damages)/100
 		get_node("hitmarker_sfx").stream = Game.audio_samples["headshot_hitmarker"]
 		get_node("Head/UI/Hitmarker").scale *= 2

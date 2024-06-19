@@ -44,7 +44,6 @@ ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_sky_contribution = 0.75
 ambient_light_energy = 0.75
 reflected_light_source = 2
-glow_enabled = true
 glow_levels/2 = 0.1
 glow_levels/3 = 0.2
 glow_levels/4 = 0.4
@@ -641,9 +640,7 @@ mesh = SubResource("PlaneMesh_ftwah")
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.642788, 0.262003, -0.719846, 0, 0.939693, 0.34202, 0.766044, -0.219846, 0.604023, 0, 6, 0)
 light_energy = 0.5
-shadow_enabled = true
 shadow_bias = 0.05
-directional_shadow_blend_splits = true
 directional_shadow_max_distance = 32.0
 
 [node name="Environment" type="WorldEnvironment" parent="."]
@@ -697,10 +694,9 @@ skeleton = NodePath("")
 
 [node name="3DGeom-2" type="MeshInstance3D" parent="map /Node"]
 transform = Transform3D(0.0254, 0, 0, 0, 0.0254, 0, 0, 0, 0.0254, -8, -19, 8.53035e-10)
+visible = false
 mesh = SubResource("ArrayMesh_bwo44")
 skeleton = NodePath("")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="map /Node/3DGeom-2"]
 
 [node name="Top Walls" type="MeshInstance3D" parent="map /Node"]
 transform = Transform3D(0.0254, 0, 0, 0, 0.0254, 0, 0, 0, 0.0254, -8, -19, 8.53035e-10)

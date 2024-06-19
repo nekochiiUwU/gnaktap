@@ -30,5 +30,5 @@ func _process(delta):
 		queue_free()
 	if has_node("Light"):
 		$Light.light_energy -= delta*60
-		if $Light.light_energy < 0:
+		if $Light.light_energy <= 1:
 			$Light.queue_free()
