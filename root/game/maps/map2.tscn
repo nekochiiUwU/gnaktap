@@ -1,6 +1,7 @@
-[gd_scene load_steps=40 format=3 uid="uid://c50m68ro4apnu"]
+[gd_scene load_steps=42 format=3 uid="uid://c50m68ro4apnu"]
 
 [ext_resource type="Texture2D" uid="uid://bdeu4air8gico" path="res://assets/textures/sky_water_landscape.jpg" id="1_oq51g"]
+[ext_resource type="Shader" path="res://map2.gdshader" id="2_j7uie"]
 
 [sub_resource type="Gradient" id="Gradient_encro"]
 interpolation_mode = 1
@@ -18,7 +19,7 @@ metadata/_snap_enabled = true
 metadata/_snap_count = 4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hi02g"]
-albedo_color = Color(0, 1, 0, 1)
+albedo_color = Color(0.501961, 0.501961, 0.501961, 1)
 emission_energy_multiplier = 0.0
 emission_texture = SubResource("GradientTexture2D_7v1wh")
 texture_filter = 0
@@ -162,6 +163,10 @@ seamless_blend_skirt = 1.0
 color_ramp = SubResource("Gradient_e78yv")
 noise = SubResource("FastNoiseLite_sc8p1")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rdrj5"]
+render_priority = 0
+shader = ExtResource("2_j7uie")
+
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_etyd5"]
 width = 128
 height = 128
@@ -174,7 +179,7 @@ noise = SubResource("FastNoiseLite_sc8p1")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qkp1v"]
 resource_name = "Material"
-albedo_color = Color(0.515625, 0.515625, 0.515625, 1)
+next_pass = SubResource("ShaderMaterial_rdrj5")
 albedo_texture = SubResource("NoiseTexture2D_hd2w7")
 metallic_specular = 0.1
 roughness = 0.5
@@ -253,16 +258,15 @@ albedo_color = Color(1, 0, 0.501961, 1)
 [sub_resource type="Curve3D" id="Curve3D_tlaxw"]
 bake_interval = 512.0
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 15, 0, 15, 0, 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, -2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -4, 0, 2, 0, 0, 0, 0, 0, 0, -12.4815, -0.841139, -0.0960715, 0, 0, 0, 0, 0, 0, -4.13712, -1.16426, -16.5813, 0, 0, 0, 0, 0, 0, -8, -3.5, -24),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 15, 0, 15, 0, 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, -2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -4, 0, 2, 0, 0, 0, 0, 0, 0, -12, 0, 0, 0, 0, 0, 0, 0, 0, -4, 0, -16, 0, 0, 0, 0, 0, 0, -8, 0, -24),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 8
 
 [node name="Map" type="Node3D"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.6831, -1.27198, 0.620695)
 
 [node name="Ground" type="CSGMesh3D" parent="."]
-visible = false
 use_collision = true
 collision_layer = 2
 collision_mask = 0
@@ -271,6 +275,7 @@ mesh = SubResource("PlaneMesh_ftwah")
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.642788, 0.262003, -0.719846, 0, 0.939693, 0.34202, 0.766044, -0.219846, 0.604023, 0, 6, 0)
 light_energy = 0.75
+shadow_enabled = true
 shadow_bias = 0.05
 shadow_blur = 2.0
 directional_shadow_mode = 0

@@ -1,7 +1,5 @@
-res://default_bus_layout.tres
+res://root/game/maps/map2.tscn
 res://assets/misc/post_traitment.gdshader
 res://root/game/maps/map2.gdshader
 res://a.gdshader
-res://root/game/maps/map2.tscn
-res://root/main_menu/main_menu.tscn
-res://wall.tscn
+res://map2.gdshader
