@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c50m68ro4apnu"]
+[gd_scene load_steps=40 format=3 uid="uid://c50m68ro4apnu"]
 
 [ext_resource type="Texture2D" uid="uid://bdeu4air8gico" path="res://assets/textures/sky_water_landscape.jpg" id="1_oq51g"]
 
@@ -148,9 +148,121 @@ height = 0.1
 radial_segments = 4
 rings = 1
 
+[sub_resource type="Gradient" id="Gradient_e78yv"]
+colors = PackedColorArray(0.501961, 0.501961, 0.501961, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_sc8p1"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hd2w7"]
+width = 128
+height = 128
+in_3d_space = true
+seamless = true
+seamless_blend_skirt = 1.0
+color_ramp = SubResource("Gradient_e78yv")
+noise = SubResource("FastNoiseLite_sc8p1")
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_etyd5"]
+width = 128
+height = 128
+in_3d_space = true
+seamless = true
+seamless_blend_skirt = 1.0
+as_normal_map = true
+color_ramp = SubResource("Gradient_e78yv")
+noise = SubResource("FastNoiseLite_sc8p1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qkp1v"]
+resource_name = "Material"
+albedo_color = Color(0.515625, 0.515625, 0.515625, 1)
+albedo_texture = SubResource("NoiseTexture2D_hd2w7")
+metallic_specular = 0.1
+roughness = 0.5
+normal_enabled = true
+normal_scale = 6.7
+normal_texture = SubResource("NoiseTexture2D_etyd5")
+uv1_scale = Vector3(6, 4, 2)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_npil3"]
+_surfaces = [{
+"aabb": AABB(-1.07961, -1.15307, -0.544502, 2.51007, 3.85168, 1.54499),
+"format": 34896613377,
+"index_count": 132,
+"index_data": PackedByteArray(23, 0, 15, 0, 18, 0, 23, 0, 21, 0, 15, 0, 3, 0, 9, 0, 11, 0, 3, 0, 2, 0, 9, 0, 12, 0, 16, 0, 17, 0, 12, 0, 13, 0, 16, 0, 4, 0, 10, 0, 8, 0, 4, 0, 6, 0, 10, 0, 0, 0, 7, 0, 5, 0, 0, 0, 1, 0, 7, 0, 6, 0, 15, 0, 10, 0, 6, 0, 18, 0, 15, 0, 4, 0, 18, 0, 6, 0, 4, 0, 19, 0, 18, 0, 10, 0, 14, 0, 8, 0, 10, 0, 15, 0, 14, 0, 8, 0, 19, 0, 4, 0, 8, 0, 14, 0, 19, 0, 20, 0, 19, 0, 14, 0, 20, 0, 22, 0, 19, 0, 3, 0, 20, 0, 2, 0, 3, 0, 21, 0, 20, 0, 9, 0, 15, 0, 11, 0, 9, 0, 14, 0, 15, 0, 2, 0, 14, 0, 9, 0, 2, 0, 20, 0, 14, 0, 11, 0, 21, 0, 3, 0, 11, 0, 15, 0, 21, 0, 0, 0, 23, 0, 1, 0, 0, 0, 22, 0, 23, 0, 7, 0, 19, 0, 5, 0, 7, 0, 18, 0, 19, 0, 5, 0, 22, 0, 0, 0, 5, 0, 19, 0, 22, 0, 1, 0, 18, 0, 7, 0, 1, 0, 23, 0, 18, 0, 12, 0, 21, 0, 13, 0, 12, 0, 20, 0, 21, 0, 17, 0, 20, 0, 12, 0, 17, 0, 22, 0, 20, 0, 13, 0, 23, 0, 16, 0, 13, 0, 21, 0, 23, 0, 16, 0, 22, 0, 17, 0, 16, 0, 23, 0, 22, 0),
+"lods": [0.508952, PackedByteArray(23, 0, 15, 0, 18, 0, 23, 0, 21, 0, 15, 0, 1, 0, 23, 0, 18, 0, 22, 0, 23, 0, 1, 0, 22, 0, 1, 0, 19, 0, 1, 0, 18, 0, 19, 0, 4, 0, 19, 0, 18, 0, 4, 0, 18, 0, 6, 0, 2, 0, 14, 0, 15, 0, 2, 0, 20, 0, 14, 0, 15, 0, 21, 0, 2, 0, 20, 0, 21, 0, 23, 0, 23, 0, 22, 0, 20, 0, 4, 0, 6, 0, 14, 0, 14, 0, 19, 0, 4, 0, 6, 0, 15, 0, 14, 0, 6, 0, 18, 0, 15, 0, 20, 0, 19, 0, 14, 0, 20, 0, 22, 0, 19, 0, 2, 0, 21, 0, 20, 0)],
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray(254, 255, 91, 25, 46, 98, 0, 0, 210, 219, 155, 18, 39, 240, 0, 0, 43, 14, 138, 21, 47, 60, 0, 0, 0, 0, 122, 14, 63, 231, 0, 0, 66, 176, 204, 251, 191, 74, 0, 0, 23, 212, 39, 233, 242, 65, 0, 0, 3, 154, 145, 254, 191, 123, 0, 0, 142, 190, 145, 195, 171, 140, 0, 0, 95, 91, 82, 253, 102, 33, 0, 0, 214, 68, 199, 235, 71, 12, 0, 0, 156, 116, 255, 255, 55, 86, 0, 0, 253, 62, 141, 203, 208, 135, 0, 0, 5, 62, 134, 0, 237, 91, 0, 0, 235, 43, 118, 2, 56, 212, 0, 0, 213, 67, 181, 242, 0, 0, 0, 0, 113, 91, 164, 243, 116, 141, 0, 0, 168, 166, 245, 0, 84, 225, 0, 0, 150, 210, 0, 0, 152, 117, 0, 0, 42, 150, 213, 236, 175, 176, 0, 0, 102, 206, 173, 243, 223, 35, 0, 0, 106, 24, 249, 18, 84, 45, 0, 0, 30, 8, 44, 10, 234, 255, 0, 0, 134, 254, 202, 17, 98, 70, 0, 0, 147, 202, 237, 8, 255, 255, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_i5swd"]
+resource_name = "stone_Cube"
+_surfaces = [{
+"aabb": AABB(-1.07961, -1.15307, -0.544502, 2.51007, 3.85168, 1.54499),
+"attribute_data": PackedByteArray(51, 98, 24, 121, 51, 98, 24, 121, 51, 98, 24, 121, 50, 98, 246, 70, 50, 98, 246, 70, 50, 98, 246, 70, 184, 97, 207, 197, 184, 97, 207, 197, 184, 97, 207, 197, 162, 97, 33, 250, 162, 97, 33, 250, 162, 97, 33, 250, 177, 168, 77, 119, 177, 168, 77, 119, 177, 168, 77, 119, 26, 149, 79, 116, 26, 149, 79, 116, 26, 149, 79, 116, 177, 168, 178, 72, 177, 168, 178, 72, 177, 168, 178, 72, 27, 149, 196, 75, 27, 149, 196, 75, 27, 149, 196, 75, 76, 215, 77, 119, 76, 215, 77, 119, 76, 215, 77, 119, 148, 149, 100, 200, 148, 149, 100, 200, 148, 149, 100, 200, 76, 215, 178, 72, 76, 215, 178, 72, 76, 215, 178, 72, 177, 149, 169, 247, 177, 149, 169, 247, 177, 149, 169, 247, 87, 39, 148, 115, 87, 39, 148, 115, 87, 39, 148, 115, 233, 39, 116, 76, 233, 39, 116, 76, 233, 39, 116, 76, 77, 151, 255, 191, 77, 151, 255, 191, 255, 223, 255, 127, 77, 151, 255, 191, 255, 223, 255, 127, 77, 151, 255, 255, 77, 151, 255, 255, 255, 223, 255, 63, 255, 223, 255, 63, 77, 151, 0, 0, 189, 87, 105, 77, 189, 87, 105, 77, 189, 87, 105, 77, 86, 88, 173, 114, 86, 88, 173, 114, 86, 88, 173, 114, 255, 159, 255, 63, 77, 151, 255, 63, 77, 151, 255, 63, 77, 151, 255, 63, 77, 151, 255, 63, 77, 151, 255, 127, 255, 159, 255, 127, 77, 151, 255, 127, 77, 151, 255, 127, 77, 151, 255, 127, 255, 95, 255, 191, 255, 31, 255, 127, 255, 95, 255, 191, 255, 31, 255, 127, 255, 95, 255, 191, 255, 95, 255, 255, 255, 31, 255, 63, 255, 95, 255, 255, 255, 95, 0, 0, 255, 31, 255, 63, 255, 95, 255, 127, 255, 95, 255, 127, 255, 95, 255, 127, 255, 95, 255, 127, 255, 95, 255, 127, 255, 95, 255, 63, 255, 95, 255, 63, 255, 95, 255, 63, 255, 95, 255, 63, 255, 95, 255, 63, 50, 98, 246, 70, 177, 168, 77, 119, 177, 168, 178, 72, 177, 168, 178, 72, 77, 151, 255, 191, 255, 223, 255, 127, 255, 223, 255, 63, 77, 151, 255, 63, 77, 151, 255, 63, 77, 151, 255, 127, 255, 31, 255, 127, 255, 95, 255, 255, 255, 31, 255, 63, 255, 95, 255, 127, 255, 95, 255, 127, 255, 95, 255, 127, 255, 95, 255, 63, 255, 95, 255, 63),
+"format": 34896613399,
+"index_count": 132,
+"index_data": PackedByteArray(83, 0, 51, 0, 59, 0, 83, 0, 76, 0, 51, 0, 9, 0, 27, 0, 33, 0, 9, 0, 6, 0, 27, 0, 37, 0, 53, 0, 55, 0, 37, 0, 41, 0, 53, 0, 12, 0, 32, 0, 25, 0, 12, 0, 19, 0, 32, 0, 1, 0, 23, 0, 16, 0, 1, 0, 5, 0, 23, 0, 18, 0, 50, 0, 31, 0, 18, 0, 58, 0, 50, 0, 14, 0, 61, 0, 20, 0, 14, 0, 65, 0, 61, 0, 30, 0, 44, 0, 24, 0, 30, 0, 49, 0, 44, 0, 26, 0, 64, 0, 13, 0, 26, 0, 46, 0, 64, 0, 72, 0, 63, 0, 45, 0, 72, 0, 79, 0, 63, 0, 11, 0, 70, 0, 8, 0, 11, 0, 75, 0, 70, 0, 28, 0, 47, 0, 34, 0, 28, 0, 42, 0, 47, 0, 7, 0, 43, 0, 29, 0, 7, 0, 68, 0, 43, 0, 35, 0, 73, 0, 10, 0, 35, 0, 48, 0, 73, 0, 0, 0, 87, 0, 4, 0, 0, 0, 81, 0, 87, 0, 22, 0, 66, 0, 15, 0, 22, 0, 62, 0, 66, 0, 17, 0, 82, 0, 2, 0, 17, 0, 67, 0, 82, 0, 3, 0, 60, 0, 21, 0, 3, 0, 86, 0, 60, 0, 36, 0, 74, 0, 39, 0, 36, 0, 69, 0, 74, 0, 56, 0, 71, 0, 38, 0, 56, 0, 78, 0, 71, 0, 40, 0, 84, 0, 52, 0, 40, 0, 77, 0, 84, 0, 54, 0, 80, 0, 57, 0, 54, 0, 85, 0, 80, 0),
+"lods": [0.508952, PackedByteArray(83, 0, 51, 0, 95, 0, 83, 0, 76, 0, 51, 0, 88, 0, 83, 0, 95, 0, 81, 0, 105, 0, 88, 0, 103, 0, 88, 0, 97, 0, 88, 0, 96, 0, 97, 0, 89, 0, 97, 0, 96, 0, 89, 0, 96, 0, 91, 0, 6, 0, 92, 0, 47, 0, 6, 0, 68, 0, 92, 0, 47, 0, 99, 0, 6, 0, 98, 0, 100, 0, 104, 0, 104, 0, 102, 0, 98, 0, 12, 0, 90, 0, 93, 0, 93, 0, 64, 0, 12, 0, 90, 0, 94, 0, 93, 0, 90, 0, 58, 0, 94, 0, 72, 0, 63, 0, 45, 0, 72, 0, 101, 0, 63, 0, 8, 0, 75, 0, 70, 0)],
+"material": SubResource("StandardMaterial3D_qkp1v"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 106,
+"vertex_data": PackedByteArray(254, 255, 91, 25, 46, 98, 190, 199, 254, 255, 91, 25, 46, 98, 35, 203, 254, 255, 91, 25, 46, 98, 14, 219, 210, 219, 155, 18, 39, 240, 150, 200, 210, 219, 155, 18, 39, 240, 67, 194, 210, 219, 155, 18, 39, 240, 198, 202, 43, 14, 138, 21, 47, 60, 185, 212, 43, 14, 138, 21, 47, 60, 218, 224, 43, 14, 138, 21, 47, 60, 11, 250, 0, 0, 122, 14, 63, 231, 251, 212, 0, 0, 122, 14, 63, 231, 163, 195, 0, 0, 122, 14, 63, 231, 13, 251, 66, 176, 204, 251, 191, 74, 46, 241, 66, 176, 204, 251, 191, 74, 253, 248, 66, 176, 204, 251, 191, 74, 131, 236, 23, 212, 39, 233, 242, 65, 230, 231, 23, 212, 39, 233, 242, 65, 6, 206, 23, 212, 39, 233, 242, 65, 150, 218, 3, 154, 145, 254, 191, 123, 91, 243, 3, 154, 145, 254, 191, 123, 240, 238, 3, 154, 145, 254, 191, 123, 247, 193, 142, 190, 145, 195, 171, 140, 242, 199, 142, 190, 145, 195, 171, 140, 209, 218, 142, 190, 145, 195, 171, 140, 149, 205, 95, 91, 82, 253, 102, 33, 255, 239, 95, 91, 82, 253, 102, 33, 160, 245, 95, 91, 82, 253, 102, 33, 84, 247, 214, 68, 199, 235, 71, 12, 254, 213, 214, 68, 199, 235, 71, 12, 47, 195, 214, 68, 199, 235, 71, 12, 81, 225, 156, 116, 255, 255, 55, 86, 68, 218, 156, 116, 255, 255, 55, 86, 17, 241, 156, 116, 255, 255, 55, 86, 0, 244, 253, 62, 141, 203, 208, 135, 149, 214, 253, 62, 141, 203, 208, 135, 46, 202, 253, 62, 141, 203, 208, 135, 111, 195, 5, 62, 134, 0, 237, 91, 220, 198, 5, 62, 134, 0, 237, 91, 1, 191, 5, 62, 134, 0, 237, 91, 40, 223, 235, 43, 118, 2, 56, 212, 122, 200, 235, 43, 118, 2, 56, 212, 84, 172, 235, 43, 118, 2, 56, 212, 0, 191, 213, 67, 181, 242, 0, 0, 216, 192, 213, 67, 181, 242, 0, 0, 70, 225, 213, 67, 181, 242, 0, 0, 73, 247, 213, 67, 181, 242, 0, 0, 31, 251, 213, 67, 181, 242, 0, 0, 255, 247, 113, 91, 164, 243, 116, 141, 71, 201, 113, 91, 164, 243, 116, 141, 119, 195, 113, 91, 164, 243, 116, 141, 251, 227, 113, 91, 164, 243, 116, 141, 225, 242, 113, 91, 164, 243, 116, 141, 166, 183, 168, 166, 245, 0, 84, 225, 72, 172, 168, 166, 245, 0, 84, 225, 4, 191, 168, 166, 245, 0, 84, 225, 226, 185, 150, 210, 0, 0, 152, 117, 5, 191, 150, 210, 0, 0, 152, 117, 37, 223, 150, 210, 0, 0, 152, 117, 47, 186, 42, 150, 213, 236, 175, 176, 219, 244, 42, 150, 213, 236, 175, 176, 167, 187, 42, 150, 213, 236, 175, 176, 3, 200, 42, 150, 213, 236, 175, 176, 108, 211, 42, 150, 213, 236, 175, 176, 59, 218, 102, 206, 173, 243, 223, 35, 18, 251, 102, 206, 173, 243, 223, 35, 33, 249, 102, 206, 173, 243, 223, 35, 183, 243, 102, 206, 173, 243, 223, 35, 201, 220, 102, 206, 173, 243, 223, 35, 158, 218, 106, 24, 249, 18, 84, 45, 218, 224, 106, 24, 249, 18, 84, 45, 166, 198, 106, 24, 249, 18, 84, 45, 42, 250, 106, 24, 249, 18, 84, 45, 39, 223, 106, 24, 249, 18, 84, 45, 7, 251, 30, 8, 44, 10, 234, 255, 164, 195, 30, 8, 44, 10, 234, 255, 125, 199, 30, 8, 44, 10, 234, 255, 22, 251, 30, 8, 44, 10, 234, 255, 179, 196, 30, 8, 44, 10, 234, 255, 78, 172, 134, 254, 202, 17, 98, 70, 37, 223, 134, 254, 202, 17, 98, 70, 2, 251, 134, 254, 202, 17, 98, 70, 67, 186, 134, 254, 202, 17, 98, 70, 157, 198, 134, 254, 202, 17, 98, 70, 17, 219, 147, 202, 237, 8, 255, 255, 117, 198, 147, 202, 237, 8, 255, 255, 73, 172, 147, 202, 237, 8, 255, 255, 251, 185, 147, 202, 237, 8, 255, 255, 162, 200, 147, 202, 237, 8, 255, 255, 240, 193, 210, 219, 155, 18, 39, 240, 137, 203, 66, 176, 204, 251, 191, 74, 13, 231, 3, 154, 145, 254, 191, 123, 21, 244, 3, 154, 145, 254, 191, 123, 102, 231, 213, 67, 181, 242, 0, 0, 128, 207, 213, 67, 181, 242, 0, 0, 167, 241, 113, 91, 164, 243, 116, 141, 7, 229, 42, 150, 213, 236, 175, 176, 135, 187, 42, 150, 213, 236, 175, 176, 126, 194, 102, 206, 173, 243, 223, 35, 255, 255, 106, 24, 249, 18, 84, 45, 44, 201, 30, 8, 44, 10, 234, 255, 141, 207, 30, 8, 44, 10, 234, 255, 249, 192, 134, 254, 202, 17, 98, 70, 135, 252, 134, 254, 202, 17, 98, 70, 249, 198, 134, 254, 202, 17, 98, 70, 71, 205, 147, 202, 237, 8, 255, 255, 148, 190, 147, 202, 237, 8, 255, 255, 121, 178, 63, 16, 6, 62, 137, 41, 238, 27, 237, 48, 122, 40, 31, 33, 237, 17, 239, 23, 80, 61, 214, 41, 199, 27, 120, 218, 246, 205, 124, 211, 103, 202, 75, 200, 169, 234, 207, 218, 209, 205, 212, 233, 165, 213, 7, 201, 187, 233, 87, 193, 221, 11, 121, 175, 85, 3, 204, 34, 32, 24, 93, 28, 31, 26, 57, 39, 24, 29, 146, 49, 22, 40, 50, 216, 228, 13, 150, 194, 100, 14, 229, 193, 184, 2, 121, 33, 189, 17, 146, 34, 189, 21, 145, 39, 235, 28, 10, 111, 199, 177, 207, 190, 186, 6, 109, 177, 155, 6, 35, 220, 64, 205, 83, 215, 192, 206, 91, 212, 229, 201, 52, 130, 126, 191, 197, 216, 33, 15, 192, 191, 162, 8, 229, 220, 236, 204, 46, 225, 58, 204, 171, 233, 169, 213, 200, 41, 90, 152, 212, 5, 38, 138, 102, 2, 33, 135, 142, 40, 152, 144, 79, 6, 154, 139, 147, 5, 161, 137, 54, 211, 206, 207, 71, 212, 240, 201, 40, 106, 185, 173, 136, 59, 39, 67, 166, 176, 78, 5, 13, 224, 132, 204, 177, 233, 169, 213, 103, 120, 142, 185, 80, 216, 38, 14, 240, 251, 159, 15, 219, 3, 127, 130, 31, 6, 192, 138, 228, 26, 98, 83, 87, 6, 51, 139, 246, 1, 134, 134, 59, 25, 79, 83, 209, 215, 19, 13, 107, 251, 151, 14, 112, 33, 194, 17, 160, 48, 184, 11, 223, 34, 135, 21, 171, 62, 70, 64, 78, 175, 12, 3, 132, 31, 17, 27, 148, 33, 112, 22, 134, 49, 29, 40, 122, 211, 104, 202, 251, 41, 153, 153, 98, 200, 139, 234, 67, 2, 241, 134, 255, 65, 56, 61, 213, 233, 165, 213, 65, 41, 6, 149, 14, 201, 178, 233, 109, 250, 156, 12, 134, 5, 107, 137, 236, 1, 120, 134, 38, 68, 61, 59, 214, 24, 75, 83, 188, 17, 227, 61, 233, 48, 124, 40, 65, 250, 69, 12, 18, 4, 40, 130, 86, 26, 92, 83, 25, 33, 240, 17, 111, 24, 69, 61, 112, 37, 241, 31, 183, 75, 83, 21, 81, 213, 102, 13, 98, 71, 160, 20, 65, 200, 39, 208, 215, 157, 170, 47, 175, 131, 145, 170, 92, 23, 133, 2, 140, 39, 70, 11, 182, 38, 224, 35, 242, 25, 162, 137, 123, 224, 44, 207, 51, 34, 156, 137, 150, 19, 128, 104, 5, 10, 167, 113, 23, 36, 61, 43, 77, 5, 183, 123, 11, 43, 95, 86)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_npil3")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2xeul"]
+size = Vector3(2, 4, 5)
+
+[sub_resource type="Gradient" id="Gradient_80ha8"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.561404)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pgdvt"]
+gradient = SubResource("Gradient_80ha8")
+width = 4
+height = 4
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0.1)
+repeat = 1
+metadata/_snap_enabled = true
+
+[sub_resource type="SystemFont" id="SystemFont_k0rfc"]
+font_names = PackedStringArray("Calibri")
+font_weight = 100
+multichannel_signed_distance_field = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dxc3t"]
+shading_mode = 0
+albedo_color = Color(0.501961, 0, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_bbxcx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v4iah"]
+shading_mode = 0
+albedo_color = Color(1, 0, 0.501961, 1)
+
+[sub_resource type="Curve3D" id="Curve3D_tlaxw"]
+bake_interval = 512.0
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 15, 0, 15, 0, 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, -2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -4, 0, 2, 0, 0, 0, 0, 0, 0, -12.4815, -0.841139, -0.0960715, 0, 0, 0, 0, 0, 0, -4.13712, -1.16426, -16.5813, 0, 0, 0, 0, 0, 0, -8, -3.5, -24),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 8
+
 [node name="Map" type="Node3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="Ground" type="CSGMesh3D" parent="."]
+visible = false
 use_collision = true
 collision_layer = 2
 collision_mask = 0
@@ -170,7 +282,7 @@ directional_shadow_pancake_size = 1.0
 environment = SubResource("Environment_sfs7y")
 
 [node name="Node3D" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -69.2625, 5.5, 0)
 
 [node name="CSGMesh3D2" type="CSGMesh3D" parent="Node3D"]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -2, -6.5, -6)
@@ -297,7 +409,7 @@ material = SubResource("StandardMaterial3D_tnx21")
 [node name="Spawnpoints" type="Node3D" parent="."]
 
 [node name="0" type="Node3D" parent="Spawnpoints"]
-transform = Transform3D(-0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, -0.258819, 10, 1, 12)
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 8, 1, 24)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Spawnpoints/0"]
 transform = Transform3D(-1, -1.50996e-07, 6.60024e-15, 0, -4.37114e-08, -1, 1.50996e-07, -1, 4.37114e-08, 0, 0, 0)
@@ -305,7 +417,7 @@ layers = 524288
 mesh = SubResource("CylinderMesh_1mmdv")
 
 [node name="1" type="Node3D" parent="Spawnpoints"]
-transform = Transform3D(-5.96046e-08, 0, 1, 0, 1, 0, -1, 0, -5.96046e-08, 12, 1, -13)
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -8, 1, -24)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Spawnpoints/1"]
 transform = Transform3D(-1, -1.50996e-07, 6.60024e-15, 0, -4.37114e-08, -1, 1.50996e-07, -1, 4.37114e-08, 0, 0, 0)
@@ -313,7 +425,7 @@ layers = 524288
 mesh = SubResource("CylinderMesh_1mmdv")
 
 [node name="2" type="Node3D" parent="Spawnpoints"]
-transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, -14, 1, -8)
+transform = Transform3D(1, 0, -1.3411e-07, 0, 1, 0, 1.3411e-07, 0, 1, -24, 1, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Spawnpoints/2"]
 transform = Transform3D(-1, -1.50996e-07, 6.60024e-15, 0, -4.37114e-08, -1, 1.50996e-07, -1, 4.37114e-08, 0, 0, 0)
@@ -321,20 +433,3014 @@ layers = 524288
 mesh = SubResource("CylinderMesh_1mmdv")
 
 [node name="3" type="Node3D" parent="Spawnpoints"]
-transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 4, 1, -8)
+transform = Transform3D(-1, 0, 2.98023e-07, 0, 1, 0, -2.98023e-07, 0, -1, 24, 1, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Spawnpoints/3"]
 transform = Transform3D(-1, -1.50996e-07, 6.60024e-15, 0, -4.37114e-08, -1, 1.50996e-07, -1, 4.37114e-08, 0, 0, 0)
 layers = 524288
 mesh = SubResource("CylinderMesh_1mmdv")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.29285, 0)
-visible = false
-light_specular = 0.25
-light_bake_mode = 1
-shadow_enabled = true
-shadow_bias = 0.05
-shadow_blur = 10.0
-omni_range = 32.0
-omni_shadow_mode = 0
+[node name="4" type="Node3D" parent="Spawnpoints"]
+transform = Transform3D(-1, 0, 3.12924e-07, 0, 1, 0, -3.12924e-07, 0, -1, -15, 1, -15)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Spawnpoints/4"]
+transform = Transform3D(-1, -1.50996e-07, 6.60024e-15, 0, -4.37114e-08, -1, 1.50996e-07, -1, 4.37114e-08, 0, 0, 0)
+layers = 524288
+mesh = SubResource("CylinderMesh_1mmdv")
+
+[node name="5" type="Node3D" parent="Spawnpoints"]
+transform = Transform3D(1, 0, -2.38419e-07, 0, 1, 0, 2.38419e-07, 0, 1, 15, 1, 15)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Spawnpoints/5"]
+transform = Transform3D(-1, -1.50996e-07, 6.60024e-15, 0, -4.37114e-08, -1, 1.50996e-07, -1, 4.37114e-08, 0, 0, 0)
+layers = 524288
+mesh = SubResource("CylinderMesh_1mmdv")
+
+[node name="Node3D3" type="Node3D" parent="."]
+
+[node name="Node3D2" type="Node3D" parent="Node3D3"]
+
+[node name="Wall4" type="Node3D" parent="Node3D3/Node3D2"]
+transform = Transform3D(0.0871557, 0, -0.996195, 0, 1, 0, 0.996195, 0, 0.0871557, -10.2814, 0, -32.3457)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall4"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall4"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall4"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall4"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall4"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall4"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall4"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall4"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall4"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D2/Wall4"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D2/Wall4/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall6" type="Node3D" parent="Node3D3/Node3D2"]
+transform = Transform3D(-0.866026, 0, 0.5, 0, 1, 0, -0.5, 0, -0.866026, -2.20782, 0, -29.4457)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall6"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall6"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall6"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall6"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall6"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall6"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall6"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall6"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall6"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D2/Wall6"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D2/Wall6/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall8" type="Node3D" parent="Node3D3/Node3D2"]
+transform = Transform3D(-0.573577, 0, -0.819152, 0, 1, 0, 0.819152, 0, -0.573577, -12.3078, 0, -19.3457)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall8"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall8"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall8"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall8"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall8"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall8"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall8"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall8"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall8"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D2/Wall8"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D2/Wall8/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall13" type="Node3D" parent="Node3D3/Node3D2"]
+transform = Transform3D(-0.736746, 0, 0.676169, 0, 1, 0, -0.676169, 0, -0.736746, -8.92937, 0, -16.5457)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall13"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall13"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall13"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall13"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall13"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall13"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall13"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall13"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall13"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D2/Wall13"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D2/Wall13/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall15" type="Node3D" parent="Node3D3/Node3D2"]
+transform = Transform3D(-0.95566, 0, 0.294474, 0, 1, 0, -0.294474, 0, -0.95566, -17.7178, 0, -16.1421)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall15"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall15"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall15"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall15"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall15"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall15"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall15"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall15"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall15"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D2/Wall15"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D2/Wall15/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall18" type="Node3D" parent="Node3D3/Node3D2"]
+transform = Transform3D(-0.926358, 0, 0.376645, 0, 1, 0, -0.376645, 0, -0.926358, 18.3922, 0, -11.8457)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall18"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall18"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall18"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall18"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall18"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall18"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall18"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall18"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall18"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D2/Wall18"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D2/Wall18/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall19" type="Node3D" parent="Node3D3/Node3D2"]
+transform = Transform3D(-0.916048, 0, -0.401069, 0, 1, 0, 0.401069, 0, -0.916048, 18.3922, 0, -6.54573)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall19"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall19"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall19"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall19"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall19"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall19"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall19"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall19"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall19"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D2/Wall19"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D2/Wall19/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall54" type="Node3D" parent="Node3D3/Node3D2"]
+transform = Transform3D(-0.988639, 0, -0.150312, 0, 1, 0, 0.150312, 0, -0.988639, 27.3922, 0, -3.54573)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall54"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall54"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall54"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall54"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall54"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall54"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall54"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall54"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall54"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D2/Wall54"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D2/Wall54/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall25" type="Node3D" parent="Node3D3/Node3D2"]
+transform = Transform3D(-0.98638, 0, 0.16448, 0, 1, 0, -0.16448, 0, -0.98638, -28.2974, 0, -4.18042)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall25"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall25"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall25"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall25"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall25"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall25"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall25"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall25"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall25"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D2/Wall25"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D2/Wall25/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall28" type="Node3D" parent="Node3D3/Node3D2"]
+transform = Transform3D(-0.782369, 3.78552e-08, 0.622815, 1.60047e-08, 1, -4.0676e-08, -0.622815, -2.18557e-08, -0.782369, -3.259, 0, -9.89546)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall28"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall28"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall28"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall28"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall28"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall28"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall28"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall28"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall28"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D2/Wall28"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D2/Wall28/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall76" type="Node3D" parent="Node3D3/Node3D2"]
+transform = Transform3D(-0.782369, 3.78552e-08, 0.622815, 1.60047e-08, 1, -4.0676e-08, -0.622815, -2.18557e-08, -0.782369, 0.741001, 0, -13.8955)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall76"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall76"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall76"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall76"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall76"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall76"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall76"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall76"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall76"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D2/Wall76"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D2/Wall76/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall20" type="Node3D" parent="Node3D3/Node3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.7814, 0, -22.2457)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall20"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall20"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall20"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall20"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall20"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall20"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall20"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall20"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall20"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D2/Wall20"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D2/Wall20/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall26" type="Node3D" parent="Node3D3/Node3D2"]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -12.7814, 0, -27.6457)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall26"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall26"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall26"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall26"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall26"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall26"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall26"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall26"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall26"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D2/Wall26"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D2/Wall26/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall30" type="Node3D" parent="Node3D3/Node3D2"]
+transform = Transform3D(-0.573576, 0, -0.819152, 0, 1, 0, 0.819152, 0, -0.573576, -5.38141, 0, -32.3457)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall30"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall30"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall30"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall30"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall30"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall30"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall30"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall30"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall30"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D2/Wall30"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D2/Wall30/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall32" type="Node3D" parent="Node3D3/Node3D2"]
+transform = Transform3D(-0.984808, 0, -0.173648, 0, 1, 0, 0.173648, 0, -0.984808, -3.50782, 0, -24.5457)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall32"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall32"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall32"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall32"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall32"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall32"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall32"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall32"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall32"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D2/Wall32"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D2/Wall32/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall34" type="Node3D" parent="Node3D3/Node3D2"]
+transform = Transform3D(0.173648, 0, -0.984808, 0, 1, 0, 0.984808, 0, 0.173648, 0.0921822, 0, -20.6457)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall34"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall34"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall34"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall34"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall34"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall34"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall34"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall34"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall34"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D2/Wall34"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D2/Wall34/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall35" type="Node3D" parent="Node3D3/Node3D2"]
+transform = Transform3D(-0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, -0.258819, 5.89219, 0, -20.6457)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall35"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall35"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall35"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall35"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall35"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall35"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall35"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall35"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall35"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D2/Wall35"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D2/Wall35/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall36" type="Node3D" parent="Node3D3/Node3D2"]
+transform = Transform3D(-0.531783, 0, -0.846881, 0, 1, 0, 0.846881, 0, -0.531783, 11.1922, 0, -19.4457)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall36"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall36"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall36"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall36"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall36"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall36"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall36"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall36"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall36"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D2/Wall36"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D2/Wall36/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall37" type="Node3D" parent="Node3D3/Node3D2"]
+transform = Transform3D(-0.732852, 0, -0.680388, 0, 1, 0, 0.680388, 0, -0.732852, 15.6922, 0, -16.5457)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall37"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall37"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall37"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall37"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall37"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall37"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall37"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall37"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall37"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D2/Wall37"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D2/Wall37/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall39" type="Node3D" parent="Node3D3/Node3D2"]
+transform = Transform3D(0.455949, 0, 0.890006, 0, 1, 0, -0.890006, 0, 0.455949, -11.4178, 0, -16.4421)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall39"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall39"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall39"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall39"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall39"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall39"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall39"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall39"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall39"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D2/Wall39"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D2/Wall39/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall46" type="Node3D" parent="Node3D3/Node3D2"]
+transform = Transform3D(-0.99874, 0, -0.0501919, 0, 1, 0, 0.0501919, 0, -0.99874, 8.69217, 0, -8.14663)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall46"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall46"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall46"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall46"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall46"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall46"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall46"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall46"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall46"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D2/Wall46"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D2/Wall46/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall47" type="Node3D" parent="Node3D3/Node3D2"]
+transform = Transform3D(-0.676825, 0, 0.736144, 0, 1, 0, -0.736144, 0, -0.676825, -21.265, 0, -14.0886)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall47"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall47"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall47"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall47"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall47"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall47"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall47"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall47"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall47"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D2/Wall47"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D2/Wall47/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall48" type="Node3D" parent="Node3D3/Node3D2"]
+transform = Transform3D(-0.821079, 0, 0.570814, 0, 1, 0, -0.570814, 0, -0.821079, -25.7557, 0, -9.2174)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall48"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall48"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall48"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall48"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall48"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall48"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall48"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall48"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall48"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D2/Wall48"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D2/Wall48/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall50" type="Node3D" parent="Node3D3/Node3D2"]
+transform = Transform3D(0.988959, 0, -0.148189, 0, 1, 0, 0.148189, 0, 0.988959, -6.259, 0, -2.17838)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall50"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall50"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall50"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall50"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall50"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall50"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall50"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall50"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall50"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D2/Wall50"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D2/Wall50/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall78" type="Node3D" parent="Node3D3/Node3D2"]
+transform = Transform3D(0.150312, 0, -0.988639, 0, 1, 0, 0.988639, 0, 0.150312, 22.7199, 0, -3.88287)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall78"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall78"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall78"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall78"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall78"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall78"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall78"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall78"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D2/Wall78"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D2/Wall78"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D2/Wall78/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Node3D3" type="Node3D" parent="Node3D3"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="Wall4" type="Node3D" parent="Node3D3/Node3D3"]
+transform = Transform3D(0.0871557, 0, -0.996195, 0, 1, 0, 0.996195, 0, 0.0871557, -10.2814, 0, -32.3457)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall4"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall4"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall4"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall4"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall4"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall4"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall4"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall4"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall4"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D3/Wall4"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D3/Wall4/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall6" type="Node3D" parent="Node3D3/Node3D3"]
+transform = Transform3D(-0.866026, 0, 0.5, 0, 1, 0, -0.5, 0, -0.866026, -2.20782, 0, -29.4457)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall6"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall6"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall6"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall6"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall6"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall6"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall6"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall6"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall6"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D3/Wall6"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D3/Wall6/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall8" type="Node3D" parent="Node3D3/Node3D3"]
+transform = Transform3D(-0.573577, 0, -0.819152, 0, 1, 0, 0.819152, 0, -0.573577, -12.3078, 0, -19.3457)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall8"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall8"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall8"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall8"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall8"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall8"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall8"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall8"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall8"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D3/Wall8"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D3/Wall8/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall13" type="Node3D" parent="Node3D3/Node3D3"]
+transform = Transform3D(-0.736746, 0, 0.676169, 0, 1, 0, -0.676169, 0, -0.736746, -8.92937, 0, -16.5457)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall13"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall13"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall13"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall13"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall13"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall13"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall13"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall13"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall13"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D3/Wall13"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D3/Wall13/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall15" type="Node3D" parent="Node3D3/Node3D3"]
+transform = Transform3D(-0.95566, 0, 0.294474, 0, 1, 0, -0.294474, 0, -0.95566, -17.7178, 0, -16.1421)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall15"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall15"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall15"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall15"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall15"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall15"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall15"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall15"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall15"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D3/Wall15"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D3/Wall15/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall18" type="Node3D" parent="Node3D3/Node3D3"]
+transform = Transform3D(-0.926358, 0, 0.376645, 0, 1, 0, -0.376645, 0, -0.926358, 18.3922, 0, -11.8457)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall18"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall18"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall18"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall18"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall18"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall18"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall18"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall18"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall18"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D3/Wall18"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D3/Wall18/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall19" type="Node3D" parent="Node3D3/Node3D3"]
+transform = Transform3D(-0.916048, 0, -0.401069, 0, 1, 0, 0.401069, 0, -0.916048, 18.3922, 0, -6.54573)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall19"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall19"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall19"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall19"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall19"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall19"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall19"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall19"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall19"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D3/Wall19"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D3/Wall19/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall54" type="Node3D" parent="Node3D3/Node3D3"]
+transform = Transform3D(-0.988639, 0, -0.150312, 0, 1, 0, 0.150312, 0, -0.988639, 27.3922, 0, -3.54573)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall54"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall54"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall54"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall54"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall54"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall54"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall54"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall54"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall54"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D3/Wall54"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D3/Wall54/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall25" type="Node3D" parent="Node3D3/Node3D3"]
+transform = Transform3D(-0.98638, 0, 0.16448, 0, 1, 0, -0.16448, 0, -0.98638, -28.2974, 0, -4.18042)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall25"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall25"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall25"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall25"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall25"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall25"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall25"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall25"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall25"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D3/Wall25"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D3/Wall25/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall28" type="Node3D" parent="Node3D3/Node3D3"]
+transform = Transform3D(-0.782369, 3.78552e-08, 0.622815, 1.60047e-08, 1, -4.0676e-08, -0.622815, -2.18557e-08, -0.782369, -3.259, 0, -9.89546)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall28"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall28"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall28"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall28"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall28"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall28"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall28"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall28"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall28"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D3/Wall28"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D3/Wall28/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall76" type="Node3D" parent="Node3D3/Node3D3"]
+transform = Transform3D(-0.782369, 3.78552e-08, 0.622815, 1.60047e-08, 1, -4.0676e-08, -0.622815, -2.18557e-08, -0.782369, 0.741001, 0, -13.8955)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall76"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall76"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall76"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall76"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall76"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall76"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall76"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall76"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall76"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D3/Wall76"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D3/Wall76/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall20" type="Node3D" parent="Node3D3/Node3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.7814, 0, -22.2457)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall20"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall20"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall20"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall20"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall20"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall20"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall20"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall20"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall20"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D3/Wall20"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D3/Wall20/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall26" type="Node3D" parent="Node3D3/Node3D3"]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -12.7814, 0, -27.6457)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall26"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall26"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall26"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall26"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall26"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall26"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall26"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall26"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall26"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D3/Wall26"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D3/Wall26/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall30" type="Node3D" parent="Node3D3/Node3D3"]
+transform = Transform3D(-0.573576, 0, -0.819152, 0, 1, 0, 0.819152, 0, -0.573576, -5.38141, 0, -32.3457)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall30"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall30"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall30"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall30"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall30"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall30"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall30"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall30"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall30"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D3/Wall30"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D3/Wall30/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall32" type="Node3D" parent="Node3D3/Node3D3"]
+transform = Transform3D(-0.984808, 0, -0.173648, 0, 1, 0, 0.173648, 0, -0.984808, -3.50782, 0, -24.5457)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall32"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall32"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall32"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall32"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall32"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall32"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall32"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall32"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall32"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D3/Wall32"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D3/Wall32/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall34" type="Node3D" parent="Node3D3/Node3D3"]
+transform = Transform3D(0.173648, 0, -0.984808, 0, 1, 0, 0.984808, 0, 0.173648, 0.0921822, 0, -20.6457)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall34"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall34"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall34"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall34"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall34"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall34"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall34"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall34"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall34"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D3/Wall34"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D3/Wall34/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall35" type="Node3D" parent="Node3D3/Node3D3"]
+transform = Transform3D(-0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, -0.258819, 5.89219, 0, -20.6457)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall35"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall35"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall35"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall35"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall35"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall35"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall35"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall35"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall35"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D3/Wall35"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D3/Wall35/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall36" type="Node3D" parent="Node3D3/Node3D3"]
+transform = Transform3D(-0.531783, 0, -0.846881, 0, 1, 0, 0.846881, 0, -0.531783, 11.1922, 0, -19.4457)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall36"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall36"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall36"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall36"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall36"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall36"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall36"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall36"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall36"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D3/Wall36"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D3/Wall36/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall37" type="Node3D" parent="Node3D3/Node3D3"]
+transform = Transform3D(-0.732852, 0, -0.680388, 0, 1, 0, 0.680388, 0, -0.732852, 15.6922, 0, -16.5457)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall37"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall37"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall37"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall37"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall37"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall37"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall37"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall37"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall37"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D3/Wall37"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D3/Wall37/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall39" type="Node3D" parent="Node3D3/Node3D3"]
+transform = Transform3D(0.455949, 0, 0.890006, 0, 1, 0, -0.890006, 0, 0.455949, -11.4178, 0, -16.4421)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall39"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall39"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall39"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall39"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall39"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall39"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall39"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall39"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall39"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D3/Wall39"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D3/Wall39/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall46" type="Node3D" parent="Node3D3/Node3D3"]
+transform = Transform3D(-0.99874, 0, -0.0501919, 0, 1, 0, 0.0501919, 0, -0.99874, 8.69217, 0, -8.14663)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall46"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall46"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall46"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall46"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall46"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall46"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall46"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall46"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall46"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D3/Wall46"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D3/Wall46/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall47" type="Node3D" parent="Node3D3/Node3D3"]
+transform = Transform3D(-0.676825, 0, 0.736144, 0, 1, 0, -0.736144, 0, -0.676825, -21.265, 0, -14.0886)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall47"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall47"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall47"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall47"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall47"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall47"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall47"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall47"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall47"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D3/Wall47"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D3/Wall47/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall48" type="Node3D" parent="Node3D3/Node3D3"]
+transform = Transform3D(-0.821079, 0, 0.570814, 0, 1, 0, -0.570814, 0, -0.821079, -25.7557, 0, -9.2174)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall48"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall48"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall48"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall48"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall48"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall48"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall48"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall48"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall48"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D3/Wall48"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D3/Wall48/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall50" type="Node3D" parent="Node3D3/Node3D3"]
+transform = Transform3D(0.988959, 0, -0.148189, 0, 1, 0, 0.148189, 0, 0.988959, -6.259, 0, -2.17838)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall50"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall50"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall50"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall50"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall50"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall50"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall50"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall50"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall50"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D3/Wall50"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D3/Wall50/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Wall78" type="Node3D" parent="Node3D3/Node3D3"]
+transform = Transform3D(0.150312, 0, -0.988639, 0, 1, 0, 0.988639, 0, 0.150312, 22.7199, 0, -3.88287)
+metadata/_edit_group_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall78"]
+transform = Transform3D(-0.234825, -0.152522, 0.959997, 0.046918, 0.984683, 0.16792, -0.970905, 0.0844731, -0.224072, 0, 0.325793, 0)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall78"]
+transform = Transform3D(0.970905, -0.0844731, 0.224072, 0.046918, 0.984683, 0.16792, -0.234825, -0.152522, 0.959997, -1, 0.325793, -1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall78"]
+transform = Transform3D(0.462702, -0.0474331, -0.885244, 0.129229, 0.99151, 0.0144185, 0.877045, -0.12107, 0.464903, -0.5, 0.225793, -2.3)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall78"]
+transform = Transform3D(-0.673171, 0.0847162, 0.734619, 0.0706999, 0.996239, -0.0501, -0.7361, 0.0182116, -0.676628, -0.5, 0.625793, -3.4)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube5" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall78"]
+transform = Transform3D(0.989092, -0.0635093, 0.132901, 0.0471871, 0.99134, 0.122549, -0.139533, -0.114941, 0.983524, -0.5, -0.374207, 1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall78"]
+transform = Transform3D(-0.0804402, -0.0518745, 0.995409, -0.526181, 0.850371, 0.00179472, -0.846559, -0.523621, -0.0956993, -0.1, -0.374207, -2.1)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall78"]
+transform = Transform3D(0.280611, -0.110361, -0.953456, 0.615541, 0.782886, 0.0905417, 0.736455, -0.612298, 0.287618, -1.4, -0.374207, -0.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube8" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall78"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, -0.560541, 0.82597, -0.0597165, 0.782287, 0.551793, 0.289053, -1.4, 0.225793, -3.7)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="Cube9" type="MeshInstance3D" parent="Node3D3/Node3D3/Wall78"]
+transform = Transform3D(0.271701, 0.115311, -0.955449, 0.156798, 0.974226, 0.162165, 0.949523, -0.193872, 0.246617, -1.4, 0.225793, 0.2)
+mesh = SubResource("ArrayMesh_i5swd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D3/Node3D3/Wall78"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/Node3D3/Wall78/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691895, 0.84566, -1.5094)
+shape = SubResource("BoxShape3D_2xeul")
+
+[node name="Sprite3D" type="Sprite3D" parent="Node3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, -24)
+modulate = Color(1, 0, 0.501961, 1)
+billboard = 1
+no_depth_test = true
+fixed_size = true
+texture_filter = 0
+texture = SubResource("GradientTexture2D_pgdvt")
+
+[node name="Label3D" type="Label3D" parent="Node3D3/Sprite3D"]
+billboard = 1
+double_sided = false
+no_depth_test = true
+fixed_size = true
+text = " 
+ 
+Base 1"
+font = SubResource("SystemFont_k0rfc")
+font_size = 8
+outline_size = 0
+
+[node name="Sprite3D2" type="Sprite3D" parent="Node3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, 24)
+modulate = Color(0.501961, 0, 1, 1)
+billboard = 1
+no_depth_test = true
+fixed_size = true
+texture_filter = 0
+texture = SubResource("GradientTexture2D_pgdvt")
+
+[node name="Label3D" type="Label3D" parent="Node3D3/Sprite3D2"]
+billboard = 1
+double_sided = false
+no_depth_test = true
+fixed_size = true
+text = " 
+ 
+Base 2"
+font = SubResource("SystemFont_k0rfc")
+font_size = 8
+outline_size = 0
+
+[node name="Sprite3D3" type="Sprite3D" parent="Node3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+modulate = Color(0, 1, 0.501961, 1)
+billboard = 1
+no_depth_test = true
+fixed_size = true
+texture_filter = 0
+texture = SubResource("GradientTexture2D_pgdvt")
+
+[node name="Label3D" type="Label3D" parent="Node3D3/Sprite3D3"]
+billboard = 1
+double_sided = false
+no_depth_test = true
+fixed_size = true
+text = " 
+ 
+Mid"
+font = SubResource("SystemFont_k0rfc")
+font_size = 8
+outline_size = 0
+
+[node name="Sprite3D4" type="Sprite3D" parent="Node3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 2, 0)
+modulate = Color(0.501961, 1, 0, 1)
+billboard = 1
+no_depth_test = true
+fixed_size = true
+texture_filter = 0
+texture = SubResource("GradientTexture2D_pgdvt")
+
+[node name="Label3D" type="Label3D" parent="Node3D3/Sprite3D4"]
+billboard = 1
+double_sided = false
+no_depth_test = true
+fixed_size = true
+text = " 
+ 
+Neutre"
+font = SubResource("SystemFont_k0rfc")
+font_size = 8
+outline_size = 0
+
+[node name="Sprite3D5" type="Sprite3D" parent="Node3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 2, 0)
+modulate = Color(1, 0.501961, 0, 1)
+billboard = 1
+no_depth_test = true
+fixed_size = true
+texture_filter = 0
+texture = SubResource("GradientTexture2D_pgdvt")
+
+[node name="Label3D" type="Label3D" parent="Node3D3/Sprite3D5"]
+billboard = 1
+double_sided = false
+no_depth_test = true
+fixed_size = true
+text = " 
+ 
+Neutre"
+font = SubResource("SystemFont_k0rfc")
+font_size = 8
+outline_size = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 8)
+material_override = SubResource("StandardMaterial3D_dxc3t")
+mesh = SubResource("SphereMesh_bbxcx")
+skeleton = NodePath("../../Spawnpoints")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Node3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 14)
+material_override = SubResource("StandardMaterial3D_dxc3t")
+mesh = SubResource("SphereMesh_bbxcx")
+skeleton = NodePath("../../Spawnpoints")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Node3D3"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 16, 0, -7)
+material_override = SubResource("StandardMaterial3D_v4iah")
+mesh = SubResource("SphereMesh_bbxcx")
+skeleton = NodePath("../../Spawnpoints")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Node3D3"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -8, 0, -13)
+material_override = SubResource("StandardMaterial3D_v4iah")
+mesh = SubResource("SphereMesh_bbxcx")
+skeleton = NodePath("../../Spawnpoints")
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_tlaxw")
