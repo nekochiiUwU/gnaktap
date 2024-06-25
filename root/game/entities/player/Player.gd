@@ -29,17 +29,34 @@ var speed_modifyer: float = 1.
 var inventory = {
 	"weapons": [
 		{
-			"name": "M4A1", 
-			"types": ["gun", "rifle"], 
+			"type": "gun", 
+			"base": "AR", 
+			"stats": {
+				"damages": 25,
+				"firerate": 10,
+				"magsize": 30,
+				"stability": 1,
+				"range": 10,
+				"scope": 1.5
+			},
 			"state": "idle", 
-			"ammo": 40, 
 			"weight": 20.
 		}, 
 		{
-			"name": "cut", 
-			"types": ["melee", "dagger", "cut"], 
+			"type": "melee", 
+			"base": "cut", 
+			"stats": {
+				"damages": 40,
+				"animspeed": 1,
+				"size": 1,
+				"movespeed": 1,
+			},
 			"state": "idle", 
 			"weight": 2.
+		},
+		{
+			"type": "nothing",
+			"base": "uwu"
 		}
 	], #[primary,secondary]
 	"items":[]
@@ -68,7 +85,8 @@ func _ready():
 func _enter_tree():
 	if is_multiplayer_authority():
 		$Head/UI.add_child(load("res://root/game/entities/player/leaderboard_ui/leaderboard_ui.tscn").instantiate())
-
+		$Head/UI.add_child(load("res://root/game/entities/player/weapons_ui/weapons_ui.tscn").instantiate())
+		$Head/UI.get_node("Weapons_ui").visible = false
 
 func calibrate_ui():
 	var window_size = get_viewport().size
@@ -148,6 +166,8 @@ func _process(delta):
 		if Input.is_action_pressed("change_weapon"):
 			switch_weapon((active_weapon+1)%len(inventory.weapons))
 		$Head/UI.get_node("leaderboard_ui").visible = Input.is_action_pressed("show_leaderboard")
+		if Input.is_action_just_pressed("debug"):
+			$Head/UI.get_node("Weapons_ui").visible = !$Head/UI.get_node("Weapons_ui").visible
 		if Input.is_action_pressed("change_to_primary_weapon"):
 			switch_weapon(0)
 		elif Input.is_action_pressed("change_to_secondary_weapon"):

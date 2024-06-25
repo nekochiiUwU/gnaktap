@@ -13,11 +13,11 @@ func primary_process(_delta):
 	
 	#rps = 1.
 	#damages = 99.
-	#a=.5
+	#a = .5
 	
 	rps = 20.
 	damages = 15.
-	a=1.05
+	a = 1.05
 	if t - last_shoot > 1/rps:
 		#get_node("../../..").velocity += global_basis.z*Vector3(100, 10, 100)*5
 		rpc("shoot", $Lazer.global_position, $Lazer.global_rotation, damages)

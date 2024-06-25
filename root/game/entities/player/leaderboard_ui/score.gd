@@ -10,7 +10,7 @@ func update():
 	get_node("Weapons").clear()
 	var weapons = player.inventory["weapons"]
 	for weapon in weapons:
-		get_node("Weapons").add_item(weapon.name+" |")
+		get_node("Weapons").add_item(weapon.base+" |")
 	get_node("Points").text = str(player.score) #faudra rename cette variable un jour, REEL
 
 func lobby_update(data: Array):

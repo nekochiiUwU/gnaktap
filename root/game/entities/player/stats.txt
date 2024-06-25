@@ -1,0 +1,26 @@
+  "Hp":
+  "Mana":
+  "Regen"
+
+ --gun
+  "damages":
+  "firerate": 
+  "magsize" > influe reload time = vitesse d'animation peut-etre
+  "stability": 
+stats caches :
+  "range"
+  "scope"
+
+ --melee
+  "damages":
+  "hitspeed": 
+  "size": 
+  "movespeed": 
+
+ --spell
+  "damages": 
+  "Cooldown":
+  "Mana": 
+  "Spell speed": 
+  
+

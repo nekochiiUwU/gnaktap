@@ -1,0 +1,318 @@
+[gd_scene load_steps=2 format=3 uid="uid://bl1h77r6wgxi5"]
+
+[ext_resource type="Script" path="res://root/game/entities/player/weapons_ui/weapons_ui.gd" id="1_se4mq"]
+
+[node name="Weapons_ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 23.0
+offset_top = 22.0
+offset_right = -1129.0
+offset_bottom = -626.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_se4mq")
+
+[node name="Légende" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1104.0
+offset_bottom = 600.0
+color = Color(0.121569, 0.121569, 0.121569, 0.364706)
+
+[node name="Inventory" type="ColorRect" parent="Légende"]
+layout_mode = 0
+offset_left = 83.0
+offset_top = 475.0
+offset_right = 1024.0
+offset_bottom = 584.0
+
+[node name="Label" type="Label" parent="Légende/Inventory"]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 49.0
+offset_right = 148.0
+offset_bottom = 73.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "INVENTORY"
+
+[node name="Slot0" type="Button" parent="Légende/Inventory"]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 8.0
+offset_right = 403.0
+offset_bottom = 102.0
+toggle_mode = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Légende/Inventory/Slot0"]
+
+[node name="Slot1" type="Button" parent="Légende/Inventory"]
+layout_mode = 0
+offset_left = 424.0
+offset_top = 8.0
+offset_right = 643.0
+offset_bottom = 102.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Légende/Inventory/Slot1"]
+
+[node name="Slot2" type="Button" parent="Légende/Inventory"]
+layout_mode = 0
+offset_left = 662.0
+offset_top = 8.0
+offset_right = 881.0
+offset_bottom = 102.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Légende/Inventory/Slot2"]
+
+[node name="Shop" type="ColorRect" parent="Légende"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 11.0
+offset_right = 1091.0
+offset_bottom = 464.0
+color = Color(1, 1, 1, 0.501961)
+
+[node name="Stats" type="ColorRect" parent="Légende/Shop"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 14.0
+offset_right = 1064.0
+offset_bottom = 201.0
+
+[node name="Stat0" type="Control" parent="Légende/Shop/Stats"]
+anchors_preset = 0
+offset_left = 282.0
+offset_top = 33.0
+offset_right = 450.0
+offset_bottom = 178.0
+
+[node name="Titre" type="Label" parent="Légende/Shop/Stats/Stat0"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 16.0
+offset_right = 120.0
+offset_bottom = 39.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "EXEMPLE"
+
+[node name="Nombre" type="Label" parent="Légende/Shop/Stats/Stat0"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 44.0
+offset_right = 112.0
+offset_bottom = 67.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "30"
+
+[node name="+" type="Button" parent="Légende/Shop/Stats/Stat0"]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 73.0
+offset_right = 153.0
+offset_bottom = 105.0
+text = "+"
+
+[node name="-" type="Button" parent="Légende/Shop/Stats/Stat0"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 73.0
+offset_right = 48.0
+offset_bottom = 105.0
+text = "-
+"
+
+[node name="SpinBox" type="SpinBox" parent="Légende/Shop/Stats/Stat0"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 74.0
+offset_right = 134.063
+offset_bottom = 105.0
+alignment = 1
+update_on_text_changed = true
+
+[node name="Stat1" type="Control" parent="Légende/Shop/Stats"]
+anchors_preset = 0
+offset_left = 469.0
+offset_top = 33.0
+offset_right = 637.0
+offset_bottom = 178.0
+
+[node name="Titre" type="Label" parent="Légende/Shop/Stats/Stat1"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 16.0
+offset_right = 120.0
+offset_bottom = 39.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "EXEMPLE"
+
+[node name="Nombre" type="Label" parent="Légende/Shop/Stats/Stat1"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 44.0
+offset_right = 112.0
+offset_bottom = 67.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "30"
+
+[node name="+" type="Button" parent="Légende/Shop/Stats/Stat1"]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 73.0
+offset_right = 153.0
+offset_bottom = 105.0
+text = "+"
+
+[node name="-" type="Button" parent="Légende/Shop/Stats/Stat1"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 73.0
+offset_right = 48.0
+offset_bottom = 105.0
+text = "-
+"
+
+[node name="SpinBox" type="SpinBox" parent="Légende/Shop/Stats/Stat1"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 74.0
+offset_right = 134.063
+offset_bottom = 105.0
+alignment = 1
+update_on_text_changed = true
+
+[node name="Stat2" type="Control" parent="Légende/Shop/Stats"]
+anchors_preset = 0
+offset_left = 648.0
+offset_top = 34.0
+offset_right = 816.0
+offset_bottom = 179.0
+
+[node name="Titre" type="Label" parent="Légende/Shop/Stats/Stat2"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 16.0
+offset_right = 120.0
+offset_bottom = 39.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "EXEMPLE"
+
+[node name="Nombre" type="Label" parent="Légende/Shop/Stats/Stat2"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 44.0
+offset_right = 112.0
+offset_bottom = 67.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "30"
+
+[node name="+" type="Button" parent="Légende/Shop/Stats/Stat2"]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 73.0
+offset_right = 153.0
+offset_bottom = 105.0
+text = "+"
+
+[node name="-" type="Button" parent="Légende/Shop/Stats/Stat2"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 73.0
+offset_right = 48.0
+offset_bottom = 105.0
+text = "-
+"
+
+[node name="SpinBox" type="SpinBox" parent="Légende/Shop/Stats/Stat2"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 74.0
+offset_right = 134.063
+offset_bottom = 105.0
+alignment = 1
+update_on_text_changed = true
+
+[node name="Stat3" type="Control" parent="Légende/Shop/Stats"]
+anchors_preset = 0
+offset_left = 824.0
+offset_top = 35.0
+offset_right = 992.0
+offset_bottom = 180.0
+
+[node name="Titre" type="Label" parent="Légende/Shop/Stats/Stat3"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 16.0
+offset_right = 120.0
+offset_bottom = 39.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "EXEMPLE"
+
+[node name="Nombre" type="Label" parent="Légende/Shop/Stats/Stat3"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 44.0
+offset_right = 112.0
+offset_bottom = 67.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "30"
+
+[node name="+" type="Button" parent="Légende/Shop/Stats/Stat3"]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 73.0
+offset_right = 153.0
+offset_bottom = 105.0
+text = "+"
+
+[node name="-" type="Button" parent="Légende/Shop/Stats/Stat3"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 73.0
+offset_right = 48.0
+offset_bottom = 105.0
+text = "-
+"
+
+[node name="SpinBox" type="SpinBox" parent="Légende/Shop/Stats/Stat3"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 74.0
+offset_right = 134.063
+offset_bottom = 105.0
+alignment = 1
+update_on_text_changed = true
+
+[node name="Label" type="Label" parent="Légende/Shop/Stats"]
+layout_mode = 0
+offset_left = 95.0
+offset_top = 89.0
+offset_right = 231.0
+offset_bottom = 140.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Stats"
+
+[node name="Upgrade" type="ColorRect" parent="Légende/Shop"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 218.0
+offset_right = 1063.0
+offset_bottom = 439.0
+
+[node name="Label" type="Label" parent="Légende/Shop/Upgrade"]
+layout_mode = 0
+offset_left = 74.0
+offset_top = 104.0
+offset_right = 192.0
+offset_bottom = 148.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Upgrades"
+
+[connection signal="pressed" from="Légende/Inventory/Slot0" to="." method="_on_weapon_selected" binds= [0]]
+[connection signal="pressed" from="Légende/Inventory/Slot1" to="." method="_on_weapon_selected" binds= [1]]
+[connection signal="pressed" from="Légende/Inventory/Slot2" to="." method="_on_weapon_selected" binds= [2]]
+[connection signal="value_changed" from="Légende/Shop/Stats/Stat0/SpinBox" to="." method="_on_stat_set" binds= [0]]
+[connection signal="value_changed" from="Légende/Shop/Stats/Stat1/SpinBox" to="." method="_on_stat_set" binds= [1]]
+[connection signal="value_changed" from="Légende/Shop/Stats/Stat2/SpinBox" to="." method="_on_stat_set" binds= [2]]
+[connection signal="value_changed" from="Légende/Shop/Stats/Stat3/SpinBox" to="." method="_on_stat_set" binds= [3]]
