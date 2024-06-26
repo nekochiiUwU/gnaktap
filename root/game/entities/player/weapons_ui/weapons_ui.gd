@@ -23,9 +23,10 @@ func _on_weapon_selected(newslot):
 	for i in range(4):
 		get_node("Légende/Shop/Stats/Stat"+str(i)+"/Titre").text = keys[i]
 		get_node("Légende/Shop/Stats/Stat"+str(i)+"/Nombre").text = str(player.inventory["weapons"][slot]["stats"][keys[i]])
-
+	
 
 func _on_stat_set(value, stat):
 	var key = (player.inventory["weapons"][slot]["stats"].keys())[stat]
 	player.inventory["weapons"][slot]["stats"][key] = value
 	_on_weapon_selected(slot)
+	player.update_weapons()

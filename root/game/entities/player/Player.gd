@@ -36,9 +36,10 @@ var inventory = {
 				"firerate": 10,
 				"magsize": 30,
 				"stability": 1,
-				"range": 10,
+				"dropoff": 10,
 				"scope": 1.5
 			},
+			"upgrades":[],
 			"state": "idle", 
 			"weight": 20.
 		}, 
@@ -51,17 +52,34 @@ var inventory = {
 				"size": 1,
 				"movespeed": 1,
 			},
+			"upgrades":[],
 			"state": "idle", 
 			"weight": 2.
 		},
 		{
-			"type": "nothing",
-			"base": "uwu"
+			"type": "gun", 
+			"base": "AR", 
+			"stats": {
+				"damages": 25,
+				"firerate": 10,
+				"magsize": 30,
+				"stability": 1,
+				"dropoff": 10,
+				"scope": 1.5
+			},
+			"upgrades":[],
+			"state": "idle", 
+			"weight": 20.
 		}
 	], #[primary,secondary]
 	"items":[]
 }
-
+"""{
+			"type": "nothing",
+			"base": "nothing",
+			"state": "idle", 
+			"weight": 2.
+}"""
 
 func _ready():
 	Game = get_node("../../..")
@@ -80,6 +98,7 @@ func _ready():
 		get_node("Head/Light").queue_free()
 		get_node("Head/UI").queue_free()
 		get_node("%Camera").queue_free()
+	update_weapons()
 
 
 func _enter_tree():
@@ -87,6 +106,7 @@ func _enter_tree():
 		$Head/UI.add_child(load("res://root/game/entities/player/leaderboard_ui/leaderboard_ui.tscn").instantiate())
 		$Head/UI.add_child(load("res://root/game/entities/player/weapons_ui/weapons_ui.tscn").instantiate())
 		$Head/UI.get_node("Weapons_ui").visible = false
+
 
 func calibrate_ui():
 	var window_size = get_viewport().size
@@ -172,6 +192,8 @@ func _process(delta):
 			switch_weapon(0)
 		elif Input.is_action_pressed("change_to_secondary_weapon"):
 			switch_weapon(1)
+		elif Input.is_action_pressed("change_to_third_weapon"):
+			switch_weapon(2)
 		rpc("online_synchronisation", get_online_synchronisation_data())
 		if ProjectSettings.get_setting("custom/game/camera_rotation"):
 			$Head.rotation.z -= velocity.dot(transform.basis.x) * delta*.04
@@ -246,6 +268,7 @@ func hitmarker_process():
 		get_node("Head/UI/Hitmarker").modulate = (get_node("Head/UI/Hitmarker").modulate/get_node("Head/UI/Hitmarker").modulate)*x
 		get_node("Head/UI/Hitmarker").scale = (get_node("Head/UI/Hitmarker").scale)*x
 
+
 func rotation_process(angle: Vector2):
 	if angle:
 		angle.x = clamp(-PI, angle.x, PI)
@@ -284,6 +307,7 @@ func switch_weapon(weapon: int):
 		get_node("Arm/Hand/"+str(active_weapon)).visible = false
 		get_node("Arm/Hand/"+str(weapon)).visible = true
 		active_weapon = weapon
+		print("active_weapon :", active_weapon) 
 
 
 func get_hit(_owner, _damages, collision):
@@ -313,7 +337,7 @@ func die():
 
 func get_online_synchronisation_data():
 	return [position, rotation.y, get_node("Head").rotation.x, health, visible, kills, deaths, 
-			get_node("Mesh").mesh.height]
+			get_node("Mesh").mesh.height, active_weapon]
 
 
 @rpc("authority", "call_remote", "unreliable", 0)
@@ -325,7 +349,8 @@ func online_synchronisation(data: Array = [
 		"visible", 
 		"kills", 
 		"deaths", 
-		"mesh_height"
+		"mesh_height",
+		"active_weapon"
 		]):
 	position = data[0]
 	rotation.y = data[1]
@@ -335,6 +360,7 @@ func online_synchronisation(data: Array = [
 	kills = data[5]
 	deaths = data[6]
 	get_node("Mesh").mesh.height = data[7]
+	active_weapon = data[8]
 
 
 @rpc("authority", "call_remote", "reliable", 0)
@@ -364,6 +390,22 @@ func hitmarker(_damages: float, type: String, is_kill: bool):
 	hitmarker_time = Game.time
 	if is_kill:
 		kill()
+
+
+func update_weapons():
+	for slot in len(inventory.weapons):
+		var weapon = inventory.weapons[slot]
+		if has_node("Arm/Hand/"+str(slot)):
+			var old = get_node("Arm/Hand/"+str(slot))
+			get_node("Arm/Hand/").remove_child(old) 
+			old.queue_free()
+		var new_weapon = load("res://root/game/entities/player/weapons/"+weapon["type"]+"/"+weapon["base"]+".tscn").instantiate()
+		new_weapon.set_multiplayer_authority(get_multiplayer_authority())
+		new_weapon.name = str(slot)
+		get_node("Arm/Hand").add_child(new_weapon)
+		new_weapon.initiate_weapon(weapon)
+		new_weapon.visible = false
+	get_node("Arm/Hand/"+str(active_weapon)).visible = true
 
 
 func kill():

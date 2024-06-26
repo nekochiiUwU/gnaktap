@@ -8,7 +8,7 @@
   "magsize" > influe reload time = vitesse d'animation peut-etre
   "stability": 
 stats caches :
-  "range"
+  "dropoff"
   "scope"
 
  --melee
