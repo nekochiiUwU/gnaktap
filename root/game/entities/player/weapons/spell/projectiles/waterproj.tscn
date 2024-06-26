@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgd268g25sj8d"]
+
+[ext_resource type="Script" path="res://root/game/entities/player/weapons/spell/projectiles/waterproj.gd" id="1_lfifm"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_74i8j"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_if05d"]
+albedo_color = Color(0.144664, 0.289849, 0.847977, 1)
+emission_enabled = true
+emission = Color(0.503581, 0.619536, 0.700405, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_rjxm3"]
+radius = 0.1
+
+[node name="Waterproj" type="CharacterBody3D"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_lfifm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_74i8j")
+surface_material_override/0 = SubResource("StandardMaterial3D_if05d")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_rjxm3")

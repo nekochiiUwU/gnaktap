@@ -8,7 +8,7 @@ extends Node3D
 
 var spawnpoints = []
 var time = 0
-var match_duration: float = 60. * 7.
+var match_duration: float = 60.*100.
 
 var local_player: Player
 

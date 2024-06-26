@@ -11,7 +11,7 @@ var base: String = "fire"
 func initiate_weapon(weapon):
 	base = weapon["base"]
 	var stats = weapon["stats"]
-	damages = stats["damage``s"]
+	damages = stats["damages"]
 	cooldown = stats["cooldown"]
 	manacost = stats["manacost"]
 	speed = stats["speed"]
@@ -47,7 +47,7 @@ func shoot(_position, _rotation, _damages):
 	get_node("../../../../..").add_child(proj)
 	proj.global_position = _position
 	proj.global_rotation = _rotation
-	proj.init(str(get_node("../../..").name), _damages, speed)
+	proj.init(str(get_node("../../..").name), _damages, speed, get_node("../../.."))
 
 
 func secondary_process(_delta):

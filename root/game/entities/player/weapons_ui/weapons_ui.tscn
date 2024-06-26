@@ -329,6 +329,7 @@ offset_right = 1062.0
 offset_bottom = 438.0
 
 [node name="Label" type="Label" parent="Légende/Shop/ColorRect"]
+layout_mode = 0
 offset_left = 8.0
 offset_top = 103.0
 offset_right = 126.0

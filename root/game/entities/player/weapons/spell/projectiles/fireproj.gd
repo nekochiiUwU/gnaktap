@@ -11,7 +11,7 @@ var lifetime = 2
 var distmax = 5
 var dist = 0
 
-func init(__owner, _damages, _speed):
+func init(__owner, _damages, _speed, _player):
 	_owner = __owner
 	if _owner == str(multiplayer.get_unique_id()):
 		get_node("Collision").queue_free()
@@ -31,7 +31,6 @@ func _physics_process(delta):
 	#velocity.y -= grav/10*delta
 	move_and_slide()
 	
-	move_and_collide(velocity*delta)
 	dist += (velocity*delta).length()
 	if dist > distmax:
 		queue_free()

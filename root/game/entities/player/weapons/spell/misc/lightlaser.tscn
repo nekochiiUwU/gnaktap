@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://73fowb423f47"]
+
+[ext_resource type="Script" path="res://root/game/entities/player/weapons/spell/misc/lightlaser.gd" id="1_kykl1"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_c4kgp"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 16.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ml4rp"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.384314)
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_qrhhd"]
+height = 16.0
+radius = 0.3
+
+[node name="Lightlaser" type="CharacterBody3D"]
+script = ExtResource("1_kykl1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -8)
+mesh = SubResource("CylinderMesh_c4kgp")
+surface_material_override/0 = SubResource("StandardMaterial3D_ml4rp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -8)
+shape = SubResource("CylinderShape3D_qrhhd")

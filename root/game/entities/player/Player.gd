@@ -59,27 +59,16 @@ var inventory = {
 			"weight": 2.
 		},
 		{
-			"type": "spell", 
-			"base": "fire", 
-			"stats": {
-				"damages": 25,
-				"cooldown": 3,
-				"manacost": 30,
-				"speed": 3,
-			},
+			"type": "nothing", 
+			"base": "nothing", 
+			"stats": {},
 			"upgrades":[],
 			"state": "idle", 
-			"weight": 20.
+			"weight": 2.
 		}
 	], #[primary,secondary]
 	"items":[]
 }
-"""{
-			"type": "nothing",
-			"base": "nothing",
-			"state": "idle", 
-			"weight": 2.
-}"""
 
 func _ready():
 	Game = get_node("../../..")
@@ -409,6 +398,12 @@ func update_weapons():
 		new_weapon.initiate_weapon(weapon)
 		new_weapon.visible = false
 	get_node("Arm/Hand/"+str(active_weapon)).visible = true
+
+
+@rpc("any_peer", "call_local", "reliable", 1)
+func rpc_buy(item, slot):
+	inventory["weapons"][slot] = Data.shop[item].duplicate(true)
+	update_weapons()
 
 
 func kill():

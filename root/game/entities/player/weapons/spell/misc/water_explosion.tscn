@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://f8m4ugdj83l6"]
+
+[ext_resource type="Script" path="res://root/game/entities/player/weapons/spell/misc/water_explosion.gd" id="1_huugi"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_u5vna"]
+flip_faces = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a1k5x"]
+transparency = 1
+albedo_color = Color(0.57918, 0.828956, 0.830968, 0.427451)
+emission_enabled = true
+emission = Color(0.459745, 0.612091, 0.944643, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_x2od7"]
+
+[node name="WaterExplosion" type="Node3D"]
+script = ExtResource("1_huugi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_u5vna")
+surface_material_override/0 = SubResource("StandardMaterial3D_a1k5x")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="Collision" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_x2od7")
