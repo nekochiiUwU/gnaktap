@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dllmlkdkpkadp"]
+
+[ext_resource type="Script" path="res://root/game/entities/player/weapons/spell/spell.gd" id="1_yoxjt"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_75avu"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g0o2v"]
+albedo_color = Color(0.264887, 0.0486097, 0.0874492, 1)
+emission_enabled = true
+emission = Color(0.898275, 2.59906e-06, 1.2514e-06, 1)
+
+[node name="Fire" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, -0.2, -0.6)
+script = ExtResource("1_yoxjt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_75avu")
+surface_material_override/0 = SubResource("StandardMaterial3D_g0o2v")

@@ -4,6 +4,8 @@ extends CharacterBody3D
 var Game
 
 var health:            float =  100.
+var mana:              float =  100.
+var regen:             float =  1.
 var gravity:           float = -ProjectSettings.get_setting("physics/3d/default_gravity") * 1.5
 var jump:              float =  10.
 var speed:             float =  8.
@@ -57,15 +59,13 @@ var inventory = {
 			"weight": 2.
 		},
 		{
-			"type": "gun", 
-			"base": "AR", 
+			"type": "spell", 
+			"base": "fire", 
 			"stats": {
 				"damages": 25,
-				"firerate": 10,
-				"magsize": 30,
-				"stability": 1,
-				"dropoff": 10,
-				"scope": 1.5
+				"cooldown": 3,
+				"manacost": 30,
+				"speed": 3,
 			},
 			"upgrades":[],
 			"state": "idle", 
@@ -183,6 +183,9 @@ func _process(delta):
 		hitmarker_process()
 		rotation_process(Input.get_vector("camera_left", "camera_right", "camera_up", "camera_down")*delta*joy_sensi)
 		get_node("Head/UI/HealthBar").value = health
+		get_node("Head/UI/ManaBar").value = mana
+		health += regen*delta
+		mana += regen*delta
 		if Input.is_action_pressed("change_weapon"):
 			switch_weapon((active_weapon+1)%len(inventory.weapons))
 		$Head/UI.get_node("leaderboard_ui").visible = Input.is_action_pressed("show_leaderboard")

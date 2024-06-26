@@ -45,7 +45,7 @@ func shoot(_position, _rotation, _damages):
 	print(rotation.x*2)
 	#get_node("Canon/AudioStreamPlayer3D").pitch_scale = 1
 	get_node("Canon/AudioStreamPlayer3D").play()
-	var Bullet = load("res://root/game/entities/bullet/bullet.tscn").instantiate()
+	var Bullet = load("res://root/game/entities/player/weapons/gun/bullet/bullet.tscn").instantiate()
 	get_node("../../../../..").add_child(Bullet)
 	Bullet.global_position = _position
 	Bullet.global_rotation = _rotation

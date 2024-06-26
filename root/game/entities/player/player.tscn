@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://weitoykb1612"]
+[gd_scene load_steps=18 format=3 uid="uid://weitoykb1612"]
 
 [ext_resource type="Script" path="res://root/game/entities/player/Player.gd" id="1_humwg"]
 [ext_resource type="Shader" path="res://assets/misc/post_traitment.gdshader" id="2_gb0na"]
@@ -76,6 +76,10 @@ skew = Vector2(1, 0)
 bg_color = Color(0, 1, 0, 1)
 skew = Vector2(1, 0)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c2dnl"]
+bg_color = Color(0, 0.964473, 0.774325, 1)
+skew = Vector2(1, 0)
+
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 0, 1, 0)
 collision_mask = 2
@@ -140,16 +144,35 @@ texture = SubResource("PlaceholderTexture2D_p2muh")
 [node name="HealthBar" type="ProgressBar" parent="Head/UI"]
 texture_filter = 1
 layout_mode = 0
-offset_left = -128.0
-offset_top = 312.0
-offset_right = 128.0
-offset_bottom = 320.0
+offset_left = -120.0
+offset_top = 303.0
+offset_right = 136.0
+offset_bottom = 311.0
 theme_override_styles/background = SubResource("StyleBoxFlat_1gsey")
 theme_override_styles/fill = SubResource("StyleBoxFlat_wi8oh")
 value = 80.0
 show_percentage = false
 
 [node name="Line2D" type="Line2D" parent="Head/UI/HealthBar"]
+position = Vector2(132, -312)
+points = PackedVector2Array(-128, 312, 128, 312, 120, 320, -136, 320)
+closed = true
+width = 1.0
+default_color = Color(0, 0, 0, 0.501961)
+
+[node name="ManaBar" type="ProgressBar" parent="Head/UI"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -129.0
+offset_top = 312.0
+offset_right = 127.0
+offset_bottom = 320.0
+theme_override_styles/background = SubResource("StyleBoxFlat_1gsey")
+theme_override_styles/fill = SubResource("StyleBoxFlat_c2dnl")
+value = 80.0
+show_percentage = false
+
+[node name="Line2D" type="Line2D" parent="Head/UI/ManaBar"]
 position = Vector2(132, -312)
 points = PackedVector2Array(-128, 312, 128, 312, 120, 320, -136, 320)
 closed = true

@@ -309,7 +309,7 @@ text = "Stats"
 layout_mode = 0
 offset_left = 14.0
 offset_top = 218.0
-offset_right = 1063.0
+offset_right = 669.0
 offset_bottom = 439.0
 
 [node name="Label" type="Label" parent="Légende/Shop/Upgrade"]
@@ -321,6 +321,30 @@ offset_bottom = 148.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Upgrades"
 
+[node name="ColorRect" type="ColorRect" parent="Légende/Shop"]
+layout_mode = 0
+offset_left = 686.0
+offset_top = 217.0
+offset_right = 1062.0
+offset_bottom = 438.0
+
+[node name="Label" type="Label" parent="Légende/Shop/ColorRect"]
+offset_left = 8.0
+offset_top = 103.0
+offset_right = 126.0
+offset_bottom = 147.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Base weapons"
+
+[node name="Weapon_shop" type="ItemList" parent="Légende/Shop/ColorRect"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 6.0
+offset_right = 367.0
+offset_bottom = 213.0
+allow_reselect = true
+allow_search = false
+
 [connection signal="pressed" from="Légende/Inventory/Slot0" to="." method="_on_weapon_selected" binds= [0]]
 [connection signal="pressed" from="Légende/Inventory/Slot1" to="." method="_on_weapon_selected" binds= [1]]
 [connection signal="pressed" from="Légende/Inventory/Slot2" to="." method="_on_weapon_selected" binds= [2]]
@@ -328,3 +352,4 @@ text = "Upgrades"
 [connection signal="value_changed" from="Légende/Shop/Stats/Stat1/SpinBox" to="." method="_on_stat_set" binds= [1]]
 [connection signal="value_changed" from="Légende/Shop/Stats/Stat2/SpinBox" to="." method="_on_stat_set" binds= [2]]
 [connection signal="value_changed" from="Légende/Shop/Stats/Stat3/SpinBox" to="." method="_on_stat_set" binds= [3]]
+[connection signal="item_activated" from="Légende/Shop/ColorRect/Weapon_shop" to="." method="_on_weapon_bought"]
