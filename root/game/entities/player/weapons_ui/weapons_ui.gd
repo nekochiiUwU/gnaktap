@@ -19,8 +19,8 @@ func _ready():
 	_on_weapon_selected(0)
 
 func _on_weapon_selected(newslot):
-	if player.inventory["weapons"][newslot]["type"] == "nothing":
-		return
+	#if player.inventory["weapons"][newslot]["type"] == "nothing":
+	#	return
 	slot = newslot
 	var keys = player.inventory["weapons"][slot]["stats"].keys()
 	for i in range(4):

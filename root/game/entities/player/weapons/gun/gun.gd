@@ -67,7 +67,7 @@ func secondary_process(_delta):
 
 func _physics_process(delta):
 	if is_multiplayer_authority():
-		if (Input.mouse_mode == Input.MOUSE_MODE_CAPTURED) and (int(str(name)) == get_node("../../../").active_weapon):
+		if (Input.mouse_mode == Input.MOUSE_MODE_CAPTURED) and (int(str(name)) == get_node("../../../").active_weapon) and get_node("../../../").speed_modifier <= 1.05:
 			if Input.is_action_pressed("primary_attack"):
 				primary_process(delta)
 

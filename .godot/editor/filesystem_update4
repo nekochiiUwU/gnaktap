@@ -1,8 +1,11 @@
+res://default_bus_layout.tres
 res://root/game/maps/map2.tscn
 res://map2.gdshader
 res://assets/misc/post_traitment.gdshader
 res://root/game/maps/map2.gdshader
 res://a.gdshader
+res://root/game/entities/player/Player.gd
+res://root/game/entities/player/weapons_ui/weapons_ui.gd
 res://root/game/entities/player/weapons_ui/weapons_ui.tscn
 res://root/game/entities/player/player.tscn
 res://root/game/game.tscn
@@ -19,6 +22,6 @@ res://root/game/entities/player/weapons/spell/projectiles/lightproj.tscn
 res://root/game/entities/player/weapons/spell/misc/lightlaser.tscn
 res://root/game/entities/player/weapons/gun/AR.tscn
 res://root/game/pause/pause.tscn
-res://default_bus_layout.tres
-res://root/game/misc/data.gd
-res://root/game/entities/player/weapons_ui/weapons_ui.gd
+res://root/game/entities/player/weapons/melee/cut.gd
+res://root/game/entities/player/weapons/gun/gun.gd
+res://root/game/entities/player/weapons/spell/spell.gd
