@@ -22,11 +22,14 @@ var active_weapon:       int =  0 #emplacement dans l'equipement
 var crouch_height:     float =  1.5
 var normal_height:     float =  1.8
 var crouch_value:      float =  0.
+var sprint_speed:     float =  1.5
+var normal_speed:     float =  1.
+var speed_modifier:    float = 1.
 var user_fov:          float = 90.
 var target_fov:        float = 90.
 var interact_objects: Array = []
 var current_interact = null
-var speed_modifyer: float = 1.
+
 
 var inventory = {
 	"weapons": [
@@ -106,7 +109,7 @@ func calibrate_ui():
 
 
 func _input(event):
-	speed = 9.
+	speed = 6.
 	if is_multiplayer_authority():
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			if event is InputEventMouseMotion:
@@ -119,7 +122,7 @@ func _physics_process(delta):
 	if is_multiplayer_authority():
 		var input = Input.get_vector("move_left", "move_right", "move_forward", "move_backward").normalized()
 		input *= speed*(1-crouch_value)+crouch_speed*crouch_value
-		input *= speed_modifyer
+		input *= speed_modifier
 		var x = 50/(inventory.weapons[active_weapon].weight+50)
 		input *= x
 		gravity = (2-x/2)*-ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -169,6 +172,7 @@ func _process(delta):
 		if Input.is_key_pressed(KEY_0):
 			velocity.y += 1
 		crouch_process()
+		sprint_process()
 		hitmarker_process()
 		rotation_process(Input.get_vector("camera_left", "camera_right", "camera_up", "camera_down")*delta*joy_sensi)
 		get_node("Head/UI/HealthBar").value = health
@@ -195,7 +199,7 @@ func _process(delta):
 		$Arm/Hand.rotation.z = crouch_value/10
 		get_node("Arm/Hand").rotation.z += $Head.rotation.z*2
 		if ProjectSettings.get_setting("custom/game/camera_bounce"):
-			var x = float(is_on_floor()) * min(abs(velocity.x)+abs(velocity.z), 1)*min(speed_modifyer, 1)*(1-crouch_value*.8)
+			var x = float(is_on_floor()) * min(abs(velocity.x)+abs(velocity.z), 1)*min(speed_modifier, 1)*(1-crouch_value*.8)
 			get_node("%Camera").position.x += (pow(sin(dt*.01 ), 2) *.4-.2      ) * delta * 10 * x
 			get_node("%Camera").position.y -= (pow(cos(dt*.02 ), 2) *.4-.2      )    * delta * 10 * x
 			get_node("%Camera").position.z += (pow(sin(dt*.02 ), 2) *.2-.1  -.3 ) * delta * 10 * x 
@@ -235,6 +239,15 @@ func _process(delta):
 		#get_node("Head/Camera").position /= 1+delta*5
 
 
+func sprint_process():
+	if Input.is_action_pressed("sprint"):
+		speed_modifier = sprint_speed + (sprint_speed - speed_modifier) / 10
+	else:
+		speed_modifier = normal_speed + (normal_speed - speed_modifier) / 10
+	#speed_modifier = float(speed_modifier-normal_speed)/(sprint_speed-normal_speed)
+	get_node("Head/UI/PostProcess").material.set_shader_parameter("sneak_value", abs(normal_speed-speed_modifier)/4)
+
+
 func crouch_process():
 	var current_crouch_modifier
 	if Input.is_action_pressed("crouch"):
@@ -248,6 +261,7 @@ func crouch_process():
 	position.y += current_crouch_modifier
 	crouch_value = float(get_node("Mesh").mesh.height-normal_height)/(crouch_height-normal_height)
 	get_node("Head/UI/PostProcess").material.set_shader_parameter("sneak_value", crouch_value/4)
+
 
 
 func hitmarker_process():
@@ -299,7 +313,6 @@ func switch_weapon(weapon: int):
 		get_node("Arm/Hand/"+str(active_weapon)).visible = false
 		get_node("Arm/Hand/"+str(weapon)).visible = true
 		active_weapon = weapon
-		print("active_weapon :", active_weapon) 
 
 
 func get_hit(_owner, _damages, collision):

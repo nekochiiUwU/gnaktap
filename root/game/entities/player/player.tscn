@@ -265,7 +265,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
 [node name="0" parent="Arm/Hand" instance=ExtResource("3_etx6e")]
 transform = Transform3D(1, -0.000298276, -0.000149101, 0.000298232, 1, -0.000298232, 0.00014919, 0.000298187, 1, 0.25, -0.2, -0.667)
 rotation_edit_mode = 2
-visible = false
 
 [node name="1" parent="Arm/Hand" instance=ExtResource("4_30bch")]
 transform = Transform3D(0.228853, -0.628778, 0.743145, -0.254171, 0.698328, 0.669131, -0.939694, -0.342018, -2.69018e-06, 0.35, -0.2, -0.6)

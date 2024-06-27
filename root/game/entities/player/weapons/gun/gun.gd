@@ -58,8 +58,8 @@ func secondary_process(_delta):
 	rotation.z /= 1+_delta*4*stability
 	position += Vector3(.0, 0., -0.5) * _delta*30*stability
 	position /= 1 + _delta*30*stability
-	get_node("../../../").speed_modifyer += .5 * _delta*60
-	get_node("../../../").speed_modifyer /= 1 + _delta*60
+	get_node("../../../").speed_modifier += .5 * _delta*60
+	get_node("../../../").speed_modifier /= 1 + _delta*60
 	get_node("../../../Head/Camera").fov += log(rotation.length()*100+1)/2
 	#get_node("../../../Head/Camera").fov += log(rotation.length()*100+1)
 	#get_node("../../../Head/Camera").fov /= 1+_delta*60
@@ -92,8 +92,8 @@ func _process(delta):
 					get_node("../../../").target_fov = get_node("../../../").user_fov
 					position += Vector3(0.25, -0.1, -0.667) * delta*15*stability
 					position /= 1 + delta*15*stability
-					get_node("../../../").speed_modifyer += 1. * delta*30
-					get_node("../../../").speed_modifyer /= 1 + delta*30
+					get_node("../../../").speed_modifier += 1. * delta*30
+					get_node("../../../").speed_modifier /= 1 + delta*30
 		else:
-			get_node("../../../").speed_modifyer += 1. * delta*30
-			get_node("../../../").speed_modifyer /= 1 + delta*30
+			get_node("../../../").speed_modifier += 1. * delta*30
+			get_node("../../../").speed_modifier /= 1 + delta*30

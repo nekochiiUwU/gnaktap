@@ -71,7 +71,12 @@ var shop:Dictionary = {
 		"nothing": {
 			"type": "nothing", 
 			"base": "nothing", 
-			"stats": {},
+			"stats": {
+				"nothing1":0,
+				"nothing2":0,
+				"nothing3":0,
+				"nothing4":0
+				},
 			"upgrades":[],
 			"state": "idle", 
 			"weight": 2.
